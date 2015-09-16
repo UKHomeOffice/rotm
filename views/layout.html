@@ -1,0 +1,39 @@
+{{< govuk-template}}
+
+{{$head}}
+    {{> partials-head}}
+{{/head}}
+
+{{$pageTitle}}
+    {{$header}}{{/header}} &ndash; GOV.UK
+{{/pageTitle}}
+
+{{$headerClass}}with-proposition{{/headerClass}}
+{{$insideHeader}}{{/insideHeader}}
+{{$main}}
+  <main id="content" class="main" role="main">
+    <div class="phase-banner">
+      <p>
+        <strong class="phase-tag">BETA</strong>
+        <span>This is a new service – your <a href="mailto:brpformfeedback@homeoffice.gsi.gov.uk?subject=BRP Beta feedback">feedback</a> will help us to improve it.</span>
+      </p>
+    </div>
+    <span id="step">
+      {{> partials-back}} <span>{{$step}}{{/step}}</span>
+    </span>
+    <div class="grid-row">
+      {{> partials-maincontent-left}}
+    </div>
+
+    <script type="text/javascript" src="/public/js/bundle.js"></script>
+  </main>
+{{/main}}
+
+{{$footerSupportLinks}}
+  <ul>
+    <li><a href="/cookies">Cookies</a></li>
+    <li><a href="/terms-and-conditions">Terms and conditions</a></li>
+  </ul>
+{{/footerSupportLinks}}
+
+{{/ govuk-template}}
