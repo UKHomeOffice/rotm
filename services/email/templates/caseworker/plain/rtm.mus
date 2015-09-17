@@ -1,0 +1,12 @@
+Form submitted: Report terrorist materials
+{{#data}}
+   
+  {{#t}}pages.rtm-email-table.headers.website_url{{/t}}: {{website_url}}
+  
+  {{#t}}pages.rtm-email-table.headers.trigger_warning{{/t}}: {{#trigger_warning}}Yes{{/trigger_warning}}{{^trigger_warning}}No{{/trigger_warning}}
+
+  {{#t}}pages.rtm-email-table.headers.content_locate_hint{{/t}}: {{#content_locate_hint}}{{content_locate_hint}}{{/content_locate_hint}}{{^content_locate_hint}}No information{{/content_locate_hint}}
+
+  {{#t}}pages.rtm-email-table.headers.content_description{{/t}}: {{#content_description}}{{content_description}}{{/content_description}}{{^content_description}}No description given{{/content_description}}
+  
+{{/data}}

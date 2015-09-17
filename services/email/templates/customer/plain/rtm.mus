@@ -1,0 +1,19 @@
+Form submitted: Report terrorist materials
+{{#data}}
+
+  Thankyou for your report regarding terrorist materials. Here is the data which we have recorded:
+   
+  Website address: {{website_url}}
+  
+  Disturbing material: {{#trigger_warning}}Yes{{/trigger_warning}}{{^trigger_warning}}No{{/trigger_warning}}
+
+  How to locate material: {{#content_locate_hint}}{{content_locate_hint}}{{/content_locate_hint}}{{^content_locate_hint}}No information{{/content_locate_hint}}
+
+  Description of material: {{#content_description}}{{content_description}}{{/content_description}}{{^content_description}}No description given{{/content_description}}
+
+  
+{{/data}}
+
+If you're unsure an email is from UKVI:
+ * do not reply to it or click any links
+ * forward it to phishing@homeoffice.gsi.gov.uk
