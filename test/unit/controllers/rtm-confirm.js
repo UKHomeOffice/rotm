@@ -29,16 +29,20 @@ describe('controllers/rtm/confirm', function () {
         }
       };
       res = {};
-      callback = sinon.stub();
+      callback = sinon.stub()
 
       /*eslint no-unused-vars: 0*/
       ConfirmController.prototype.saveValues(req, res, callback);
 
     });
+
+    after(function(){
+      Model.save.restore();
+    });
     
     it('should use the email service to send values', function () {
       /*eslint no-unused-vars: 1*/
-      
+
       modelProto.save.should.have.been.called;
       
     });
@@ -51,5 +55,5 @@ describe('controllers/rtm/confirm', function () {
     });
 
   });
-    
+        
 });
