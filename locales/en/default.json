@@ -17,6 +17,29 @@
       "required": "Please specify the URL for the content you wish to report"
     }
   },
+  "fields": {
+    "rtm": {
+      "legend": "Details about terrorist material"
+    },
+    "rtm-confirmation": {
+      "legend": "Confirmation details about terrorist material"
+    },
+    "website_url": {
+      "label": "Website address",
+      "hint": "The web address can normally be found at the top of the browser window and usually starts \"http://\" or \"https://\"."
+    },
+    "trigger_warning": {
+      "label": "Warning, this material may be disturbing to the viewer."
+    },
+    "content_locate_hint": {
+      "label": "Location of material on website",
+      "hint": "Use the text box above to briefly describe where we can see the information on this page (1200 character limit)"
+    },
+    "content_description": {
+      "label": "Description of material",
+      "hint": "Use the text box above to provide any necessary supporting information (1200 character limit)"
+    }
+  },
   "journeys": {
     "terrorism_reporting": {
       "header": "Reporting Terrorist Material"
