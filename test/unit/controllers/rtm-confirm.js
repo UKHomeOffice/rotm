@@ -11,7 +11,7 @@ describe('controllers/rtm/confirm', function () {
     var res;
     var callback;
 
-
+    
     var modelProto = {
       save: sinon.spy(),
       set: sinon.stub()
@@ -31,15 +31,25 @@ describe('controllers/rtm/confirm', function () {
       res = {};
       callback = sinon.stub();
 
+      /*eslint no-unused-vars: 0*/
+      ConfirmController.prototype.saveValues(req, res, callback);
+
     });
     
     it('should use the email service to send values', function () {
-      /*eslint no-unused-vars: 0*/
-      ConfirmController.prototype.saveValues(req, res, callback);
       /*eslint no-unused-vars: 1*/
+      
       modelProto.save.should.have.been.called;
+      
+    });
+
+    it('should pass a calback to the email service', function () {
+      /*eslint no-unused-vars: 1*/
+      
+      modelProto.save.should.have.been.calledWith(callback);
+      
     });
 
   });
-  
+    
 });
