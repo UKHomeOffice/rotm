@@ -9,8 +9,6 @@ describe('controllers/rtm/confirm:send', function () {
     var res;
     var callback;
 
-    var emailResult = '';
-    
     var ConfirmController = require('../../../controllers/rtm/confirm');
 
     beforeEach(function (done) {
@@ -26,20 +24,22 @@ describe('controllers/rtm/confirm:send', function () {
       };
       res = {};
 
+      callback = sinon.stub();
+      
       /*eslint no-unused-vars: 0*/
-      ConfirmController.prototype.saveValues(req, res, function(){
-        console.log("I was never called");
-        done();
-      });
+      ConfirmController.prototype.saveValues(req, res, function(){ callback(); done(); });
 
     });
     
-    it('should attempt to send an email', function (d) {
+    it('should attempt to send an email', function (done) {
       /*eslint no-unused-vars: 1*/
 
-      console.log(d);
-//      emailResult = ?
+      callback.should.have.been.called;
+
+      //TODO
+      /* actually test it */
       
+      done();
     });
 
   });

@@ -1,6 +1,6 @@
 'use strict';
 
-var proxyquire = require('proxyquire');
+var proxyquire = require('proxyquire').noPreserveCache();
 
 describe('controllers/rtm/confirm', function () {
 
@@ -36,10 +36,6 @@ describe('controllers/rtm/confirm', function () {
 
     });
 
-    after(function(){
-      Model.save.restore();
-    });
-    
     it('should use the email service to send values', function () {
       /*eslint no-unused-vars: 1*/
 
