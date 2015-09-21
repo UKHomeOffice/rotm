@@ -126,8 +126,6 @@ Emailer.prototype.send = function send(email, callback) {
   var plainText = Mustache.render(caseworkerPlainTextTemplates[email.template], templateData);
   var htmlFormat = Mustache.render(caseworkerHtmlTemplates[email.template], templateData);
 
-  console.log(htmlFormat);
-  
   this.transporter.sendMail({
     from: config.email.from,
     to: config.email.caseworker[email.template],
