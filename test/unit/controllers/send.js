@@ -2,14 +2,14 @@
 
 describe('controllers/rtm/confirm:send', function () {
     
-  var emailReturn = '';
-
   describe('sending emails', function () {
 
     var controller;
     var req;
     var res;
     var callback;
+
+    var err, buff;
     
     var ConfirmController = require('../../../controllers/rtm/confirm');
 
@@ -21,7 +21,7 @@ describe('controllers/rtm/confirm:send', function () {
             trigger_warning: 'yes',
             content_locate_hint: '',
             content_description: '',
-            to: 'an@email.address' // callback is only called from services/email/index.js if a user recipient is given
+            email: 'an@email.address' // callback is only called from services/email/index.js if a user recipient is given
           })
         }
       };
@@ -30,8 +30,8 @@ describe('controllers/rtm/confirm:send', function () {
       callback = sinon.stub();
       
       /*eslint no-unused-vars: 0*/
-      ConfirmController.prototype.saveValues(req, res, function(d){
-        emailReturn = d;
+      ConfirmController.prototype.saveValues(req, res, function(e, d){
+        err = e; buff = d;
         callback();
         done();
       });
@@ -46,7 +46,9 @@ describe('controllers/rtm/confirm:send', function () {
       */
       
       callback.should.have.been.called;
-      should.equal(emailReturn.substr(0,15), "<!doctype html>"); // first line of the html email template 
+      should.equal(err, null);
+
+      should.equal(buff.hasOwnProperty("envelope"), true); // better; email buffer object should have envelope property
       done();
     });
 
