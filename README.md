@@ -1,5 +1,6 @@
 # RTM
-Report Terrorist Material
+
+Reporting Terrorist Material
 
 This repo is a clone of brp_app at https://github.com/UKHomeOffice/brp_app/commit/7107671f42aa0cdb5738192801c739a40a9c9475
 
