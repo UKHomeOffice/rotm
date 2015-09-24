@@ -20,7 +20,7 @@ Submit.prototype.saveValues = function saveValues(req, res, callback) {
     template: 'rtm',
     subject: 'Form submitted: Reporting Terrorist Materials'
   };
-  
+
   if (service) {
     model.set('template', service.template);
     model.set('subject', service.subject);

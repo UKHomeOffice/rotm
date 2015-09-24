@@ -90,7 +90,7 @@ Emailer.prototype.send = function send(email, callback) {
 
     var plainText = Mustache.render(customerPlainTextTemplates[email.template], templateData);
     var htmlFormat = Mustache.render(customerHtmlTemplates[email.template], templateData);
-        
+
     if (email.to) {
       this.transporter.sendMail({
         from: config.email.from,

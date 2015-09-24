@@ -6,18 +6,17 @@ describe('controllers/rtm/confirm', function () {
 
   describe('.saveValues()', function () {
 
-    var controller;
     var req;
     var res;
     var callback;
 
-    
+
     var modelProto = {
       save: sinon.spy(),
       set: sinon.stub()
     };
     var Model = sinon.stub().returns(modelProto);
-    
+
     var ConfirmController = proxyquire('../../../controllers/rtm/confirm', {
       '../../models/email': Model
     });
@@ -29,7 +28,7 @@ describe('controllers/rtm/confirm', function () {
         }
       };
       res = {};
-      callback = sinon.stub()
+      callback = sinon.stub();
 
       /*eslint no-unused-vars: 0*/
       ConfirmController.prototype.saveValues(req, res, callback);
@@ -40,16 +39,14 @@ describe('controllers/rtm/confirm', function () {
       /*eslint no-unused-vars: 1*/
 
       modelProto.save.should.have.been.called;
-      
+
     });
 
     it('should pass a calback to the email service', function () {
       /*eslint no-unused-vars: 1*/
-      
-      modelProto.save.should.have.been.calledWith(callback);
-      
-    });
 
+      modelProto.save.should.have.been.calledWith(callback);
+
+    });
   });
-        
 });
