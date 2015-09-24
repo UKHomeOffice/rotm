@@ -23,7 +23,8 @@ describe('controllers/rtm/confirm:send', function () {
             content_locate_hint: '',
             content_description: '',
             email: 'an@email.address'
-            // callback is only called from services/email/index.js if a user recipient is given
+            // callback only called with nodemailer-stub-transport arguments
+            // from services/email/index.js if a user recipient is given
           })
         }
       };
