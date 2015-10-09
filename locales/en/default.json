@@ -4,7 +4,8 @@
     "continue": "Continue",
     "submit": "Submit",
     "change": "Change",
-    "close": "Close"
+    "close": "Close",
+    "send": "Send report"
   },
   "errorlist": {
     "title": {
@@ -55,7 +56,12 @@
       "content_description": "You may use the box below to provide us with more information about the material or information you are submitting (optional)."
     },
     "rtm-confirmation": {
-      "description": "Please confirm the following details are correct:"
+      "description": "Please confirm the following details are correct:",
+      "check_details": "Check the details of web address",
+      "web_address": "Specific web address",
+      "where_on_page": "Where can we find the material on the page?",
+      "tell_us_more": "Tell us more",
+      "can_we_contact": "Can we contact you for more information?"
     },
     "rtm-completion": {
       "header": "Thank you, we have received your information.",
