@@ -15,7 +15,7 @@
   {{$header}}{{#t}}pages.terrorism_reporting.header{{/t}}{{/header}}
 
   {{$content}}
-    <p>{{#t}}pages.terrorism_reporting.description{{/t}}</p>
+    <p class="panel-indent">{{#t}}pages.terrorism_reporting.description{{/t}}</p>
 
     {{<partials-form}}
          
@@ -29,35 +29,25 @@
 
           <div class="form-group">
 
-            <p>{{#t}}pages.terrorism_reporting.website_url{{/t}}</p>
             {{#input-text}}website_url{{/input-text}}
 
           </div>
 
           <div class="form-group">
 
-            <p>{{#t}}pages.terrorism_reporting.trigger_warning{{/t}}</p>
-            {{#checkbox}}trigger_warning{{/checkbox}}
-
-          </div>
-
-          <div class="form-group">
-
-            <p>{{#t}}pages.terrorism_reporting.content_locate_hint{{/t}}</p>
             {{#textarea}}content_locate_hint{{/textarea}}
 
           </div>
 
           <div class="form-group">
 
-            <p>{{#t}}pages.terrorism_reporting.content_description{{/t}}</p>
             {{#textarea}}content_description{{/textarea}}
 
           </div>
 
         </fieldset>
 
-        {{#input-submit}}submit{{/input-submit}}
+        {{#input-submit}}next_step{{/input-submit}}
 
       {{/form}}
 

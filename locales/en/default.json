@@ -4,7 +4,9 @@
     "continue": "Continue",
     "submit": "Submit",
     "change": "Change",
-    "close": "Close"
+    "close": "Close",
+    "send": "Send report",
+    "next_step": "Next step"
   },
   "errorlist": {
     "title": {
@@ -18,44 +20,51 @@
     }
   },
   "fields": {
+
     "rtm": {
       "legend": "Details about terrorist material"
     },
+
     "rtm-confirmation": {
       "legend": "Confirmation details about terrorist material"
     },
+
     "website_url": {
-      "label": "Website address",
-      "hint": "The web address can normally be found at the top of the browser window and usually starts \"http://\" or \"https://\"."
+      "label": "Enter the specific web address that you are reporting",
+      "hint": "The web address can normally be found at the top of the browser window and starts with \"www.\",  \"http://\" or \"https://\"."
     },
-    "trigger_warning": {
-      "label": "Warning, this material may be disturbing to the viewer."
-    },
+
     "content_locate_hint": {
-      "label": "Location of material on website",
-      "hint": "Use the text box above to briefly describe where we can see the information on this page (1200 character limit)"
+      "label": "Where can we find the material on the page (optional)",
+      "hint": "For example, if it's an image, video or text, where is it on the page? If it's in a social media feed, what time and date was it posted?"
     },
+
     "content_description": {
-      "label": "Description of material",
-      "hint": "Use the text box above to provide any necessary supporting information (1200 character limit)"
+      "label": "Tell us more about the material you are submitting (optional)",
+      "hint": "How did you find the material? Do you know any details that would help us investigate, such as the names or locations of the people involved?"
     }
+    
   },
+
   "journeys": {
     "terrorism_reporting": {
-      "header": "Reporting Terrorist Material"
+      "header": "Report Online Terrorist Material"
     }
   },
+
   "pages": {
     "terrorism_reporting": {
-      "header": "Reporting Terrorist Material Online",
-      "description": "If you are reporting a crime that is happening right now or if there is a threat to someone's life, call 999 immediately.",
-      "website_url": "Please enter the specific web address that you are reporting (e.g. http://www.reportingthispage.com/terrorist/content/123).",
-      "trigger_warning": "If the content is shocking or disturbing please tick the box below so that we do not open the link unnecessarily or in the view of people who might be offended.",
-      "content_locate_hint": "If it is difficult to find the web content that is troubling you on this page, please describe its location in a bit more detail below (optional).",
-      "content_description": "You may use the box below to provide us with more information about the material or information you are submitting (optional)."
+      "header": "Report Online Terrorist Material",
+      "description": "If you are reporting a crime that is happening right now or if there is a threat to someone's life, call 999 immediately."
+
     },
     "rtm-confirmation": {
-      "description": "Please confirm the following details are correct:"
+      "description": "Please confirm the following details are correct:",
+      "check_details": "Check the details of web address",
+      "web_address": "Specific web address",
+      "where_on_page": "Where can we find the material on the page?",
+      "tell_us_more": "Tell us more",
+      "can_we_contact": "Can we contact you for more information?"
     },
     "rtm-completion": {
       "header": "Thank you, we have received your information.",
