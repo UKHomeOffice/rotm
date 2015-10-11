@@ -42,7 +42,7 @@ describe('controllers/confirm', function () {
 
     });
 
-    it('should pass a calback to the email service', function () {
+    it('should pass a callback to the email service', function () {
       /*eslint no-unused-vars: 1*/
 
       modelProto.save.should.have.been.calledWith(callback);
