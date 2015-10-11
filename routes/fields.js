@@ -26,12 +26,13 @@ module.exports = {
   'anonymous': {
     validate: ['required'],
     className: ['inline', 'form-group'],
+    legend: 'fields.anonymous.legend',
     options: [{
       value: 'yes',
-      label: 'fields.anonymous.yes.label'
+      label: 'fields.anonymous.options.yes.label'
     }, {
       value: 'no',
-      label: 'fields.anonymous.no.label',
+      label: 'fields.anonymous.options.no.label',
       toggle: 'contact-info-group'
     }]
   },
@@ -40,9 +41,9 @@ module.exports = {
   },
   'contact-info-email': {
     validate: ['email'],
-    label: 'fields.contact-info-name.label'
+    label: 'fields.contact-info-email.label'
   },
   'contact-info-phone': {
-    label: 'fields.contact-info-name.label'
+    label: 'fields.contact-info-phone.label'
   }
 };

@@ -18,3 +18,185 @@ $path: "../img/";
 textarea {
   min-height: 150px; 
 }
+
+.confirmation h3 {
+    color: #6f777b
+}
+
+.confirmation div {
+    border-top: 1px solid #dee0e2
+}
+
+.confirmation div {
+    padding: 1em 5.5em 1em 0;
+    position: relative
+}
+
+@media (min-width: 641px) {
+    .confirmation div {
+        padding-right: 0
+    }
+}
+
+.confirmation div h3,
+.confirmation div .data-wrap,
+.confirmation div .change {
+    vertical-align: top
+}
+
+.confirmation div h3,
+.confirmation div .data-wrap {
+    border-top: none;
+    margin: 0 0 1em;
+    padding: 0
+}
+
+@media (min-width: 641px) {
+    .confirmation div h3,
+    .confirmation div .data-wrap {
+        display: -moz-inline-stack;
+        display: inline-block
+    }
+}
+
+.confirmation div h3 {
+    font-weight: normal
+}
+
+@media (min-width: 641px) {
+    .confirmation div h3 {
+        width: 33%
+    }
+}
+
+.confirmation div .data-wrap {
+    padding: 0
+}
+
+@media (min-width: 641px) {
+    .confirmation div .data-wrap {
+        width: 52%;
+        padding: 0
+    }
+    .confirmation div .data-wrap p,
+    .confirmation div .data-wrap div {
+        padding-right: 1.25em;
+        padding-left: 1.25em
+    }
+}
+
+.confirmation div .data-wrap p {
+    color: #0b0c0c
+}
+
+.confirmation .change {
+    background-color: #dee0e2;
+    position: relative;
+    display: -moz-inline-stack;
+    display: inline-block;
+    padding: 0.35em 0.5em 0.15em 0.5em;
+    border: none;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    -webkit-appearance: none;
+    -webkit-box-shadow: 0 2px 0 #b5babe;
+    -moz-box-shadow: 0 2px 0 #b5babe;
+    box-shadow: 0 2px 0 #b5babe;
+    /*font-size: 1em;*/
+    font-size: 16px;
+    line-height: 1.25;
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+    cursor: pointer;
+    color: #0b0c0c;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 1em
+}
+
+.confirmation .change:visited {
+    background-color: #dee0e2
+}
+
+.confirmation .change:hover,
+.confirmation .change:focus {
+    background: #d0d3d6
+}
+
+.confirmation .change:active {
+    top: 2px;
+    -webkit-box-shadow: 0 0 0 #dee0e2;
+    -moz-box-shadow: 0 0 0 #dee0e2;
+    box-shadow: 0 0 0 #dee0e2
+}
+
+.confirmation .change.disabled,
+.confirmation .change[disabled="disabled"],
+.confirmation .change[disabled] {
+    zoom: 1;
+    filter: alpha(opacity=50);
+    opacity: 0.5
+}
+
+.confirmation .change.disabled:hover,
+.confirmation .change[disabled="disabled"]:hover,
+.confirmation .change[disabled]:hover {
+    cursor: default;
+    background-color: #dee0e2
+}
+
+.confirmation .change.disabled:active,
+.confirmation .change[disabled="disabled"]:active,
+.confirmation .change[disabled]:active {
+    top: 0;
+    -webkit-box-shadow: 0 2px 0 #b5babe;
+    -moz-box-shadow: 0 2px 0 #b5babe;
+    box-shadow: 0 2px 0 #b5babe
+}
+
+.confirmation .change:hover,
+.confirmation .change:focus,
+.confirmation .change:visited {
+    color: #0b0c0c
+}
+
+.confirmation .change:before {
+    content: "";
+    height: 110%;
+    width: 100%;
+    display: block;
+    background: transparent;
+    position: absolute;
+    top: 0;
+    left: 0
+}
+
+.confirmation .change:active:before {
+    top: -10%;
+    height: 120%
+}
+
+.confirmation .change[rel="external"]:after {
+    display: none;
+    content: none;
+    margin-left: 0;
+    margin-right: 0
+}
+
+@media (min-width: 641px) {
+    .confirmation .change {
+        position: relative;
+        float: right;
+        margin-top: 0
+    }
+}
+
+.panel-indent .form-label-bold
+{
+    font-size: inherit;
+    font-weight: inherit;
+}
+

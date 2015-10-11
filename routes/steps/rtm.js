@@ -14,6 +14,12 @@ module.exports = {
   '/confirmation': {
     template: 'rtm/confirm',
     controller: require('../../controllers/rtm/confirm'),
+    fields: [
+      'anonymous',
+      'contant-info-name',
+      'contant-info-email',
+      'contant-info-phone'
+    ],
     backLink: '/',
     next: '/done'
   },
