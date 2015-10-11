@@ -16,9 +16,9 @@ module.exports = {
     controller: require('../../controllers/confirm'),
     fields: [
       'anonymous',
-      'contant-info-name',
-      'contant-info-email',
-      'contant-info-phone'
+      'contact-info-name',
+      'contact-info-email',
+      'contact-info-phone'
     ],
     backLink: '/',
     next: '/done'
