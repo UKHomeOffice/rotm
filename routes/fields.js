@@ -4,24 +4,45 @@ module.exports = {
   'continue': {
     value: 'buttons.continue'
   },
-  submit: {
+  'submit': {
     value: 'buttons.submit'
   },
-  change: {
+  'change': {
     value: 'buttons.change'
   },
-  'website_url': {
+  'send': {
+    value: 'buttons.send'
+  },
+  'url': {
     validate: ['required'],
-    label: 'fields.website_url.label'
+    label: 'fields.url.label'
   },
-  'trigger_warning': {
-    label: 'fields.trigger_warning.label',
-    className: 'form-checkbox'
+  'location': {
+    label: 'fields.location.label'
   },
-  'content_locate_hint': {
-    label: 'fields.content_locate_hint.label'
+  'description': {
+    label: 'fields.description.label'
   },
-  'content_description': {
-    label: 'fields.content_description.label'
+  'anonymous': {
+    validate: ['required'],
+    className: ['inline', 'form-group'],
+    options: [{
+      value: 'yes',
+      label: 'fields.anonymous.yes.label'
+    }, {
+      value: 'no',
+      label: 'fields.anonymous.no.label',
+      toggle: 'contact-info-group'
+    }]
+  },
+  'contact-info-name': {
+    label: 'fields.contact-info-name.label'
+  },
+  'contact-info-email': {
+    validate: ['email'],
+    label: 'fields.contact-info-name.label'
+  },
+  'contact-info-phone': {
+    label: 'fields.contact-info-name.label'
   }
 };

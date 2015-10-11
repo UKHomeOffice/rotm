@@ -3,11 +3,11 @@
 module.exports = {
   '/': {
     template: 'rtm/terrorism-reporting',
+    controller: require('../../controllers/add-report'),
     fields: [
-      'website_url',
-      'trigger_warning',
-      'content_locate_hint',
-      'content_description'
+      'url',
+      'location',
+      'description'
     ],
     next: '/confirmation'
   },

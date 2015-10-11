@@ -12,7 +12,7 @@
     {{> partials-navigation}}
   {{/propositionHeader}}
 
-  {{$header}}{{#t}}pages.terrorism_reporting.header{{/t}}{{/header}}
+  {{$header}}{{#t}}journeys.terrorism_reporting.header{{/t}}{{/header}}
 
   {{$content}}
     <p>{{#t}}pages.terrorism_reporting.description{{/t}}</p>
@@ -27,29 +27,51 @@
               <span class="form-label-bold">{{#t}}fields.rtm-confirmation.legend{{/t}}</span>
             </legend>
 
-            <div class="form-group">
-              <p>{{#t}}pages.rtm-confirmation.description{{/t}}</p>
-            </div>
-            
-            <p>Website address:</p>
-            <p class="panel-indent">{{#t}}{{values.website_url}}{{/t}}</p>
+            {{#values.report}}
+              <h2>{{#t}}pages.rtm-confirmation.check-details{{/t}}</h2>
+	      <div class="confirmation">
+                <div>
+                  <h3>{{#t}}fields.url.short{{/t}}</h3>
+		  <div class="data-wrap">
+		    <p>{{url}}</p>
+		  </div>
+		  <a href="" class="change">
+                    {{#t}}buttons.change{{/t}}<span class="visuallyhidden"> {{#t}}fields.url{.short{{/t}}</span>
+		  </a>
+                </div>
+                <div>
+		  <h3>{{#t}}fields.location.short{{/t}}</h3>
+		  <div class="data-wrap">
+                    <p>{{content_locate_hint}}</p>
+		  </div>
+		  <a href="" class="change">
+		    {{#t}}buttons.change{{/t}}<span class="visuallyhidden"> {{#t}}fields.location.short{{/t}}</span>
+		  </a>
+                </div>
+                <div>
+		  <h3>{{#t}}fields.description.short{{/t}}</h3>
+		  <div class="data-wrap">
+                    <p>{{content_description}}</p>
+		  </div>
+		  <a href="" class="change">
+		    {{#t}}buttons.change{{/t}}<span class="visuallyhidden"> {{#t}}fields.description.short{{/t}}</span>
+		  </a>
+                </div>
+              </div>
+            {{/values.report}}
 
-            <p>Disturbing material:</p>
-            <p class="panel-indent">The linked address does {{^values.trigger_warning}}not {{/values.trigger_warning}}contain disturbing material.</p>
-
-            {{#values.content_locate_hint}}
-              <p>Location of the terrorist material:</p>
-              <p class="panel-indent">{{#t}}{{values.content_locate_hint}}{{/t}}</p>
-            {{/values.content_locate_hint}}
-
-            {{#values.content_description}}
-              <p>Description of the terrorist material:</p>
-              <p class="panel-indent">{{#t}}{{values.content_description}}{{/t}}</p>
-            {{/values.content_description}}
-
+	    <a href="">{{#t}}pages.rtm-confirmation.add-another{{/t}}</a>
         </fieldset>
 
-        {{#input-submit}}submit{{/input-submit}}
+        <fieldset>
+          <legend class="visuallyhidden">
+            <span class="form-label-bold">{{#t}}pages.rtm-confirmation.anonymous{{/t}}</span>
+          </legend>
+	  <div class"label">{{#t}}pages.rtm-confirmation.anonymous{{/t}}</div>
+	  {{#radio-group}}anonymous{{/radio-group}}
+        </fieldset>
+
+        {{#input-submit}}send{{/input-submit}}
 
       {{/form}}
 
