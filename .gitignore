@@ -12,4 +12,5 @@ doc
 Gemfile.lock
 *~
 **/*~
+*.swp
 coverage
