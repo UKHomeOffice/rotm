@@ -13,7 +13,7 @@ module.exports = {
   },
   '/confirmation': {
     template: 'rtm/confirm',
-    controller: require('../../controllers/rtm/confirm'),
+    controller: require('../../controllers/confirm'),
     fields: [
       'anonymous',
       'contant-info-name',

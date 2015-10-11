@@ -3,13 +3,12 @@
 var util = require('util');
 var _ = require('underscore');
 
-var Controller = require('../../lib/base-controller');
-var Model = require('../../models/email');
+var Controller = require('../lib/base-controller');
+var Model = require('../models/email');
 
 var Submit = function Submit() {
   Controller.apply(this, arguments);
 };
-
 
 util.inherits(Submit, Controller);
 
