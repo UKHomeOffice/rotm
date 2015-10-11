@@ -5,7 +5,8 @@
     "submit": "Submit",
     "change": "Change",
     "close": "Close",
-    "send": "Send report"
+    "send": "Send report",
+    "next_step": "Next step"
   },
   "errorlist": {
     "title": {
@@ -19,9 +20,11 @@
     }
   },
   "fields": {
+
     "rtm": {
       "legend": "Details about terrorist material"
     },
+
     "rtm-confirmation": {
       "legend": "Confirmation details about terrorist material"
     },
@@ -31,12 +34,12 @@
       "hint": "The web address can be found at the top of the browser window and starts with \"www.\", \"http://\" or \"https://\"."
     },
     "location": {
-      "label": "Where can we find the material on the page?",
+      "label": "Where can we find the material on the page? (optional)",
       "short": "Where can we find the material on the page?",
       "hint": "For example, if it's an image, video or text, where is it on the page? If it's in a social media feed, what time and date was it posted?"
     },
     "description": {
-      "label": "Tell us more about the material you are submitting",
+      "label": "Tell us more about the material you are submitting (optional)",
       "short": "Tell us more",
       "hint": "How did you find the material? Do you know any details that would help us investigate, such as the names or locations of the people involved?"
     },
@@ -57,12 +60,15 @@
     "contact-info-phone": {
       "label": "Phone number"
     }
+    
   },
+
   "journeys": {
     "terrorism_reporting": {
       "header": "Report online terrorist material"
     }
   },
+
   "pages": {
     "terrorism_reporting": {
       "description": "If you are reporting a crime that is happening right now or if there is a threat to someone's life, call 999 immediately."
