@@ -1,14 +1,49 @@
 'use strict';
 
 module.exports = {
-  'website_url': {
+  'continue': {
+    value: 'buttons.continue'
+  },
+  'submit': {
+    value: 'buttons.submit'
+  },
+  'change': {
+    value: 'buttons.change'
+  },
+  'send': {
+    value: 'buttons.send'
+  },
+  'url': {
     validate: ['required'],
-    label: 'fields.website_url.label'
+    label: 'fields.url.label'
   },
-  'content_locate_hint': {
-    label: 'fields.content_locate_hint.label'
+  'location': {
+    label: 'fields.location.label'
   },
-  'content_description': {
-    label: 'fields.content_description.label'
+  'description': {
+    label: 'fields.description.label'
+  },
+  'anonymous': {
+    validate: ['required'],
+    className: ['inline', 'form-group'],
+    legend: 'fields.anonymous.legend',
+    options: [{
+      value: 'yes',
+      label: 'fields.anonymous.options.yes.label'
+    }, {
+      value: 'no',
+      label: 'fields.anonymous.options.no.label',
+      toggle: 'contact-info-group'
+    }]
+  },
+  'contact-info-name': {
+    label: 'fields.contact-info-name.label'
+  },
+  'contact-info-email': {
+    validate: ['email'],
+    label: 'fields.contact-info-email.label'
+  },
+  'contact-info-phone': {
+    label: 'fields.contact-info-phone.label'
   }
 };

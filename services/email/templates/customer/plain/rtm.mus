@@ -3,15 +3,15 @@ Form submitted: Report terrorist materials
 
   Thankyou for your report regarding terrorist materials. Here is the data which we have recorded:
    
-  Website address: {{website_url}}
+  {{#report}}
+  Website address: {{url}}
   
-  Disturbing material: {{#trigger_warning}}Yes{{/trigger_warning}}{{^trigger_warning}}No{{/trigger_warning}}
+  How to locate material: {{#location}}{{location}}{{/location}}{{^location}}No information{{/location}}
 
-  How to locate material: {{#content_locate_hint}}{{content_locate_hint}}{{/content_locate_hint}}{{^content_locate_hint}}No information{{/content_locate_hint}}
-
-  Description of material: {{#content_description}}{{content_description}}{{/content_description}}{{^content_description}}No description given{{/content_description}}
+  Description of material: {{#description}}{{description}}{{/description}}{{^description}}No description given{{/description}}
 
   
+  {{/report}}
 {{/data}}
 
 If you're unsure an email is from UKVI:

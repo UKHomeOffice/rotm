@@ -1,6 +1,6 @@
 'use strict';
 
-describe('controllers/rtm/confirm:send', function () {
+describe('controllers/confirm:send', function () {
 
   describe('sending emails', function () {
 
@@ -11,7 +11,7 @@ describe('controllers/rtm/confirm:send', function () {
     var err;
     var buff;
 
-    var ConfirmController = require('../../../controllers/rtm/confirm');
+    var ConfirmController = require('../../../controllers/confirm');
 
     before(function (done) {
       req = {

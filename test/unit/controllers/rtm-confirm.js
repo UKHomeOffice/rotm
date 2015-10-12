@@ -2,7 +2,7 @@
 
 var proxyquire = require('proxyquire').noPreserveCache();
 
-describe('controllers/rtm/confirm', function () {
+describe('controllers/confirm', function () {
 
   describe('.saveValues()', function () {
 
@@ -17,8 +17,8 @@ describe('controllers/rtm/confirm', function () {
     };
     var Model = sinon.stub().returns(modelProto);
 
-    var ConfirmController = proxyquire('../../../controllers/rtm/confirm', {
-      '../../models/email': Model
+    var ConfirmController = proxyquire('../../../controllers/confirm', {
+      '../models/email': Model
     });
 
     beforeEach(function () {
@@ -42,7 +42,7 @@ describe('controllers/rtm/confirm', function () {
 
     });
 
-    it('should pass a calback to the email service', function () {
+    it('should pass a callback to the email service', function () {
       /*eslint no-unused-vars: 1*/
 
       modelProto.save.should.have.been.calledWith(callback);

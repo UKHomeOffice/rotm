@@ -1,7 +1,7 @@
 {
   "buttons": {
     "test": "Start",
-    "continue": "Continue",
+    "next": "Next step",
     "submit": "Submit",
     "change": "Change",
     "close": "Close",
@@ -15,8 +15,11 @@
     }
   },
   "validation": {
-    "website_url": {
+    "url": {
       "required": "Please specify the URL for the content you wish to report"
+    },
+    "anonymous": {
+      "required": "Please let us know whether we can contact you for more information"
     }
   },
   "fields": {
@@ -28,43 +31,58 @@
     "rtm-confirmation": {
       "legend": "Confirmation details about terrorist material"
     },
-
-    "website_url": {
+    "url": {
       "label": "Enter the specific web address that you are reporting",
-      "hint": "The web address can normally be found at the top of the browser window and starts with \"www.\",  \"http://\" or \"https://\"."
+      "short": "Website address",
+      "hint": "The web address can be found at the top of the browser window and starts with \"www.\", \"http://\" or \"https://\"."
     },
-
-    "content_locate_hint": {
-      "label": "Where can we find the material on the page (optional)",
+    "location": {
+      "label": "Where can we find the material on the page? (optional)",
+      "short": "Where can we find the material on the page?",
       "hint": "For example, if it's an image, video or text, where is it on the page? If it's in a social media feed, what time and date was it posted?"
     },
-
-    "content_description": {
+    "description": {
       "label": "Tell us more about the material you are submitting (optional)",
+      "short": "Tell us more",
       "hint": "How did you find the material? Do you know any details that would help us investigate, such as the names or locations of the people involved?"
+    },
+    "anonymous": {
+      "legend": "Can we contact you for more information?",
+      "options": {
+        "yes": {
+          "label": "No, submit anonymously"
+        },
+        "no": {
+          "label": "Yes, I'll add my contact details"
+        }
+      }
+    },
+    "contact-info-name": {
+      "label": "Name (optional)"
+    },
+    "contact-info-email": {
+      "label": "Email address (optional)"
+    },
+    "contact-info-phone": {
+      "label": "Phone number (optional)"
     }
-    
   },
 
   "journeys": {
     "terrorism_reporting": {
-      "header": "Report Online Terrorist Material"
+      "header": "Report online terrorist material"
     }
   },
 
   "pages": {
     "terrorism_reporting": {
-      "header": "Report Online Terrorist Material",
       "description": "If you are reporting a crime that is happening right now or if there is a threat to someone's life, call 999 immediately."
-
     },
     "rtm-confirmation": {
-      "description": "Please confirm the following details are correct:",
-      "check_details": "Check the details of web address",
-      "web_address": "Specific web address",
-      "where_on_page": "Where can we find the material on the page?",
-      "tell_us_more": "Tell us more",
-      "can_we_contact": "Can we contact you for more information?"
+      "check-details": "Check the details of web address",
+      "add-another": "Add another website address",
+      "about-privacy": "About your privacy",
+      "about-privacy-blurb": "WRITE ME!"
     },
     "rtm-completion": {
       "header": "Thank you, we have received your information.",
@@ -72,10 +90,9 @@
     },
     "rtm-email-table": {
       "headers": {
-        "website_url": "Website address",
-        "trigger_warning": "Disturbing material",
-        "content_locate_hint": "Location of terrorist material",
-        "content_description": "Description of terrorist material"
+        "url": "Website address",
+        "location": "Location of terrorist material",
+        "description": "Description of terrorist material"
       }
     }
   },
