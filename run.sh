@@ -7,4 +7,8 @@ if [[ -d ${PUBLIC_DIR} ]] && [[ ! $(ls -A ${PUBLIC_DIR}) ]]; then
   cp -r /app/public/ /
 fi
 
-npm start
+if [ ${DOCKER_COMPOSE} ]
+  then npm run dev;
+  else npm start;
+fi
+

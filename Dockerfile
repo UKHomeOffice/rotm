@@ -1,15 +1,27 @@
-FROM vaijab/nodejs:0.12.7
+# Node image to build on top of
+FROM node:4.1.2
 
-RUN useradd -d /app app
+# Install nodemon
+RUN npm install -g nodemon
+
+# Create the app user and the app directory
+RUN groupadd app           \
+ && useradd -mg app app    \
+ && mkdir -p /srv/app      \
+ && chown app:app /srv/app
+
+# Switch to the app user
 USER app
+WORKDIR /srv/app
 
-WORKDIR /app
-COPY package.json /app/package.json
-COPY assets /app/assets
+# Copy files required by the app
+COPY . /srv/app
+
+# Install dependencies
 RUN npm install
-COPY . /app
 
-USER root
+# Go!
 EXPOSE 8080
-CMD /app/run.sh
+ENV DOCKER 1
+CMD ./run.sh
 

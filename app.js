@@ -15,7 +15,7 @@ if (config.env !== 'ci') {
   app.use(churchill(logger));
 }
 
-if (config.env === 'development') {
+if (config.serve_static) {
   app.use('/public', express.static(path.resolve(__dirname, './public')));
 }
 

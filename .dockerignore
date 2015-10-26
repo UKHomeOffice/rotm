@@ -1,0 +1,25 @@
+.dockerignore
+Dockerfile
+docker-compose.yml
+.gitignore
+.git
+README.md
+
+# .gitignore
+#ide specific
+.idea/
+
+node_modules
+public
+reports
+*.log
+.DS_Store
+public/js/bundle.js
+.yardoc
+doc
+Gemfile.lock
+*~
+**/*~
+*.swp
+coverage
+
