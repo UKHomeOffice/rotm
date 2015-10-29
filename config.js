@@ -3,6 +3,7 @@
 /*eslint no-process-env: 0*/
 /*eslint no-inline-comments: 0*/
 /*eslint camelcase: 0*/
+
 module.exports = {
   env: process.env.NODE_ENV,
   port: process.env.PORT || 8080,
@@ -12,8 +13,8 @@ module.exports = {
     ttl: process.env.SESSION_TTL || 1200 /* 20 mins */
   },
   redis: {
-    port: process.env.REDIS_PORT || 6379,
-    host: process.env.REDIS_HOST || '127.0.0.1'
+    port: process.env.REDIS_PORT_6379_TCP_PORT || process.env.REDIS_PORT || 6379,
+    host: process.env.REDIS_PORT_6379_TCP_ADDR || process.env.REDIS_HOST || '127.0.0.1'
   },
   email: {
     caseworker: {
@@ -30,5 +31,7 @@ module.exports = {
       pass: process.env.SMTP_PASSWORD || ''
     },
     from: process.env.FROM_ADDRESS || 'rtm@dsp.notprod.homeoffice.gov.uk'
-  }
+  },
+  serve_static: !(process.env.DOCKER || false)
 };
+
