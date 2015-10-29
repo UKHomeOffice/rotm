@@ -3,15 +3,10 @@ nginx:
     volumes:
         - "./public:/public:z"
     links:
-        - app1:app1
-        - app2:app2
-        - app3:app3
+        - app:app
     ports:
         - "80:80"
-        - "443:443"
-    environment:
-        - DOCKER_COMPOSE=1
-app1:
+app:
     build: .
     ports:
         - "8080"
@@ -20,26 +15,7 @@ app1:
     links:
         - redis
     environment:
-        - DOCKER_COMPOSE=1
-app2:
-    build: .
-    ports:
-        - "8080"
-    volumes:
-        - ".:/srv/app:z"
-    links:
-        - redis
-    environment:
-        - DOCKER_COMPOSE=1
-app3:
-    build: .
-    ports:
-        - "8080"
-    volumes:
-        - ".:/srv/app:z"
-    links:
-        - redis
-    environment:
+        - NODE_ENV=development
         - DOCKER_COMPOSE=1
 redis:
     image: redis
