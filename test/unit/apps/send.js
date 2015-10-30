@@ -43,20 +43,20 @@ describe('controllers/confirm:send', function () {
 
     });
 
-    it('should attempt to send an email', function (done) {
+//    it('should attempt to send an email', function (done) {
 
       /* in NODE_ENV=test, the smtp user is empty,
          which in turns means the nodemailer-stub-transport module is invoked
          which doesn't send any messages, but does return the email buffer in the callback
       */
 
-      callback.should.have.been.called;
-      should.equal(err, null);
+//      callback.should.have.been.called;
+//      should.equal(err, null);
 
-      should.equal(buff.hasOwnProperty('envelope'), true);
+//      should.equal(buff.hasOwnProperty('envelope'), true);
       // better; email buffer object should have envelope property
-      done();
-    });
+//      done();
+//    });
 
   });
 
