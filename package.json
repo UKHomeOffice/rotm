@@ -6,7 +6,8 @@
   "license": "GPLv2",
   "scripts": {
     "start": "node .",
-    "dev": "parallelshell 'NODE_ENV=development nodemon -e html,js,json' 'npm run watch:scss' 'npm run watch:js'",
+    "dev": "nodemon -e html,js,json",
+    "watch": "parallelshell 'npm run watch:scss' 'npm run watch:js'",
     "watch:scss": "nodemon -e scss -x 'npm run sass'",
     "watch:js": "nodemon --watch assets/js -x 'npm run browserify'",
     "test": "NODE_ENV=test mocha",
