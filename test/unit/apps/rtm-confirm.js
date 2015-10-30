@@ -28,7 +28,7 @@ describe('controllers/confirm', function () {
         }
       };
       res = {};
-      callback = sinon.stub()
+      callback = sinon.stub();
 
       /*eslint no-unused-vars: 0*/
       ConfirmController.prototype.saveValues(req, res, callback);

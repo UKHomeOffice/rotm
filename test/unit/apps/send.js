@@ -33,11 +33,11 @@ describe('controllers/confirm:send', function () {
       res = {};
 
       /*eslint no-unused-vars: 0*/
-      ConfirmController.prototype.saveValues(req, res, function(e, b){
+      ConfirmController.prototype.saveValues(req, res, function(e, b) {
         buff = b; err = e;
         done();
       });
-      
+
     });
 
     it('should attempt to send an email', function (done) {
