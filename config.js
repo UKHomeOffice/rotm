@@ -4,7 +4,7 @@
 /*eslint no-inline-comments: 0*/
 /*eslint camelcase: 0*/
 module.exports = {
-  env: process.env.NODE_ENV,
+  env: process.env.NODE_ENV || 'development',
   port: process.env.PORT || 8080,
   listen_host: process.env.LISTEN_HOST || '0.0.0.0',
   session: {
@@ -12,8 +12,8 @@ module.exports = {
     ttl: process.env.SESSION_TTL || 1200 /* 20 mins */
   },
   redis: {
-    port: process.env.REDIS_PORT || 6379,
-    host: process.env.REDIS_HOST || '127.0.0.1'
+    port: process.env.REDIS_PORT_6379_TCP_PORT || process.env.REDIS_PORT || 6379,
+    host: process.env.REDIS_PORT_6379_TCP_ADDR || process.env.REDIS_HOST || '127.0.0.1'
   },
   email: {
     caseworker: {

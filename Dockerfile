@@ -1,5 +1,7 @@
 FROM vaijab/nodejs:0.12.7
 
+RUN dnf install -y -q git
+
 RUN useradd -d /app app
 USER app
 
