@@ -13,13 +13,12 @@ var Submit = function Submit() {
 util.inherits(Submit, Controller);
 
 Submit.prototype.saveValues = function saveValues(req, res, callback) {
-  var sessionData = _.pick(req.sessionModel.toJSON(), _.identity)
-  , data = sessionData['report'];
+  var sessionData = _.pick(req.sessionModel.toJSON(), _.identity);
+  var data = sessionData.report;
 
-  console.log(data);
-  if (data && data.length){
+  if (data && data.length) {
 
-    data.forEach(function(d){
+    data.forEach(function sendEachReport(d) {
 
       var model = new Model(d);
       var service = {
@@ -39,6 +38,6 @@ Submit.prototype.saveValues = function saveValues(req, res, callback) {
     });
 
   }
-}
+};
 
 module.exports = Submit;
