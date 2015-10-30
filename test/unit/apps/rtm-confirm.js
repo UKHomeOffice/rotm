@@ -18,7 +18,7 @@ describe('controllers/confirm', function () {
     var Model = sinon.stub().returns(modelProto);
 
     var ConfirmController = proxyquire('../../../apps/rtm/controllers/confirm', {
-      '../models/email': Model
+      '../../common/models/email': Model
     });
 
     beforeEach(function () {
@@ -28,26 +28,25 @@ describe('controllers/confirm', function () {
         }
       };
       res = {};
-      callback = sinon.stub();
+      callback = sinon.stub()
 
       /*eslint no-unused-vars: 0*/
       ConfirmController.prototype.saveValues(req, res, callback);
 
     });
 
-//    it('should use the email service to send values', function () {
+    it('should use the email service to send values', function () {
       /*eslint no-unused-vars: 1*/
 
-//      modelProto.set.should.have.been.called;
+      modelProto.set.should.have.been.called;
 
-//    });
+    });
 
-//    it('should pass a callback to the email service', function () {
+    it('should pass a callback to the email service', function () {
       /*eslint no-unused-vars: 1*/
 
-//      modelProto.save.should.have.been.calledWith(callback);
+      modelProto.save.should.have.been.calledWith(callback);
 
-//    });
-
+    });
   });
 });

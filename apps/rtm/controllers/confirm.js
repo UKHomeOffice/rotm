@@ -15,11 +15,8 @@ util.inherits(Submit, Controller);
 Submit.prototype.saveValues = function saveValues(req, res, callback) {
   var sessionData = _.pick(req.sessionModel.toJSON(), _.identity);
   var data = sessionData.report;
-
   if (data && data.length) {
-
     data.forEach(function sendEachReport(d) {
-
       var model = new Model(d);
       var service = {
         template: 'rtm',
