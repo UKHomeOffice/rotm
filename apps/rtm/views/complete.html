@@ -1,0 +1,32 @@
+{{<layout}}
+
+  {{$journeyHeader}}
+    {{#t}}journeys.terrorism_reporting.header{{/t}}
+  {{/journeyHeader}}
+
+  {{$propositionHeader}}
+    {{> partials-navigation}}
+  {{/propositionHeader}}
+
+  {{$header}}{{#t}}journeys.terrorism_reporting.header{{/t}}{{/header}}
+
+  {{$content}}
+  
+    <div class="alert-complete" role="alert">
+      <span class="icon icon-complete" role="presentation"></span>
+      <div class="alert-message">
+        <h1>{{#t}}pages.rtm-completion.header{{/t}}</h1>
+      </div>
+    </div>
+
+    <hr>
+
+<!--    <p>{{#t}}pages.rtm-completion.email{{/t}} <strong>{{values.email}}</strong></p> //-->
+
+    <hr>
+
+    <a href='{{baseUrl}}' class='button'>{{#t}}buttons.close{{/t}}</a>
+
+  {{/content}}
+
+{{/layout}}

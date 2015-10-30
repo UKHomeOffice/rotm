@@ -1,0 +1,22 @@
+{
+  "terrorism_reporting": {
+    "description": "If you are reporting a crime that is happening right now or if there is a threat to someone's life, call 999 immediately."
+  },
+  "rtm-confirmation": {
+    "check-details": "Check the details of web address",
+    "add-another": "Add another website address",
+    "about-privacy": "About your privacy",
+    "about-privacy-blurb": "WRITE ME!"
+  },
+  "rtm-completion": {
+    "header": "Thank you, we have received your information.",
+    "email": "We have sent you an email containing the information you have provided to"
+  },
+  "rtm-email-table": {
+    "headers": {
+      "url": "Website address",
+      "location": "Location of terrorist material",
+      "description": "Description of terrorist material"
+    }
+  }
+}

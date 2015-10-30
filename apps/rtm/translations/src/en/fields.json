@@ -1,0 +1,45 @@
+{
+
+  "rtm": {
+    "legend": "Details about terrorist material"
+  },
+
+  "rtm-confirmation": {
+    "legend": "Confirmation details about terrorist material"
+  },
+  "url": {
+    "label": "Enter the specific web address that you are reporting",
+    "short": "Website address",
+    "hint": "The web address can be found at the top of the browser window and starts with \"www.\", \"http://\" or \"https://\"."
+  },
+  "location": {
+    "label": "Where can we find the material on the page? (optional)",
+    "short": "Where can we find the material on the page?",
+    "hint": "For example, if it's an image, video or text, where is it on the page? If it's in a social media feed, what time and date was it posted?"
+  },
+  "description": {
+    "label": "Tell us more about the material you are submitting (optional)",
+    "short": "Tell us more",
+    "hint": "How did you find the material? Do you know any details that would help us investigate, such as the names or locations of the people involved?"
+  },
+  "anonymous": {
+    "legend": "Can we contact you for more information?",
+    "options": {
+      "yes": {
+        "label": "No, submit anonymously"
+      },
+      "no": {
+        "label": "Yes, I'll add my contact details"
+      }
+    }
+  },
+  "contact-info-name": {
+    "label": "Name (optional)"
+  },
+  "contact-info-email": {
+    "label": "Email address (optional)"
+  },
+  "contact-info-phone": {
+    "label": "Phone number (optional)"
+  }
+}

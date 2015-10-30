@@ -81,11 +81,7 @@ app.use(secureCookies);
 app.use(initSession);
 
 // apps
-app.use(require('./apps/correct-mistakes/'));
-app.use(require('./apps/collection/'));
-app.use(require('./apps/someone-else/'));
-app.use(require('./apps/not-arrived/'));
-app.use(require('./apps/lost-stolen-damaged/'));
+app.use(require('./apps/rtm/'));
 
 // boring stuff
 app.get('/cookies', function renderCookies(req, res) {

@@ -1,0 +1,81 @@
+{{<layout}}
+
+  {{$journeyHeader}}
+    {{#t}}journeys.terrorism_reporting.header{{/t}}
+  {{/journeyHeader}}
+
+  {{$validationSummary}}
+    {{> partials-validation-summary}}
+  {{/validationSummary}}
+
+  {{$propositionHeader}}
+    {{> partials-navigation}}
+  {{/propositionHeader}}
+
+  {{$header}}{{#t}}journeys.terrorism_reporting.header{{/t}}{{/header}}
+
+  {{$content}}
+    <p>{{#t}}pages.terrorism_reporting.description{{/t}}</p>
+
+    {{<partials-form}}
+         
+      {{$form}}
+        <fieldset>
+          <legend class="visuallyhidden">
+            <span class="form-label-bold">{{#t}}fields.rtm-confirmation.legend{{/t}}</span>
+          </legend>
+          <div class="confirmation">
+            {{#values.report}}
+	      <h2>{{#t}}pages.rtm-confirmation.check-details{{/t}}</h2>
+              <div>
+                <h3>{{#t}}fields.url.short{{/t}}</h3>
+                <div class="data-wrap">
+		  <p>{{url}}</p>
+		</div>
+		<a href="" class="change">
+                  {{#t}}buttons.change{{/t}}<span class="visuallyhidden"> {{#t}}fields.url.short{{/t}}</span>
+		</a>
+              </div>
+              <div>
+		<h3>{{#t}}fields.location.short{{/t}}</h3>
+		<div class="data-wrap">
+                  <p>{{location}}</p>
+		</div>
+		<a href="" class="change">
+		  {{#t}}buttons.change{{/t}}<span class="visuallyhidden"> {{#t}}fields.location.short{{/t}}</span>
+		</a>
+              </div>
+              <div>
+		<h3>{{#t}}fields.description.short{{/t}}</h3>
+		<div class="data-wrap">
+                  <p>{{description}}</p>
+		</div>
+		<a href="" class="change">
+		  {{#t}}buttons.change{{/t}}<span class="visuallyhidden"> {{#t}}fields.description.short{{/t}}</span>
+		</a>
+              </div>
+            {{/values.report}}
+            <div>
+	      <a href="">{{#t}}pages.rtm-confirmation.add-another{{/t}}</a>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+	  <div class="form-label-bold">{{#t}}fields.anonymous.legend{{/t}}</div>
+	  {{#radio-group}}anonymous{{/radio-group}}
+          <fieldset id="contact-info-group" class="panel-indent {{#errors.contact-info}}validation-error{{/errors.contact-info}}">
+            {{#input-text}}contact-info-name{{/input-text}}
+            {{#input-text}}contact-info-email{{/input-text}}
+            {{#input-text}}contact-info-phone{{/input-text}}
+            <p>{{#t}}pages.rtm-confirmation.about-privacy{{/t}}</p>
+            <p>{{#t}}pages.rtm-confirmation.about-privacy-blurb{{/t}}</p>
+          </fieldset>
+        </fieldset>
+        {{#input-submit}}send{{/input-submit}}
+      {{/form}}
+
+    {{/partials-form}}
+
+  {{/content}}
+
+{{/layout}}

@@ -1,0 +1,8 @@
+{
+  "url": {
+    "required": "Please specify the URL for the content you wish to report"
+  },
+  "anonymous": {
+    "required": "Please let us know whether we can contact you for more information"
+  }
+}
