@@ -1,10 +1,18 @@
 'use strict';
 
+/* parse out some ENV vars */
+/* docker-compose / kubernetes dev or local */
+var redis_endpoint = process.env.REDIS_PORT || 'tcp://127.0.0.1:6379';
+var redis_regexp = /tcp:\/\/(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}):(\d{1,4})/g;
+var redis_details = redis_regexp.exec(redis_endpoint);
+var redis_addr = redis_details[1];
+var redis_port = redis_details[2];
+
 /*eslint no-process-env: 0*/
 /*eslint no-inline-comments: 0*/
 /*eslint camelcase: 0*/
 module.exports = {
-  env: process.env.NODE_ENV || 'development',
+  env: process.env.NODE_ENV || 'local',
   port: process.env.PORT || 8080,
   listen_host: process.env.LISTEN_HOST || '0.0.0.0',
   session: {
@@ -12,17 +20,12 @@ module.exports = {
     ttl: process.env.SESSION_TTL || 1200 /* 20 mins */
   },
   redis: {
-    port: process.env.REDIS_PORT_6379_TCP_PORT || process.env.REDIS_PORT || 6379,
-    host: process.env.REDIS_PORT_6379_TCP_ADDR || process.env.REDIS_HOST || '127.0.0.1'
+    port: redis_port,
+    host: redis_addr
   },
   email: {
     caseworker: {
-      error: process.env.CASEWORKER_ERROR_EMAIL || 'caseworker_email_address',
-      'lost-or-stolen-uk': process.env.CASEWORKER_LOSTSTOLEN_EMAIL || 'caseworker_email_address',
-      'lost-or-stolen-abroad': process.env.CASEWORKER_LOSTSTOLEN_EMAIL || 'caseworker_email_address',
-      delivery: process.env.CASEWORKER_DELIVERY_EMAIL || 'caseworker_email_address',
-      collection: process.env.CASEWORKER_COLLECTION_EMAIL || 'caseworker_email_address',
-      'someone-else': process.env.CASEWORKER_SOMEONEELSE_EMAIL || 'someoneelse_email_address'
+      rtm: process.env.CASEWORKER_EMAIL || ''
     },
     port: process.env.EMAIL_PORT || 587,
     host: process.env.EMAIL_HOST || 'email-smtp.eu-west-1.amazonaws.com',

@@ -17,7 +17,6 @@ app:
         - redis
     environment:
         - NODE_ENV=development
-        - DOCKER_COMPOSE=1
 redis:
     image: redis
     ports:
