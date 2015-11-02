@@ -4,6 +4,8 @@
   "submit": "Submit",
   "change": "Change",
   "close": "Close",
+  "delete": "Delete",
+  "cancel": "Cancel",
   "send": "Send report",
   "next_step": "Next step"
 }

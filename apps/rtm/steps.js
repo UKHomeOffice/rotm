@@ -23,6 +23,22 @@ module.exports = {
     backLink: '/',
     next: '/done'
   },
+  '/removeurl': {
+    template: 'confirm-remove.html',
+    controller: require('./controllers/remove'),
+    fields: [
+      'remove-url',
+      'remove-index'
+    ],
+    backLink: '/',
+    next: '/confirm-remove'
+  },
+  '/confirm-remove': {
+    template: 'remove.html',
+    controller: require('./controllers/remove'),
+    backLink: '/',
+    next: '/confirmation'
+  },
   '/done': {
     template: 'complete.html',
     backLink: null
