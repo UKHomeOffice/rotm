@@ -12,7 +12,7 @@ app:
     ports:
         - "8080"
     volumes:
-        - ".:/srv/app:z"
+        - ".:/app:z"
     links:
         - redis
     environment:
