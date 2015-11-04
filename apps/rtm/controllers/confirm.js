@@ -12,15 +12,15 @@ var Submit = function Submit() {
 
 util.inherits(Submit, Controller);
 
-function getReports(req){
+function getReports(req) {
   var sessionData = _.pick(req.sessionModel.toJSON(), _.identity);
   var data = sessionData.report;
   return data;
-};
+}
 
-Submit.prototype.getValues = function locals(req, res, callback){
+Submit.prototype.getValues = function locals(req) {
   var data = getReports(req);
-  _.each(data, function addIndex(d, i){
+  _.each(data, function addIndex(d, i) {
     d.index = i;
   });
   Controller.prototype.getValues.apply(this, arguments);
