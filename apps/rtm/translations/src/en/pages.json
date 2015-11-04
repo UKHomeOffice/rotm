@@ -3,7 +3,8 @@
     "description": "If you are reporting a crime that is happening right now or if there is a threat to someone's life, call 999 immediately."
   },
   "rtm-confirm-delete": {
-    "confirm-deletion": "Please confirm you wish to remove the following web address from your report"
+    "confirm-deletion": "Please confirm you wish to remove the following web address from your report",
+    "delete-confirmed": "The selected web address was successfully removed from your report."
   },
   "rtm-confirmation": {
     "check-details": "Check the details of web address",

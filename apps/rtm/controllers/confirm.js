@@ -12,9 +12,22 @@ var Submit = function Submit() {
 
 util.inherits(Submit, Controller);
 
-Submit.prototype.saveValues = function saveValues(req, res, callback) {
+function getReports(req){
   var sessionData = _.pick(req.sessionModel.toJSON(), _.identity);
   var data = sessionData.report;
+  return data;
+};
+
+Submit.prototype.getValues = function locals(req, res, callback){
+  var data = getReports(req);
+  _.each(data, function addIndex(d, i){
+    d.index = i;
+  });
+  Controller.prototype.getValues.apply(this, arguments);
+};
+
+Submit.prototype.saveValues = function saveValues(req, res, callback) {
+  var data = getReports(req);
   if (data && data.length) {
     data.forEach(function sendEachReport(d) {
       var model = new Model(d);

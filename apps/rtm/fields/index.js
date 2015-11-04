@@ -45,5 +45,11 @@ module.exports = {
   },
   'contact-info-phone': {
     label: 'fields.contact-info-phone.label'
+  },
+  'remove-url': {
+    'label': ''
+  },
+  'remove-index': {
+    'label': ''
   }
 };

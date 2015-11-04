@@ -26,20 +26,18 @@
          </legend>
 
          <div class="confirmation">
-           {{#values.report}}
 	         <h2>{{#t}}pages.rtm-confirm-delete.confirm-deletion{{/t}}</h2>
            <div>
              <h3>{{#t}}fields.url.short{{/t}}</h3>
              <div class="data-wrap">
-		           <p>{{url}}</p>
+		           <p>GOD_DAMNED RPOERT:{{values.report}}</p>
 		         </div>
            </div>
-           {{/values.report}}
          </div>
        </fieldset>
 
        <input type="hidden" name="remove-url" value="true" />
-       <input type="hidden" name="remove-index" value="{{index}}" />
+       <input type="hidden" name="remove-index" value="{{values.report.index}}" />
        
        {{#input-submit}}delete{{/input-submit}}
 

@@ -34,9 +34,12 @@ module.exports = {
     next: '/confirm-remove'
   },
   '/confirm-remove': {
-    template: 'remove.html',
-    controller: require('./controllers/remove'),
+    template: 'removed.html',
+    controller: require('./controllers/removed.js'),
     backLink: '/',
+    fields: [
+      'continue'
+    ],
     next: '/confirmation'
   },
   '/done': {
