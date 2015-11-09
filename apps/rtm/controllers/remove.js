@@ -34,15 +34,14 @@ Remove.prototype.locals = function locals(req, res) {
 
 /*eslint no-unused-vars: 0*/
 Remove.prototype.saveValues = function saveValues(req, res, callback) {
-  var array = req.sessionModel.get('report') || [];
   var id = req.params.action;
   var index = req.form.values['remove-index'];
-  var reports = req.sessionModel.get('report');
+  var reports = req.sessionModel.get('report') || [];
   reportToRemove = reports[id];
 
   if (id === index && typeof id !== undefined && typeof reportToRemove !== undefined) {
-    array.splice(id, 1);
-    req.sessionModel.set('report', array);
+    reports.splice(id, 1);
+    req.sessionModel.set('report', reports);
     req.sessionModel.unset('errorValues');
   }
   callback();
