@@ -1,4 +1,4 @@
-'use strict';
+ 'use strict';
 
 module.exports = {
   '/': {
@@ -22,6 +22,45 @@ module.exports = {
     ],
     backLink: '/',
     next: '/done'
+  },
+  '/removeurl': {
+    template: 'confirm-remove.html',
+    controller: require('./controllers/remove'),
+    fields: [
+      'remove-url',
+      'remove-index'
+    ],
+    backLink: '/',
+    next: '/confirm-remove'
+  },
+  '/editurl': {
+    template: 'confirm-edit.html',
+    controller: require('./controllers/edit'),
+    fields: [
+      'url',
+      'location',
+      'description',
+      'edit-index'
+    ],
+    backLink: '/',
+    next: '/confirm-edit'
+  },
+  '/confirm-remove': {
+    template: 'removed.html',
+    controller: require('./controllers/removed.js'),
+    backLink: '/',
+    fields: [
+      'continue'
+    ],
+    next: '/confirmation'
+  },
+  '/confirm-edit': {
+    template: 'edited.html',
+    backLink: '/',
+    fields: [
+      'continue'
+    ],
+    next: '/confirmation'
   },
   '/done': {
     template: 'complete.html',

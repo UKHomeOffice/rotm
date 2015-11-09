@@ -14,7 +14,8 @@ util.inherits(AddToSessionController, Controller);
 
 AddToSessionController.prototype.saveValues = function saveValues(req, res, callback) {
   var array = req.sessionModel.get(this.key) || [];
-  array.push(req.form.values);
+  var data = req.form.values;
+  array.push(data);
   this.getNextStep(req);
   req.sessionModel.set(this.key, array);
   req.sessionModel.unset('errorValues');

@@ -1,0 +1,30 @@
+{{<layout}}
+
+     {{$journeyHeader}}
+     {{#t}}journeys.terrorism_reporting.header{{/t}}
+     {{/journeyHeader}}
+
+     {{$validationSummary}}
+     {{> partials-validation-summary}}
+  {{/validationSummary}}
+
+  {{$propositionHeader}}
+  {{> partials-navigation}}
+  {{/propositionHeader}}
+
+  {{$header}}{{#t}}journeys.terrorism_reporting.header{{/t}}{{/header}}
+
+  {{$content}}
+
+  {{<partials-form}}
+
+       {{$form}}
+	     <h2>{{#t}}pages.rtm-confirm-delete.delete-confirmed{{/t}}</h2>
+       {{#input-submit}}continue{{/input-submit}}
+       {{/form}}
+       
+   {{/partials-form}}
+
+ {{/content}}
+
+{{/layout}}

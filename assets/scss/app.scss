@@ -1,6 +1,6 @@
 $path: "../img/";
 
-@import "../../node_modules/hmpo-frontend-toolkit/assets/stylesheets/app.scss";
+@import "../../node_modules/hof/node_modules/hmpo-frontend-toolkit/assets/stylesheets/app.scss";
 
 @import "./alert.scss";
 @import "./icons.scss";
@@ -89,11 +89,18 @@ textarea {
   color: #0b0c0c
 }
 
-.confirmation .change {
-  background-color: #dee0e2;
+.confirmation a.btn {
   position: relative;
   display: -moz-inline-stack;
   display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 1em
+}
+
+a.btn {
+  background-color: #dee0e2;
   padding: 0.35em 0.5em 0.15em 0.5em;
   border: none;
   -webkit-border-radius: 0;
@@ -111,59 +118,55 @@ textarea {
   cursor: pointer;
   color: #0b0c0c;
   overflow: hidden;
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin-top: 1em
 }
 
-.confirmation .change:visited {
+a.btn:visited {
   background-color: #dee0e2
 }
 
-.confirmation .change:hover,
-.confirmation .change:focus {
+a.btn:hover,
+a.btn:focus {
   background: #d0d3d6
 }
 
-.confirmation .change:active {
+a.btn:active {
   top: 2px;
   -webkit-box-shadow: 0 0 0 #dee0e2;
   -moz-box-shadow: 0 0 0 #dee0e2;
   box-shadow: 0 0 0 #dee0e2
 }
 
-.confirmation .change.disabled,
-.confirmation .change[disabled="disabled"],
-.confirmation .change[disabled] {
+a.btn.disabled,
+a.btn[disabled="disabled"],
+a.btn[disabled] {
   zoom: 1;
   filter: alpha(opacity=50);
   opacity: 0.5
 }
 
-.confirmation .change.disabled:hover,
-.confirmation .change[disabled="disabled"]:hover,
-.confirmation .change[disabled]:hover {
+a.btn.disabled:hover,
+a.btn[disabled="disabled"]:hover,
+a.btn[disabled]:hover {
   cursor: default;
   background-color: #dee0e2
 }
 
-.confirmation .change.disabled:active,
-.confirmation .change[disabled="disabled"]:active,
-.confirmation .change[disabled]:active {
+a.btn.disabled:active,
+a.btn[disabled="disabled"]:active,
+a.btn[disabled]:active {
   top: 0;
   -webkit-box-shadow: 0 2px 0 #b5babe;
   -moz-box-shadow: 0 2px 0 #b5babe;
   box-shadow: 0 2px 0 #b5babe
 }
 
-.confirmation .change:hover,
-.confirmation .change:focus,
-.confirmation .change:visited {
+a.btn:hover,
+a.btn:focus,
+a.btn:visited {
   color: #0b0c0c
 }
 
-.confirmation .change:before {
+a.btn:before {
   content: "";
   height: 110%;
   width: 100%;
@@ -174,12 +177,12 @@ textarea {
   left: 0
 }
 
-.confirmation .change:active:before {
+a.btn:active:before {
   top: -10%;
   height: 120%
 }
 
-.confirmation .change[rel="external"]:after {
+a.btn[rel="external"]:after {
   display: none;
   content: none;
   margin-left: 0;
@@ -187,7 +190,7 @@ textarea {
 }
 
 @media (min-width: 641px) {
-  .confirmation .change {
+  a.btn {
     position: relative;
     float: right;
     margin-top: 0

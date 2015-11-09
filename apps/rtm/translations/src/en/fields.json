@@ -3,7 +3,9 @@
   "rtm": {
     "legend": "Details about terrorist material"
   },
-
+  "rtm-confirm-delete" : {
+    "legend": "Please confirm you wish to remove this web address from your report"
+  },
   "rtm-confirmation": {
     "legend": "Confirmation details about terrorist material"
   },

@@ -26,13 +26,14 @@
           </legend>
           <div class="confirmation">
             {{#values.report}}
-	      <h2>{{#t}}pages.rtm-confirmation.check-details{{/t}}</h2>
+	          <h2>{{#t}}pages.rtm-confirmation.check-details{{/t}}</h2>
+            <span class="remove-url-anchor"><a href="{{baseUrl}}/removeurl/{{index}}">{{#t}}pages.rtm-confirmation.remove-url{{/t}}</a></span>
               <div>
                 <h3>{{#t}}fields.url.short{{/t}}</h3>
                 <div class="data-wrap">
 		  <p>{{url}}</p>
 		</div>
-		<a href="" class="change">
+		<a href="{{baseUrl}}/editurl/{{index}}" class="btn">
                   {{#t}}buttons.change{{/t}}<span class="visuallyhidden"> {{#t}}fields.url.short{{/t}}</span>
 		</a>
               </div>
@@ -41,7 +42,7 @@
 		<div class="data-wrap">
                   <p>{{location}}</p>
 		</div>
-		<a href="" class="change">
+		<a href="{{baseUrl}}/editurl/{{index}}" class="btn">
 		  {{#t}}buttons.change{{/t}}<span class="visuallyhidden"> {{#t}}fields.location.short{{/t}}</span>
 		</a>
               </div>
@@ -50,7 +51,7 @@
 		<div class="data-wrap">
                   <p>{{description}}</p>
 		</div>
-		<a href="" class="change">
+		<a href="{{baseUrl}}/editurl/{{index}}" class="btn">
 		  {{#t}}buttons.change{{/t}}<span class="visuallyhidden"> {{#t}}fields.description.short{{/t}}</span>
 		</a>
               </div>
