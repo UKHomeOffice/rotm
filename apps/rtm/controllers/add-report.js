@@ -2,13 +2,22 @@
 
 var util = require('util');
 
-var BaseController = require('./add-to-session-controller');
+var BaseController = require('../../../lib/base-controller');
 
-var AddReport = function AddReport() {
-  [].unshift.call(arguments, 'report');
+var AddReportController = function AddReportController() {
   BaseController.apply(this, arguments);
 };
 
-util.inherits(AddReport, BaseController);
+util.inherits(AddReportController, BaseController);
 
-module.exports = AddReport;
+AddReportController.prototype.saveValues = function saveValues(req, res, callback) {
+  var array = req.sessionModel.get('report') || [];
+  var data = req.form.values;
+  array.push(data);
+  this.getNextStep(req);
+  req.sessionModel.set('report', array);
+  req.sessionModel.unset('errorValues');
+  callback();
+};
+
+module.exports = AddReportController;
