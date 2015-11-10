@@ -4,7 +4,8 @@ var toolkit = require('hof').toolkit;
 var helpers = toolkit.helpers;
 var progressiveReveal = toolkit.progressiveReveal;
 var formFocus = toolkit.formFocus;
-
+var Ajax = require('./ajax');
+global.window.Ajax = Ajax;
 helpers.documentReady(progressiveReveal);
 helpers.documentReady(formFocus);
 

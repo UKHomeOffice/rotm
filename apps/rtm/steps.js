@@ -65,5 +65,8 @@ module.exports = {
   '/done': {
     template: 'complete.html',
     backLink: null
+  },
+  '/data': {
+    controller: require('./controllers/data')
   }
 };
