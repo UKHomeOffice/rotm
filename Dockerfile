@@ -2,6 +2,7 @@ FROM vaijab/nodejs:0.12.7
 
 RUN dnf install -y -q git
 
+RUN npm install -g nodemon
 RUN useradd -d /app app
 USER app
 
