@@ -19,7 +19,8 @@ var status = 'failure';
 var msg = 'An error occurred';
 var resp = {};
 
-DataHandler.prototype.render = function render(req, res) {
+/*eslint no-unused-vars: 0*/
+DataHandler.prototype.render = function render(req, res, callback) {
   res.status(httpCode).send(
     {
       'status': status,
@@ -28,26 +29,26 @@ DataHandler.prototype.render = function render(req, res) {
   );
 };
 
-DataHandler.prototype.successHandler = function successHandler(req, res) {
+DataHandler.prototype.successHandler = function successHandler(req, res, callback) {
   httpCode = 200;
   status = 'success';
   msg = resp;
   this.render(req, res);
 };
 
-DataHandler.prototype.errorHandler = function errorHandler(err, req, res) {
-  logger.error(httpCode, msg);
+DataHandler.prototype.errorHandler = function errorHandler(err, req, res, callback) {
+  msg = err.message;
+  logger.info(httpCode, msg);
   this.render(req, res);
 };
 
-DataHandler.prototype.getValues = function getValues() {
-  msg = 'Only POST requests are accepted';
+DataHandler.prototype.getValues = function getValues(req, res, callback) {
   /*eslint handle-callback-err: 0 */
-  throw new Error(msg);
+  throw new Error('Only POST requests are accepted');
 };
 
 /* augment this method to act on AJAX post data */
-DataHandler.prototype.saveValues = function saveValues(req, res) {
+DataHandler.prototype.saveValues = function saveValues(req, res, callback) {
   logger.info(req.body);
   resp = req.body;
   this.successHandler(req, res);

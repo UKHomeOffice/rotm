@@ -67,6 +67,7 @@ module.exports = {
     backLink: null
   },
   '/data': {
-    controller: require('./controllers/data')
+    controller: require('./controllers/update-session'),
+    next: null
   }
 };
