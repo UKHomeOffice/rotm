@@ -203,3 +203,23 @@ a.btn[rel="external"]:after {
   font-weight: inherit;
 }
 
+div.editable-field {
+  .cancel-btn {
+    display: none;
+  }
+  input.button {
+    display: none;
+  }
+}
+
+div.editable-field.edit {
+  .edit-btn {
+    display: none;
+  }
+  .cancel-btn {
+    display: inherit;
+  }
+  input.button {
+    display: inherit;
+  }
+}
