@@ -5,9 +5,6 @@ var helpers = toolkit.helpers;
 var progressiveReveal = toolkit.progressiveReveal;
 var formFocus = toolkit.formFocus;
 
-var Ajax = require('./ajax');
-global.window.Ajax = Ajax;
-
 var FieldEditor = require('./field-editor');
 
 helpers.documentReady(progressiveReveal);
@@ -54,7 +51,9 @@ $('#country, #someone-else-nationality, #change-person-nationality').typeahead({
 /*eslint no-undef: 0*/
 /*eslint no-unused-vars: 0*/
 var editableFields = document.getElementsByClassName('editable-field');
+var csrfToken = document.querySelector('input[name="x-csrf-token"]').value;
 if (editableFields.length) {
-  var fieldEditor = new FieldEditor(editableFields);
+  var fieldEditor = new FieldEditor(csrfToken);
+  fieldEditor.init(editableFields);
 }
 

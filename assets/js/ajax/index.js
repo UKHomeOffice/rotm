@@ -1,6 +1,10 @@
 'use strict';
 
-var XHR = function XHR(options) {
+/*eslint no-undef: 0 */
+/*eslint no-unused-vars: 0 */
+/*eslint func-names: 0 */
+
+var Ajax = function Ajax(options) {
   /*eslint no-undef: 0*/
   var xhr = new XMLHttpRequest();
   xhr.onload = function onload() {
@@ -22,4 +26,4 @@ var XHR = function XHR(options) {
   }
 };
 
-module.exports = XHR;
+module.exports = Ajax;
