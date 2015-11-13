@@ -68,7 +68,7 @@ var EditableField = function(ele) {
   var fieldType = fieldProperties.element.split(':')[1] || null;
   var formField = document.createElement(fieldEl);
   var formModel = new FieldModel(fieldProperties);
-  formModel.SetValue(fieldPara.innerText);
+  formModel.SetValue(fieldPara.textContent);
 
   this.setMode = function(newmode) {
     el.className = el.className.replace(/\sedit|\sview/g, '') + ' ' + newmode;
@@ -105,7 +105,7 @@ var EditableField = function(ele) {
   };
 
   this.success = function(e) {
-    fieldPara.innerText = formModel.GetValue();
+    fieldPara.textContent = formModel.GetValue();
     this.setMode('view');
   };
 
