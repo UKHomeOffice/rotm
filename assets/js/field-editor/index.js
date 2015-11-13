@@ -32,15 +32,14 @@ var FieldModel = function(fieldProperties) {
     var value = e.detail.field.value;
     this.SetValue(value);
 
-    parameters += '&paramName=' + encodeURIComponent(name);
-    parameters += '&paramValue=' + encodeURIComponent(value);
+    parameters += '&' + encodeURIComponent(name) + '=' + encodeURIComponent(value);
     parameters += '&x-csrf-token=' + encodeURIComponent(csrfToken);
 
     var xhr = new Ajax({
       method: 'POST',
-      uri: '/report-terrorism/data',
+      uri: 'editurl',
       params: parameters,
-      responseType: 'text',
+      responseType: 'json',
       complete: function(resp) {
         if (resp.status === 200) {
           e.detail.field.dispatchEvent(eventFactory('success', {'resp': resp}));
