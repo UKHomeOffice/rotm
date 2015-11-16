@@ -38,6 +38,7 @@ var FieldEditor = function(token) {
         el.addEventListener('toggled', handleToggle);
         var ef = new EditableField(el);
         ef.init(csrfToken);
+        return ef;
       });
 
     }
