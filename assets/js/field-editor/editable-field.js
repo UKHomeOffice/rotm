@@ -6,6 +6,7 @@
 var eventFactory = require('./event-factory');
 var FieldModel = require('./field-model');
 var FieldElement = require('./field-element');
+var _ = require('underscore');
 
 var EditableField = function(ele) {
   /* view */
@@ -76,14 +77,17 @@ var EditableField = function(ele) {
     this.setMode('view');
   };
 
+  var self = this;
+  /* underscore's polyfill used purely to accommodate acceptance tests 
+   * phantomjs doesn't support Function.bind */
   this.init = function(csrfToken) {
-    editBtn.addEventListener('click', this.toggleMode.bind(this));
-    cancelBtn.addEventListener('click', this.toggleMode.bind(this));
-    submitBtn.addEventListener('click', this.submit.bind(this));
+    editBtn.addEventListener('click', _.bind(self.toggleMode, self));
+    cancelBtn.addEventListener('click', _.bind(self.toggleMode, self));
+    submitBtn.addEventListener('click', _.bind(self.submit, self));
 
-    el.addEventListener('submit', formModel.handleSubmit.bind(formModel, csrfToken));
-    formField.addEventListener('success', this.success.bind(this));
-    formField.addEventListener('failure', this.failure.bind(this));
+    el.addEventListener('submit', _.bind(formModel.handleSubmit, formModel, csrfToken));
+    formField.addEventListener('success', _.bind(self.success, self));
+    formField.addEventListener('failure', _.bind(self.failure, self));
   };
 
   this.Element = function() {
