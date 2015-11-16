@@ -2,7 +2,7 @@
 
 var util = require('util');
 
-var Controller = require('../../../lib/base-controller');
+var Controller = require('../../../lib/ajax-controller');
 
 var Remove = function Remove() {
   Controller.apply(this, arguments);
