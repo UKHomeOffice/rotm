@@ -77,17 +77,23 @@ var EditableField = function(ele) {
     this.setMode('view');
   };
 
-  var self = this;
-  /* underscore's polyfill used purely to accommodate acceptance tests 
+  /* underscore's polyfill used purely to accommodate acceptance tests
    * phantomjs doesn't support Function.bind */
-  this.init = function(csrfToken) {
-    editBtn.addEventListener('click', _.bind(self.toggleMode, self));
-    cancelBtn.addEventListener('click', _.bind(self.toggleMode, self));
-    submitBtn.addEventListener('click', _.bind(self.submit, self));
+  var editHandler = _.bind(self.toggleMode, self);
+  var cancelHandler = editHandler;
+  var submitHandler = _.bind(self.submit, self);
+  var submitEvtHandler = _.bind(formModel.handleSubmit, formModel, csrfToken);
+  var successHandler = _.bind(self.success, self);
+  var failureHandler = _.bind(self.failure, self);
 
-    el.addEventListener('submit', _.bind(formModel.handleSubmit, formModel, csrfToken));
-    formField.addEventListener('success', _.bind(self.success, self));
-    formField.addEventListener('failure', _.bind(self.failure, self));
+  this.init = function(csrfToken) {
+    editBtn.addEventListener('click', editHandler);
+    cancelBtn.addEventListener('click', cancelHandler);
+    submitBtn.addEventListener('click', submitHandler);
+
+    el.addEventListener('submit', submitEvtHandler);
+    formField.addEventListener('success', successHandler);
+    formField.addEventListener('failure', failureHandler);
   };
 
   this.Element = function() {
