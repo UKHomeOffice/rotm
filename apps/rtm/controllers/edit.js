@@ -3,7 +3,7 @@
 var util = require('util');
 var _ = require('underscore');
 
-var Controller = require('../../../lib/ajax-controller');
+var Controller = require('../../../lib/ajax-edit-controller');
 
 var Edit = function Remove() {
   Controller.apply(this, arguments);
@@ -47,7 +47,7 @@ Edit.prototype.saveValues = function saveValues(req, res, callback) {
   /*eslint no-warning-comments: 0*/
   // FIXME: edit-index should be removed as it already exists in the
   // action
-  var id = req.params.action;
+  var id = req.params.action || req.form.values['edit-index'];
   var index = req.form.values['edit-index'];
   var reports = req.sessionModel.get('report');
   reportToEdit = reports[id];
@@ -59,16 +59,6 @@ Edit.prototype.saveValues = function saveValues(req, res, callback) {
     req.sessionModel.unset('errorValues');
   }
   callback();
-};
-
-Edit.prototype.ajaxSaveValues = function ajaxSaveValues(req, res, callback) {
-  /*eslint no-warning-comments: 0*/
-  // FIXME: Dirty hack
-  if (this.isAjaxRequest(req)) {
-    req.params.action = req.form.values['edit-index'];
-  }
-
-  this.saveValues(req, res, callback);
 };
 
 module.exports = Edit;
