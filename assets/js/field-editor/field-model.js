@@ -11,7 +11,17 @@ var FieldModel = function(fieldProperties) {
   /* model */
 
   var name = fieldProperties.name;
-  var parameters = fieldProperties.defaults;
+  var options = JSON.parse(fieldProperties.options);
+  var uri = options.uri + '/' + options.id;
+
+  var defaults = (function(dflts) {
+    var params = [];
+    for (var prop in dflts) {
+      params.push(prop + '=' + dflts.prop);
+    }
+    return params.join('&');
+  }(JSON.parse(fieldProperties.defaults)));
+
   var data = '';
 
   this.SetValue = function(d) {
@@ -26,12 +36,13 @@ var FieldModel = function(fieldProperties) {
     var value = e.detail.field.value;
     this.SetValue(value);
 
-    parameters += '&' + encodeURIComponent(name) + '=' + encodeURIComponent(value);
+    var parameters = defaults + '&';
+    parameters += encodeURIComponent(name) + '=' + encodeURIComponent(value);
     parameters += '&x-csrf-token=' + encodeURIComponent(token);
 
     var xhr = new Ajax({
       method: 'POST',
-      uri: 'editurl',
+      uri: uri,
       params: parameters,
       responseType: 'json',
       complete: function(resp) {

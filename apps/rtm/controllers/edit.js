@@ -44,20 +44,23 @@ Edit.prototype.locals = function EditLocals(req, res) {
 
 /*eslint no-unused-vars: 0*/
 Edit.prototype.saveValues = function saveValues(req, res, callback) {
-  /*eslint no-warning-comments: 0*/
-  // FIXME: edit-index should be removed as it already exists in the
-  // action
-  var id = req.params.action || req.form.values['edit-index'];
-  var index = req.form.values['edit-index'];
+
+  var id = req.params.action;
+  if (typeof id === undefined) {
+    throw new Error('The required report id is missing');
+  }
+
   var reports = req.sessionModel.get('report');
   reportToEdit = reports[id];
-
-  if (id === index && typeof id !== undefined && typeof reportToEdit !== undefined) {
-    _.extend(reportToEdit, req.form.values);
-
-    req.sessionModel.set('report', reports);
-    req.sessionModel.unset('errorValues');
+  if (typeof reportToEdit === undefined) {
+    throw new Error('The required report id is missing');
   }
+
+  _.extend(reportToEdit, req.form.values);
+
+  req.sessionModel.set('report', reports);
+  req.sessionModel.unset('errorValues');
+
   callback();
 };
 

@@ -21,7 +21,16 @@ function getReports(req) {
 Submit.prototype.getValues = function locals(req) {
   var data = getReports(req);
   _.each(data, function addIndex(d, i) {
-    d.index = i;
+
+    var options = {
+      'id': i,
+      'uri': 'editurl'
+    };
+    var defaults = {};
+
+    d.options = options;
+    d['data-options'] = JSON.stringify(options);
+    d['data-defaults'] = JSON.stringify(defaults);
   });
   Controller.prototype.getValues.apply(this, arguments);
 };

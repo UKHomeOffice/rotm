@@ -56,4 +56,3 @@ if (editableFields.length) {
   var fieldEditor = new FieldEditor(csrfToken);
   fieldEditor.init(editableFields);
 }
-

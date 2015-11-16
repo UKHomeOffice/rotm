@@ -27,14 +27,14 @@
           <div class="confirmation">
             {{#values.report}}
 	          <h2>{{#t}}pages.rtm-confirmation.check-details{{/t}}</h2>
-            <span class="remove-url-anchor"><a href="{{baseUrl}}/removeurl/{{index}}">{{#t}}pages.rtm-confirmation.remove-url{{/t}}</a></span>
+            <span class="remove-url-anchor"><a href="{{baseUrl}}/removeurl/{{options.id}}">{{#t}}pages.rtm-confirmation.remove-url{{/t}}</a></span>
               <div class="editable-field">
                 <h3>{{#t}}fields.url.short{{/t}}</h3>
                 <div class="data-wrap">
-		              <p data-name="url" data-element="input:text" data-defaults="edit-index={{index}}">{{url}}</p>
+		              <p data-name="url" data-element="input:text" data-options="{{data-options}}" data-defaults="{{data-defaults}}">{{url}}</p>
 		            </div>
                 {{#input-submit}}update{{/input-submit}}
-		            <a href="{{baseUrl}}/editurl/{{index}}" class="btn edit-btn">
+		            <a href="{{baseUrl}}/editurl/{{options.id}}" class="btn edit-btn">
                   {{#t}}buttons.change{{/t}}<span class="visuallyhidden"> {{#t}}fields.url.short{{/t}}</span>
 		            </a>
 		            <a href="" class="btn cancel-btn">
@@ -44,10 +44,10 @@
               <div class="editable-field">
 		            <h3>{{#t}}fields.location.short{{/t}}</h3>
 		            <div class="data-wrap">
-                  <p data-name="location" data-element="textarea" data-defaults="edit-index={{index}}">{{location}}</p>
+                  <p data-name="location" data-element="textarea" data-options="{{data-options}}" data-defaults="{{data-defaults}}">{{location}}</p>
 		            </div>
                 {{#input-submit}}update{{/input-submit}}
-		            <a href="{{baseUrl}}/editurl/{{index}}" class="btn edit-btn">
+		            <a href="{{baseUrl}}/editurl/{{options.id}}" class="btn edit-btn">
 		              {{#t}}buttons.change{{/t}}<span class="visuallyhidden"> {{#t}}fields.location.short{{/t}}</span>
 		            </a>
 		            <a href="" class="btn cancel-btn">
@@ -57,10 +57,10 @@
               <div class="editable-field">
 		            <h3>{{#t}}fields.description.short{{/t}}</h3>
 		            <div class="data-wrap">
-                  <p data-name="description" data-element="textarea" data-defaults="edit-index={{index}}">{{description}}</p>
+                  <p data-name="description" data-element="textarea" data-options="{{data-options}}" data-defaults="{{data-defaults}}">{{description}}</p>
 		            </div>
                 {{#input-submit}}update{{/input-submit}}
-		            <a href="{{baseUrl}}/editurl/{{index}}" class="btn edit-btn">
+		            <a href="{{baseUrl}}/editurl/{{options.id}}" class="btn edit-btn">
 		              {{#t}}buttons.change{{/t}}<span class="visuallyhidden"> {{#t}}fields.description.short{{/t}}</span>
 		            </a>
 		            <a href="" class="btn cancel-btn">
