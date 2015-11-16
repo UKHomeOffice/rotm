@@ -27,7 +27,7 @@ var FieldModel = function(fieldProperties) {
     this.SetValue(value);
 
     parameters += '&' + encodeURIComponent(name) + '=' + encodeURIComponent(value);
-    parameters += '&x-csrf-token=' + encodeURIComponent(csrfToken);
+    parameters += '&x-csrf-token=' + encodeURIComponent(token);
 
     var xhr = new Ajax({
       method: 'POST',
