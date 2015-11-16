@@ -35,11 +35,10 @@ Remove.prototype.locals = function locals(req, res) {
 /*eslint no-unused-vars: 0*/
 Remove.prototype.saveValues = function saveValues(req, res, callback) {
   var id = req.params.action;
-  var index = req.form.values['remove-index'];
   var reports = req.sessionModel.get('report') || [];
   reportToRemove = reports[id];
 
-  if (id === index && typeof id !== undefined && typeof reportToRemove !== undefined) {
+  if (typeof id !== undefined && typeof reportToRemove !== undefined) {
     reports.splice(id, 1);
     req.sessionModel.set('report', reports);
     req.sessionModel.unset('errorValues');
