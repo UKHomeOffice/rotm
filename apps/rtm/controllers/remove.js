@@ -1,8 +1,9 @@
 'use strict';
 
 var util = require('util');
+var _ = require('underscore');
 
-var Controller = require('../../../lib/base-controller');
+var Controller = require('../../../lib/ajax-controller');
 
 var Remove = function Remove() {
   Controller.apply(this, arguments);
@@ -25,10 +26,16 @@ Remove.prototype.getValues = function getValues(req, res, callback) {
 };
 
 Remove.prototype.locals = function locals(req, res) {
+  var lcls = Controller.prototype.locals.apply(this, arguments);
   if (reportToRemove) {
-    locals.values = {'report': reportToRemove};
+    return _.extend({}, lcls, {
+      'values': {
+        'report': reportToRemove
+      }
+    });
   }
-  return locals;
+
+  return lcls;
 };
 
 
