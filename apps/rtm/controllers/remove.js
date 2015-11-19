@@ -26,16 +26,16 @@ Remove.prototype.getValues = function getValues(req, res, callback) {
 };
 
 Remove.prototype.locals = function locals(req, res) {
-  var locals = Controller.prototype.locals.apply(this, arguments);
+  var lcls = Controller.prototype.locals.apply(this, arguments);
   if (reportToRemove) {
-    return _.extend({}, locals, {
+    return _.extend({}, lcls, {
       'values': {
         'report': reportToRemove
       }
     });
   }
 
-  return locals;
+  return lcls;
 };
 
 
