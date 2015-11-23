@@ -1,31 +1,43 @@
 {{<layout}}
 
-  {{$journeyHeader}}
-    {{#t}}journeys.terrorism_reporting.header{{/t}}
-  {{/journeyHeader}}
+     {{$journeyHeader}}
+     {{#t}}journeys.terrorism_reporting.complete-header{{/t}}
+     {{/journeyHeader}}
 
-  {{$propositionHeader}}
-    {{> partials-navigation}}
+     {{$propositionHeader}}
+     {{> partials-navigation}}
   {{/propositionHeader}}
 
-  {{$header}}{{#t}}journeys.terrorism_reporting.header{{/t}}{{/header}}
+  {{$header}}{{#t}}journeys.terrorism_reporting.complete-header{{/t}}{{/header}}
 
   {{$content}}
   
-    <div class="alert-complete" role="alert">
-      <span class="icon icon-complete" role="presentation"></span>
-      <div class="alert-message">
-        <h1>{{#t}}pages.rtm-completion.header{{/t}}</h1>
-      </div>
+  <div class="alert-complete" role="alert">
+    <span class="icon icon-complete" role="presentation"></span>
+    <div class="alert-message">
+      <h1>{{#t}}pages.rtm-completion.header{{/t}}</h1>
     </div>
+  </div>
 
-    <hr>
+  <hr>
 
-<!--    <p>{{#t}}pages.rtm-completion.email{{/t}} <strong>{{values.email}}</strong></p> //-->
+  <div>
+    <p>{{#t}}pages.rtm-completion.content-thankyou{{/t}}</p>
 
-    <hr>
+    <h2>{{#t}}pages.rtm-completion.content-whats-next{{/t}}</h2>
+    
+    <p>{{#t}}pages.rtm-completion.content-copy-sent{{/t}}</p>
 
-    <a href='{{baseUrl}}' class='button'>{{#t}}buttons.close{{/t}}</a>
+    {{#email}}
+    <p>{{#t}}pages.rtm-completion.content-contact-details{{/t}}</p>
+    {{/email}}
+
+    <p>{{#t}}pages.rtm-completion.content-more{{/t}} <a href="{{baseUrl}}">{{#t}}pages.rtm-completion.content-more-link{{/t}}</a></p>
+    
+    <p><a href="https://eforms.homeoffice.gov.uk/outreach/Feedback.ofml?FormName=terrorism_reporting/">{{#t}}pages.rtm-completion.content-feedback-link{{/t}}</a> {{#t}}pages.rtm-completion.content-feedback-time{{/t}} </p>
+    
+  </div>
+
 
   {{/content}}
 

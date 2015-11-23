@@ -16,16 +16,17 @@
   },
   "location": {
     "label": "Where exactly on the page is the material (optional)?",
-    "short": "Where on the page is the material?",
+    "short": "Where the material is on the page",
     "hint": "Is the material in a photo or is it written? Is it at the top or the bottom of the page? If it is in a social media feed, who posted the material and when (time and date)?"
   },
   "description": {
     "label": "Tell us more about the material you found (optional)",
-    "short": "Tell us more about the material",
+    "short": "Further details",
     "hint": "How did you find the material? Do you know any details that would help us investigate, such as the names or locations of the people involved?"
   },
   "anonymous": {
     "legend": "Can we contact you for more information?",
+    "hint": "Being able to contact you may help us with our enquiries. All information will always be treated confidentially.",
     "options": {
       "yes": {
         "label": "No, submit anonymously"

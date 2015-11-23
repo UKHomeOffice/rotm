@@ -63,6 +63,16 @@ textarea {
   font-weight: normal
 }
 
+.confirmation fieldset legend, #contact-details-group legend {
+  @include heading-24;
+  font-weight: bold;
+}
+
+#contact-details-group legend span.form-hint {
+  font-weight: normal;
+  @include copy-19;
+}
+
 @media (min-width: 641px) {
   .confirmation div h3 {
     width: 33%

@@ -1,5 +1,7 @@
 {
   "terrorism_reporting": {
-    "header": "Report online terrorist material"
+    "details-header": "Report online terrorist material",
+    "confirmation-header": "Check the details before submitting the report",
+    "complete-header": "Terrorist Material report received"
   }
 }
