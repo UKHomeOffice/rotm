@@ -13,20 +13,27 @@
   {{/propositionHeader}}
 
   {{$header}}{{#t}}journeys.terrorism_reporting.details-header{{/t}}{{/header}}
-
+  
   {{$content}}
-    <p class="panel-indent">{{#t}}pages.terrorism_reporting.cta-999{{/t}}</p>
-    <p>{{#t}}pages.terrorism_reporting.advice-additional-reports{{/t}}</p>
-
-    {{<partials-form}}
-         
-      {{$form}}
-         {{> partials-rtm-report-form}}
-         {{#input-submit}}next{{/input-submit}}
-      {{/form}}
-
+  {{^additional-report}}
+  <p class="panel-indent">{{#t}}pages.terrorism_reporting.cta-999{{/t}}</p>
+  <p>{{#t}}pages.terrorism_reporting.advice-additional-reports{{/t}}</p>
+  {{/additional-report}}
+  
+  {{#additional-report}}
+  <p>{{#t}}pages.terrorism_reporting.additional-report-header{{/t}}</p>
+  {{/additional-report}}
+  
+  {{<partials-form}}
+       
+     {{$form}}
+       {{> partials-rtm-report-form}}
+       {{#input-submit}}next{{/input-submit}}
+     {{/form}}
+    
     {{/partials-form}}
-
+    
   {{/content}}
-
+    
 {{/layout}}
+    
