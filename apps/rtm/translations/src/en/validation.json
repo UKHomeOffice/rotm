@@ -1,6 +1,6 @@
 {
   "url": {
-    "required": "Please specify the URL for the content you wish to report"
+    "required": "Please specify the web address that contains the material"
   },
   "anonymous": {
     "required": "Please let us know whether we can contact you for more information"
