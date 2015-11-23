@@ -11,6 +11,16 @@ module.exports = {
     ],
     next: '/confirmation'
   },
+  '/additional': {
+    template: 'report-terrorism.html',
+    controller: require('./controllers/additional-report'),
+    fields: [
+      'url',
+      'location',
+      'description'
+    ],
+    next: '/confirmation'
+  },
   '/confirmation': {
     template: 'confirm.html',
     controller: require('./controllers/confirm'),
