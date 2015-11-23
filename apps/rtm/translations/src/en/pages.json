@@ -12,14 +12,29 @@
     "edit-confirmed": "The selected web address report was successfully edited."
   },
   "rtm-confirmation": {
-    "check-details": "Check the details of web address",
-    "remove-url": "Delete this web address",
-    "add-another": "Add another website address",
+    "check-details": {
+      "single-report": "Check details of the report",
+      "multiple-reports": "Check details of report "
+    },
+    "remove-url": {
+      "single-report": "Delete this report",
+      "multiple-reports": "Delete report "
+    },
+    "add-another": "Add another website address", 
+    
     "about-privacy": "About your privacy",
-    "about-privacy-blurb": "WRITE ME!"
+    "about-privacy-blurb": "Your contact details will only be used if further information is required. Your details will remain confidential and will not be used for any other purpose or passed on to any other parties. We keep your personal data secure according to our <a href=\"https://www.gov.uk/help/privacy-policy\">privacy policy</a>."
   },
   "rtm-completion": {
-    "header": "Thank you, we have received your information.",
+    "header": "Thank you, we have received your report.",
+    "content-thankyou": "Thankyou for your submission. Alerting the authorities to terrorist material can help save lives.",
+    "content-whats-next": "What happens next",
+    "content-copy-sent": "We have sent a copy of your report to the police team dealing with online terrorist material.",
+    "content-contact-details": "If they require more information, they may get in touch with you.",
+    "content-more": "More to report?",
+    "content-more-link": "Complete the form again",
+    "content-feedback-link": "Tell us what you think of this form",
+    "content-feedback-time": "(takes 30 seconds)",
     "email": "We have sent you an email containing the information you have provided to"
   },
   "rtm-email-table": {

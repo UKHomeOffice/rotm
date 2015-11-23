@@ -1,7 +1,7 @@
 {{<layout}}
 
   {{$journeyHeader}}
-    {{#t}}journeys.terrorism_reporting.header{{/t}}
+    {{#t}}journeys.terrorism_reporting.confirmation-header{{/t}}
   {{/journeyHeader}}
 
   {{$validationSummary}}
@@ -12,10 +12,9 @@
     {{> partials-navigation}}
   {{/propositionHeader}}
 
-  {{$header}}{{#t}}journeys.terrorism_reporting.header{{/t}}{{/header}}
+  {{$header}}{{#t}}journeys.terrorism_reporting.confirmation-header{{/t}}{{/header}}
 
   {{$content}}
-    <p>{{#t}}pages.terrorism_reporting.description{{/t}}</p>
 
     {{<partials-form}}
          
@@ -26,8 +25,15 @@
           </legend>
           <div class="confirmation">
             {{#values.report}}
-	          <h2>{{#t}}pages.rtm-confirmation.check-details{{/t}}</h2>
-            <span class="remove-url-anchor"><a href="{{baseUrl}}/removeurl/{{options.id}}">{{#t}}pages.rtm-confirmation.remove-url{{/t}}</a></span>
+            <fieldset>
+            {{#single-report}}
+	          <legend class="heading-large">{{#t}}pages.rtm-confirmation.check-details.single-report{{/t}}</legend>
+            <span class="remove-url-anchor"><a href="{{baseUrl}}/removeurl/{{options.id}}">{{#t}}pages.rtm-confirmation.remove-url.single-report{{/t}}</a></span>
+            {{/single-report}}
+            {{#multiple-reports}}
+	          <legend class="heading-large">{{#t}}pages.rtm-confirmation.check-details.multiple-reports{{/t}}{{report-number}}</legend>
+            <span class="remove-url-anchor"><a href="{{baseUrl}}/removeurl/{{options.id}}">{{#t}}pages.rtm-confirmation.remove-url.multiple-reports{{/t}}{{report-number}}</a></span>
+            {{/multiple-reports}}
               <div class="editable-field">
                 <h3>{{#t}}fields.url.short{{/t}}</h3>
                 <div class="data-wrap">
@@ -67,6 +73,7 @@
                   {{#t}}buttons.cancel{{/t}}
 		            </a>
               </div>
+              </fieldset>
               {{/values.report}}
               <div>
 	              <a href="{{baseUrl}}">{{#t}}pages.rtm-confirmation.add-another{{/t}}</a>
@@ -74,8 +81,9 @@
           </div>
         </fieldset>
         <fieldset>
-	        <div class="form-label-bold">{{#t}}fields.anonymous.legend{{/t}}</div>
-	        {{#radio-group}}anonymous{{/radio-group}}
+          <span id="contact-details-group">
+	          {{#radio-group}}anonymous{{/radio-group}}
+          </span>
           <fieldset id="contact-info-group" class="panel-indent {{#errors.contact-info}}validation-error{{/errors.contact-info}}">
             {{#input-text}}contact-info-name{{/input-text}}
             {{#input-text}}contact-info-email{{/input-text}}

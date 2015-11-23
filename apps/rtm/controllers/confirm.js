@@ -18,7 +18,7 @@ function getReports(req) {
   return data;
 }
 
-Submit.prototype.getValues = function locals(req) {
+Submit.prototype.getValues = function getValues(req) {
   var data = getReports(req);
   _.each(data, function addIndex(d, i) {
 
@@ -29,10 +29,20 @@ Submit.prototype.getValues = function locals(req) {
     var defaults = {};
 
     d.options = options;
+
     d['data-options'] = JSON.stringify(options);
     d['data-defaults'] = JSON.stringify(defaults);
+    d['report-number'] = i + 1;
   });
   Controller.prototype.getValues.apply(this, arguments);
+};
+
+Submit.prototype.locals = function locals(req) {
+  var lcls = Controller.prototype.locals.apply(this, arguments);
+  var reportCount = getReports(req).length;
+  lcls['single-report'] = reportCount === 1;
+  lcls['multiple-reports'] = reportCount > 1;
+  return lcls;
 };
 
 Submit.prototype.saveValues = function saveValues(req, res, callback) {
