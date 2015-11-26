@@ -2,7 +2,7 @@
   "terrorism_reporting": {
     "details-header": "Report online terrorist material",
     "confirmation-header": "Check the details before submitting the report",
-    "complete-header": "Terrorist Material report received",
+    "complete-header": "Report successfully received",
     "confirm-remove-header": "Confirm removal of report",
     "removed-header": "Report removed",
     "confirm-edit-header": "Edit details of your report",
