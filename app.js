@@ -9,6 +9,8 @@ var session = require('express-session');
 var redis = require('redis');
 var RedisStore = require('connect-redis-crypto')(session);
 var config = require('./config');
+var servestatic = require('serve-static');
+
 require('moment-business');
 
 if (config.env !== 'ci') {
@@ -20,12 +22,19 @@ if (config.env === 'development' || config.env === 'local') {
 }
 
 app.use(function setAssetPath(req, res, next) {
-  res.locals.assetPath = '/public';
+  res.locals.assetPath = config.siteroot + '/public';
   next();
 });
 
-require('hof').template.setup(app);
 app.set('view engine', 'html');
+
+var hofTemplate = require('hof').template;
+hofTemplate.setup(app, {
+  path: config.siteroot + '/govuk-assets'
+});
+
+app.use('/govuk-assets', servestatic(hofTemplate.assetPath));
+
 app.set('views', path.resolve(__dirname, './apps/common/views'));
 app.enable('view cache');
 app.use(require('express-partial-templates')(app));
