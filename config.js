@@ -13,6 +13,7 @@ var redis_port = redis_details[2];
 /*eslint camelcase: 0*/
 module.exports = {
   env: process.env.NODE_ENV || 'local',
+  siteroot: process.env.SITEROOT || '',
   port: process.env.PORT || 8080,
   listen_host: process.env.LISTEN_HOST || '0.0.0.0',
   session: {
