@@ -8,7 +8,7 @@ var redis_details = redis_regexp.exec(redis_endpoint);
 var redis_addr = redis_details[1];
 var redis_port = redis_details[2];
 
-process.title = 'rtm_node';
+process.title = 'rtm';
 
 /*eslint no-process-env: 0*/
 /*eslint no-inline-comments: 0*/
