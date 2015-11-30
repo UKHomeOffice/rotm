@@ -6,6 +6,7 @@
   "license": "GPLv2",
   "scripts": {
     "start": "node .",
+    "stop": "pkill --signal SIGINT rtm_node",
     "dev": "NODE_ENV=development nodemon -e html,js,json",
     "watch": "parallelshell 'npm run watch:scss' 'npm run watch:js'",
     "watch:scss": "nodemon -e scss -x 'npm run sass'",
