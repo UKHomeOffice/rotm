@@ -28,11 +28,11 @@
            <fieldset>
              {{#single-report}}
 	           <legend class="heading-large">{{#t}}pages.rtm-confirmation.check-details.single-report{{/t}}</legend>
-             <span class="remove-url-anchor"><a href="{{baseUrl}}/removeurl/{{options.id}}">{{#t}}pages.rtm-confirmation.remove-url.single-report{{/t}}</a></span>
+             <span class="remove-url-anchor"><a href="{{siteroot}}{{baseUrl}}/removeurl/{{options.id}}">{{#t}}pages.rtm-confirmation.remove-url.single-report{{/t}}</a></span>
              {{/single-report}}
              {{#multiple-reports}}
 	           <legend class="heading-large">{{#t}}pages.rtm-confirmation.check-details.multiple-reports{{/t}}{{report-number}}</legend>
-             <span class="remove-url-anchor"><a href="{{baseUrl}}/removeurl/{{options.id}}">{{#t}}pages.rtm-confirmation.remove-url.multiple-reports{{/t}}{{report-number}}</a></span>
+             <span class="remove-url-anchor"><a href="{{siteroot}}{{baseUrl}}/removeurl/{{options.id}}">{{#t}}pages.rtm-confirmation.remove-url.multiple-reports{{/t}}{{report-number}}</a></span>
              {{/multiple-reports}}
              <div class="editable-field">
                <h3>{{#t}}fields.url.short{{/t}}</h3>
@@ -40,7 +40,7 @@
 		             <p data-name="url" data-element="input:text" data-options="{{data-options}}" data-defaults="{{data-defaults}}">{{url}}</p>
 		           </div>
                {{#input-submit}}update{{/input-submit}}
-		           <a href="{{baseUrl}}/editurl/{{options.id}}" class="btn edit-btn">
+		           <a href="{{siteroot}}{{baseUrl}}/editurl/{{options.id}}" class="btn edit-btn">
                  {{#t}}buttons.change{{/t}}<span class="visuallyhidden"> {{#t}}fields.url.short{{/t}}</span>
 		           </a>
 		           <a href="" class="btn cancel-btn">
@@ -53,7 +53,7 @@
                  <p data-name="location" data-element="textarea" data-options="{{data-options}}" data-defaults="{{data-defaults}}">{{location}}</p>
 		           </div>
                {{#input-submit}}update{{/input-submit}}
-		           <a href="{{baseUrl}}/editurl/{{options.id}}" class="btn edit-btn">
+		           <a href="{{siteroot}}{{baseUrl}}/editurl/{{options.id}}" class="btn edit-btn">
 		             {{#t}}buttons.change{{/t}}<span class="visuallyhidden"> {{#t}}fields.location.short{{/t}}</span>
 		           </a>
 		           <a href="" class="btn cancel-btn">
@@ -66,7 +66,7 @@
                  <p data-name="description" data-element="textarea" data-options="{{data-options}}" data-defaults="{{data-defaults}}">{{description}}</p>
 		           </div>
                {{#input-submit}}update{{/input-submit}}
-		           <a href="{{baseUrl}}/editurl/{{options.id}}" class="btn edit-btn">
+		           <a href="{{siteroot}}{{baseUrl}}/editurl/{{options.id}}" class="btn edit-btn">
 		             {{#t}}buttons.change{{/t}}<span class="visuallyhidden"> {{#t}}fields.description.short{{/t}}</span>
 		           </a>
 		           <a href="" class="btn cancel-btn">
@@ -76,7 +76,7 @@
            </fieldset>
            {{/values.report}}
            <div>
-	           <a href="{{baseUrl}}">{{#t}}pages.rtm-confirmation.add-another{{/t}}</a>
+	           <a href="{{siteroot}}{{baseUrl}}">{{#t}}pages.rtm-confirmation.add-another{{/t}}</a>
            </div>
          </div>
        </fieldset>

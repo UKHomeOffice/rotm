@@ -14,7 +14,7 @@ AddReportController.prototype.saveValues = function saveValues(req, res, callbac
   var array = req.sessionModel.get('report') || [];
   var data = req.form.values;
   array.push(data);
-  this.getNextStep(req);
+  this.getNextStep(req, res);
   req.sessionModel.set('report', array);
   req.sessionModel.unset('errorValues');
   callback();
