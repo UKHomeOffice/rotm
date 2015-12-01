@@ -23,6 +23,7 @@ if (config.env === 'development' || config.env === 'so-ci') {
 
 app.use(function setAssetPath(req, res, next) {
   res.locals.assetPath = config.siteroot + '/public';
+  res.locals.siteroot = config.siteroot;
   next();
 });
 
