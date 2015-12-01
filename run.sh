@@ -9,5 +9,7 @@ if [ "$NODE_ENV" = "development" ]
   then npm run dev;
 elif [ "$NODE_ENV" = "so-ci" ]
   then SITEROOT=/rotm nohup npm start > /dev/null 2>&1 &
+  exit 0
 fi
+
 
