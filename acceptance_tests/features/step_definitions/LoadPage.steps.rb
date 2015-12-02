@@ -5,6 +5,6 @@ end
 
 Then(/^I should see the RTM form$/) do
   page.should have_selector('form')
-  expect(find('form')).to have_selector('fieldset')
-  expect(find('form').find('fieldset')).to have_selector('legend.visuallyhidden')
+  expect(find('form')).to have_selector('#url-group')
+  expect(find('form').find('#url-group')).to have_selector('input#url')
 end

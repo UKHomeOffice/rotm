@@ -25,7 +25,7 @@
          </legend>
          <div class="confirmation">
            {{#values.report}}
-           <fieldset>
+           <fieldset class="data-preview">
              {{#single-report}}
 	           <legend class="heading-large">{{#t}}pages.rtm-confirmation.check-details.single-report{{/t}}</legend>
              <span class="remove-url-anchor"><a href="{{siteroot}}{{baseUrl}}/removeurl/{{options.id}}">{{#t}}pages.rtm-confirmation.remove-url.single-report{{/t}}</a></span>
@@ -76,7 +76,7 @@
            </fieldset>
            {{/values.report}}
            <div>
-	           <a href="{{siteroot}}{{baseUrl}}">{{#t}}pages.rtm-confirmation.add-another{{/t}}</a>
+	           <a id="additional-report" href="{{siteroot}}{{baseUrl}}">{{#t}}pages.rtm-confirmation.add-another{{/t}}</a>
            </div>
          </div>
        </fieldset>
