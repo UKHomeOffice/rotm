@@ -37,5 +37,8 @@ module.exports = {
       pass: process.env.SMTP_PASSWORD || ''
     },
     from: process.env.FROM_ADDRESS || 'brp@dsp.notprod.homeoffice.gov.uk'
+  },
+  ga: {
+    tagId: process.env.GA_TAG_ID
   }
 };
