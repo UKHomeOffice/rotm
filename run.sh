@@ -5,17 +5,15 @@ if pidof -o %PPID -x "rtm">/dev/null; then
    npm stop
 fi
 
-if [ "$NODE_ENV" = "development" ]
+if [ "$NODE_ENV" = "development" ] #use this for local machine dev on port 8080
 then echo "starting the service"
      npm run dev
-elif [ "$NODE_ENV" = "nginx-dev" ]
+elif [ "$NODE_ENV" = "nginx-dev" ] #use this on local machine with nginx pointing at localhost/rotm 
 then echo "starting the service"
      SITEROOT=/rotm nohup nodemon -e html,js,json --debug . > /dev/null 2>&1 &
-     exit 0
-elif [ "$NODE_ENV" = "so-ci" ]
+elif [ "$NODE_ENV" = "so-ci" ] #use this on ci.so
 then echo "starting service"
-     SITEROOT=/rotm nohup npm start > /dev/null 2>&1 &
-     exit 0
+     SITEROOT=/rotm GA_TAG_ID=UA-70918942-1 nohup npm start > /dev/null 2>&1 &
 fi
 
 

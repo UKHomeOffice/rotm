@@ -21,9 +21,10 @@ if (config.env === 'development' || config.env === 'so-ci') {
   app.use('/public', express.static(path.resolve(__dirname, './public')));
 }
 
-app.use(function setAssetPath(req, res, next) {
+app.use(function injectLocals(req, res, next) {
   res.locals.assetPath = config.siteroot + '/public';
   res.locals.siteroot = config.siteroot;
+  res.locals.gaTagId = config.ga.tagId;
   next();
 });
 
