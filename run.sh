@@ -7,7 +7,7 @@ fi
 
 if [ "$NODE_ENV" = "development" ] #use this for local machine dev on port 8080
 then echo "starting the service"
-     npm run dev
+     CONFI_FILE=config_dev.yml npm run dev
 elif [ "$NODE_ENV" = "nginx-dev" ] #use this on local machine with nginx pointing at localhost/rotm 
 then echo "starting the service"
      SITEROOT=/rotm nohup nodemon -e html,js,json --debug . > /dev/null 2>&1 &
