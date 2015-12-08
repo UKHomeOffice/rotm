@@ -45,7 +45,7 @@ var emailOptions = {
   host: config.email.host,
   port: config.email.port,
   ignoreTLS: config.email.ignoreTLS
-}
+};
 
 if (config.email.auth.user && config.email.auth.pass) {
   emailOptions.auth = config.email.auth;
