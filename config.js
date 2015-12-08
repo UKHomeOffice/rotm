@@ -1,12 +1,30 @@
 'use strict';
 
+function parseFullTCPAddress(addr) {
+  var regexp = /tcp:\/\/(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}):(\d{1,})/g;
+  var details = regexp.exec(addr);
+  return details;
+}
+
 /* parse out some ENV vars */
 /* docker-compose / kubernetes dev or local */
-var redis_endpoint = process.env.REDIS_PORT || 'tcp://127.0.0.1:6379';
-var redis_regexp = /tcp:\/\/(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}):(\d{1,4})/g;
-var redis_details = redis_regexp.exec(redis_endpoint);
-var redis_addr = redis_details[1];
-var redis_port = redis_details[2];
+var redis_details = parseFullTCPAddress(process.env.REDIS_PORT || 'tcp://127.0.0.1:6379');
+var redis_addr;
+var redis_port;
+
+if (redis_details.length === 2) {
+  redis_addr = redis_details[1];
+  redis_port = redis_details[2];
+}
+
+var maildev_details = parseFullTCPAddress(process.env.MAILDEV_PORT || '');
+var maildev_addr;
+var maildev_port;
+
+if (maildev_details.length === 2)
+  maildev_addr = maildev_details[1];
+  maildev_port = maildev_details[2];
+}
 
 process.title = 'rtm';
 
@@ -30,13 +48,15 @@ module.exports = {
     caseworker: {
       rtm: process.env.CASEWORKER_EMAIL || ''
     },
-    port: process.env.EMAIL_PORT || 587,
-    host: process.env.EMAIL_HOST || 'email-smtp.eu-west-1.amazonaws.com',
+    port: maildev_port,
+    host: maildev_addr,
     auth: {
       user: process.env.SMTP_USER || '',
       pass: process.env.SMTP_PASSWORD || ''
     },
-    from: process.env.FROM_ADDRESS || 'brp@dsp.notprod.homeoffice.gov.uk'
+    from: process.env.FROM_ADDRESS || '',
+    ignoreTLS: process.env.EMAIL_IGNORE_TLS || false,
+    secure: process.env.EMAIL_SECURE || false
   },
   ga: {
     tagId: process.env.GA_TAG_ID
