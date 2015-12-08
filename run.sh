@@ -13,7 +13,7 @@ then echo "starting the service"
      SITEROOT=/rotm nohup nodemon -e html,js,json --debug . > /dev/null 2>&1 &
 elif [ "$NODE_ENV" = "so-ci" ] #use this on ci.so
 then echo "starting service"
-     SITEROOT=/rotm GA_TAG_ID=UA-70918942-1 nohup npm start > /dev/null 2>&1 &
+     SITEROOT=/rotm GA_TAG_ID=UA-70918942-1 node /var/www/rotm/app.js
 fi
 
 
