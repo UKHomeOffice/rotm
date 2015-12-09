@@ -1,9 +1,9 @@
 'use strict';
 
 function parseFullTCPAddress(addr) {
-  var regexp = /tcp:\/\/(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}):(\d{1,})/g;
+  var regexp = /tcp:\/\/(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}):(\d+)/g;
   var details = regexp.exec(addr);
-  return details;
+  return details || [];
 }
 
 /* parse out some ENV vars */
@@ -12,16 +12,16 @@ var redis_details = parseFullTCPAddress(process.env.REDIS_PORT || 'tcp://127.0.0
 var redis_addr;
 var redis_port;
 
-if (redis_details.length === 2) {
+if (redis_details.length > 1) {
   redis_addr = redis_details[1];
   redis_port = redis_details[2];
 }
 
 var maildev_details = parseFullTCPAddress(process.env.MAILDEV_PORT || '');
-var maildev_addr;
-var maildev_port;
+var maildev_addr = '';
+var maildev_port = '';
 
-if (maildev_details.length === 2)
+if (maildev_details.length > 1) {
   maildev_addr = maildev_details[1];
   maildev_port = maildev_details[2];
 }
