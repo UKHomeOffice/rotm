@@ -95,13 +95,7 @@ app.use(initSession);
 
 // apps
 app.use(require('./apps/rtm/'));
-
-app.get('/cookies', function renderCookies(req, res) {
-  res.render('cookies');
-});
-app.get('/terms-and-conditions', function renderTerms(req, res) {
-  res.render('terms');
-});
+app.use(require('./apps/common/'));
 
 // errors
 app.use(require('./errors/'));

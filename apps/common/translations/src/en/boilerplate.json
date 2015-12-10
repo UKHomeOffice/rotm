@@ -1,0 +1,87 @@
+{
+  "terms": {
+    "page-title": "Terms and conditions",
+    "page-headings": {
+      "how-information-used": "How we use your information"
+    },
+    "page-content": {
+      "hopic-pre": "The data you provide is used in accordance with the",
+      "hopic-link": "Home Office's personal information charter",
+      "hopic-explanation": "This includes information about the applicant and any person sponsoring their application. The Home Office is the data controller, which means that it decides how this information will be used and stored. The information will be held in confidence and handled in accordance with the Data Protection Act 1998.",
+      "how-information-helps": "The information will be used to help:",
+      "how-information-helps-crime": "prevent and detect crime",
+      "third-parties": "Your information may be passed on to third parties, government departments, local authorities, foreign governments and public bodies for the purpose of:",
+      "third-parties-accuracy": "confirming that the information you have provided is accurate",
+      "third-parties-prevention": "preventing and detecting crime, including fraud and money laundering",
+      "third-parties-work": "allowing a third party, government department, local authority or public body to carry out their work",
+      "site-usage-data": "The Home Office reserves the right to gather information relating to site usage. Any information gathered is mainly for internal use, for example, to improve customer service."
+    }
+  },
+  "cookies": {
+    "page-title": "Cookies",
+    "page-headings": {
+      "intro-cookie-message": "Introductory cookie message",
+      "measuring-site-use": "Measuring site use",
+      "session-cookies": "Session cookies"
+    },
+    "page-content": {
+      "service-description": "The BRP service puts small files (known as ‘cookies’) onto your computer in order to:",
+      "reason-remember-messages": "remember what messages you’ve seen so you’re not shown them again",
+      "reason-understand-usage": "understand how you use the service so we can update and improve it",
+      "reason-temporary-store": "temporarily store information you enter to support your application",
+      "no-personal-identification": "The cookies we use don’t identify you personally.",
+      "find-out": "Find out",
+      "how-to-manage": "how to manage cookies",
+      "cookie-message": "When you first use the service we show a ‘cookie message’. We then store a cookie on your computer so it knows not to show this message again.",
+      "cookie-message-table": {
+        "headings": {
+          "name": "Name",
+          "purpose": "Purpose",
+          "expires": "Expires"
+        },
+        "content": {
+          "name": "seen_cookie_message",
+          "purpose": "Lets us know you’ve already seen our cookie message",
+          "expires": "1 month"
+        }
+      },
+      "google-analytics": "We use Google Analytics to collect information about how you use this service. This helps us check it’s meeting your needs and make improvements.",
+      "ga-info": "Google Analytics stores information about:",
+      "ga-info-referral": "how you got to the site",
+      "ga-info-visits": "pages you visit and how long you spend on them",
+      "ga-info-clicks": "what you click on",
+      "ga-identificatoin": "No personal details are stored with this information, so you can’t be identified.",
+      "ga-table": {
+        "headings": {
+          "name": "Name",
+          "purpose": "Purpose",
+          "expires": "Expires"
+        },
+        "content": {
+          "name_a": "_ga",
+          "purpose_a": "Used to distinguish users",
+          "expires_a": "2 years",
+          "name_b": "_gat",
+          "purpose_b": "Used to throttle request rate",
+          "expires_b": "10 minutes"
+        }
+      },
+      "ga-sharing": "Google isn’t allowed to use or share our analytics data.",
+      "ga-opt-out-pre": "You can",
+      "ga-opt-out-link": "opt out of Google Analytics cookies",
+      "session-cookies": "We store session cookies on your computer to help keep your information secure while you use the service.",
+      "session-cookies-table": {
+        "headings": {
+          "name": "Name",
+          "purpose": "Purpose",
+          "expires": "Expires"
+        },
+        "content": {
+          "name": "hmbrp.sid",
+          "purpose": "Stores a session ID and temporarily stores data you enter to enable you to submit your information",
+          "expires": "After 20 minutes of inactivity"
+        }
+      }
+    }
+  }
+}
