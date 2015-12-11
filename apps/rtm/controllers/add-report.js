@@ -10,9 +10,12 @@ var AddReportController = function AddReportController() {
 
 util.inherits(AddReportController, BaseController);
 
-AddReportController.prototype.locals = function locals() {
+AddReportController.prototype.locals = function locals(req) {
   var lcls = BaseController.prototype.locals.apply(this, arguments);
-  lcls['additional-report'] = true;
+  var reports = req.sessionModel.get('report') || [];
+  if (reports.length) {
+    lcls['additional-report'] = true;
+  }
   return lcls;
 };
 
