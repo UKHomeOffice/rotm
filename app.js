@@ -95,7 +95,6 @@ app.use(initSession);
 
 // apps
 app.use(require('./apps/rtm/'));
-app.use(require('./apps/common/'));
 
 // errors
 app.use(require('./errors/'));
