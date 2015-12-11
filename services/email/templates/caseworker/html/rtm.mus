@@ -56,7 +56,6 @@
 
                   <p style="font-size: 23px; color: #000; line-height: 1.32; margin: 0 0 20px 0;">Reporting Terrorist Materials form</p>
 
-                  {{#report}}
                     <p style="font-size: 19px; font-weight: bold; color: #000; line-height: 1.32; margin: 0 0 10px 0;">Terrorist Material Online Report</p>
                     <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF" style="margin: 0 0 20px 0;">
                       <tr style="border-top: 1px solid #009390;">
@@ -76,7 +75,6 @@
                       </tr>
                       {{/description}}
                     </table>
-                  {{/report}}
 
                   </table>
 

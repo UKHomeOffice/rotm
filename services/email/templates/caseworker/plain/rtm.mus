@@ -1,6 +1,5 @@
 Form submitted: Report terrorist materials
 {{#data}}
-  {{#report}}
   {{#t}}pages.rtm-email-table.headers.url{{/t}}: {{url}}
   
   {{#t}}pages.rtm-email-table.headers.location{{/t}}: {{#location}}{{location}}{{/location}}{{^location}}No information{{/location}}
@@ -8,5 +7,4 @@ Form submitted: Report terrorist materials
   {{#t}}pages.rtm-email-table.headers.description{{/t}}: {{#description}}{{description}}{{/description}}{{^description}}No description given{{/description}}
 
 
-  {{/report}} 
 {{/data}}
