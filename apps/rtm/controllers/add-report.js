@@ -10,6 +10,13 @@ var AddReportController = function AddReportController() {
 
 util.inherits(AddReportController, BaseController);
 
+AddReportController.prototype.locals = function locals() {
+  var lcls = BaseController.prototype.locals.apply(this, arguments);
+  lcls['additional-report'] = true;
+  return lcls;
+};
+
+
 AddReportController.prototype.saveValues = function saveValues(req, res, callback) {
   var array = req.sessionModel.get('report') || [];
   var data = req.form.values;

@@ -13,7 +13,7 @@ module.exports = {
   },
   '/additional': {
     template: 'report-terrorism.html',
-    controller: require('./controllers/additional-report'),
+    controller: require('./controllers/add-report'),
     fields: [
       'url',
       'location',
