@@ -20,7 +20,7 @@ then echo "starting the service"
        npm stop
      fi
 
-     SITEROOT=/rotm nohup nodemon -e html,js,json --debug . > /dev/null 2>&1 &
+     SITEROOT=/rotm nodemon -e html,js,json --debug .
 
 elif [ "$NODE_ENV" = "so-ci" ] #use this on ci.so
 then echo "starting service"
