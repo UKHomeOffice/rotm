@@ -28,6 +28,7 @@ module.exports = function errorHandler(err, req, res, next) {
   res.render(err.template, {
     error: err,
     content: content,
+    backLink: false,
     showStack: config.env === 'development',
     startLink: req.path.replace(/^\/([^\/]*).*$/, '$1')
   });
