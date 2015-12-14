@@ -14,7 +14,7 @@ util.inherits(Controller, BaseController);
 
 Controller.prototype.getReports = function getReports(req) {
   var sessionData = _.pick(req.sessionModel.toJSON(), _.identity);
-  var data = sessionData.report;
+  var data = sessionData.report || [];
   return data;
 };
 
