@@ -2,8 +2,9 @@
 
 var util = require('util');
 var _ = require('underscore');
+var path = require('path');
 
-var Controller = require('../../../lib/base-controller');
+var Controller = require('./rotm-base-controller');
 var Model = require('../../common/models/email');
 
 var Submit = function Submit() {
@@ -12,14 +13,19 @@ var Submit = function Submit() {
 
 util.inherits(Submit, Controller);
 
-function getReports(req) {
-  var sessionData = _.pick(req.sessionModel.toJSON(), _.identity);
-  var data = sessionData.report;
-  return data;
-}
-
 Submit.prototype.getValues = function getValues(req) {
-  var data = getReports(req);
+  var data = this.getReports(req);
+
+  if (!this.options.hasOwnProperty('originalTemplate')) {
+    this.options.originalTemplate = this.options.template;
+  }
+
+  if (!data.length) {
+    this.options.template = path.resolve(__dirname, '../../common/views/start-again.html');
+  } else {
+    this.options.template = this.options.originalTemplate;
+  }
+
   _.each(data, function addIndex(d, i) {
 
     var options = {
@@ -39,14 +45,14 @@ Submit.prototype.getValues = function getValues(req) {
 
 Submit.prototype.locals = function locals(req) {
   var lcls = Controller.prototype.locals.apply(this, arguments);
-  var reportCount = getReports(req).length;
+  var reportCount = this.getReports(req).length;
   lcls['single-report'] = reportCount === 1;
   lcls['multiple-reports'] = reportCount > 1;
   return lcls;
 };
 
 Submit.prototype.saveValues = function saveValues(req, res, callback) {
-  var data = getReports(req);
+  var data = this.getReports(req);
   if (data && data.length) {
     data.forEach(function sendEachReport(d) {
       var model = new Model(d);
