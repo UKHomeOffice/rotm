@@ -1,14 +1,25 @@
-Form submitted: Report terrorist materials
 {{#data}}
 
-  Thankyou for your report regarding terrorist materials. Here is the data which we have recorded:
+  {{#t}}pages.rtm-email-table.information.subject{{/t}}
+  
+  {{#t}}pages.rtm-email-table.information.customer-intro{{/t}}
    
-  Website address: {{url}}
+  {{#t}}pages.rtm-email-table.headers.url{{/t}}: {{url}}  
   
-  How to locate material: {{#location}}{{location}}{{/location}}{{^location}}No information{{/location}}
+  {{#t}}pages.rtm-email-table.headers.location{{/t}}: {{#location}}{{location}}{{/location}}{{^location}}{{#t}}page.rtm-email-table.information.no-data{{/t}}{{/location}}
 
-  Description of material: {{#description}}{{description}}{{/description}}{{^description}}No description given{{/description}}
+  {{#t}}pages.rtm-email-table.headers.description{{/t}}: {{#description}}{{description}}{{/description}}{{^description}}{{#t}}page.rtm-email-table.information.no-data{{/t}}{{/description}}
   
+  {{#contact-details}}
+  {{#t}}pages.rtm-email-table.information.customer-contact-details{{/t}}
+
+  {{#t}}pages.rtm-email-table.headers.name{{/t}}: {{#name}}{{name}}{{/name}}{{^name}}{{#t}}page.rtm-email-table.information.no-data{{/t}}{{/name}}
+  {{#t}}pages.rtm-email-table.headers.email{{/t}}: {{#email}}{{email}}{{/email}}{{^email}}{{#t}}page.rtm-email-table.information.no-data{{/t}}{{/email}}
+  {{#t}}pages.rtm-email-table.headers.phone{{/t}}: {{#phone}}{{phone}}{{/phone}}{{^phone}}{{#t}}page.rtm-email-table.information.no-data{{/t}}{{/phone}}
+
+  {{#t}}page.rtm-confirmation.about-privacy-blurb{{/t}}
+  {{/contact-details}}
+
 {{/data}}
 
 If you're unsure an email is from UKVI:

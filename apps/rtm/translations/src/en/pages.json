@@ -44,9 +44,22 @@
   },
   "rtm-email-table": {
     "headers": {
+      "date": "Report date / time",
+      "id": "Report Unique ID",
       "url": "Website address",
       "location": "Location of terrorist material",
-      "description": "Description of terrorist material"
+      "description": "Description of terrorist material",
+      "name": "User contact name",
+      "email": "User contact email",
+      "phone": "User contact phone"
+    },
+    "information": {
+      "subject": "Report Online Terrorist Materials: Form submitted",
+      "contact-details": "The user consented to be contacted",
+      "no-contact-details": "The user did not consent to be contacted",
+      "no-data": "Not provided",
+      "customer-intro": "Thankyou for your report regarding terrorist materials. Here is the data which we have recorded:",
+      "customer-contact-details": "You consented to be contacted if necessary, with the following contact details:"
     }
   }
 }
