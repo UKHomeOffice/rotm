@@ -11,6 +11,7 @@ var BoilerPlate = function BoilerPlate() {
 util.inherits(BoilerPlate, Controller);
 
 BoilerPlate.prototype.getValues = function getValues(req, res) {
+
   this.options.clearSession = false;
   res.locals.backLink = '/';
   if (this.getReports(req).length) {
