@@ -74,6 +74,7 @@ module.exports = {
   },
   '/done': {
     template: 'complete.html',
+    controller: require('./controllers/done'),
     backLink: null
   }
 };
