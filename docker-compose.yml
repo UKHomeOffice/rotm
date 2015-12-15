@@ -9,6 +9,7 @@ nginx:
     ports:
         - "80:80"
         - "1080:1080"
+
 app:
     build: .
     ports:
@@ -22,10 +23,12 @@ app:
         - NODE_ENV=docker
         - EMAIL_IGNORE_TLS=true
         - CASEWORKER_EMAIL=a@user.com
+
 redis:
     image: redis
     ports:
         - "6379"
+
 maildev:
     image: djfarrelly/maildev
     ports:
