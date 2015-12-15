@@ -3,6 +3,8 @@
 var util = require('util');
 var _ = require('underscore');
 var path = require('path');
+var uuid = require('node-uuid');
+var i18n = require('hof').i18n;
 
 var Controller = require('./rotm-base-controller');
 var Model = require('../../common/models/email');
@@ -53,23 +55,52 @@ Submit.prototype.locals = function locals(req) {
 
 Submit.prototype.saveValues = function saveValues(req, res, callback) {
   var data = this.getReports(req);
+
   if (data && data.length) {
-    data.forEach(function sendEachReport(d) {
-      var model = new Model(d);
-      var service = {
-        template: 'rtm',
-        subject: 'Form submitted: Reporting Terrorist Materials'
-      };
 
-      if (service) {
-        model.set('template', service.template);
-        model.set('subject', service.subject);
-      } else {
-        throw new Error('no service found');
-      }
+    var userData = req.form.values.anonymous === 'no' ? {
+      'contact-details': true,
+      name: req.form.values['contact-info-name'],
+      email: req.form.values['contact-info-email'],
+      phone: req.form.values['contact-info-phone']
+    } : {};
 
-      model.save(callback);
+    var locali18n = i18n({
+      path: path.resolve(
+        __dirname, '../translations/__lng__/__ns__.json'
+      )
+    });
 
+    locali18n.on('ready', function prepareEmail() {
+
+      data.forEach(function sendEachReport(d, i) {
+
+        var reportNumber = i + 1;
+        var subjectAppend = data.length ? ' - ' + reportNumber + ' of ' + data.length : '';
+
+        d = _.extend(d, userData);
+
+        var dateTime = new Date();
+        d.reportDate = dateTime.toISOString();
+        d.reportId = uuid.v4();
+        d.subject = locali18n.translate('pages.rtm-email-table.information.subject') + subjectAppend;
+
+        var model = new Model(d);
+        var service = {
+          template: 'rtm',
+          subject: d.subject
+        };
+
+        if (service) {
+          model.set('template', service.template);
+          model.set('subject', service.subject);
+        } else {
+          throw new Error('no service found');
+        }
+
+        model.save(callback);
+
+      });
     });
 
   }

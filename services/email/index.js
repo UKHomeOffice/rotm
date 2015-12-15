@@ -30,12 +30,7 @@ var caseworkerPlainTextTemplates = {
 };
 
 var translationLocation = {
-  error: 'correct-mistakes',
-  'lost-or-stolen-uk': 'lost-stolen-damaged',
-  'lost-or-stolen-abroad': 'lost-stolen-damaged',
-  delivery: 'not-arrived',
-  collection: 'collection',
-  'someone-else': 'someone-else'
+  rtm: 'rtm'
 };
 
 var transport = (config.email.host === '' && config.email.port === '') ?
@@ -60,6 +55,7 @@ function Emailer() {
 }
 
 Emailer.prototype.send = function send(email, callback) {
+
   var locali18n = i18n({
     path: path.resolve(
       __dirname, '../../apps/', './' + translationLocation[email.template], './translations/__lng__/__ns__.json'

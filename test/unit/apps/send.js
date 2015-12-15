@@ -28,6 +28,11 @@ describe('controllers/confirm:send', function () {
               // from services/email/index.js if a user recipient is given
             }]
           })
+        },
+        form: {
+          values: {
+            'anonymous': 'yes'
+          }
         }
       };
       res = {};
