@@ -30,7 +30,7 @@ module.exports = {
       'remove-url',
       'remove-index'
     ],
-    backLink: '/',
+    backLink: '/confirmation',
     next: '/confirm-remove'
   },
   '/editurl': {
@@ -42,13 +42,13 @@ module.exports = {
       'description',
       'edit-index'
     ],
-    backLink: '/',
+    backLink: '/confirmation',
     next: '/confirm-edit'
   },
   '/confirm-remove': {
     template: 'removed.html',
     controller: require('./controllers/removed'),
-    backLink: '/',
+    backLink: '/confirmation',
     fields: [
       'continue'
     ],
@@ -56,7 +56,7 @@ module.exports = {
   },
   '/confirm-edit': {
     template: 'edited.html',
-    backLink: '/',
+    backLink: '/confirmation',
     fields: [
       'continue'
     ],
