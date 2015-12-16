@@ -8,6 +8,7 @@ Feature: EditReport
     Then I should see the confirmation page
     Then I should see the url - http://www.example.com
     And I should see a link to edit existing reports
+    Then I should clear the session
 
 	Scenario: The edit data form is populated with existing report data
     When I visit the RTM form
@@ -17,6 +18,7 @@ Feature: EditReport
     When I click on the first edit report link 
     Then I should see the RTM form
     Then I should see the url field has been populated
+    Then I should clear the session
 
 	Scenario: The confirmation page confirms the data has been edited
     When I visit the RTM form
@@ -31,4 +33,5 @@ Feature: EditReport
     When I click on Continue
     Then I should see the confirmation page
     Then I should see the url - http://www.edited-example.com
+    Then I should clear the session
   
