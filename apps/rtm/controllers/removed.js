@@ -10,11 +10,11 @@ var ItemRemoved = function ItemRemoved() {
 
 util.inherits(ItemRemoved, Controller);
 
-ItemRemoved.prototype.getNextStep = function getNextStep(req, res) {
+ItemRemoved.prototype.getNextStep = function getNextStep(req) {
   var next = Controller.prototype.getNextStep.apply(this, arguments);
   var sessionData = req.sessionModel.get('report') || [];
   if (sessionData.length < 1) {
-    next = res.locals.siteroot + req.baseUrl;
+    next = req.baseUrl;
   }
   return next;
 };

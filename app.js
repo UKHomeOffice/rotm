@@ -22,8 +22,8 @@ if (config.env === 'development' || config.env === 'so-ci' || config.env === 'ng
 }
 
 app.use(function injectLocals(req, res, next) {
+  req.baseUrl = config.siteroot + req.baseUrl;
   res.locals.assetPath = config.siteroot + '/public';
-  res.locals.siteroot = config.siteroot;
   res.locals.gaTagId = config.ga.tagId;
   next();
 });

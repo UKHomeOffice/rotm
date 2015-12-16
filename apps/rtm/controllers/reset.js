@@ -19,7 +19,7 @@ Reset.prototype.saveValues = function getValues(req, res, callback) {
 };
 
 Reset.prototype.getNextStep = function getNextStep(req, res) {
-  var next = res.locals.siteroot + req.baseUrl;
+  var next = req.baseUrl;
   return next;
 };
 
