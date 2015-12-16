@@ -1,6 +1,7 @@
 Feature: ResetReport
   Existing report data can be deleted via a reset page before submission 
 
+  @reset
 	Scenario: The reset page provides the ability to remove all report data
     When I visit the RTM form
     And I supply the RTM form with the valid url http://www.example.com
