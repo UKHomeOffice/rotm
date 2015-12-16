@@ -1,0 +1,18 @@
+{{<layout}}
+
+{{$header}}
+    {{#t}}common-pages.reset.title{{/t}}
+{{/header}}
+
+{{$content}}
+    <p>{{#t}}common-pages.reset.message{{/t}}</p>
+  {{<partials-form}}
+     {{$form}}
+    {{#input-submit}}reset{{/input-submit}}
+     {{/form}}
+
+  {{/partials-form}}
+       {{/content}}
+
+       
+{{/layout}}

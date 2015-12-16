@@ -62,6 +62,12 @@ module.exports = {
     ],
     next: '/confirmation'
   },
+  '/reset': {
+    template: '../../common/views/reset.html',
+    controller: require('./controllers/reset'),
+    backLink: '/confirmation',
+    next: '/confirmation'
+  },
   '/cookies': {
     controller: require('./controllers/boilerplate'),
     template: 'cookies.html',
