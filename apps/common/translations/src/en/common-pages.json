@@ -1,0 +1,6 @@
+{
+  "reset" : {
+    "title" : "Reset session",
+    "message" : "Please confirm you wish to reset the session. All data submitted hitherto will be lost."
+  }
+}
