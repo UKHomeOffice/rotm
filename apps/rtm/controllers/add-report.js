@@ -15,6 +15,7 @@ AddReportController.prototype.locals = function locals(req) {
   var reports = req.sessionModel.get('report') || [];
   if (reports.length) {
     lcls['additional-report'] = true;
+    lcls.backLink = '/confirmation';
   }
   return lcls;
 };
