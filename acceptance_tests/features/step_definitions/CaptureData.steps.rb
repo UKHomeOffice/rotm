@@ -47,3 +47,18 @@ Then(/^I should see the description for confirmation$/) do
   page.should have_no_selector('div.validation-summary')
   page.should have_content('Some sample description text') 
 end
+
+When(/^I select the option to remain anonymous$/) do
+  anonymous_yes = page.first('input[type="radio"]')[:id]
+  anonymous_yes.should == "anonymous-yes"
+  choose('anonymous-yes')
+end
+
+When(/^I submit the RTM confirmation form$/) do
+  click_button('Send report')
+end
+
+Then (/^I should see a submission successful message$/) do
+  page.should have_selector('div.alert-complete')
+end
+
