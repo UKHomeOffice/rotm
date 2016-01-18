@@ -14,7 +14,9 @@ Initiate the server in development mode (Express is used to serve the static res
 $ npm run dev
 ```
 
-Then select one of the following journeys to see the applcation in action
+The app runs on the path /report-terrorism
+
+Then select one of the following journeys to see the application in action
 
 - [Collection](http://localhost:8080/collection)
 - [Someone else](http://localhost:8080/someone-else)
