@@ -55,8 +55,8 @@ module.exports = {
       pass: process.env.SMTP_PASSWORD || ''
     },
     from: process.env.FROM_ADDRESS || '',
-    ignoreTLS: process.env.EMAIL_IGNORE_TLS || false,
-    secure: process.env.EMAIL_SECURE || false
+    ignoreTLS: process.env.EMAIL_IGNORE_TLS === 'true',
+    secure: process.env.EMAIL_SECURE === 'true'
   },
   ga: {
     tagId: process.env.GA_TAG_ID
