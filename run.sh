@@ -13,12 +13,6 @@ elif [ "$NODE_ENV" = "docker" ] #use this for dockerised local machine
 then echo "starting the service"
      nodemon -e html,js,json .
 
-elif [ "$NODE_ENV" = "nginx-dev" ] #use this on local machine with nginx pointing at localhost/rotm 
-then echo "starting the service"
-     if pidof -o %PPID -x "rtm">/dev/null; then
-       echo "stopping pid $$"
-       npm stop
-     fi
 
      SITEROOT=/rotm nodemon -e html,js,json --debug .
 
