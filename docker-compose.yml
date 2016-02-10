@@ -20,7 +20,7 @@ app:
         - redis
         - maildev
     environment:
-        - NODE_ENV=docker
+        - NODE_ENV=docker-compose
         - EMAIL_IGNORE_TLS=true
         - CASEWORKER_EMAIL=a@user.com
 
