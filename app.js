@@ -17,7 +17,7 @@ if (config.env !== 'ci') {
   app.use(churchill(logger));
 }
 
-if (config.env === 'development' || config.env === 'so-ci' || config.env === 'nginx-dev') {
+if (config.env === 'development' || config.env === 'so-ci') {
   app.use('/public', express.static(path.resolve(__dirname, './public')));
 }
 
