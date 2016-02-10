@@ -23,6 +23,13 @@ then echo "starting the service"
 elif [ "$NODE_ENV" = "so-ci" ] #use this on ci.so
 then echo "starting service"
      SITEROOT=/rotm GA_TAG_ID=UA-70918942-1 node /var/www/rotm/app.js
+
+else
+  
+  echo "starting the service"
+  cp -r /app/public/* /public/
+  npm start
+  
 fi
 
 
