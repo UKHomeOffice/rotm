@@ -53,6 +53,9 @@ app.use(function setBaseUrl(req, res, next) {
 /*************************************/
 /******* Redis session storage *******/
 /*************************************/
+
+logger.info('connecting to redis on ', config.redis.port, config.redis.host);
+
 var client = redis.createClient(config.redis.port, config.redis.host);
 
 client.on('error', function clientErrorHandler(e) {

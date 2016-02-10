@@ -1,31 +1,5 @@
 'use strict';
 
-function parseFullTCPAddress(addr) {
-  var regexp = /tcp:\/\/(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}):(\d+)/g;
-  var details = regexp.exec(addr);
-  return details || [];
-}
-
-/* parse out some ENV vars */
-/* docker-compose / kubernetes dev or local */
-var redis_details = parseFullTCPAddress(process.env.REDIS_PORT || 'tcp://127.0.0.1:6379');
-var redis_addr;
-var redis_port;
-
-if (redis_details.length > 1) {
-  redis_addr = redis_details[1];
-  redis_port = redis_details[2];
-}
-
-var maildev_details = parseFullTCPAddress(process.env.MAILDEV_PORT || '');
-var maildev_addr = '';
-var maildev_port = '';
-
-if (maildev_details.length > 1) {
-  maildev_addr = maildev_details[1];
-  maildev_port = maildev_details[2];
-}
-
 process.title = 'rtm';
 
 /*eslint no-process-env: 0*/
@@ -41,15 +15,15 @@ module.exports = {
     ttl: process.env.SESSION_TTL || 1800 /* 30 mins timeout */
   },
   redis: {
-    port: redis_port,
-    host: redis_addr
+    port: process.env.REDIS_PORT,
+    host: process.env.REDIS_HOST
   },
   email: {
     caseworker: {
       rtm: process.env.CASEWORKER_EMAIL || ''
     },
-    port: maildev_port,
-    host: maildev_addr,
+    port: process.env.SMTP_PORT || '',
+    host: process.env.SMTP_HOST || '',
     auth: {
       user: process.env.SMTP_USER || '',
       pass: process.env.SMTP_PASSWORD || ''
