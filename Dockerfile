@@ -14,5 +14,7 @@ COPY . /app
 USER root
 RUN npm install -g nodemon
 EXPOSE 8080
+
+USER app
 CMD /app/run.sh
 
