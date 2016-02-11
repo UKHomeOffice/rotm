@@ -1,18 +1,18 @@
-FROM vaijab/nodejs:0.12.7
+FROM node:5.6
 
-RUN dnf install -y -q git
-
-RUN npm install -g nodemon
-RUN useradd -d /app app
+RUN /usr/sbin/useradd --create-home --home-dir /app --shell /bin/bash app 
+RUN chown -R app /app
 USER app
 
 WORKDIR /app
 COPY package.json /app/package.json
 COPY assets /app/assets
+ENV HOME /app
 RUN npm install
 COPY . /app
 
 USER root
+RUN npm install -g nodemon
 EXPOSE 8080
 CMD /app/run.sh
 
