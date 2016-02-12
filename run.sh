@@ -28,7 +28,7 @@ else
   
   echo "starting the service"
   cp -r /app/public/* /public/
-  npm start
+  SECURE_PROTOCOL=true npm start
   
 fi
 
