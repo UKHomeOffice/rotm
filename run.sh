@@ -7,7 +7,7 @@ then echo "starting the service"
        npm stop
      fi
 
-     CONFIG_FILE=config_dev.yml npm run dev
+     npm run dev
      
 elif [ "$NODE_ENV" = "docker-compose" ] #use this for dockerised local machine
 then echo "starting the service"
