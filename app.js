@@ -82,16 +82,20 @@ function secureCookies(req, res, next) {
 
 app.use(require('cookie-parser')(config.session.secret));
 app.use(secureCookies);
-app.use(session({
-  store: redisStore,
-  cookie: {
-    secure: config.secureProtocol || false
-  },
-  key: 'hmbrp.sid',
-  secret: config.session.secret,
-  resave: true,
-  saveUninitialized: true
-}));
+
+function initSession(req, res, next) {
+  session({
+    store: redisStore,
+    cookie: {
+      secure: (req.protocol === 'https')
+    },
+    key: 'hmbrp.sid',
+    secret: config.session.secret,
+    resave: true,
+    saveUninitialized: true
+  })(req, res, next);
+};
+app.use(initSession);
 
 // apps
 app.use(require('./apps/rtm/'));
