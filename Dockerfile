@@ -11,7 +11,8 @@ ENV PATH=${PATH}:/opt/nodejs/bin
 RUN yum clean all && yum update -y && yum clean all && rpm --rebuilddb
 
 RUN /usr/sbin/useradd --create-home --home-dir /app --shell /bin/bash app
-RUN chown -R app /app
+RUN mkdir /public
+RUN chown -R app /app /public
 USER app
 
 WORKDIR /app
@@ -25,8 +26,7 @@ USER root
 RUN npm install -g nodemon
 EXPOSE 8080
 
-VOLUME /public
-
 USER app
-ENTRYPOINT [ '/app/run.sh' ]
+VOLUME /public
+ENTRYPOINT [ "/app/run.sh" ]
 
