@@ -5,7 +5,7 @@
   "description": "A Home Office application for reporting online terrorist material.",
   "license": "GPLv2",
   "scripts": {
-    "start": "node .",
+    "start": "npm run hof-transpile && node .",
     "stop": "pkill --signal SIGINT rtm",
     "dev": "NODE_ENV=development nodemon -e html,js,json .",
     "watch": "parallelshell 'npm run watch:scss' 'npm run watch:js'",
