@@ -24,9 +24,13 @@ COPY . /app
 
 USER root
 RUN npm install -g nodemon
-EXPOSE 8080
 
-USER app
+EXPOSE 8080
 VOLUME /public
+
+RUN chown -R app /app /public
+USER app
+
+# USER app
 ENTRYPOINT [ "/app/run.sh" ]
 
