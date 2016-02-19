@@ -51,6 +51,7 @@ docker run -d  --name=${APP_HOST} -P \
   -e "SMTP_PORT=${SMTP_PORT}" \
   -e "REDIS_HOST=${REDIS_HOST}" \
   -e "REDIS_PORT=${REDIS_PORT}" \
+  -e "NODE_ENV=ci-build" \
   -v /tmp/${IMAGE}:/app/$HOME/node_modules \
   ${TAG}
 
