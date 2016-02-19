@@ -1,4 +1,7 @@
-FROM ruby:2.2-onbuild
+FROM ruby:2.2.1
+
+COPY . ./
+RUN bundle install
 RUN apt-get update && \
     apt-get install -y build-essential chrpath libssl-dev libxft-dev && \
     apt-get install -y libfreetype6 libfreetype6-dev && \
