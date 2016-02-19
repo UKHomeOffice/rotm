@@ -16,5 +16,5 @@ RUN npm install -g nodemon
 EXPOSE 8080
 
 USER app
-CMD /app/run.sh
+ENTRYPOINT [ '/app/run.sh' ]
 

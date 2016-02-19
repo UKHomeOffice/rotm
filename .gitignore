@@ -1,6 +1,6 @@
 #ide specific
 .idea/
-
+artefacts
 node_modules
 public
 reports
