@@ -67,6 +67,8 @@ echo docker run -i --rm=true \
      -e "CONFIG_FILE=${CONFIG_FILE}" \
      ${ACCEPTANCE_TAG}
 
+# Pause before running tests
+sleep 10
 if docker run -i --rm=true \
      --link ${APP_HOST}:${APP_HOST} \
      -e "CONFIG_FILE=${CONFIG_FILE}" \
