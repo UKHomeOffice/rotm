@@ -94,7 +94,7 @@ function initSession(req, res, next) {
     resave: true,
     saveUninitialized: true
   })(req, res, next);
-};
+}
 app.use(initSession);
 
 // apps
