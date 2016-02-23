@@ -4,7 +4,7 @@ set -e
 BUILD_HOME_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 IMAGE="rotm-app"
 REGISTRY="${REGISTRY:-quay.io}"
-VERSION=v0.1.${BUILD_VERSION:-0-dev}
+VERSION=v0.1.${BUILD_NUMBER:-0-dev}
 TAG=${REGISTRY}/ukhomeofficedigital/${IMAGE}:${VERSION}
 GA_TAG_ID=UA-70918942-1
 MAILCATCHER_HOST=rotm_mailcatcher
@@ -76,7 +76,7 @@ if docker run -i --rm=true \
   ok=0
 else
   echo "Application logs:"
-  docker logs ${APP_HOST}
+  #docker logs ${APP_HOST}
   ok=1
 fi
 cd -
