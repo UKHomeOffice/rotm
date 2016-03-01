@@ -2,7 +2,7 @@ Feature: DeleteReport
   Existing reports can be deleted before data is submitted 
 
 	Scenario: The confirmation page provides the ability to delete existing reports
-    When I visit the RTM form
+    When I load the RTM start page
     And I supply the RTM form with the valid url http://www.example.com
     And I submit the RTM form
     Then I should see the confirmation page
@@ -11,7 +11,7 @@ Feature: DeleteReport
     Then I should clear the session
 
 	Scenario: The delete report confirmation form is populated with the report data
-    When I visit the RTM form
+    When I load the RTM start page
     And I supply the RTM form with the valid url http://www.example.com
     And I submit the RTM form
     Then I should see the confirmation page
@@ -22,7 +22,7 @@ Feature: DeleteReport
     Then I should clear the session
 
 	Scenario: Deleting all data returns the user to the start page
-    When I visit the RTM form
+    When I load the RTM start page
     And I supply the RTM form with the valid url http://www.example.com
     And I submit the RTM form
     When I click on the additional report link

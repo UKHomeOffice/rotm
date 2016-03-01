@@ -2,7 +2,7 @@ Feature: AddReport
   Additional reports can be added before data is submitted 
 
 	Scenario: The confirmation page provides the ability to add additional reports
-    When I visit the RTM form
+    When I load the RTM start page
     And I supply the RTM form with the valid url http://www.example.com
     And I submit the RTM form
     Then I should see the confirmation page
@@ -11,7 +11,7 @@ Feature: AddReport
     Then I should clear the session
   
 	Scenario: The additional reports link leds back to the RTM report form
-    When I visit the RTM form
+    When I load the RTM start page
     And I supply the RTM form with the valid url http://www.example.com
     And I submit the RTM form
     Then I should see the confirmation page
@@ -22,7 +22,7 @@ Feature: AddReport
     Then I should clear the session
   
 	Scenario: The confirmation lists multiple reports when more than one report is submitted
-    When I visit the RTM form
+    When I load the RTM start page
     And I supply the RTM form with the valid url http://www.example1.com
     And I submit the RTM form
     Then I should see the url - http://www.example1.com

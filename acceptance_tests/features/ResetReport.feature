@@ -3,7 +3,7 @@ Feature: ResetReport
 
   @reset
 	Scenario: The reset page provides the ability to remove all report data
-    When I visit the RTM form
+    When I load the RTM start page
     And I supply the RTM form with the valid url http://www.example.com
     And I submit the RTM form
     Then I should see the confirmation page
@@ -16,7 +16,7 @@ Feature: ResetReport
 
   @reset
 	Scenario: Attempts to access the confirmation page after data has been reset leads to the start again message
-    When I visit the RTM form
+    When I load the RTM start page
     And I supply the RTM form with the valid url http://www.example.com
     And I submit the RTM form
     Then I should see the confirmation page

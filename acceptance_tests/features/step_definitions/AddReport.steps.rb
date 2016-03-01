@@ -15,7 +15,7 @@ Then (/^I should see (.+) reports for confirmation$/) do |count|
 end
 
 Then (/^I should clear the session$/) do 
-  visit config['rtm_dev_host'] + "/reset"
+  visit config['rtm_dev_host'] + "/report-terrorism/reset"
   page.status_code.should == 200
   click_button('Reset')
   page.status_code.should == 302
