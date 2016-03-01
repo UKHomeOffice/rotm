@@ -1,7 +1,3 @@
-When(/^I visit the RTM form$/) do
-  visit config['rtm_dev_host']
-end
-
 
 When(/^I supply the RTM form with a valid url$/) do
   fill_in('url', :with => 'http://www.blahdeblah.com')
@@ -24,7 +20,7 @@ When(/^I submit the RTM form$/) do
 end
 
 Then (/^I should see the confirmation page$/) do
-  confPage = config['rtm_dev_host'] + "/confirmation"
+  confPage = config['rtm_dev_host'] + "/report-terrorism/confirmation"
   current_url.should == confPage
 end
 

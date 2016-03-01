@@ -2,7 +2,7 @@ Feature: EditReport
   Exoisting reports can be edited before data is submitted 
 
 	Scenario: The confirmation page provides the ability to edit existing reports
-    When I visit the RTM form
+    When I load the RTM start page
     And I supply the RTM form with the valid url http://www.example.com
     And I submit the RTM form
     Then I should see the confirmation page
@@ -11,7 +11,7 @@ Feature: EditReport
     Then I should clear the session
 
 	Scenario: The edit data form is populated with existing report data
-    When I visit the RTM form
+    When I load the RTM start page
     And I supply the RTM form with the valid url http://www.example.com
     And I submit the RTM form
     Then I should see the confirmation page
@@ -21,7 +21,7 @@ Feature: EditReport
     Then I should clear the session
 
 	Scenario: The confirmation page confirms the data has been edited
-    When I visit the RTM form
+    When I load the RTM start page
     And I supply the RTM form with the valid url http://www.example.com
     And I submit the RTM form
     Then I should see the confirmation page

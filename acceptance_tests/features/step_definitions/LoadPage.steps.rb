@@ -1,5 +1,5 @@
 When(/^I load the RTM start page$/) do
-  visit config['rtm_dev_host']
+  visit config['rtm_dev_host'] + '/report-terrorism'
   page.status_code.should == 200
 end
 
@@ -10,13 +10,21 @@ Then(/^I should see the RTM form$/) do
 end
 
 Then(/^I visit the cookie page$/) do
-  visit config['rtm_dev_host'] + '/cookies'
+  visit config['rtm_dev_host'] + '/report-terrorism' + '/cookies'
   page.status_code.should == 200
   page.should have_content('Cookies');
 end
 
 Then(/^I visit the terms page$/) do
-  visit config['rtm_dev_host'] + '/terms-and-conditions'
+  visit config['rtm_dev_host'] + '/report-terrorism' + '/terms-and-conditions'
   page.status_code.should == 200
   page.should have_content('Terms and conditions');
+end
+
+When(/^I load the bundle JS asset$/) do
+  visit config['rtm_dev_host'] + '/public/js/bundle.js'
+end
+
+Then(/^I should get a (\d+) status$/) do |status_code|
+  page.status_code.should == status_code.to_i
 end
