@@ -28,4 +28,6 @@ Feature: ResetReport
     Then I should see the RTM form  
     When I visit the confirmation page
     Then I should see the start again page  
+    When I click on Start Again
+    Then I should see the RTM form  
   
