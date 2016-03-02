@@ -52,12 +52,13 @@ docker run -d  --name=${APP_HOST} -P \
   -e "REDIS_HOST=${REDIS_HOST}" \
   -e "REDIS_PORT=${REDIS_PORT}" \
   -e "NODE_ENV=ci-build" \
+  -e "SERVE_STATIC=true" \
   -v /tmp/${IMAGE}:/app/$HOME/node_modules \
   ${TAG}
 
 # Acceptance / integration tests...
 CONFIG_FILE=config_ci_build.yml
-echo "rtm_dev_host: 'http://${APP_HOST}:8080/report-terrorism'" \
+echo "rtm_dev_host: 'http://${APP_HOST}:8080'" \
     > ${BUILD_HOME_DIR}/acceptance_tests/features/support/${CONFIG_FILE}
 echo "Running acceptance tests container..."
 cd ${BUILD_HOME_DIR}/acceptance_tests
