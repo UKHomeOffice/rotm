@@ -4,7 +4,7 @@ var util = require('util');
 var _ = require('underscore');
 var path = require('path');
 var uuid = require('node-uuid');
-var i18n = require('hof').i18n;
+var i18n = require('i18n-future')();
 
 var Controller = require('./rotm-base-controller');
 var Model = require('../../common/models/email');
@@ -65,13 +65,7 @@ Submit.prototype.saveValues = function saveValues(req, res, callback) {
       phone: req.form.values['contact-info-phone']
     } : {};
 
-    var locali18n = i18n({
-      path: path.resolve(
-        __dirname, '../translations/__lng__/__ns__.json'
-      )
-    });
-
-    locali18n.on('ready', function prepareEmail() {
+    i18n.on('ready', function prepareEmail() {
 
       data.forEach(function sendEachReport(d, i) {
 
@@ -83,7 +77,7 @@ Submit.prototype.saveValues = function saveValues(req, res, callback) {
         var dateTime = new Date();
         d.reportDate = dateTime.toISOString();
         d.reportId = uuid.v4();
-        d.subject = locali18n.translate('pages.rtm-email-table.information.subject') + subjectAppend;
+        d.subject = i18n.translate('pages.rtm-email-table.information.subject') + subjectAppend;
 
         var model = new Model(d);
         var service = {
