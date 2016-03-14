@@ -3,7 +3,7 @@
 var logger = require('../../lib/logger');
 var nodemailer = require('nodemailer');
 var config = require('../../config');
-var i18n = require('hof').i18n;
+var i18nFuture = require('i18n-future');
 var Hogan = require('hogan.js');
 var i18nLookup = require('hof').i18nLookup;
 var fs = require('fs');
@@ -56,9 +56,9 @@ function Emailer() {
 
 Emailer.prototype.send = function send(email, callback) {
 
-  var locali18n = i18n({
+  var locali18n = i18nFuture({
     path: path.resolve(
-      __dirname, '../../apps/', './' + translationLocation[email.template], './translations/__lng__/__ns__.json'
+      __dirname, '../../apps/', './' + translationLocation[email.template]
     )
   });
 
