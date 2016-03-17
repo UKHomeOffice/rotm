@@ -3,7 +3,7 @@
 var express = require('express');
 var app = express();
 var path = require('path');
-var logger = require('./lib/logger');
+var logger = require('so-forms').controllers.logger;
 var churchill = require('churchill');
 var session = require('express-session');
 var config = require('./config');
@@ -28,12 +28,12 @@ app.use(function injectLocals(req, res, next) {
 
 app.set('view engine', 'html');
 
-var hofTemplate = require('hof').template;
-hofTemplate.setup(app, {
+var template = require('so-forms').template;
+template.setup(app, {
   path: config.siteroot + '/govuk-assets'
 });
 
-app.use('/govuk-assets', servestatic(hofTemplate.assetPath));
+app.use('/govuk-assets', servestatic(template.assetPath));
 
 app.set('views', path.resolve(__dirname, './apps/common/views'));
 app.enable('view cache');

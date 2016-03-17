@@ -1,56 +1,52 @@
 'use strict';
 
-var util = require('util');
-var _ = require('underscore');
+const _ = require('lodash');
 
-var Controller = require('../../../lib/ajax-controller');
+const Controller = require('so-forms').controllers.ajax_edit;
 
-var Remove = function Remove() {
-  Controller.apply(this, arguments);
-};
+let reportToRemove;
 
-util.inherits(Remove, Controller);
+module.exports = class Remove extends Controller {
+  constructor(options) {
+    super(options);
 
-var reportToRemove;
-
-/*eslint no-unused-vars: 0*/
-Remove.prototype.getValues = function getValues(req, res, callback) {
-  if (req.params.action) {
-    var id = req.params.action;
-    var reports = req.sessionModel.get('report') || [];
-    if (typeof reports[id] === 'object') {
-      reportToRemove = reports[id];
-    }
   }
-  Controller.prototype.getValues.apply(this, arguments);
-};
 
-Remove.prototype.locals = function locals(req, res) {
-  var lcls = Controller.prototype.locals.apply(this, arguments);
-  if (reportToRemove) {
-    return _.extend({}, lcls, {
-      'values': {
-        'report': reportToRemove
+  getValues(req, res, callback) {
+    if (req.params.action) {
+      const id = req.params.action;
+      const reports = req.sessionModel.get('report') || [];
+      if (typeof reports[id] === 'object') {
+        reportToRemove = reports[id];
       }
-    });
+    }
+    super.getValues(req, res, callback);
   }
 
-  return lcls;
-};
+  locals(req, res) {
+    const lcls = super.locals(req, res);
+    if (reportToRemove) {
+      return _.extend({}, lcls, {
+        'values': {
+          'report': reportToRemove
+        }
+      });
+    }
 
-
-/*eslint no-unused-vars: 0*/
-Remove.prototype.saveValues = function saveValues(req, res, callback) {
-  var id = req.params.action;
-  var reports = req.sessionModel.get('report') || [];
-  reportToRemove = reports[id];
-
-  if (typeof id !== undefined && typeof reportToRemove !== undefined) {
-    reports.splice(id, 1);
-    req.sessionModel.set('report', reports);
-    req.sessionModel.unset('errorValues');
+    return lcls;
   }
-  callback();
-};
 
-module.exports = Remove;
+  saveValues(req, res, callback) {
+    const id = req.params.action;
+    const reports = req.sessionModel.get('report') || [];
+    reportToRemove = reports[id];
+
+    if (typeof id !== undefined && typeof reportToRemove !== undefined) {
+      reports.splice(id, 1);
+      req.sessionModel.set('report', reports);
+      req.sessionModel.unset('errorValues');
+    }
+    callback();
+  }
+
+};

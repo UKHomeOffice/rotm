@@ -1,7 +1,7 @@
 'use strict';
 var i18nFuture = require('i18n-future')();
 var config = require('../config');
-var logger = require('../lib/logger');
+var logger = require('so-forms').controllers.logger;
 
 /*eslint no-unused-vars: 0*/
 module.exports = function errorHandler(err, req, res) {

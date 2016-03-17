@@ -1,6 +1,11 @@
 env:
   node: true
+  es6: true
+  
+ecmaFeatures:
+  blockBindings: true
 
+  
 plugins:
   - filenames
   - one-variable-per-var

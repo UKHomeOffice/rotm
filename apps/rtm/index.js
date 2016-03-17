@@ -1,8 +1,8 @@
 'use strict';
 
-var hof = require('hof');
-var wizard = hof.wizard;
-var mixins = hof.mixins;
+var form = require('so-forms');
+var wizard = form.wizard;
+var mixins = form.mixins;
 var i18nFuture = require('i18n-future');
 var router = require('express').Router();
 var path = require('path');
@@ -30,7 +30,7 @@ jasonBaker(translationSrc, {saltStars: true}, function setupRoute(err, translati
   }));
 
   router.use('/report-terrorism/', wizard(require('./steps'), fields, {
-    controller: require('../../lib/base-controller'),
+    controller: require('so-forms').controllers.base,
     templatePath: path.resolve(__dirname, 'views'),
     translate: i18n.translate.bind(i18n),
     params: '/:action?'
