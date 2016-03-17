@@ -15,11 +15,7 @@ var translationSrc = [
   path.resolve(__dirname, '../common/translations/src/**/*.json')
 ];
 
-jasonBaker(translationSrc, {saltStars: true}, function setupRoute(err, translations) {
-
-  if (err) {
-    throw err;
-  }
+function setupRoute(translations) {
 
   var i18n = i18nFuture({
     resources: translations
@@ -36,6 +32,12 @@ jasonBaker(translationSrc, {saltStars: true}, function setupRoute(err, translati
     params: '/:action?'
   }));
 
-});
+}
+
+jasonBaker.promise(translationSrc, {fsToNs: true})
+  .then(setupRoute)
+  .catch(function(err) {
+    throw err;
+  });
 
 module.exports = router;
