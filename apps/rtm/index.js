@@ -36,7 +36,7 @@ function setupRoute(translations) {
 
 jasonBaker.promise(translationSrc, {fsToNs: true})
   .then(setupRoute)
-  .catch(function(err) {
+  .catch(function catchError(err) {
     throw err;
   });
 
