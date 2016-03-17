@@ -39,7 +39,7 @@
     "hogan.js": "^3.0.2",
     "i18n-future": "^0.2.0",
     "i18n-lookup": "^0.1.0",
-    "jason-baker": "^0.1.0",
+    "jason-baker": "1.0.0",
     "jquery": "^2.1.4",
     "lodash": "^4.6.1",
     "moment": "^2.10.3",
