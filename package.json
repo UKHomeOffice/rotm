@@ -35,10 +35,10 @@
     "express-session": "^1.11.3",
     "hmpo-form-wizard": "^4.3.0",
     "hmpo-model": "^0.3.0",
-    "hof": "1.0.2",
     "hogan-express-strict": "^0.5.4",
     "hogan.js": "^3.0.2",
     "i18n-future": "^0.2.0",
+    "i18n-lookup": "^0.1.0",
     "jason-baker": "^0.1.0",
     "jquery": "^2.1.4",
     "lodash": "^4.6.1",
@@ -56,6 +56,7 @@
     "winston": "^1.0.1"
   },
   "devDependencies": {
+    "bluebird": "^3.3.4",
     "chai": "^3.0.0",
     "debug": "^2.2.0",
     "eslint": "^0.23.0",
