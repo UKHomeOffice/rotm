@@ -77,7 +77,7 @@ if docker run -i --rm=true \
   ok=0
 else
   echo "Application logs:"
-  #docker logs ${APP_HOST}
+  docker logs ${APP_HOST}
   ok=1
 fi
 cd -
