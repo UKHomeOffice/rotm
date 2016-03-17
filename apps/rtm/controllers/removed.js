@@ -1,22 +1,20 @@
 'use strict';
 
-var util = require('util');
+const Controller = require('so-forms').controllers.base;
 
-var Controller = require('../../../lib/base-controller');
+module.exports = class ItemRemoved extends Controller {
 
-var ItemRemoved = function ItemRemoved() {
-  Controller.apply(this, arguments);
-};
-
-util.inherits(ItemRemoved, Controller);
-
-ItemRemoved.prototype.getNextStep = function getNextStep(req) {
-  var next = Controller.prototype.getNextStep.apply(this, arguments);
-  var sessionData = req.sessionModel.get('report') || [];
-  if (sessionData.length < 1) {
-    next = req.baseUrl;
+  constructor(options) {
+    super(options);
   }
-  return next;
-};
 
-module.exports = ItemRemoved;
+  getNextStep(req) {
+    let next = super.getNextStep(req);
+    const sessionData = req.sessionModel.get('report') || [];
+    if (sessionData.length < 1) {
+      next = req.baseUrl;
+    }
+    return next;
+  }
+
+};

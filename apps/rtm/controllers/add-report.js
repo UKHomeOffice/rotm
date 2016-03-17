@@ -1,34 +1,30 @@
 'use strict';
 
-var util = require('util');
+const Controller = require('so-forms').controllers.base;
 
-var BaseController = require('../../../lib/base-controller');
+module.exports = class AddReportController extends Controller {
 
-var AddReportController = function AddReportController() {
-  BaseController.apply(this, arguments);
-};
-
-util.inherits(AddReportController, BaseController);
-
-AddReportController.prototype.locals = function locals(req) {
-  var lcls = BaseController.prototype.locals.apply(this, arguments);
-  var reports = req.sessionModel.get('report') || [];
-  if (reports.length) {
-    lcls['additional-report'] = true;
-    lcls.backLink = '/confirmation';
+  constructor(options) {
+    super(options);
   }
-  return lcls;
+
+  locals(req) {
+    var lcls = super.locals(req);
+    var reports = req.sessionModel.get('report') || [];
+    if (reports.length) {
+      lcls['additional-report'] = true;
+      lcls.backLink = '/confirmation';
+    }
+    return lcls;
+  }
+
+  saveValues(req, res, callback) {
+    var array = req.sessionModel.get('report') || [];
+    var data = req.form.values;
+    array.push(data);
+    super.getNextStep(req, res);
+    req.sessionModel.set('report', array);
+    req.sessionModel.unset('errorValues');
+    callback();
+  }
 };
-
-
-AddReportController.prototype.saveValues = function saveValues(req, res, callback) {
-  var array = req.sessionModel.get('report') || [];
-  var data = req.form.values;
-  array.push(data);
-  this.getNextStep(req, res);
-  req.sessionModel.set('report', array);
-  req.sessionModel.unset('errorValues');
-  callback();
-};
-
-module.exports = AddReportController;

@@ -1,26 +1,21 @@
 'use strict';
 
-var util = require('util');
-var _ = require('underscore');
-var logger = require('../../../lib/logger');
+const Controller = require('so-forms').controllers.ajax_edit;
 
-var Controller = require('../../../lib/ajax-edit-controller');
+module.exports = class Reset extends Controller {
 
-var Reset = function Reset() {
-  Controller.apply(this, arguments);
+  constructor(options) {
+    super(options);
+  }
+
+  saveValues(req, res, callback) {
+    req.sessionModel.reset();
+    callback();
+  }
+
+  getNextStep(req) {
+    let next = req.baseUrl;
+    return next;
+  }
+
 };
-
-util.inherits(Reset, Controller);
-
-/*eslint no-unused-vars: 0*/
-Reset.prototype.saveValues = function getValues(req, res, callback) {
-  req.sessionModel.reset();
-  callback();
-};
-
-Reset.prototype.getNextStep = function getNextStep(req, res) {
-  var next = req.baseUrl;
-  return next;
-};
-
-module.exports = Reset;
