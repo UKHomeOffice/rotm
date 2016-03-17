@@ -1,6 +1,6 @@
 'use strict';
 
-var logger = require('../../lib/logger');
+var logger = require('so-forms').controllers.logger;
 var nodemailer = require('nodemailer');
 var config = require('../../config');
 var i18nFuture = require('i18n-future');
