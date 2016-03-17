@@ -1,8 +1,8 @@
 'use strict';
 
-var hof = require('hof');
-var wizard = hof.wizard;
-var mixins = hof.mixins;
+var form = require('so-forms');
+var wizard = form.wizard;
+var mixins = form.mixins;
 var i18nFuture = require('i18n-future');
 var router = require('express').Router();
 var path = require('path');
