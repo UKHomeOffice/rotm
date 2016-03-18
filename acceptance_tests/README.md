@@ -1,4 +1,4 @@
-#BRP Acceptance Tests
+#ROTM Acceptance Tests
 
 The tests follow the standard principles of feature files and step definitions.
 
