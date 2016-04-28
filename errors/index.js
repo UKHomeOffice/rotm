@@ -5,7 +5,7 @@ var i18n = hof.i18n({
   path: path.resolve(__dirname, '../apps/common/translations/__lng__/__ns__.json')
 });
 var config = require('../config');
-var logger = require('so-forms').controllers.logger;
+var logger = require('../lib/logger');
 
 /*eslint no-unused-vars: 0*/
 module.exports = function errorHandler(err, req, res) {
