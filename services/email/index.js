@@ -1,11 +1,11 @@
 'use strict';
 
-var logger = require('so-forms').controllers.logger;
+var logger = require('../../lib/logger');
 var nodemailer = require('nodemailer');
 var config = require('../../config');
-var i18nFuture = require('i18n-future');
+var i18nFuture = require('hof').i18n;
 var Hogan = require('hogan.js');
-var i18nLookup = require('i18n-lookup');
+var i18nLookup = require('hof').i18nLookup;
 var fs = require('fs');
 var path = require('path');
 

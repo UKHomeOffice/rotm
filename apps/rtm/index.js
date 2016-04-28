@@ -1,12 +1,13 @@
 'use strict';
 
-var form = require('so-forms');
-var wizard = form.wizard;
-var mixins = form.mixins;
-var i18nFuture = require('i18n-future');
+var hof = require('hof');
+var wizard = hof.wizard;
+var mixins = hof.mixins;
+var i18nFuture = hof.i18n;
 var router = require('express').Router();
 var path = require('path');
 var _ = require('underscore');
+var BaseController = require('hof').controllers.base;
 
 var fields = _.extend({}, require('../common/fields/'), require('./fields/'));
 var i18n = i18nFuture({
@@ -18,7 +19,7 @@ router.use(mixins(fields, {
 }));
 
 router.use('/report-terrorism/', wizard(require('./steps'), fields, {
-  controller: require('so-forms').controllers.base,
+  controller: BaseController,
   templatePath: path.resolve(__dirname, 'views'),
   translate: i18n.translate.bind(i18n),
   params: '/:action?'

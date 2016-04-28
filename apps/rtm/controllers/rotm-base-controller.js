@@ -1,7 +1,7 @@
 'use strict';
 
 const _ = require('lodash');
-const BaseController = require('so-forms').controllers.base;
+const BaseController = require('hof').controllers.base;
 
 module.exports = class Controller extends BaseController {
 
