@@ -1,7 +1,7 @@
 'use strict';
 
 const _ = require('underscore');
-const Controller = require('so-forms').controllers.ajax_edit;
+const Controller = require('../../common/controllers/ajax-edit');
 let reportToEdit;
 
 module.exports = class Edit extends Controller {
