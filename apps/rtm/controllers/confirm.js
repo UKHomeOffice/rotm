@@ -3,7 +3,7 @@
 const _ = require('lodash');
 const path = require('path');
 const uuid = require('node-uuid');
-const i18n = require('i18n-future');
+const i18n = require('hof').i18n;
 
 const Controller = require('./rotm-base-controller');
 const Model = require('../../common/models/email');
