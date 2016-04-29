@@ -3,7 +3,7 @@
 var express = require('express');
 var app = express();
 var path = require('path');
-var logger = require('so-forms').controllers.logger;
+var logger = require('./lib/logger');
 var churchill = require('churchill');
 var session = require('express-session');
 var config = require('./config');
@@ -28,7 +28,7 @@ app.use(function injectLocals(req, res, next) {
 
 app.set('view engine', 'html');
 
-var template = require('so-forms').template;
+var template = require('hof').template;
 template.setup(app, {
   path: config.siteroot + '/govuk-assets'
 });

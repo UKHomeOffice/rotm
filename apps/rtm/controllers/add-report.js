@@ -1,6 +1,6 @@
 'use strict';
 
-const Controller = require('so-forms').controllers.base;
+const Controller = require('hof').controllers.base;
 
 module.exports = class AddReportController extends Controller {
 

@@ -64,7 +64,7 @@ module.exports = {
   },
   '/reset': {
     template: '../../common/views/reset.html',
-    controller: require('so-forms').controllers.reset,
+    controller: require('../common/controllers/reset'),
     backLink: '/confirmation',
     next: '/confirmation'
   },
