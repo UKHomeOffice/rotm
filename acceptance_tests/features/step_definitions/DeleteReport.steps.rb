@@ -16,7 +16,6 @@ Then (/^I should see the confirm delete form$/) do
 end
 
 When(/^I submit the confirm delete form$/) do
-  sleep 5
   click_button('Delete')
 end
 

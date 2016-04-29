@@ -17,7 +17,6 @@ end
 Then (/^I should clear the session$/) do 
   visit config['rtm_dev_host'] + "/report-terrorism/reset"
   page.status_code.should == 200
-  sleep 5
   click_button('Reset')
   page.status_code.should == 302
 end
