@@ -16,6 +16,7 @@ When(/^I supply the RTM form with a valid description$/) do
 end
 
 When(/^I submit the RTM form$/) do
+  sleep 5
   click_button('Next step')
 end
 
@@ -51,6 +52,7 @@ When(/^I select the option to remain anonymous$/) do
 end
 
 When(/^I submit the RTM confirmation form$/) do
+  sleep 5
   click_button('Send report')
 end
 

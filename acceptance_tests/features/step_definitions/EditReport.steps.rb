@@ -10,6 +10,7 @@ When (/^I click on the first edit report link$/) do
 end
 
 When(/^I submit the edited RTM form$/) do
+  sleep 5
   click_button('Edit')
 end
 
@@ -22,5 +23,6 @@ Then (/^I should see the edit confirmed page$/) do
 end
 
 When (/^I click on Continue$/) do
+  sleep 5
   click_button('Continue')
 end
