@@ -1,6 +1,7 @@
 When(/^I submit the RTM form without a website url$/) do
   visit config['rtm_dev_host'] + '/report-terrorism'
   fill_in('url', :with => '')
+  sleep 5
   click_button('Next step')
 end
 
