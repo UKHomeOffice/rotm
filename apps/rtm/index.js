@@ -9,7 +9,7 @@ var path = require('path');
 var _ = require('underscore');
 var BaseController = require('hof').controllers.base;
 
-var fields = _.extend({}, require('../common/fields/'), require('./fields/'));
+var fields = _.extend({}, require('./fields/'));
 var i18n = i18nFuture({
   path: path.resolve(__dirname, './translations/__lng__/__ns__.json')
 });
