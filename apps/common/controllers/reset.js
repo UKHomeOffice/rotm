@@ -14,7 +14,7 @@ module.exports = class Reset extends Controller {
   }
 
   getNextStep(req) {
-    let next = req.baseUrl;
+    let next = req.baseUrl + '/';
     return next;
   }
 

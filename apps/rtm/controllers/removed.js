@@ -12,7 +12,7 @@ module.exports = class ItemRemoved extends Controller {
     let next = super.getNextStep(req);
     const sessionData = req.sessionModel.get('report') || [];
     if (sessionData.length < 1) {
-      next = req.baseUrl;
+      next = req.baseUrl + '/';
     }
     return next;
   }
