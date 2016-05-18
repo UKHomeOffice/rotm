@@ -1,7 +1,7 @@
 
 
 When (/^I visit the confirmation page$/) do
-  visit config['rtm_dev_host'] + '/report-terrorism/confirmation'
+  visit config['rtm_dev_host'] + '/confirmation'
 end
 
 Then (/^I should see the start again page$/) do

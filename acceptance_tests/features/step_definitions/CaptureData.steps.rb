@@ -20,7 +20,7 @@ When(/^I submit the RTM form$/) do
 end
 
 Then (/^I should see the confirmation page$/) do
-  confPage = config['rtm_dev_host'] + "/report-terrorism/confirmation"
+  confPage = config['rtm_dev_host'] + "/confirmation"
   current_url.should == confPage
 end
 
