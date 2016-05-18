@@ -3,3 +3,4 @@ artefacts
 ci_build.sh
 run-docker-compose.sh
 run-local.sh
+coverage
