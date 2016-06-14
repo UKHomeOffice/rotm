@@ -98,6 +98,10 @@ app.use(initSession);
 // apps
 app.use(require('./apps/rtm/'));
 
+app.get('/cookies', function renderCookies(req, res) {
+  res.render('cookies');
+});
+
 // errors
 app.use(require('./errors/'));
 
