@@ -14,3 +14,8 @@ Feature: LoadPage
 	Scenario: The back link on the cookie page leads you to the RTM form when there are no reports 
     When I load the RTM start page
     And I visit the cookie page
+
+  @terms
+	Scenario: The back link on the T&C page leads you to the RTM form when there are no reports 
+    When I load the RTM start page
+    And I visit the terms page

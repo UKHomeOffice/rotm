@@ -68,11 +68,6 @@ module.exports = {
     backLink: '/confirmation',
     next: '/confirmation'
   },
-  '/terms-and-conditions': {
-    controller: require('./controllers/boilerplate'),
-    template: 'terms.html',
-    backLink: '/'
-  },
   '/done': {
     template: 'complete.html',
     controller: require('./controllers/done'),

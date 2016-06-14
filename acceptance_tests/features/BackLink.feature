@@ -106,24 +106,3 @@ Feature: BackLink
     And I submit the RTM confirmation form
     Then I should not see the back link
     Then I should clear the session
-
-  @back @terms
-	Scenario: The back link on the T&C page leads you to the RTM form when there are no reports 
-    When I load the RTM start page
-    And I visit the terms page
-    Then I should see the back link
-    And I should click on back link
-    Then I should see the RTM form
-    Then I should clear the session
-  
-  @back @terms
-	Scenario: The back link on the T&C page leads you to the confirmation form when there are already existing reports 
-    When I load the RTM start page
-    And I supply the RTM form with the valid url http://www.example.com
-    And I submit the RTM form
-    And I visit the terms page
-    Then I should see the back link
-    And I should click on back link
-    Then I should see the confirmation page
-    Then I should clear the session
-  
