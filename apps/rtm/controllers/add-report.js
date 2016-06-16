@@ -8,8 +8,8 @@ module.exports = class AddReportController extends Controller {
     super(options);
   }
 
-  locals(req) {
-    var lcls = super.locals(req);
+  locals(req, res) {
+    var lcls = super.locals(req, res);
     var reports = req.sessionModel.get('report') || [];
     if (reports.length) {
       lcls['additional-report'] = true;

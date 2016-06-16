@@ -43,8 +43,8 @@ module.exports = class Submit extends Controller {
     super.getValues(req, res, callback);
   }
 
-  locals(req) {
-    const lcls = super.locals(req);
+  locals(req, res) {
+    const lcls = super.locals(req, res);
     const reportCount = super.getReports(req).length;
     lcls['single-report'] = reportCount === 1;
     lcls['multiple-reports'] = reportCount > 1;

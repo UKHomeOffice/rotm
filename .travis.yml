@@ -1,12 +1,14 @@
 language: node_js
 node_js:
+  - "6"
   - "4.4.2"
 
 services:
   - redis-server
 
-cache:
-  directories:
-    - node_modules
+before_install:
+  - if [[ `npm -v` != 3* ]]; then npm i -g npm@3; fi
+  - npm cache clean
+  - rvm install 2.2.2
 
 script: "npm run test:ci && npm run sass; NODE_ENV='ci' npm start& npm run test:acceptance"

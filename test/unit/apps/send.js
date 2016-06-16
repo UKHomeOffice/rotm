@@ -39,7 +39,8 @@ describe('controllers/confirm:send', function () {
 
       /*eslint no-unused-vars: 0*/
       ConfirmController.prototype.saveValues(req, res, function(e, b) {
-        buff = b; err = e;
+        buff = b;
+        err = e;
         done();
       });
 
@@ -52,7 +53,7 @@ describe('controllers/confirm:send', function () {
          which doesn't send any messages, but does return the email buffer in the callback
       */
 
-      should.equal(buff.hasOwnProperty('envelope'), true);
+      buff.should.have.property('envelope');
       // better; email buffer object should have envelope property
       done();
     });

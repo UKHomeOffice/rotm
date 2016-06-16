@@ -1,6 +1,6 @@
 $path: "../img/";
 
-@import "../../node_modules/hof/node_modules/hmpo-frontend-toolkit/assets/stylesheets/app.scss";
+@import "../../node_modules/hmpo-frontend-toolkit/assets/stylesheets/app.scss";
 
 @import "./alert.scss";
 @import "./icons.scss";
@@ -16,7 +16,7 @@ $path: "../img/";
 }
 
 textarea {
-  min-height: 150px; 
+  min-height: 150px;
 }
 
 .confirmation h3 {
