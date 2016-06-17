@@ -10,10 +10,6 @@ module.exports = class BoilerPlate extends Controller{
 
   getValues(req, res, next) {
     this.options.clearSession = false;
-    res.locals.backLink = '/';
-    if (this.getReports(req).length) {
-      res.locals.backLink = '/confirmation';
-    }
     super.getValues(req, res, next);
   }
 };
