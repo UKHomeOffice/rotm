@@ -29,6 +29,12 @@
      {{$form}}
        {{> partials-rtm-report-form}}
        {{#input-submit}}next{{/input-submit}}
+
+        {{#additional-report}}
+          <a href="{{baseUrl}}/confirmation" class="btn">
+            {{#t}}buttons.cancel{{/t}}
+          </a>
+        {{/additional-report}}
      {{/form}}
     
     {{/partials-form}}
