@@ -11,11 +11,11 @@ Feature: LoadPage
     Then I should get a 200 status
 
   @cookie
-	Scenario: The back link on the cookie page leads you to the RTM form when there are no reports 
+	Scenario: The cookies link leads you to the cookies page 
     When I load the RTM start page
     And I visit the cookie page
 
   @terms
-	Scenario: The back link on the T&C page leads you to the RTM form when there are no reports 
+	Scenario: The terms and conditions link leads you to the terms and conditions page
     When I load the RTM start page
     And I visit the terms page
