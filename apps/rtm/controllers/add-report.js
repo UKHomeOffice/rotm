@@ -13,7 +13,6 @@ module.exports = class AddReportController extends Controller {
     var reports = req.sessionModel.get('report') || [];
     if (reports.length) {
       lcls['additional-report'] = true;
-      lcls.backLink = '/confirmation';
     }
     return lcls;
   }

@@ -20,7 +20,6 @@ module.exports = {
       'contact-info-email',
       'contact-info-phone'
     ],
-    backLink: '/',
     next: '/done'
   },
   '/removeurl': {
@@ -30,7 +29,6 @@ module.exports = {
       'remove-url',
       'remove-index'
     ],
-    backLink: '/confirmation',
     next: '/confirm-remove'
   },
   '/editurl': {
@@ -42,21 +40,19 @@ module.exports = {
       'description',
       'edit-index'
     ],
-    backLink: '/confirmation',
     next: '/confirm-edit'
   },
   '/confirm-remove': {
     template: 'removed.html',
     controller: require('./controllers/removed'),
-    backLink: '/confirmation',
     fields: [
       'continue'
     ],
+    backLink: null,
     next: '/confirmation'
   },
   '/confirm-edit': {
     template: 'edited.html',
-    backLink: '/confirmation',
     fields: [
       'continue'
     ],
@@ -65,7 +61,6 @@ module.exports = {
   '/reset': {
     template: '../../common/views/reset.html',
     controller: require('../common/controllers/reset'),
-    backLink: '/confirmation',
     next: '/confirmation'
   },
   '/done': {
