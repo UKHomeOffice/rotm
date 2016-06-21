@@ -104,7 +104,11 @@ app.get('/terms-and-conditions', function renderTerms(req, res) {
 });
 
 // errors
-app.use(require('./errors/'));
+app.use(require('hof').middleware.errors({
+  logger: require('./lib/logger'),
+  translate: require('hof').i18n.translate,
+  debug: config.env === 'development'
+}));
 
 // eslint-disable-next-line camelcase
 app.listen(config.port, config.listen_host);
