@@ -85,7 +85,7 @@ function initSession(req, res, next) {
     cookie: {
       secure: (req.protocol === 'https')
     },
-    key: 'hmbrp.sid',
+    name: config.session.name,
     secret: config.session.secret,
     resave: true,
     saveUninitialized: true
