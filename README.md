@@ -42,7 +42,7 @@ Run the EcmaScript (ES) linter.  Rules are defined in [.eslintrc](./.eslintrc)
 $ npm run lint
 ```
 
-Run the jscs style checker. Rules are defined in [.jscsrc.json](./.jscsrc.json)
+Run the jscs style checker. Rules are defined in [.jscsrc](./.jscsrc)
 ```bash
 $ npm run style
 ```
