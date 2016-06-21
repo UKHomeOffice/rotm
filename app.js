@@ -46,9 +46,7 @@ app.use(function setBaseUrl(req, res, next) {
   next();
 });
 
-/*************************************/
-/******* Redis session storage *******/
-/*************************************/
+// Redis session storage
 
 logger.info('connecting to redis on ', config.redis.port, config.redis.host);
 
@@ -108,7 +106,6 @@ app.get('/terms-and-conditions', function renderTerms(req, res) {
 // errors
 app.use(require('./errors/'));
 
-/*eslint camelcase: 0*/
+// eslint-disable-next-line camelcase
 app.listen(config.port, config.listen_host);
-/*eslint camelcase: 1*/
 logger.info('App listening on port', config.port);
