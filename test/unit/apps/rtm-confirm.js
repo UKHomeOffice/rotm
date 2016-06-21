@@ -2,16 +2,16 @@
 
 var proxyquire = require('proxyquire').noPreserveCache();
 
-describe('controllers/confirm', function () {
+describe('controllers/confirm', () => {
 
-  describe('.saveValues()', function () {
+  describe('.saveValues()', () => {
 
     var req;
     var res;
     var callback;
     var modelProto;
 
-    before(function (done) {
+    before(done => {
 
       modelProto = {
         save: function() {
@@ -38,13 +38,11 @@ describe('controllers/confirm', function () {
       res = {};
       callback = sinon.stub();
 
-      /*eslint no-unused-vars: 0*/
       ConfirmController.prototype.saveValues(req, res, callback);
 
     });
 
-    it('should use the email service to send values', function (done) {
-      /*eslint no-unused-vars: 1*/
+    it('should use the email service to send values', done => {
 
       modelProto.set.should.have.been.called;
       done();

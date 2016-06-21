@@ -1,24 +1,21 @@
+/* eslint camelcase: 0*/
+
 'use strict';
 
-describe('controllers/confirm:send', function () {
+describe('controllers/confirm:send', () => {
 
-  describe('sending emails', function () {
-
-    var req;
-    var res;
-    var callback;
-
-    var err;
-    var buff;
+  describe('sending emails', () => {
+    let req;
+    let res;
+    let buff;
 
     var ConfirmController = require('../../../apps/rtm/controllers/confirm');
 
-    before(function (done) {
+    before(done => {
       req = {
         sessionModel: {
           toJSON: sinon.stub().returns({
             'report': [{
-              /*eslint camelcase: 0*/
               website_url: 'a.url.com',
               trigger_warning: 'yes',
               content_locate_hint: '',
@@ -37,16 +34,14 @@ describe('controllers/confirm:send', function () {
       };
       res = {};
 
-      /*eslint no-unused-vars: 0*/
-      ConfirmController.prototype.saveValues(req, res, function(e, b) {
+      ConfirmController.prototype.saveValues(req, res, (e, b) => {
         buff = b;
-        err = e;
         done();
       });
 
     });
 
-    it('should attempt to send an email', function (done) {
+    it('should attempt to send an email', done => {
 
       /* in NODE_ENV=test, the smtp user is empty,
          which in turns means the nodemailer-stub-transport module is invoked
