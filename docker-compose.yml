@@ -1,0 +1,20 @@
+app:
+  build: .
+  environment:
+    - NODE_ENV=docker-compose
+    - EMAIL_IGNORE_TLS=true
+    - CASEWORKER_EMAIL=a@user.com
+  net: "host"
+  ports:
+    - "8080:8080"
+
+redis:
+  image: redis
+  net: "host"
+
+maildev:
+  image: djfarrelly/maildev
+  net: "host"
+  ports:
+    - "80"
+    - "25"
