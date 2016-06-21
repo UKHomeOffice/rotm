@@ -15,6 +15,7 @@ module.exports = class AjaxController extends Controller {
     return req.headers.accept === 'application/json';
   }
 
+  // eslint-disable-next-line consistent-return
   process(req, res, callback) {
     if (this.isAjaxRequest(req)) {
       // Don't try to process missing fields
@@ -25,6 +26,7 @@ module.exports = class AjaxController extends Controller {
     }
   }
 
+  // eslint-disable-next-line consistent-return
   successHandler(req, res, callback) {
     if (this.isAjaxRequest(req)) {
       this.error = false;
@@ -34,6 +36,7 @@ module.exports = class AjaxController extends Controller {
     }
   }
 
+  // eslint-disable-next-line consistent-return
   errorHandler(err, req, res, callback) {
     if (this.isAjaxRequest(req)) {
       this.error = err.message;
@@ -44,6 +47,7 @@ module.exports = class AjaxController extends Controller {
     }
   }
 
+  // eslint-disable-next-line consistent-return
   render(req, res, callback) {
     if (this.isAjaxRequest(req)) {
       if (this.error) {

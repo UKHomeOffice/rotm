@@ -2,7 +2,7 @@
 
 const Controller = require('./rotm-base-controller');
 
-module.exports = class BoilerPlate extends Controller{
+module.exports = class BoilerPlate extends Controller {
 
   constructor(options) {
     super(options);
