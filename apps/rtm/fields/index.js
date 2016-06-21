@@ -18,10 +18,14 @@ module.exports = {
     label: 'fields.url.label'
   },
   'location': {
-    label: 'fields.location.label'
+    label: 'fields.location.label',
+    'ignore-defaults': true,
+    formatter: ['trim', 'hyphens']
   },
   'description': {
-    label: 'fields.description.label'
+    label: 'fields.description.label',
+    'ignore-defaults': true,
+    formatter: ['trim', 'hyphens']
   },
   'anonymous': {
     validate: ['required'],
