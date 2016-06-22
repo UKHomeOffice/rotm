@@ -14,15 +14,17 @@ module.exports = {
     value: 'buttons.send'
   },
   'url': {
+    mixin: 'input-text',
     validate: ['required'],
-    label: 'fields.url.label'
   },
   'location': {
+    mixin: 'textarea',
     label: 'fields.location.label',
     'ignore-defaults': true,
     formatter: ['trim', 'hyphens']
   },
   'description': {
+    mixin: 'textarea',
     label: 'fields.description.label',
     'ignore-defaults': true,
     formatter: ['trim', 'hyphens']

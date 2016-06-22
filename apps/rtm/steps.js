@@ -1,18 +1,25 @@
  'use strict';
 
+const controllers = require('hof').controllers;
+
 module.exports = {
   '/': {
-    template: 'report-terrorism.html',
-    controller: require('./controllers/add-report'),
+    controller: controllers.start,
+    next: '/reports'
+  },
+  '/reports': {
+    controller: require('./controllers/reports'),
     fields: [
       'url',
       'location',
       'description'
     ],
-    next: '/confirmation'
+    next: '/confirm',
+    locals: {
+      step: 'reports'
+    }
   },
-  '/confirmation': {
-    template: 'confirm.html',
+  '/confirm': {
     controller: require('./controllers/confirm'),
     fields: [
       'anonymous',
@@ -20,52 +27,16 @@ module.exports = {
       'contact-info-email',
       'contact-info-phone'
     ],
-    next: '/done'
+    next: '/confirmation',
+    locals: {
+      step: 'confirm'
+    }
   },
-  '/removeurl': {
-    template: 'confirm-remove.html',
-    controller: require('./controllers/remove'),
-    fields: [
-      'remove-url',
-      'remove-index'
-    ],
-    next: '/confirm-remove'
-  },
-  '/editurl': {
-    template: 'confirm-edit.html',
-    controller: require('./controllers/edit'),
-    fields: [
-      'url',
-      'location',
-      'description',
-      'edit-index'
-    ],
-    next: '/confirm-edit'
-  },
-  '/confirm-remove': {
-    template: 'removed.html',
-    controller: require('./controllers/removed'),
-    fields: [
-      'continue'
-    ],
+  '/confirmation': {
+    clearSession: true,
     backLink: null,
-    next: '/confirmation'
-  },
-  '/confirm-edit': {
-    template: 'edited.html',
-    fields: [
-      'continue'
-    ],
-    next: '/confirmation'
-  },
-  '/reset': {
-    template: '../../common/views/reset.html',
-    controller: require('../common/controllers/reset'),
-    next: '/confirmation'
-  },
-  '/done': {
-    template: 'complete.html',
-    controller: require('./controllers/done'),
-    backLink: null
+    locals: {
+      step: 'confirmation'
+    }
   }
 };

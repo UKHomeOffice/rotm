@@ -4,10 +4,10 @@
 
   {{#t}}pages.rtm-email-table.headers.date{{/t}}: {{reportDate}}
 
-  {{#t}}pages.rtm-email-table.headers.id{{/t}}: {{reportId}}
+  {{#t}}pages.rtm-email-table.headers.id{{/t}}: {{id}}
 
-  {{#t}}pages.rtm-email-table.headers.url{{/t}}: {{url}}  
-  
+  {{#t}}pages.rtm-email-table.headers.url{{/t}}: {{url}}
+
   {{#t}}pages.rtm-email-table.headers.location{{/t}}: {{#location}}{{location}}{{/location}}{{^location}}{{#t}}page.rtm-email-table-information.no-data{{/t}}{{/location}}
 
   {{#t}}pages.rtm-email-table.headers.description{{/t}}: {{#description}}{{description}}{{/description}}{{^description}}{{#t}}page.rtm-email-table-information.no-data{{/t}}{{/description}}
@@ -23,5 +23,5 @@
   {{^contact-details}}
   {{#t}}pages.rtm-email-table.information.no-contact-details{{/t}}
   {{/contact-details}}
-    
+
 {{/data}}

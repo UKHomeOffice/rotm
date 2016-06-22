@@ -63,7 +63,7 @@
                       </tr>
                       <tr style="border-top: 1px solid #009390;">
                         <td width="25%"><p style="font-size: 16px; color: #6f777b; margin: 10px 0;">{{#t}}pages.rtm-email-table.headers.id{{/t}}</p></td>
-                        <td width="75%"><p style="font-size: 16px; color: #000; margin: 10px 0;">{{reportId}}</p></td>
+                        <td width="75%"><p style="font-size: 16px; color: #000; margin: 10px 0;">{{id}}</p></td>
                       </tr>
                       <tr style="border-top: 1px solid #009390;">
                         <td width="25%"><p style="font-size: 16px; color: #6f777b; margin: 10px 0;">{{#t}}pages.rtm-email-table.headers.url{{/t}}</p></td>
@@ -85,7 +85,7 @@
                       <tr style="border-top: 1px solid #009390;">
                         <td width="100%" colspan="2"><p style="font-size: 16px; color: #000; margin: 10px 0;">{{#t}}pages.rtm-email-table.information.contact-details{{/t}}</p></td>
                       </tr>
-                      
+
                       {{#name}}
                       <tr style="border-top: 1px solid #009390;">
                         <td width="25%"><p style="font-size: 16px; color: #6f777b; margin: 10px 0;">{{#t}}pages.rtm-email-table.headers.name{{/t}}</p></td>
