@@ -2,57 +2,28 @@
 
 const _ = require('lodash');
 const path = require('path');
-const uuid = require('node-uuid');
 const i18n = require('hof').i18n;
+const BaseController = require('hof').controllers.base;
 
-const Controller = require('./rotm-base-controller');
 const Model = require('../../common/models/email');
 
-module.exports = class Submit extends Controller {
-  constructor(options) {
-    super(options);
+module.exports = class Submit extends BaseController {
+
+  // eslint-disable-next-line consistent-return
+  get(req, res, callback) {
+    if (!req.sessionModel.get('reports').length) {
+      return res.redirect(this.getBackLink(req, res, callback));
+    }
+    super.get(req, res, callback);
   }
 
   getValues(req, res, callback) {
-    const data = super.getReports(req);
-
-    if (!this.options.hasOwnProperty('originalTemplate')) {
-      this.options.originalTemplate = this.options.template;
-    }
-
-    if (!data.length) {
-      this.options.template = path.resolve(__dirname, '../../common/views/start-again.html');
-    } else {
-      this.options.template = this.options.originalTemplate;
-    }
-
-    _.each(data, function addIndex(d, i) {
-
-      const options = {
-        'id': i,
-        'uri': 'editurl'
-      };
-      const defaults = {};
-
-      d.options = options;
-
-      d['data-options'] = JSON.stringify(options);
-      d['data-defaults'] = JSON.stringify(defaults);
-      d['report-number'] = i + 1;
-    });
-    super.getValues(req, res, callback);
-  }
-
-  locals(req, res) {
-    const lcls = super.locals(req, res);
-    const reportCount = super.getReports(req).length;
-    lcls['single-report'] = reportCount === 1;
-    lcls['multiple-reports'] = reportCount > 1;
-    return lcls;
+    const reports = req.sessionModel.get('reports') || [];
+    callback(null, {reports});
   }
 
   saveValues(req, res, callback) {
-    const data = super.getReports(req);
+    const data = req.sessionModel.get('reports');
 
     if (data && data.length) {
 
@@ -79,7 +50,6 @@ module.exports = class Submit extends Controller {
 
           const dateTime = new Date();
           d.reportDate = dateTime.toISOString();
-          d.reportId = uuid.v4();
           d.subject = locali18n.translate('pages.rtm-email-table.information.subject') + subjectAppend;
 
           const model = new Model(d);
