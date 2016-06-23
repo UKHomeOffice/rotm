@@ -1,6 +1,6 @@
 When(/^I load the RTM start page$/) do
   visit config['rtm_dev_host']
-  page.status_code.should == 200
+  page.status_code.should == 302
 end
 
 Then(/^I should see the RTM form$/) do

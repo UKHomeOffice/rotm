@@ -37,12 +37,12 @@ module.exports = class AddReportController extends Controller {
   }
 
   locals(req, res) {
-    var locals = super.locals(req, res);
-    var reports = req.sessionModel.get('reports') || [];
-    if (reports.length) {
-      locals['additional-report'] = true;
-    }
-    return locals;
+    const locals = super.locals(req, res);
+    const reports = req.sessionModel.get('reports') || [];
+    return Object.assign({}, locals, {
+      'additional-report': !!reports.length,
+      editing: req.params.action === 'edit'
+    });
   }
 
   saveValues(req, res, callback) {
