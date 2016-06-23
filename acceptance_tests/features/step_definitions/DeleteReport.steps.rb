@@ -1,13 +1,13 @@
 
 
 Then (/^I should see a link to delete existing reports$/) do
-  page.should have_selector('span.remove-url-anchor a') 
+  page.should have_selector('a.remove-url-anchor')
 end
 
 When (/^I click on the first delete report link$/) do
   Capybara.match = :first
-  page.should have_selector('span.remove-url-anchor a') 
-  find('span.remove-url-anchor a').trigger('click')
+  page.should have_selector('a.remove-url-anchor')
+  find('a.remove-url-anchor').trigger('click')
 end
 
 Then (/^I should see the confirm delete form$/) do
@@ -19,11 +19,11 @@ When(/^I submit the confirm delete form$/) do
   click_button('Delete')
 end
 
-Then (/^I should see the delete url field has been populated$/) do 
+Then (/^I should see the delete url field has been populated$/) do
   expect(find('form')).to have_selector('.data-wrap p')
-  find('form').find('.data-wrap p').text != ''  
+  find('form').find('.data-wrap p').text != ''
 end
 
 Then (/^I should see the delete confirmed page$/) do
-  page.should have_selector('input[value="Continue"]')   
+  page.should have_selector('input[value="Continue"]')
 end

@@ -119,12 +119,30 @@ describe('Reports Controller', () => {
     });
 
     it('adds additional-report: true to locals if more than one report', () => {
-      controller.locals(req, res, callback).should.be.eql({'additional-report': true});
+      controller.locals(req, res, callback)
+        .should.have.property('additional-report')
+        .and.be.true;
     });
 
-    it('doesn\'t add anything if no reports', () => {
+    it('adds additional-report: false to locals if no reports', () => {
       req.sessionModel.get.returns([]);
-      controller.locals(req, res, callback).should.be.eql({});
+      controller.locals(req, res, callback)
+        .should.have.property('additional-report')
+        .and.be.false;
+    });
+
+    it('adds editing: true to locals if editing', () => {
+      req.params.action = 'edit';
+      controller.locals(req, res, callback)
+        .should.have.property('editing')
+        .and.be.true;
+    });
+
+    it('adds editing: false to locals if not editing', () => {
+      req.params.action = 'add';
+      controller.locals(req, res, callback)
+        .should.have.property('editing')
+        .and.be.false;
     });
   });
 

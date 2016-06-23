@@ -5,38 +5,40 @@
 </legend>
 <div class="confirmation">
   {{#values.reports}}
-    <h2>{{#t}}pages.confirm.check-details{{/t}}</h2>
-    <a class="remove-url-anchor" href="{{baseUrl}}/reports/delete/{{id}}">{{#t}}pages.confirm.delete-report{{/t}}</a>
-    <div class="editable-field">
-      <h3>{{#t}}fields.url.short{{/t}}</h3>
-      <div class="data-wrap">
-        <p data-name="url" data-element="input:text" data-options="{{data-options}}" data-defaults="{{data-defaults}}">{{url}}</p>
+    <div class="report">
+      <h2>{{#t}}pages.confirm.check-details{{/t}}</h2>
+      <a class="remove-url-anchor" href="{{baseUrl}}/reports/delete/{{id}}">{{#t}}pages.confirm.delete-report{{/t}}</a>
+      <div class="editable-field">
+        <h3>{{#t}}fields.url.short{{/t}}</h3>
+        <div class="data-wrap">
+          <p data-name="url" data-element="input:text" data-options="{{data-options}}" data-defaults="{{data-defaults}}">{{url}}</p>
+        </div>
+        <a href="{{baseUrl}}/reports/edit/{{id}}" class="btn edit-btn">
+          {{#t}}buttons.change{{/t}}<span class="visuallyhidden"> {{#t}}fields.url.short{{/t}}</span>
+        </a>
       </div>
-      <a href="{{baseUrl}}/reports/edit/{{id}}" class="btn edit-btn">
-        {{#t}}buttons.change{{/t}}<span class="visuallyhidden"> {{#t}}fields.url.short{{/t}}</span>
-      </a>
-    </div>
-    <div class="editable-field">
-      <h3>{{#t}}fields.location.short{{/t}}</h3>
-      <div class="data-wrap">
-        <p data-name="location" data-element="textarea" data-options="{{data-options}}" data-defaults="{{data-defaults}}">{{location}}</p>
+      <div class="editable-field">
+        <h3>{{#t}}fields.location.short{{/t}}</h3>
+        <div class="data-wrap">
+          <p data-name="location" data-element="textarea" data-options="{{data-options}}" data-defaults="{{data-defaults}}">{{location}}</p>
+        </div>
+        <a href="{{baseUrl}}/reports/edit/{{id}}" class="btn edit-btn">
+          {{#t}}buttons.change{{/t}}<span class="visuallyhidden"> {{#t}}fields.location.short{{/t}}</span>
+        </a>
       </div>
-      <a href="{{baseUrl}}/reports/edit/{{id}}" class="btn edit-btn">
-        {{#t}}buttons.change{{/t}}<span class="visuallyhidden"> {{#t}}fields.location.short{{/t}}</span>
-      </a>
-    </div>
-    <div class="editable-field">
-      <h3>{{#t}}fields.description.short{{/t}}</h3>
-      <div class="data-wrap">
-        <p data-name="description" data-element="textarea" data-options="{{data-options}}" data-defaults="{{data-defaults}}">{{description}}</p>
+      <div class="editable-field">
+        <h3>{{#t}}fields.description.short{{/t}}</h3>
+        <div class="data-wrap">
+          <p data-name="description" data-element="textarea" data-options="{{data-options}}" data-defaults="{{data-defaults}}">{{description}}</p>
+        </div>
+        {{#input-submit}}update{{/input-submit}}
+        <a href="{{baseUrl}}/reports/{{id}}" class="btn edit-btn">
+          {{#t}}buttons.change{{/t}}<span class="visuallyhidden"> {{#t}}fields.description.short{{/t}}</span>
+        </a>
+        <a href="" class="btn cancel-btn">
+          {{#t}}buttons.cancel{{/t}}
+        </a>
       </div>
-      {{#input-submit}}update{{/input-submit}}
-      <a href="{{baseUrl}}/reports/{{id}}" class="btn edit-btn">
-        {{#t}}buttons.change{{/t}}<span class="visuallyhidden"> {{#t}}fields.description.short{{/t}}</span>
-      </a>
-      <a href="" class="btn cancel-btn">
-        {{#t}}buttons.cancel{{/t}}
-      </a>
     </div>
   {{/values.reports}}
   <div>

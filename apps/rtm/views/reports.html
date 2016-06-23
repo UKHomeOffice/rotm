@@ -10,7 +10,12 @@
     {{#fields}}
       {{#renderField}}{{/renderField}}
     {{/fields}}
-    {{#input-submit}}next{{/input-submit}}
+    {{#editing}}
+      {{#input-submit}}edit{{/input-submit}}
+    {{/editing}}
+    {{^editing}}
+      {{#input-submit}}next{{/input-submit}}
+    {{/editing}}
     {{#additional-report}}
       <a href="{{baseUrl}}/confirm" class="btn">
         {{#t}}buttons.cancel{{/t}}
