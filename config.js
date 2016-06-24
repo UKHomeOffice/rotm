@@ -14,7 +14,8 @@ module.exports = {
   secureProtocol: process.env.SECURE_PROTOCOL || false,
   session: {
     secret: process.env.SESSION_SECRET || 'howdoesyourgardengrow',
-    ttl: process.env.SESSION_TTL || 1800 /* 30 mins timeout */
+    ttl: process.env.SESSION_TTL || 1800, /* 30 mins timeout */
+    name: process.env.SESSION_KEY || 'rotm.sid'
   },
   redis: {
     port: process.env.REDIS_PORT || '6379',
