@@ -79,19 +79,16 @@ function secureCookies(req, res, next) {
 app.use(require('cookie-parser')(config.session.secret));
 app.use(secureCookies);
 
-function initSession(req, res, next) {
-  session({
-    store: redisStore,
-    cookie: {
-      secure: (req.protocol === 'https')
-    },
-    name: config.session.name,
-    secret: config.session.secret,
-    resave: true,
-    saveUninitialized: true
-  })(req, res, next);
-}
-app.use(initSession);
+const sessionOpts = Object.assign({
+  redisStore,
+  name: config.session.name,
+  cookie: {secure: config.protocol === 'https'},
+  secret: config.session.secret,
+  saveUninitialized: true,
+  resave: true
+}, config.session);
+
+app.use(session(sessionOpts));
 
 // apps
 app.use(require('./apps/rtm/'));
