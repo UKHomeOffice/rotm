@@ -1,38 +1,23 @@
 'use strict';
 
 module.exports = {
-  'continue': {
-    value: 'buttons.continue'
-  },
-  'submit': {
-    value: 'buttons.submit'
-  },
-  'change': {
-    value: 'buttons.change'
-  },
-  'send': {
-    value: 'buttons.send'
-  },
   'url': {
     mixin: 'input-text',
     validate: ['required'],
   },
   'location': {
     mixin: 'textarea',
-    label: 'fields.location.label',
     'ignore-defaults': true,
     formatter: ['trim', 'hyphens']
   },
   'description': {
     mixin: 'textarea',
-    label: 'fields.description.label',
     'ignore-defaults': true,
     formatter: ['trim', 'hyphens']
   },
   'anonymous': {
     validate: ['required'],
     className: ['inline', 'form-group'],
-    legend: 'fields.anonymous.legend',
     options: [{
       value: 'yes',
       label: 'fields.anonymous.options.yes.label'
@@ -42,20 +27,7 @@ module.exports = {
       toggle: 'contact-info-group'
     }]
   },
-  'contact-info-name': {
-    label: 'fields.contact-info-name.label'
-  },
   'contact-info-email': {
-    validate: ['email'],
-    label: 'fields.contact-info-email.label'
-  },
-  'contact-info-phone': {
-    label: 'fields.contact-info-phone.label'
-  },
-  'remove-url': {
-    'label': ''
-  },
-  'remove-index': {
-    'label': ''
+    validate: ['email']
   }
 };
