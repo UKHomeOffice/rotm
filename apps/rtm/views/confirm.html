@@ -1,103 +1,62 @@
-{{<layout}}
-
-  {{$journeyHeader}}
-  {{#t}}journeys.terrorism_reporting.details-header{{/t}}
-  {{/journeyHeader}}
-
-  {{$validationSummary}}
-  {{> partials-validation-summary}}
-  {{/validationSummary}}
-
-  {{$propositionHeader}}
-  {{> partials-navigation}}
-  {{/propositionHeader}}
-
-  {{$header}}{{#t}}journeys.terrorism_reporting.confirmation-header{{/t}}{{/header}}
-
-  {{$content}}
-
-  {{<partials-form}}
-       
-       {{$form}}
-       <fieldset>
-         <legend class="visuallyhidden">
-           <span class="form-label-bold">{{#t}}fields.rtm-confirmation.legend{{/t}}</span>
-         </legend>
-         <div class="confirmation">
-           {{#values.report}}
-           <fieldset class="data-preview">
-             {{#single-report}}
-	           <legend class="heading-large">{{#t}}pages.rtm-confirmation.check-details.single-report{{/t}}</legend>
-             <span class="remove-url-anchor"><a href="{{baseUrl}}/removeurl/{{options.id}}">{{#t}}pages.rtm-confirmation.remove-url.single-report{{/t}}</a></span>
-             {{/single-report}}
-             {{#multiple-reports}}
-	           <legend class="heading-large">{{#t}}pages.rtm-confirmation.check-details.multiple-reports{{/t}}{{report-number}}</legend>
-             <span class="remove-url-anchor"><a href="{{baseUrl}}/removeurl/{{options.id}}">{{#t}}pages.rtm-confirmation.remove-url.multiple-reports{{/t}}{{report-number}}</a></span>
-             {{/multiple-reports}}
-             <div class="editable-field">
-               <h3>{{#t}}fields.url.short{{/t}}</h3>
-               <div class="data-wrap">
-		             <p data-name="url" data-element="input:text" data-options="{{data-options}}" data-defaults="{{data-defaults}}">{{url}}</p>
-		           </div>
-               {{#input-submit}}update{{/input-submit}}
-		           <a href="{{baseUrl}}/editurl/{{options.id}}" class="btn edit-btn">
-                 {{#t}}buttons.change{{/t}}<span class="visuallyhidden"> {{#t}}fields.url.short{{/t}}</span>
-		           </a>
-		           <a href="" class="btn cancel-btn">
-                 {{#t}}buttons.cancel{{/t}}
-		           </a>
-             </div>
-             <div class="editable-field">
-		           <h3>{{#t}}fields.location.short{{/t}}</h3>
-		           <div class="data-wrap">
-                 <p data-name="location" data-element="textarea" data-options="{{data-options}}" data-defaults="{{data-defaults}}">{{location}}</p>
-		           </div>
-               {{#input-submit}}update{{/input-submit}}
-		           <a href="{{baseUrl}}/editurl/{{options.id}}" class="btn edit-btn">
-		             {{#t}}buttons.change{{/t}}<span class="visuallyhidden"> {{#t}}fields.location.short{{/t}}</span>
-		           </a>
-		           <a href="" class="btn cancel-btn">
-                 {{#t}}buttons.cancel{{/t}}
-		           </a>
-             </div>
-             <div class="editable-field">
-		           <h3>{{#t}}fields.description.short{{/t}}</h3>
-		           <div class="data-wrap">
-                 <p data-name="description" data-element="textarea" data-options="{{data-options}}" data-defaults="{{data-defaults}}">{{description}}</p>
-		           </div>
-               {{#input-submit}}update{{/input-submit}}
-		           <a href="{{baseUrl}}/editurl/{{options.id}}" class="btn edit-btn">
-		             {{#t}}buttons.change{{/t}}<span class="visuallyhidden"> {{#t}}fields.description.short{{/t}}</span>
-		           </a>
-		           <a href="" class="btn cancel-btn">
-                 {{#t}}buttons.cancel{{/t}}
-		           </a>
-             </div>
-           </fieldset>
-           {{/values.report}}
-           <div>
-	           <a id="additional-report" href="{{baseUrl}}/">{{#t}}pages.rtm-confirmation.add-another{{/t}}</a>
-           </div>
-         </div>
-       </fieldset>
-       <fieldset>
-         <span id="contact-details-group">
-	         {{#radio-group}}anonymous{{/radio-group}}
-         </span>
-         <fieldset id="contact-info-group" class="panel-indent {{#errors.contact-info}}validation-error{{/errors.contact-info}}">
-           {{#input-text}}contact-info-name{{/input-text}}
-           {{#input-text}}contact-info-email{{/input-text}}
-           {{#input-text}}contact-info-phone{{/input-text}}
-           <p>{{#t}}pages.rtm-confirmation.about-privacy{{/t}}</p>
-           <p>{{#t}}pages.rtm-confirmation.about-privacy-blurb{{/t}}</p>
-         </fieldset>
-       </fieldset>
-       {{#input-submit}}send{{/input-submit}}
-       {{/form}}
-       
-       {{/partials-form}}
-       
-       {{/content}}
-       
-       {{/layout}}
-       
+{{<partials-page}}
+{{$page-content}}
+<legend class="visuallyhidden">
+  <span class="form-label-bold">{{#t}}fields.confirm.legend{{/t}}</span>
+</legend>
+<div class="confirmation">
+  {{#values.reports}}
+    <div class="report">
+      <h2>{{#t}}pages.confirm.check-details{{/t}}</h2>
+      <a class="remove-url-anchor" href="{{baseUrl}}/reports/delete/{{id}}">{{#t}}pages.confirm.delete-report{{/t}}</a>
+      <div class="editable-field">
+        <h3>{{#t}}fields.url.short{{/t}}</h3>
+        <div class="data-wrap">
+          <p data-name="url" data-element="input:text" data-options="{{data-options}}" data-defaults="{{data-defaults}}">{{url}}</p>
+        </div>
+        <a href="{{baseUrl}}/reports/edit/{{id}}" class="btn edit-btn">
+          {{#t}}buttons.change{{/t}}<span class="visuallyhidden"> {{#t}}fields.url.short{{/t}}</span>
+        </a>
+      </div>
+      <div class="editable-field">
+        <h3>{{#t}}fields.location.short{{/t}}</h3>
+        <div class="data-wrap">
+          <p data-name="location" data-element="textarea" data-options="{{data-options}}" data-defaults="{{data-defaults}}">{{location}}</p>
+        </div>
+        <a href="{{baseUrl}}/reports/edit/{{id}}" class="btn edit-btn">
+          {{#t}}buttons.change{{/t}}<span class="visuallyhidden"> {{#t}}fields.location.short{{/t}}</span>
+        </a>
+      </div>
+      <div class="editable-field">
+        <h3>{{#t}}fields.description.short{{/t}}</h3>
+        <div class="data-wrap">
+          <p data-name="description" data-element="textarea" data-options="{{data-options}}" data-defaults="{{data-defaults}}">{{description}}</p>
+        </div>
+        {{#input-submit}}update{{/input-submit}}
+        <a href="{{baseUrl}}/reports/{{id}}" class="btn edit-btn">
+          {{#t}}buttons.change{{/t}}<span class="visuallyhidden"> {{#t}}fields.description.short{{/t}}</span>
+        </a>
+        <a href="" class="btn cancel-btn">
+          {{#t}}buttons.cancel{{/t}}
+        </a>
+      </div>
+    </div>
+  {{/values.reports}}
+  <div>
+    <a id="additional-report" href="{{baseUrl}}/reports/new">{{#t}}pages.confirm.add-another{{/t}}</a>
+  </div>
+</div>
+<fieldset>
+  <span id="contact-details-group">
+    {{#radio-group}}anonymous{{/radio-group}}
+  </span>
+  <fieldset id="contact-info-group" class="panel-indent {{#errors.contact-info}}validation-error{{/errors.contact-info}}">
+    {{#input-text}}contact-info-name{{/input-text}}
+    {{#input-text}}contact-info-email{{/input-text}}
+    {{#input-text}}contact-info-phone{{/input-text}}
+    <p>{{#t}}pages.confirm.about-privacy{{/t}}</p>
+    <p>{{#t}}pages.confirm.about-privacy-blurb{{/t}}</p>
+  </fieldset>
+</fieldset>
+{{#input-submit}}send{{/input-submit}}
+{{/page-content}}
+{{/partials-page}}

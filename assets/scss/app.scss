@@ -63,7 +63,7 @@ textarea {
   font-weight: normal
 }
 
-.confirmation fieldset legend, #contact-details-group legend {
+.confirmation legend, #contact-details-group legend {
   @include heading-24;
   font-weight: bold;
 }

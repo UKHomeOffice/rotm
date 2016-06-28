@@ -19,29 +19,29 @@ When(/^I submit the RTM form$/) do
   click_button('Next step')
 end
 
-Then (/^I should see the confirmation page$/) do
-  confPage = config['rtm_dev_host'] + "/confirmation"
+Then (/^I should see the confirm page$/) do
+  confPage = config['rtm_dev_host'] + "/confirm"
   current_url.should == confPage
 end
 
-Then(/^I should see the url for confirmation$/) do
+Then(/^I should see the url for confirm$/) do
   page.should have_no_selector('div.validation-summary')
-  page.should have_content('http://www.blahdeblah.com') 
+  page.should have_content('http://www.blahdeblah.com')
 end
 
 Then(/^I should see the url - (.+)$/) do |url|
   page.should have_no_selector('div.validation-summary')
-  page.should have_content(url) 
+  page.should have_content(url)
 end
 
-Then(/^I should see the location for confirmation$/) do
+Then(/^I should see the location for confirm$/) do
   page.should have_no_selector('div.validation-summary')
-  page.should have_content('Some sample location text') 
+  page.should have_content('Some sample location text')
 end
 
-Then(/^I should see the description for confirmation$/) do
+Then(/^I should see the description for confirm$/) do
   page.should have_no_selector('div.validation-summary')
-  page.should have_content('Some sample description text') 
+  page.should have_content('Some sample description text')
 end
 
 When(/^I select the option to remain anonymous$/) do
@@ -50,11 +50,10 @@ When(/^I select the option to remain anonymous$/) do
   choose('anonymous-yes')
 end
 
-When(/^I submit the RTM confirmation form$/) do
+When(/^I submit the RTM confirm form$/) do
   click_button('Send report')
 end
 
 Then (/^I should see a submission successful message$/) do
   page.should have_selector('div.alert-complete')
 end
-

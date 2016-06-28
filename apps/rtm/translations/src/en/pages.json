@@ -1,46 +1,30 @@
 {
-  "terrorism_reporting": {
+  "reports": {
+    "header": "Report online terrorist material",
     "cta-999": "If you're reporting a crime that's happening right now or if there's a threat to someone's life, call 999 immediately.",
     "advice-additional-reports": "If you have more than one page to report, you can add the other page(s) later.",
-    "additional-report-header-pre": "Please add another report or", 
-    "additional-report-header-link": "review your existing reports" 
+    "additional-report-header-pre": "Please add another report or",
+    "additional-report-header-link": "review your existing reports"
   },
-  "rtm-confirm-delete": {
-    "confirm-deletion": "Please confirm you wish to remove the following web address from your report",
-    "delete-confirmed": "The selected web address was successfully removed from your report."
-  },
-  "rtm-confirm-edit": {
-    "confirm-edit": "Please update the details of your report",
-    "edit-confirmed": "The selected report was successfully edited."
-  },
-  "rtm-confirmation": {
-    "check-details": {
-      "single-report": "Check details of the report",
-      "multiple-reports": "Check details of report "
-    },
-    "remove-url": {
-      "single-report": "Delete this report",
-      "multiple-reports": "Delete report "
-    },
-    "add-another": "Add another website address", 
-    
+  "confirm": {
+    "header": "Check the details before submitting the report",
+    "check-details": "Check details of the report",
+    "delete-report": "Delete this report",
+    "add-another": "Add another website address",
     "about-privacy": "About your privacy",
     "about-privacy-blurb": "Your contact details will only be used if further information is required. Your details will remain confidential and will not be used for any other purpose or passed on to any other parties. We keep your personal data secure according to our <a href=\"https://www.gov.uk/help/privacy-policy\">privacy policy</a>."
   },
-  "start-again": {
-    "title": "Start again",
-    "message": "It is not possible to access this page at this time. Please start again"
-  },
-  "rtm-completion": {
-    "header": "Thank you, we have received your report.",
-    "content-thankyou": "Thankyou for your submission. Alerting the authorities to terrorist material can help save lives.",
-    "content-whats-next": "What happens next",
-    "content-copy-sent": "We have sent a copy of your report to the police team dealing with online terrorist material.",
-    "content-contact-details": "If they require more information, they may get in touch with you.",
-    "content-more": "More to report?",
-    "content-more-link": "Complete the form again",
-    "content-feedback-link": "Tell us what you think of this form",
-    "content-feedback-time": "(takes 30 seconds)"
+  "confirmation": {
+    "header": " ",
+    "subheader": "Thank you, we have received your report.",
+    "thankyou": "Thankyou for your submission. Alerting the authorities to terrorist material can help save lives.",
+    "whats-next": "What happens next",
+    "copy-sent": "We have sent a copy of your report to the police team dealing with online terrorist material.",
+    "contact-details": "If they require more information, they may get in touch with you.",
+    "more": "More to report?",
+    "more-link": "Complete the form again",
+    "feedback-link": "Tell us what you think of this form",
+    "feedback-time": "(takes 30 seconds)"
   },
   "rtm-email-table": {
     "headers": {

@@ -1,0 +1,21 @@
+{{<partials-page}}
+  {{$page-content}}
+    <div class="alert-complete" role="alert">
+      <span class="icon icon-complete" role="presentation"></span>
+      <div class="alert-message">
+        <h1>{{#t}}pages.confirmation.subheader{{/t}}</h1>
+      </div>
+    </div>
+    <hr>
+    <div>
+      <p>{{#t}}pages.confirmation.thankyou{{/t}}</p>
+      <h2>{{#t}}pages.confirmation.whats-next{{/t}}</h2>
+      <p>{{#t}}pages.confirmation.copy-sent{{/t}}</p>
+      {{#email}}
+        <p>{{#t}}pages.confirmation.contact-details{{/t}}</p>
+      {{/email}}
+      <p>{{#t}}pages.confirmation.more{{/t}} <a href="{{baseUrl}}/">{{#t}}pages.confirmation.more-link{{/t}}</a></p>
+      <p><a href="https://eforms.homeoffice.gov.uk/outreach/Feedback.ofml?FormName=terrorism_reporting/">{{#t}}pages.confirmation.feedback-link{{/t}}</a> {{#t}}pages.confirmation.feedback-time{{/t}}</p>
+    </div>
+  {{/page-content}}
+{{/partials-page}}

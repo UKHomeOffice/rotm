@@ -24,7 +24,7 @@ router.use(mixins(fields));
 router.use('/', wizard(require('./steps'), fields, {
   controller: BaseController,
   templatePath: path.resolve(__dirname, 'views'),
-  params: '/:action?'
+  params: '/:action?/:id?'
 }));
 
 module.exports = router;
