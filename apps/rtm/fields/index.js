@@ -3,7 +3,12 @@
 module.exports = {
   'url': {
     mixin: 'input-text',
-    validate: ['required'],
+    validate: ['required', {
+      type: 'regex',
+      arguments: [
+        /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/
+      ]
+    }],
   },
   'location': {
     mixin: 'textarea',
