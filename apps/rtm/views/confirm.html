@@ -1,62 +1,28 @@
 {{<partials-page}}
-{{$page-content}}
-<legend class="visuallyhidden">
-  <span class="form-label-bold">{{#t}}fields.confirm.legend{{/t}}</span>
-</legend>
-<div class="confirmation">
-  {{#values.reports}}
-    <div class="report">
-      <h2>{{#t}}pages.confirm.check-details{{/t}}</h2>
-      <a class="remove-url-anchor" href="{{baseUrl}}/reports/delete/{{id}}">{{#t}}pages.confirm.delete-report{{/t}}</a>
-      <div class="editable-field">
-        <h3>{{#t}}fields.url.short{{/t}}</h3>
-        <div class="data-wrap">
-          <p data-name="url" data-element="input:text" data-options="{{data-options}}" data-defaults="{{data-defaults}}">{{url}}</p>
-        </div>
-        <a href="{{baseUrl}}/reports/edit/{{id}}" class="btn edit-btn">
-          {{#t}}buttons.change{{/t}}<span class="visuallyhidden"> {{#t}}fields.url.short{{/t}}</span>
-        </a>
-      </div>
-      <div class="editable-field">
-        <h3>{{#t}}fields.location.short{{/t}}</h3>
-        <div class="data-wrap">
-          <p data-name="location" data-element="textarea" data-options="{{data-options}}" data-defaults="{{data-defaults}}">{{location}}</p>
-        </div>
-        <a href="{{baseUrl}}/reports/edit/{{id}}" class="btn edit-btn">
-          {{#t}}buttons.change{{/t}}<span class="visuallyhidden"> {{#t}}fields.location.short{{/t}}</span>
-        </a>
-      </div>
-      <div class="editable-field">
-        <h3>{{#t}}fields.description.short{{/t}}</h3>
-        <div class="data-wrap">
-          <p data-name="description" data-element="textarea" data-options="{{data-options}}" data-defaults="{{data-defaults}}">{{description}}</p>
-        </div>
-        {{#input-submit}}update{{/input-submit}}
-        <a href="{{baseUrl}}/reports/{{id}}" class="btn edit-btn">
-          {{#t}}buttons.change{{/t}}<span class="visuallyhidden"> {{#t}}fields.description.short{{/t}}</span>
-        </a>
-        <a href="" class="btn cancel-btn">
-          {{#t}}buttons.cancel{{/t}}
-        </a>
+  {{$page-content}}
+    <legend class="visuallyhidden">
+      <span class="form-label-bold">{{#t}}fields.confirm.legend{{/t}}</span>
+    </legend>
+    <div class="confirmation">
+      {{#reports}}
+        {{> partials-summary-table}}
+      {{/reports}}
+      <div>
+        <a id="additional-report" href="{{baseUrl}}/reports/new">{{#t}}pages.confirm.add-another{{/t}}</a>
       </div>
     </div>
-  {{/values.reports}}
-  <div>
-    <a id="additional-report" href="{{baseUrl}}/reports/new">{{#t}}pages.confirm.add-another{{/t}}</a>
-  </div>
-</div>
-<fieldset>
-  <span id="contact-details-group">
-    {{#radio-group}}anonymous{{/radio-group}}
-  </span>
-  <fieldset id="contact-info-group" class="panel-indent {{#errors.contact-info}}validation-error{{/errors.contact-info}}">
-    {{#input-text}}contact-info-name{{/input-text}}
-    {{#input-text}}contact-info-email{{/input-text}}
-    {{#input-text}}contact-info-phone{{/input-text}}
-    <p>{{#t}}pages.confirm.about-privacy{{/t}}</p>
-    <p>{{#t}}pages.confirm.about-privacy-blurb{{/t}}</p>
-  </fieldset>
-</fieldset>
-{{#input-submit}}send{{/input-submit}}
-{{/page-content}}
+    <fieldset>
+      <span id="contact-details-group">
+        {{#radio-group}}anonymous{{/radio-group}}
+      </span>
+      <fieldset id="contact-info-group" class="panel-indent {{#errors.contact-info}}validation-error{{/errors.contact-info}}">
+        {{#input-text}}contact-info-name{{/input-text}}
+        {{#input-text}}contact-info-email{{/input-text}}
+        {{#input-text}}contact-info-phone{{/input-text}}
+        <p>{{#t}}pages.confirm.about-privacy{{/t}}</p>
+        <p>{{#t}}pages.confirm.about-privacy-blurb{{/t}}</p>
+      </fieldset>
+    </fieldset>
+    {{#input-submit}}send{{/input-submit}}
+  {{/page-content}}
 {{/partials-page}}
