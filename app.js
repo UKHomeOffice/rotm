@@ -80,7 +80,7 @@ app.use(require('cookie-parser')(config.session.secret));
 app.use(secureCookies);
 
 const sessionOpts = Object.assign({
-  redisStore,
+  store: redisStore,
   name: config.session.name,
   cookie: {secure: config.protocol === 'https'},
   secret: config.session.secret,
