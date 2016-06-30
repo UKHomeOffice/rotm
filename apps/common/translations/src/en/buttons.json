@@ -1,0 +1,14 @@
+{
+  "test": "Start",
+  "next": "Next step",
+  "submit": "Submit",
+  "change": "Change",
+  "close": "Close",
+  "delete": "Delete",
+  "cancel": "Cancel",
+  "update": "Update",
+  "continue": "Continue",
+  "edit": "Edit",
+  "send": "Send report",
+  "next_step": "Next step"
+}

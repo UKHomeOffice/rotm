@@ -1,0 +1,31 @@
+{{<layout}}
+
+  {{$journeyHeader}}
+    {{#t}}journeys.terrorism_reporting.header{{/t}}
+  {{/journeyHeader}}
+
+  {{$validationSummary}}
+    {{> partials-validation-summary}}
+  {{/validationSummary}}
+
+  {{$propositionHeader}}
+    {{> partials-navigation}}
+  {{/propositionHeader}}
+
+  {{$header}}{{#t}}journeys.terrorism_reporting.header{{/t}}{{/header}}
+
+  {{$content}}
+    <p class="panel-indent">{{#t}}pages.terrorism_reporting.description{{/t}}</p>
+
+    {{<partials-form}}
+         
+      {{$form}}
+         {{> partials-rtm-report-form}}
+         {{#input-submit}}next{{/input-submit}}
+      {{/form}}
+
+    {{/partials-form}}
+
+  {{/content}}
+
+{{/layout}}

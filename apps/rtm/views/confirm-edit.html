@@ -1,0 +1,43 @@
+{{<layout}}
+
+     {{$journeyHeader}}
+     {{#t}}journeys.terrorism_reporting.header{{/t}}
+     {{/journeyHeader}}
+
+     {{$validationSummary}}
+     {{> partials-validation-summary}}
+  {{/validationSummary}}
+
+  {{$propositionHeader}}
+  {{> partials-navigation}}
+  {{/propositionHeader}}
+
+  {{$header}}{{#t}}journeys.terrorism_reporting.header{{/t}}{{/header}}
+
+  {{$content}}
+
+  {{<partials-form}}
+       
+       {{$form}}
+
+       <div class="confirmation">
+	       <p class="panel-indent">{{#t}}pages.rtm-confirm-edit.confirm-edit{{/t}}</p>
+       </div>
+
+       {{> partials-rtm-report-form}}
+
+    <input type="hidden" name="edit-index" value="{{values.index}}" />
+       
+       {{#input-submit}}edit{{/input-submit}}
+
+		   <a href="{{baseUrl}}/confirmation" class="btn">
+		     {{#t}}buttons.cancel{{/t}}
+		   </a>
+       
+       {{/form}}
+
+   {{/partials-form}}
+
+ {{/content}}
+
+{{/layout}}

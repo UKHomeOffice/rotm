@@ -1,0 +1,54 @@
+{{<layout}}
+
+     {{$journeyHeader}}
+     {{#t}}journeys.terrorism_reporting.header{{/t}}
+     {{/journeyHeader}}
+
+     {{$validationSummary}}
+     {{> partials-validation-summary}}
+  {{/validationSummary}}
+
+  {{$propositionHeader}}
+  {{> partials-navigation}}
+  {{/propositionHeader}}
+
+  {{$header}}{{#t}}journeys.terrorism_reporting.header{{/t}}{{/header}}
+
+  {{$content}}
+
+  {{<partials-form}}
+       
+       {{$form}}
+
+       <fieldset>
+         <legend class="visuallyhidden">
+           <span class="form-label-bold">{{#t}}fields.rtm-confirm-delete.legend{{/t}}</span>
+         </legend>
+
+         <div class="confirmation">
+	         <h2>{{#t}}pages.rtm-confirm-delete.confirm-deletion{{/t}}</h2>
+           <div>
+             <h3>{{#t}}fields.url.short{{/t}}</h3>
+             <div class="data-wrap">
+		           <p>GOD_DAMNED RPOERT:{{values.report}}</p>
+		         </div>
+           </div>
+         </div>
+       </fieldset>
+
+       <input type="hidden" name="remove-url" value="true" />
+       <input type="hidden" name="remove-index" value="{{values.report.index}}" />
+       
+       {{#input-submit}}delete{{/input-submit}}
+
+		   <a href="{{baseUrl}}/confirmation" class="btn">
+		     {{#t}}buttons.cancel{{/t}}
+		   </a>
+       
+       {{/form}}
+
+   {{/partials-form}}
+
+ {{/content}}
+
+{{/layout}}
