@@ -12,7 +12,7 @@ module.exports = class Submit extends BaseController {
   // eslint-disable-next-line consistent-return
   get(req, res, callback) {
     if (!req.sessionModel.get('reports').length) {
-      return res.redirect(this.getBackLink(req, res, callback));
+      return res.redirect('/reports');
     }
     super.get(req, res, callback);
   }
