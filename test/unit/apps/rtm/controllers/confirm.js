@@ -30,7 +30,6 @@ describe('Confirm Controller', () => {
     beforeEach(() => {
       res.redirect = sinon.stub();
       ControllerStub.prototype.get = sinon.stub();
-      ControllerStub.prototype.getBackLink = sinon.stub().returns('back-link');
     });
 
     it('calls super.get when there are reports', () => {
@@ -42,7 +41,7 @@ describe('Confirm Controller', () => {
     it('redirects to previous page if reports are not set', () => {
       req.sessionModel.get.returns([]);
       controller.get(req, res, callback);
-      res.redirect.should.have.been.calledOnce.and.calledWithExactly('back-link');
+      res.redirect.should.have.been.calledOnce.and.calledWithExactly('/reports');
     });
   });
 
