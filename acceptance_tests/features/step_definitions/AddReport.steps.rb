@@ -9,5 +9,5 @@ When (/^I click on the additional report link$/) do
 end
 
 Then (/^I should see (.+) reports for confirm$/) do |count|
-  expect(page).to have_selector('div.report', count: count)
+  expect(page).to have_selector('table.table-details', count: count)
 end

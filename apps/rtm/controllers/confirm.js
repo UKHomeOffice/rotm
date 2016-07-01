@@ -22,6 +22,16 @@ module.exports = class Submit extends BaseController {
     callback(null, {reports});
   }
 
+  locals(req, res, callback) {
+    const locals = super.locals(req, res, callback);
+    let reports = req.sessionModel.get('reports');
+    reports = reports.map(report => ({
+      id: report.id,
+      fields: _.map(_.omit(report, 'id'), (value, key) => ({key, value}))
+    }));
+    return Object.assign({}, locals, {reports});
+  }
+
   saveValues(req, res, callback) {
     const data = req.sessionModel.get('reports');
 
