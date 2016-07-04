@@ -46,6 +46,9 @@ app.use(function setBaseUrl(req, res, next) {
   next();
 });
 
+// Trust proxy for secure cookies
+app.set('trust proxy', 1);
+
 // Redis session storage
 
 logger.info('connecting to redis on ', config.redis.port, config.redis.host);
