@@ -1,6 +1,7 @@
-tmp
-artefacts
+node_modules
+public
+apps/**/translations/**/default.json
 ci_build.sh
-run-docker-compose.sh
-run-local.sh
-coverage
+LICENSE.md
+README.md
+CONTRIBUTING.md
