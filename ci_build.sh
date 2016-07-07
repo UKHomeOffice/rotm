@@ -60,25 +60,13 @@ CONFIG_FILE=config_ci_build.yml
 echo "rtm_dev_host: 'http://${APP_HOST}:8080'" \
     > ${BUILD_HOME_DIR}/acceptance_tests/features/support/${CONFIG_FILE}
 echo "Running acceptance tests container..."
-cd ${BUILD_HOME_DIR}/acceptance_tests
-docker build -t ${ACCEPTANCE_TAG} .
-echo docker run -i --rm=true \
-     --link ${APP_HOST}:${APP_HOST} \
-     -e "CONFIG_FILE=${CONFIG_FILE}" \
-     ${ACCEPTANCE_TAG}
 
-# Pause before running tests
-sleep 10
-if docker run -i --rm=true \
-     --link ${APP_HOST}:${APP_HOST} \
-     -e "CONFIG_FILE=${CONFIG_FILE}" \
-     ${ACCEPTANCE_TAG} ; then
+if [npm run test:acceptance]; then
   ok=0
 else
-  echo "Application logs:"
-  docker logs ${APP_HOST}
   ok=1
 fi
+
 cd -
 
 # Always tidy up...
