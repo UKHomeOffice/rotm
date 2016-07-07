@@ -1,15 +1,11 @@
 #!/bin/bash
 
-set -e
-
-REDIS_HOST=${REDIS_HOST:-localhost}
-REDIS_HOST=${REDIS_HOST:-127.0.0.1}
-REDIS_PORT=${REDIS_PORT:-6379}
-SITEROOT=${SITEROOT:-/rotm}
-GA_TAG_ID=${GA_TAG_ID}
-echo "starting the service"
+if [ "$NODE_ENV" = "ci" ]
+then echo "starting service"
+  SITEROOT=/gro GA_TAG_ID=${GA_TAG_ID}
+fi
 
 cp -r /app/public/* /public/
-SECURE_PROTOCOL=true npm start
 
+su nodejs -c 'exec node app.js'
 
