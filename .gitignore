@@ -6,3 +6,4 @@ public
 Gemfile.lock
 apps/**/translations/en
 coverage
+artefacts
