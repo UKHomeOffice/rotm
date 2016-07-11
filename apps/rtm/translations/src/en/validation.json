@@ -1,8 +1,9 @@
 {
   "url": {
-    "required": "Please specify the web address that contains the material"
+    "required": "Specify the web address that contains the material",
+    "regex": "Submit a valid URL"
   },
   "anonymous": {
-    "required": "Please let us know whether we can contact you for more information"
+    "required": "Let us know whether we can contact you for more information"
   }
 }
