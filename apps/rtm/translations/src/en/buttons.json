@@ -2,8 +2,10 @@
   "test": "Start",
   "next": "Next step",
   "submit": "Submit",
-  "change": "Change",
-  "close": "Close",
+  "delete": "Delete",
+  "cancel": "Cancel",
+  "update": "Update",
   "send": "Send report",
-  "next_step": "Next step"
+  "next_step": "Next step",
+  "reset": "Reset"
 }

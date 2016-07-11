@@ -16,7 +16,7 @@ module.exports = {
     ],
     next: '/confirm',
     locals: {
-      step: 'reports'
+      section: 'reports'
     }
   },
   '/confirm': {
@@ -30,14 +30,14 @@ module.exports = {
     ],
     next: '/confirmation',
     locals: {
-      step: 'confirm'
+      section: 'confirm'
     }
   },
   '/confirmation': {
     clearSession: true,
     backLink: null,
     locals: {
-      step: 'confirmation'
+      section: 'confirmation'
     }
   }
 };

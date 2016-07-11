@@ -1,14 +1,25 @@
 'use strict';
 
 const express = require('express');
-const app = express();
+const hof = require('hof');
 const path = require('path');
-const logger = require('./lib/logger');
+const redis = require('redis');
+const connectRedisCrypto = require('connect-redis-crypto');
 const churchill = require('churchill');
 const session = require('express-session');
-const config = require('./config');
+const expressPartialTemplates = require('express-partial-templates');
+const hoganExpressStrict = require('hogan-express-strict');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
-require('moment-business');
+const logger = require('./lib/logger');
+const config = require('./config');
+const rtm = require('./apps/rtm/');
+
+const app = express();
+const i18n = hof.i18n({
+  path: path.resolve(__dirname, './apps/common/translations/__lng__/__ns__.json')
+});
 
 if (config.env !== 'ci') {
   app.use(churchill(logger));
@@ -25,18 +36,21 @@ app.use((req, res, next) => {
 
 app.set('view engine', 'html');
 
-const template = require('hof').template;
+const template = hof.template;
 template.setup(app, {
   path: config.siteroot + '/govuk-assets'
 });
 
-app.set('views', path.resolve(__dirname, './apps/common/views'));
+app.set('views', [
+  path.resolve(__dirname, './apps/common/views'),
+  require('hof-template-partials').views
+]);
 app.enable('view cache');
-app.use(require('express-partial-templates')(app));
-app.engine('html', require('hogan-express-strict'));
+app.use(expressPartialTemplates(app));
+app.engine('html', hoganExpressStrict);
 
-app.use(require('body-parser').urlencoded({extended: true}));
-app.use(require('body-parser').json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 app.use((req, res, next) => {
   res.locals.baseUrl = req.baseUrl;
@@ -48,11 +62,10 @@ app.set('trust proxy', 1);
 
 // Redis session storage
 logger.info('connecting to redis on ', config.redis.port, config.redis.host);
-const redis = require('redis');
-const RedisStore = require('connect-redis-crypto')(session);
+const RedisStore = connectRedisCrypto(session);
 const client = redis.createClient(config.redis.port, config.redis.host);
 
-client.on('error', (e) => logger.error(e));
+client.on('error', e => logger.error(e));
 
 const redisStore = new RedisStore({
   client,
@@ -72,7 +85,7 @@ function secureCookies(req, res, next) {
   next();
 }
 
-app.use(require('cookie-parser')(config.session.secret));
+app.use(cookieParser(config.session.secret));
 app.use(secureCookies);
 
 const sessionOpts = Object.assign({
@@ -87,15 +100,15 @@ const sessionOpts = Object.assign({
 app.use(session(sessionOpts));
 
 // apps
-app.use(require('./apps/rtm/'));
+app.use(rtm);
 
 app.get('/cookies', (req, res) => res.render('cookies'));
 app.get('/terms-and-conditions', (req, res) => res.render('terms'));
 
 // errors
-app.use(require('hof').middleware.errors({
-  logger: require('./lib/logger'),
-  translate: require('hof').i18n.translate,
+app.use(hof.middleware.errors({
+  logger,
+  translate: i18n.translate.bind(i18n),
   debug: config.env === 'development'
 }));
 
