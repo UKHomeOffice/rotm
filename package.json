@@ -36,6 +36,7 @@
     "express-partial-templates": "^0.2.0",
     "express-session": "^1.11.3",
     "hof": "https://github.com/UKHomeOffice/hof.git#so-master",
+    "hof-logger": "^1.0.0",
     "hof-template-partials": "^1.0.1",
     "hof-transpiler": "0.0.6",
     "hogan-express-strict": "^0.5.4",

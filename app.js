@@ -11,8 +11,8 @@ const expressPartialTemplates = require('express-partial-templates');
 const hoganExpressStrict = require('hogan-express-strict');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const logger = require('hof-logger')();
 
-const logger = require('./lib/logger');
 const config = require('./config');
 const rtm = require('./apps/rtm/');
 
@@ -22,6 +22,11 @@ const i18n = hof.i18n({
 
 i18n.on('ready', () => {
   const app = express();
+
+  app.use((req, res, next) => {
+    req.logger = logger;
+    next();
+  });
 
   if (config.env !== 'ci') {
     app.use(churchill(logger));

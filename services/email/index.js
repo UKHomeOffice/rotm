@@ -1,6 +1,5 @@
 'use strict';
 
-var logger = require('../../lib/logger');
 var nodemailer = require('nodemailer');
 var config = require('../../config');
 var i18nFuture = require('hof').i18n;
@@ -76,7 +75,6 @@ Emailer.prototype.send = function send(email, callback) {
 
     function sendCustomerEmail() {
       if (email.to) {
-        logger.info('Emailing customer: ', email.subject);
         this.transporter.sendMail({
           from: config.email.from,
           to: email.to,
@@ -106,7 +104,6 @@ Emailer.prototype.send = function send(email, callback) {
       }
     }
 
-    logger.info('Emailing caseworker: ', email.subject);
     this.transporter.sendMail({
       from: config.email.from,
       to: config.email.caseworker[email.template],
