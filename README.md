@@ -1,6 +1,8 @@
 # ROTM Application project for nodejs
 
 [![Docker Repository on Quay.io](https://quay.io/repository/ukhomeofficedigital/rotm-app/status "Docker Repository on Quay.io")](https://quay.io/repository/ukhomeofficedigital/rotm-app)
+[![Build Status](https://drone.digital.homeoffice.gov.uk/api/badges/UKHomeOffice/rotm/status.svg)](https://drone.digital.homeoffice.gov.uk/UKHomeOffice/rotm)
+
 
 ## Quick start
 
