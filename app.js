@@ -14,7 +14,6 @@ const hofTemplatePartials = require('hof-template-partials');
 const logger = require('./lib/logger');
 const config = require('./config');
 const rtm = require('./apps/rtm/');
-
 const i18n = hof.i18n({
   path: hofTemplatePartials.translations
 });
@@ -127,7 +126,6 @@ i18n.on('ready', () => {
   // shallow health check
   app.get('/healthz/ping', (req, res) => res.send(200));
 
-
   // 404's
   app.use(hof.middleware.notFound({
     logger,
@@ -139,7 +137,6 @@ i18n.on('ready', () => {
     logger,
     translate: i18n.translate.bind(i18n)
   }));
-
 
   // eslint-disable-next-line camelcase
   app.listen(config.port, config.listen_host);
