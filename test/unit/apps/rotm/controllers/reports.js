@@ -4,7 +4,7 @@ const proxyquire = require('proxyquire');
 
 class ControllerStub {}
 
-const Controller = proxyquire('../../../../../apps/rtm/controllers/reports', {
+const Controller = proxyquire('../../../../../apps/rotm/controllers/reports', {
   hof: {
     controllers: {
       base: ControllerStub
