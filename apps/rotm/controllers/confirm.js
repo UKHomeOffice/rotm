@@ -5,7 +5,7 @@ const path = require('path');
 const i18n = require('hof').i18n;
 const BaseController = require('hof').controllers.base;
 
-const Model = require('../../common/models/email');
+const Model = require('../models/email');
 
 module.exports = class Submit extends BaseController {
 
