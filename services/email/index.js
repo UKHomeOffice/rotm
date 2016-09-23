@@ -10,27 +10,23 @@ var fs = require('fs');
 var path = require('path');
 
 var customerHtmlTemplates = {
-  rtm: fs.readFileSync(
+  rotm: fs.readFileSync(
     path.resolve(__dirname, './templates/customer/html/rtm.mus')).toString('utf8')
 };
 
 var customerPlainTextTemplates = {
-  rtm: fs.readFileSync(
+  rotm: fs.readFileSync(
     path.resolve(__dirname, './templates/customer/plain/rtm.mus')).toString('utf8')
 };
 
 var caseworkerHtmlTemplates = {
-  rtm: fs.readFileSync(
+  rotm: fs.readFileSync(
     path.resolve(__dirname, './templates/caseworker/html/rtm.mus')).toString('utf8')
 };
 
 var caseworkerPlainTextTemplates = {
-  rtm: fs.readFileSync(
+  rotm: fs.readFileSync(
     path.resolve(__dirname, './templates/caseworker/plain/rtm.mus')).toString('utf8')
-};
-
-var translationLocation = {
-  rtm: 'rtm'
 };
 
 var transport = (config.email.host === '' && config.email.port === '') ?
@@ -55,11 +51,8 @@ function Emailer() {
 }
 
 Emailer.prototype.send = function send(email, callback) {
-
   var locali18n = i18nFuture({
-    path: path.resolve(
-      __dirname, '../../apps/', './' + translationLocation[email.template]
-    )
+    path: path.resolve(__dirname, '../../apps/rotm')
   });
 
   locali18n.on('ready', function locali18nLoaded() {
@@ -74,7 +67,8 @@ Emailer.prototype.send = function send(email, callback) {
       }
     };
 
-    function sendCustomerEmail() {
+    function sendCustomerEmail(err) {
+      logger.info('Caseworker email sent Error: ', err);
       if (email.to) {
         logger.info('Emailing customer: ', email.subject);
         this.transporter.sendMail({
@@ -109,7 +103,7 @@ Emailer.prototype.send = function send(email, callback) {
     logger.info('Emailing caseworker: ', email.subject);
     this.transporter.sendMail({
       from: config.email.from,
-      to: config.email.caseworker[email.template],
+      to: config.email.caseworker,
       subject: email.subject,
       text: Hogan.compile(caseworkerPlainTextTemplates[email.template]).render(templateData),
       html: Hogan.compile(caseworkerHtmlTemplates[email.template]).render(templateData),

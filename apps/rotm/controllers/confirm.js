@@ -45,8 +45,7 @@ module.exports = class Submit extends BaseController {
       } : {};
 
       const locali18n = i18n({
-        path: path.resolve(
-        )
+        path: path.resolve(__dirname, '../translations/') + '/__lng__/__ns__.json'
       });
 
       locali18n.on('ready', function prepareEmail() {
@@ -60,14 +59,13 @@ module.exports = class Submit extends BaseController {
 
           const dateTime = new Date();
           d.reportDate = dateTime.toISOString();
-          d.subject = locali18n.translate('pages.rtm-email-table.information.subject') + subjectAppend;
+          d.subject = locali18n.translate.call(locali18n, 'pages.rtm-email-table.information.subject') + subjectAppend;
 
           const model = new Model(d);
           const service = {
-            template: 'rtm',
+            template: 'rotm',
             subject: d.subject
           };
-
           if (service) {
             model.set('template', service.template);
             model.set('subject', service.subject);
