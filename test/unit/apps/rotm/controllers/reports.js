@@ -2,25 +2,26 @@
 
 const proxyquire = require('proxyquire');
 
-class ControllerStub {}
-
-const Controller = proxyquire('../../../../../apps/rotm/controllers/reports', {
-  hof: {
-    controllers: {
-      base: ControllerStub
-    }
-  }
-});
-
 describe('Reports Controller', () => {
   const req = {
     params: {}
   };
   const res = {};
   let callback;
+  let Controller;
   let controller;
+  class ControllerStub {}
 
   beforeEach(() => {
+    ControllerStub.prototype.getValues = sinon.stub();
+
+    Controller = proxyquire('../../../../../apps/rotm/controllers/reports', {
+      hof: {
+        controllers: {
+          base: ControllerStub
+        }
+      }
+    });
     controller = new Controller();
     callback = sinon.stub();
     req.sessionModel = {
@@ -91,18 +92,18 @@ describe('Reports Controller', () => {
   });
 
   describe('getValues', () => {
-    it('calls callback with no args if action is not edit', () => {
+    it('calls super if action is not edit', () => {
       req.params.id = 1;
       req.params.action = 'delete';
       controller.getValues(req, res, callback);
-      callback.should.have.been.calledOnce.and.calledWithExactly();
+      ControllerStub.prototype.getValues.should.have.been.calledOnce;
     });
 
-    it('calls callback with no args if id is undefined', () => {
+    it('calls super if id is undefined', () => {
       req.params.action = 'edit';
       delete req.params.id;
       controller.getValues(req, res, callback);
-      callback.should.have.been.calledOnce.and.calledWithExactly();
+      ControllerStub.prototype.getValues.should.have.been.calledOnce;
     });
 
     it('calls callback with null, and the report if passed edit and id', () => {

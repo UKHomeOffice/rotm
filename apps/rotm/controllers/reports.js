@@ -31,9 +31,9 @@ module.exports = class AddReportController extends Controller {
     if (req.params.action === 'edit' && req.params.id !== undefined) {
       const reports = req.sessionModel.get('reports');
       const report = _.find(reports, {id: req.params.id});
-      return callback(null, report);
+      callback(null, report);
     }
-    return callback();
+    super.getValues(req, res, callback);
   }
 
   locals(req, res) {
