@@ -22,18 +22,16 @@ module.exports = {
     host: process.env.REDIS_HOST || '127.0.0.1'
   },
   email: {
-    caseworker: {
-      rtm: process.env.CASEWORKER_EMAIL || ''
-    },
+    caseworker: process.env.CASEWORKER_EMAIL || '',
+    from: process.env.FROM_ADDRESS || '',
     port: process.env.SMTP_PORT || '',
     host: process.env.SMTP_HOST || '',
+    ignoreTLS: process.env.EMAIL_IGNORE_TLS || false,
+    secure: process.env.EMAIL_SECURE || false,
     auth: {
       user: process.env.SMTP_USER || '',
       pass: process.env.SMTP_PASSWORD || ''
-    },
-    from: process.env.FROM_ADDRESS || '',
-    ignoreTLS: process.env.EMAIL_IGNORE_TLS === 'true',
-    secure: process.env.EMAIL_SECURE === 'true'
+    }
   },
   ga: {
     tagId: process.env.GA_TAG_ID
