@@ -23,9 +23,9 @@ module.exports = {
   },
   email: {
     caseworker: process.env.CASEWORKER_EMAIL || '',
-    from: process.env.FROM_ADDRESS || '',
     port: process.env.SMTP_PORT || '',
     host: process.env.SMTP_HOST || '',
+    from: process.env.FROM_ADDRESS || '',
     ignoreTLS: process.env.EMAIL_IGNORE_TLS || false,
     secure: process.env.EMAIL_SECURE || false,
     auth: {

@@ -67,8 +67,12 @@ Emailer.prototype.send = function send(email, callback) {
       }
     };
 
-    function sendCustomerEmail(err) {
-      logger.info('Caseworker email sent Error: ', err);
+    function sendCustomerEmail(err, info) {
+      if (err) {
+        logger.error('Error sending caseworker email:', err);
+      }
+      logger.info('Caseworker email sent:', info);
+
       if (email.to) {
         logger.info('Emailing customer: ', email.subject);
         this.transporter.sendMail({
@@ -94,7 +98,13 @@ Emailer.prototype.send = function send(email, callback) {
               cid: 'spacer_image'
             }
           ]
-        }, callback);
+        }, (customerErr, customerInfo) => {
+          if (customerErr) {
+            logger.error('Error sending customer email:', customerErr);
+          }
+          logger.info('Customer email sent:', customerInfo);
+          callback(customerErr, customerInfo);
+        });
       } else {
         callback();
       }
