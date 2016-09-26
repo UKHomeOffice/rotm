@@ -8,6 +8,14 @@ var Hogan = require('hogan.js');
 var i18nLookup = require('i18n-lookup');
 var fs = require('fs');
 var path = require('path');
+const stubTransport = require('nodemailer-stub-transport');
+const smtpTransport = require('nodemailer-smtp-transport');
+
+var emailOptions = {
+  host: config.email.host,
+  port: config.email.port,
+  ignoreTLS: config.email.ignoreTLS
+};
 
 var customerHtmlTemplates = {
   rotm: fs.readFileSync(
@@ -29,14 +37,13 @@ var caseworkerPlainTextTemplates = {
     path.resolve(__dirname, './templates/caseworker/plain/rtm.mus')).toString('utf8')
 };
 
-var transport = (config.email.host === '' && config.email.port === '') ?
-  require('nodemailer-stub-transport') : require('nodemailer-smtp-transport');
-
-var emailOptions = {
-  host: config.email.host,
-  port: config.email.port,
-  ignoreTLS: config.email.ignoreTLS
-};
+let transport = smtpTransport;
+if (config.email.host === '' && config.email.port === '') {
+  transport = stubTransport;
+  logger.info('Using STUB transport');
+} else {
+  logger.info('Using SMTP transport');
+}
 
 if (config.email.auth.user && config.email.auth.pass) {
   emailOptions.auth = config.email.auth;
