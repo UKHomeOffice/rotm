@@ -23,8 +23,8 @@ module.exports = {
   },
   email: {
     caseworker: process.env.CASEWORKER_EMAIL || '',
-    port: process.env.SMTP_PORT || '',
-    host: process.env.SMTP_HOST || '',
+    port: process.env.EMAIL_PORT || '',
+    host: process.env.EMAIL_HOST || '',
     from: process.env.FROM_ADDRESS || '',
     ignoreTLS: process.env.EMAIL_IGNORE_TLS || false,
     secure: process.env.EMAIL_SECURE || false,
