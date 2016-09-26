@@ -21,8 +21,8 @@ module.exports = {
     formatter: ['trim', 'hyphens']
   },
   'anonymous': {
-    validate: ['required'],
-    className: ['inline', 'form-group'],
+    validate: 'required',
+    className: 'form-group',
     options: [{
       value: 'yes',
       label: 'fields.anonymous.options.yes.label'
@@ -33,6 +33,6 @@ module.exports = {
     }]
   },
   'contact-info-email': {
-    validate: ['email']
+    validate: 'email'
   }
 };
