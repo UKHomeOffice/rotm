@@ -28,12 +28,15 @@ module.exports = class AddReportController extends Controller {
   }
 
   getValues(req, res, callback) {
+    let values = req.sessionModel.toJSON();
+    delete values.errorValues;
+    values = _.extend({}, values, req.sessionModel.get('errorValues'));
     if (req.params.action === 'edit' && req.params.id !== undefined) {
       const reports = req.sessionModel.get('reports');
       const report = _.find(reports, {id: req.params.id});
-      callback(null, report);
+      values = Object.assign({}, report, values);
     }
-    super.getValues(req, res, callback);
+    callback(null, values);
   }
 
   locals(req, res) {
