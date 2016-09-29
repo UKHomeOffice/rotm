@@ -11,18 +11,7 @@
         <a id="additional-report" href="{{baseUrl}}/reports/new">{{#t}}pages.confirm.add-another{{/t}}</a>
       </div>
     </div>
-    <fieldset>
-      <span id="contact-details-group">
-        {{#radio-group}}anonymous{{/radio-group}}
-      </span>
-      <fieldset id="contact-info-group" class="panel-indent {{#errors.contact-info}}validation-error{{/errors.contact-info}}">
-        {{#input-text}}contact-info-name{{/input-text}}
-        {{#input-text}}contact-info-email{{/input-text}}
-        {{#input-text}}contact-info-phone{{/input-text}}
-        <p>{{#t}}pages.confirm.about-privacy{{/t}}</p>
-        <p>{{#t}}pages.confirm.about-privacy-blurb{{/t}}</p>
-      </fieldset>
-    </fieldset>
+    {{#radio-group}}anonymous{{/radio-group}}
     {{#input-submit}}send{{/input-submit}}
   {{/page-content}}
 {{/partials-page}}

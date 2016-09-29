@@ -5,5 +5,8 @@
   },
   "anonymous": {
     "required": "Let us know whether we can contact you for more information"
+  },
+  "contact-info-email": {
+    "email": "Enter a valid email address"
   }
 }

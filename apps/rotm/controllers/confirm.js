@@ -17,11 +17,6 @@ module.exports = class Submit extends BaseController {
     super.get(req, res, callback);
   }
 
-  getValues(req, res, callback) {
-    const reports = req.sessionModel.get('reports') || [];
-    callback(null, {reports});
-  }
-
   locals(req, res, callback) {
     const locals = super.locals(req, res, callback);
     let reports = req.sessionModel.get('reports');
