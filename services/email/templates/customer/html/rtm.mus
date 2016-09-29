@@ -66,13 +66,13 @@
                       {{#location}}
                       <tr style="border-top: 1px solid #009390;">
                         <td width="25%"><p style="font-size: 16px; color: #6f777b; margin: 10px 0;">{{#t}}pages.rtm-email-table.headers.location{{/t}}</p></td>
-                        <td width="75%"><p style="font-size: 16px; color: #000; margin: 10px 0;">{{location}}</p></td>
+                        <td width="75%"><p style="font-size: 16px; color: #000; margin: 10px 0; white-space: pre-wrap;">{{location}}</p></td>
                       </tr>
                       {{/location}}
                       {{#description}}
                       <tr style="border-top: 1px solid #009390;">
                         <td width="25%"><p style="font-size: 16px; color: #6f777b; margin: 10px 0;">{{#t}}pages.rtm-email-table.headers.description{{/t}}</p></td>
-                        <td width="75%"><p style="font-size: 16px; color: #000; margin: 10px 0;">{{description}}</p></td>
+                        <td width="75%"><p style="font-size: 16px; color: #000; margin: 10px 0; white-space: pre-wrap;">{{description}}</p></td>
                       </tr>
                       {{/description}}
 
@@ -80,7 +80,7 @@
                       <tr style="border-top: 1px solid #009390;">
                         <td width="100%" colspan="2"><p style="font-size: 16px; color: #000; margin: 10px 0;">{{#t}}pages.rtm-email-table.information.customer-contact-details{{/t}}</p></td>
                       </tr>
-                      
+
                       {{#name}}
                       <tr style="border-top: 1px solid #009390;">
                         <td width="25%"><p style="font-size: 16px; color: #6f777b; margin: 10px 0;">{{#t}}pages.rtm-email-table.headers.name{{/t}}</p></td>
