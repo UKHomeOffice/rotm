@@ -44,13 +44,4 @@ describe('Confirm Controller', () => {
       res.redirect.should.have.been.calledOnce.and.calledWithExactly('/reports');
     });
   });
-
-  describe('getValues', () => {
-    it('calls callback with the reports from sessionModel', () => {
-      controller.getValues(req, res, callback);
-      callback.should.have.been.calledOnce.and.calledWithExactly(null, {
-        reports: [{id: 1}, {id: 2}, {id: 3}]
-      });
-    });
-  });
 });

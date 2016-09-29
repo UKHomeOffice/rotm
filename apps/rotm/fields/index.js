@@ -29,7 +29,8 @@ module.exports = {
     }, {
       value: 'no',
       label: 'fields.anonymous.options.no.label',
-      toggle: 'contact-info-group'
+      toggle: 'contact-info-group',
+      child: 'partials/contact-details'
     }]
   },
   'contact-info-email': {
