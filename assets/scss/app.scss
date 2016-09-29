@@ -20,7 +20,11 @@ textarea {
 }
 
 .confirmation h3 {
-  color: #6f777b
+  color: #6f777b;
+}
+
+.confirmation table td {
+  white-space: pre-wrap;
 }
 
 .confirmation div {
