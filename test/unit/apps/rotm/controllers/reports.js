@@ -13,6 +13,7 @@ describe('Reports Controller', () => {
   class ControllerStub {}
 
   beforeEach(() => {
+    ControllerStub.prototype.getValues = sinon.stub();
     Controller = proxyquire('../../../../../apps/rotm/controllers/reports', {
       hof: {
         controllers: {
@@ -25,8 +26,7 @@ describe('Reports Controller', () => {
     req.sessionModel = {
       get: sinon.stub().returns([{id: 1}, {id: 2}, {id: 3}]),
       set: sinon.stub(),
-      unset: sinon.stub(),
-      toJSON: sinon.stub().returns({})
+      unset: sinon.stub()
     };
   });
 
@@ -92,8 +92,8 @@ describe('Reports Controller', () => {
 
   describe('getValues', () => {
     beforeEach(() => {
-      req.sessionModel.get.withArgs('errorValues').returns({error: 'value'})
-        .withArgs('reports').returns([{id: 1}, {id: 2}]);
+      req.sessionModel.get.withArgs('reports').returns([{id: 1}, {id: 2}]);
+      ControllerStub.prototype.getValues.callsArgWith(2, null, {error: 'value'});
     });
 
     it('calls callback with errorValues if action is not edit', () => {
