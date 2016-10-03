@@ -19,3 +19,14 @@ Feature: LoadPage
 	Scenario: The terms and conditions link leads you to the terms and conditions page
     When I load the RTM start page
     And I visit the terms page
+
+  @ogl
+  Scenario: The Open Government License link leads you to the ogl page
+    When I load the RTM start page
+    And I visit the ogl page
+
+  @copyright
+  Scenario: The Crown Copyright link leads you to the Crown Copyright page
+    When I load the RTM start page
+    And I visit the CrownCopyright page
+
