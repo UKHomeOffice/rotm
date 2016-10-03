@@ -14,7 +14,6 @@ describe('Reports Controller', () => {
 
   beforeEach(() => {
     ControllerStub.prototype.getValues = sinon.stub();
-
     Controller = proxyquire('../../../../../apps/rotm/controllers/reports', {
       hof: {
         controllers: {
@@ -92,25 +91,30 @@ describe('Reports Controller', () => {
   });
 
   describe('getValues', () => {
-    it('calls super if action is not edit', () => {
+    beforeEach(() => {
+      req.sessionModel.get.withArgs('reports').returns([{id: 1}, {id: 2}]);
+      ControllerStub.prototype.getValues.callsArgWith(2, null, {error: 'value'});
+    });
+
+    it('calls callback with errorValues if action is not edit', () => {
       req.params.id = 1;
       req.params.action = 'delete';
       controller.getValues(req, res, callback);
-      ControllerStub.prototype.getValues.should.have.been.calledOnce;
+      callback.should.have.been.calledOnce.and.calledWithExactly(null, {error: 'value'});
     });
 
-    it('calls super if id is undefined', () => {
+    it('calls callback with errorValues if action is undefined', () => {
       req.params.action = 'edit';
       delete req.params.id;
       controller.getValues(req, res, callback);
-      ControllerStub.prototype.getValues.should.have.been.calledOnce;
+      callback.should.have.been.calledOnce.and.calledWithExactly(null, {error: 'value'});
     });
 
-    it('calls callback with null, and the report if passed edit and id', () => {
+    it('calls callback with the report and errorValues if passed edit and id', () => {
       req.params.action = 'edit';
       req.params.id = 2;
       controller.getValues(req, res, callback);
-      callback.should.have.been.calledOnce.and.calledWithExactly(null, {id: 2});
+      callback.should.have.been.calledOnce.and.calledWithExactly(null, {id: 2, error: 'value'});
     });
   });
 
