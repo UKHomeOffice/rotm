@@ -26,6 +26,7 @@ module.exports = {
     port: process.env.EMAIL_PORT || '',
     host: process.env.EMAIL_HOST || '',
     from: process.env.FROM_ADDRESS || '',
+    replyTo: process.env.REPLY_TO || '',
     ignoreTLS: process.env.EMAIL_IGNORE_TLS || false,
     secure: process.env.EMAIL_SECURE || false,
     auth: {

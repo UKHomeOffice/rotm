@@ -84,6 +84,7 @@ Emailer.prototype.send = function send(email, callback) {
         logger.info('Emailing customer: ', email.subject);
         this.transporter.sendMail({
           from: config.email.from,
+          replyTo: config.email.replyTo,
           to: email.to,
           subject: email.subject,
           text: Hogan.compile(customerPlainTextTemplates[email.template]).render(templateData),
@@ -120,6 +121,7 @@ Emailer.prototype.send = function send(email, callback) {
     logger.info('Emailing caseworker: ', email.subject);
     this.transporter.sendMail({
       from: config.email.from,
+      replyTo: config.email.replyTo,
       to: config.email.caseworker,
       subject: email.subject,
       text: Hogan.compile(caseworkerPlainTextTemplates[email.template]).render(templateData),
