@@ -49,11 +49,6 @@ Run the jscs style checker. Rules are defined in [.jscsrc](./.jscsrc)
 $ npm run style
 ```
 
-Analyse the quality of the codebase (for results - open [./reports/plato/index.html](./reports/plato/index.html))
-```bash
-$ npm run quality
-```
-
 Compile the Sass to CSS
 ```bash
 $ npm run sass
