@@ -1,9 +1,14 @@
 {
   "name": "ROTM",
-  "version": "0.0.0",
+  "version": "0.0.4",
   "main": "app.js",
   "description": "A Home Office application for reporting online terrorist material.",
   "license": "GPLv2",
+  "repository" : {
+    "type" : "git",
+     "url" : "https://github.com/UKHomeOffice/rotm.git"
+  },
+  "bugs": "https://github.com/UKHomeOffice/rotm/issues",
   "scripts": {
     "start": "node .",
     "stop": "pkill --signal SIGINT rtm",

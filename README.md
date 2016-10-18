@@ -1,65 +1,34 @@
-# ROTM Application project for nodejs
+# Report Online Terrorist Material (ROTM)
 
-[![Docker Repository on Quay.io](https://quay.io/repository/ukhomeofficedigital/rotm-app/status "Docker Repository on Quay.io")](https://quay.io/repository/ukhomeofficedigital/rotm-app)
-[![Build Status](https://drone.digital.homeoffice.gov.uk/api/badges/UKHomeOffice/rotm/status.svg)](https://drone.digital.homeoffice.gov.uk/UKHomeOffice/rotm)
+[![Docker Repository on Quay.io](https://quay.io/repository/ukhomeofficedigital/rotm/status "Docker Repository on Quay.io")](https://quay.io/repository/ukhomeofficedigital/rotm) [![Build Status](https://travis-ci.org/UKHomeOffice/rotm.svg?branch=master)](https://travis-ci.org/UKHomeOffice/rotm)
 
+This project is built with [HOF-Bootstrap](https://github.com/UKHomeOffice/hof-bootstrap) and uses [Docker](https://www.docker.com/).
 
-## Quick start
+## Getting started
+
+Get the project from Github
+```bash
+$ git clone git@github.com:UKHomeOffice/rotm.git && cd rotm
+```
 
 Install the dependencies and build the project resources
 ```bash
 $ npm install
 ```
 
-Initiate the server in development mode (Express is used to serve the static resources in development).
+[Install Docker Compose](https://docs.docker.com/compose/install/)
+
+Run the services locally with Docker Compose
+```bash
+$ docker-compose up
+```
+
+Getting your hands dirty (You'll need [Redis](http://redis.io/) for this)
 ```bash
 $ npm run dev
 ```
 
-The app runs on the path /report-terrorism
+For anything else ROTM-related, look in [package.json](./package.json) for a full list of scripts etc, and
+[config.js](./config.js) for environment variables.
 
-Then select one of the following journeys to see the application in action
-
-## NPM scripts
-
-Start the application in default mode (production).
-We use Nginx to serve our static resources in production and ci.
-```bash
-$ npm start
-```
-
-Start the application with [Nodemon](https://www.npmjs.com/package/nodemon) in development mode.
-Debug is switched on and the server restarts when the JS or Sass are recompiled.
-```bash
-$ npm run dev
-```
-
-Run the unit tests
-```bash
-$ npm run test
-```
-
-Run the EcmaScript (ES) linter.  Rules are defined in [.eslintrc](./.eslintrc)
-```bash
-$ npm run lint
-```
-
-Run the jscs style checker. Rules are defined in [.jscsrc](./.jscsrc)
-```bash
-$ npm run style
-```
-
-Compile the Sass to CSS
-```bash
-$ npm run sass
-```
-
-_____________________________________________________________
-
-- For details on [Acceptance tests](https://github.com/UKHomeOffice/RTM/tree/master/acceptance_tests)
-
-- See the [package.json](./package.json) for a full list of scripts.
-
-- Full list of [environment variables](./documentation/ENVIRONMENT_VARIABLES.md)
-
-touched
+Otherwise, see [HOF-Bootstrap](https://github.com/UKHomeOffice/hof-bootstrap).
