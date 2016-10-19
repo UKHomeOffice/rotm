@@ -2,7 +2,6 @@ version: "2"
 services:
   app:
     build: .
-    # env_file: secrets.env
     environment:
       - NODE_ENV=docker-compose
       - EMAIL_IGNORE_TLS=true
@@ -11,7 +10,6 @@ services:
       - CASEWORKER_EMAIL=caseworker@gov.uk.test
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-      # - DEBUG=email
     links:
       - redis
       - maildev

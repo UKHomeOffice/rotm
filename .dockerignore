@@ -1,7 +1,6 @@
 node_modules
 public
 apps/**/translations/**/default.json
-ci_build.sh
-LICENSE.md
+LICENSE
 README.md
 CONTRIBUTING.md
