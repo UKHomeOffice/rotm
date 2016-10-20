@@ -1,5 +1,8 @@
+public
 node_modules
-public/js/bundle.js
-acceptance_tests
-apps/**/translations/**/default.json
 coverage
+apps/**/translations/**/default.json
+apps/**/acceptance/**/*.js
+LICENSE
+README.md
+CONTRIBUTING.md

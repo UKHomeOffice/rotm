@@ -8,20 +8,28 @@
   "rtm-confirmation": {
     "legend": "Confirmation details about terrorist material"
   },
-  "url": {
-    "label": "Enter the specific web address that contains the material",
-    "short": "Website address",
-    "hint": "The web address can be found at the top of the browser window and usually starts with \"www.\", \"http://\" or \"https://\"."
+  "where": {
+    "label": "Where did you find the material?",
+    "hint": "Give the website / app name."
   },
-  "location": {
-    "label": "Where exactly on the page is the material (optional)?",
-    "short": "Where the material is on the page",
-    "hint": "Is the material in a photo or is it written? Is it at the top or the bottom of the page? If it is in a social media feed, who posted the material and when (time and date)?"
+  "url": {
+    "label": "What's the web address? (optional)",
+    "details": {
+      "title": "What's a web address?",
+      "content": "You can find the web address at the top of the browser window. It usually starts with \"www.\", \"http://\" or \"https://\"."
+    }
   },
   "description": {
     "label": "Tell us more about the material you found (optional)",
-    "short": "Further details",
-    "hint": "How did you find the material? Do you know any details that would help us investigate, such as the names or locations of the people involved?"
+    "hint": "Include any further information you can to help us investigate. Important things to tell us include:",
+    "items": [
+      "where on the page is the material?",
+      "is it an image, text or video?",
+      "who posted the material?",
+      "what date and time was the material posted?",
+      "how did you find the material?",
+      "names, locations and details of people involved"
+    ]
   },
   "anonymous": {
     "legend": "Can we contact you for more information?",

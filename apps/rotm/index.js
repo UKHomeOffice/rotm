@@ -8,40 +8,20 @@ module.exports = {
   steps: {
     '/': {
       controller: controllers.start,
-      next: '/reports'
+      next: '/report'
     },
-    '/reports': {
-      controller: require('./controllers/reports'),
+    '/report': {
+      controller: require('./controllers/report'),
       fields: [
+        'where',
         'url',
-        'location',
         'description'
       ],
-      next: '/confirm',
+      next: '/contact-consent',
       locals: {
-        section: 'reports'
+        section: 'report'
       }
     },
-    '/confirm': {
-      controller: require('./controllers/confirm'),
-      backLink: null,
-      fields: [
-        'anonymous',
-        'contact-info-name',
-        'contact-info-email',
-        'contact-info-phone'
-      ],
-      next: '/confirmation',
-      locals: {
-        section: 'confirm'
-      }
-    },
-    '/confirmation': {
-      clearSession: true,
-      backLink: null,
-      locals: {
-        section: 'confirmation'
-      }
-    }
+    '/contact-consent': {}
   }
 };
