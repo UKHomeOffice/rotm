@@ -5,7 +5,7 @@
   "url": {
     "regex": "Submit a valid URL"
   },
-  "anonymous": {
+  "contact-consent": {
     "required": "Let us know whether we can contact you for more information"
   },
   "contact-info-email": {

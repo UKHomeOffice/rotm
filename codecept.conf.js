@@ -10,6 +10,8 @@ module.exports = {
   features: './apps/*/acceptance/features/**/*.js',
   include: {
     reportPage: pagesPath('report.js'),
-    contactConsentPage: pagesPath('contact-consent.js')
+    contactConsentPage: pagesPath('contact-consent.js'),
+    contactDetailsPage: pagesPath('contact-details.js'),
+    confirmPage: pagesPath('confirm.js')
   }
 };

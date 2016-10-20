@@ -31,25 +31,16 @@
       "names, locations and details of people involved"
     ]
   },
-  "anonymous": {
+  "contact-consent": {
     "legend": "Can we contact you for more information?",
-    "hint": "Being able to contact you may help us with our enquiries. All information will always be treated confidentially.",
+    "hint": "Being able to contact you may help us with our enquiries.",
     "options": {
-      "yes": {
-        "label": "No, submit anonymously"
+      "false": {
+        "label": "No, I’d like to remain anonymous"
       },
-      "no": {
+      "true": {
         "label": "Yes, I'll add my contact details"
       }
     }
-  },
-  "contact-info-name": {
-    "label": "Name (optional)"
-  },
-  "contact-info-email": {
-    "label": "Email address (optional)"
-  },
-  "contact-info-phone": {
-    "label": "Phone number (optional)"
   }
 }

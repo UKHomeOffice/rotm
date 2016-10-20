@@ -18,20 +18,15 @@ module.exports = {
               {{> partials-bullet-list}}
             </div>`
   },
-  'anonymous': {
+  'contact-consent': {
     validate: 'required',
-    className: 'form-group',
-    options: [{
-      value: 'yes',
-      label: 'fields.anonymous.options.yes.label'
-    }, {
-      value: 'no',
-      label: 'fields.anonymous.options.no.label',
-      toggle: 'contact-info-group',
-      child: 'partials/contact-details'
-    }]
-  },
-  'contact-info-email': {
-    validate: 'email'
+    legend: {
+      className: 'form-label-bold'
+    },
+    mixin: 'radio-group',
+    options: [
+      'true',
+      'false'
+    ]
   }
 };

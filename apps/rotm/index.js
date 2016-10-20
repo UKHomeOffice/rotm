@@ -22,6 +22,23 @@ module.exports = {
         section: 'report'
       }
     },
-    '/contact-consent': {}
+    '/contact-consent': {
+      fields: [
+        'contact-consent'
+      ],
+      next: '/contact-details',
+      forks: [{
+        target: '/confirm',
+        condition: {
+          field: 'contact-consent',
+          value: 'false'
+        }
+      }],
+      locals: {
+        section: 'consent'
+      }
+    },
+    '/contact-details': {},
+    '/confirm': {}
   }
 };
