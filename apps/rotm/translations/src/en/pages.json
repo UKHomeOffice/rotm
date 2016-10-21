@@ -12,10 +12,21 @@
   "confirm": {
     "header": "Check the details before submitting the report",
     "check-details": "Check details of the report",
-    "delete-report": "Delete this report",
-    "add-another": "Add another website address",
-    "about-privacy": "About your privacy",
-    "about-privacy-blurb": "Your contact details will only be used if further information is required. Your details will remain confidential and will not be used for any other purpose or passed on to any other parties. We keep your personal data secure according to our <a href=\"https://www.gov.uk/help/privacy-policy\">privacy policy</a>."
+    "table": {
+      "headers": {
+        "report": "Report Details",
+        "contact-details": "Contact Details",
+        "where": "Where you found the information",
+        "url": "Web address",
+        "description": "More information",
+        "contact-consent": "Contact consent",
+        "name": "Full name",
+        "contact-type": "Contact preference",
+        "email-address": "Email address",
+        "phone-number": "Phone number",
+        "phone-number-2": "Phone number"
+      }
+    }
   },
   "confirmation": {
     "header": " ",

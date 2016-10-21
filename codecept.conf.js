@@ -12,6 +12,7 @@ module.exports = {
     reportPage: pagesPath('report.js'),
     contactConsentPage: pagesPath('contact-consent.js'),
     contactDetailsPage: pagesPath('contact-details.js'),
-    confirmPage: pagesPath('confirm.js')
+    confirmPage: pagesPath('confirm.js'),
+    confirmationPage: pagesPath('confirmation.js')
   }
 };

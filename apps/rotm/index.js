@@ -51,6 +51,16 @@ module.exports = {
         section: 'contact-details'
       }
     },
-    '/confirm': {}
+    '/confirm': {
+      controller: require('./controllers/confirm'),
+      config: require('./confirm-step-config'),
+      next: '/confirmation',
+      locals: {
+        section: 'confirm'
+      }
+    },
+    '/confirmation': {
+      clearSession: true
+    }
   }
 };
