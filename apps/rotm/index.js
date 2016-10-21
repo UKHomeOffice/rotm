@@ -49,7 +49,7 @@ module.exports = {
       next: '/confirm',
       locals: {
         section: 'contact-details',
-        privacy: 'privacy'
+        privacy: 'https://www.gov.uk/help/privacy-policy'
       }
     },
     '/confirm': {}
