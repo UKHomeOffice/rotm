@@ -60,7 +60,10 @@ module.exports = {
       }
     },
     '/confirmation': {
-      clearSession: true
+      clearSession: true,
+      locals: {
+        section: 'confirmation'
+      }
     }
   }
 };
