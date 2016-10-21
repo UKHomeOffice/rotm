@@ -38,7 +38,20 @@ module.exports = {
         section: 'consent'
       }
     },
-    '/contact-details': {},
+    '/contact-details': {
+      fields: [
+        'name',
+        'contact-type',
+        'email-address',
+        'phone-number',
+        'phone-number-2'
+      ],
+      next: '/confirm',
+      locals: {
+        section: 'contact-details',
+        privacy: 'https://www.gov.uk/help/privacy-policy'
+      }
+    },
     '/confirm': {}
   }
 };

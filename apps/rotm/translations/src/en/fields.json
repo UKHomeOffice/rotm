@@ -42,5 +42,31 @@
         "label": "Yes, I'll add my contact details"
       }
     }
+  },
+  "name": {
+    "label": "What is your full name?"
+  },
+  "contact-type": {
+    "legend": "How would you prefer to be contacted?",
+    "options": {
+      "email": {
+        "label": "Email"
+      },
+      "phone": {
+        "label": "Phone"
+      },
+      "text-message": {
+        "label": "Text message"
+      }
+    }
+  },
+  "email-address": {
+    "label": "What is your email address?"
+  },
+  "phone-number": {
+    "label": "What is your phone number?"
+  },
+  "phone-number-2": {
+    "label": "What is your phone number?"
   }
 }

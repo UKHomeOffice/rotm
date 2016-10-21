@@ -6,6 +6,11 @@
   "consent": {
     "header": " "
   },
+  "contact-details": {
+    "header": "What are your contact details?",
+    "privacy": "We’ll only contact you if we need more information. Your details will remain confidential and will not be used for any other purpose or passed to any other parties. We’ll keep your personal data secure according to our",
+    "privacy-policy": "privacy policy"
+  },
   "confirm": {
     "header": "Check the details before submitting the report",
     "check-details": "Check details of the report",

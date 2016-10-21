@@ -8,7 +8,22 @@
   "contact-consent": {
     "required": "Let us know whether we can contact you for more information"
   },
-  "contact-info-email": {
+  "name": {
+    "required": "Tell us your full name"
+  },
+  "contact-type": {
+    "required": "Tell us how you would like to be contacted"
+  },
+  "email-address": {
+    "required": "Tell us your email address",
     "email": "Enter a valid email address"
+  },
+  "phone-number": {
+    "required": "Tell us your phone number",
+    "numeric": "Enter a valid phone number"
+  },
+  "phone-number-2": {
+    "required": "Tell us your phone number",
+    "numeric": "Enter a valid phone number"
   }
 }
