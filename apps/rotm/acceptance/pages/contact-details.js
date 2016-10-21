@@ -1,6 +1,13 @@
 'use strict';
 
+let I;
+
 module.exports = {
+
+  _init() {
+   I = require('so-acceptance/steps.js')();
+ },
+
   url: 'contact-details',
 
   id: {
@@ -19,5 +26,21 @@ module.exports = {
     invalidEmail: 'sterlingarcher',
     invalidPhone: 'invalid phone',
     validEmail: 'sterling@archer.com'
+  },
+
+  enterName() {
+    I.fillField(this.id.name, this.content.name);
+  },
+
+  checkEmail() {
+    I.checkOption(this.id.emailOption);
+  },
+
+  checkPhone() {
+    I.checkOption(this.id.phoneOption);
+  },
+
+  checkText() {
+    I.checkOption(this.id.textOption);
   }
 };

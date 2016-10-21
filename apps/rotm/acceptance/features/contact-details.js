@@ -47,7 +47,8 @@ Scenario('I see an error if I submit the form without an email address', (
   I,
   contactDetailsPage
 ) => {
-  I.fillField(contactDetailsPage.id.name, contactDetailsPage.content.name);
+  contactDetailsPage.enterName();
+  contactDetailsPage.checkEmail();
   I.checkOption(contactDetailsPage.id.emailOption);
   I.submitForm();
   I.seeErrors(contactDetailsPage.id.email);
@@ -57,8 +58,8 @@ Scenario('I see an error if I submit the form with an invalid email address', (
   I,
   contactDetailsPage
 ) => {
-  I.fillField(contactDetailsPage.id.name, contactDetailsPage.content.name);
-  I.checkOption(contactDetailsPage.id.emailOption);
+  contactDetailsPage.enterName();
+  contactDetailsPage.checkEmail();
   I.fillField(contactDetailsPage.id.email, contactDetailsPage.content.invalidEmail);
   I.submitForm();
   I.seeErrors(contactDetailsPage.id.email);
@@ -68,8 +69,8 @@ Scenario('I see an error if I submit the form without a phone number (phone)', (
   I,
   contactDetailsPage
 ) => {
-  I.fillField(contactDetailsPage.id.name, contactDetailsPage.content.name);
-  I.checkOption(contactDetailsPage.id.phoneOption);
+  contactDetailsPage.enterName();
+  contactDetailsPage.checkPhone();
   I.submitForm();
   I.seeErrors(contactDetailsPage.id.phone);
 });
@@ -78,8 +79,8 @@ Scenario('I see an error if I submit the form with an invalid phone number (phon
   I,
   contactDetailsPage
 ) => {
-  I.fillField(contactDetailsPage.id.name, contactDetailsPage.content.name);
-  I.checkOption(contactDetailsPage.id.phoneOption);
+  contactDetailsPage.enterName();
+  contactDetailsPage.checkPhone();
   I.fillField(contactDetailsPage.id.phone, contactDetailsPage.content.invalidPhone);
   I.submitForm();
   I.seeErrors(contactDetailsPage.id.phone);
@@ -89,7 +90,8 @@ Scenario('I see an error if I submit the form without a phone number (text)', (
   I,
   contactDetailsPage
 ) => {
-  I.fillField(contactDetailsPage.id.name, contactDetailsPage.content.name);
+  contactDetailsPage.enterName();
+  contactDetailsPage.checkText();
   I.checkOption(contactDetailsPage.id.textOption);
   I.submitForm();
   I.seeErrors(contactDetailsPage.id.phone2);
@@ -99,8 +101,8 @@ Scenario('I see an error if I submit the form with an invalid phone number (text
   I,
   contactDetailsPage
 ) => {
-  I.fillField(contactDetailsPage.id.name, contactDetailsPage.content.name);
-  I.checkOption(contactDetailsPage.id.textOption);
+  contactDetailsPage.enterName();
+  contactDetailsPage.checkText();
   I.fillField(contactDetailsPage.id.phone2, contactDetailsPage.content.invalidPhone);
   I.submitForm();
   I.seeErrors(contactDetailsPage.id.phone2);
@@ -111,8 +113,8 @@ Scenario('I am taken to the confirm page on a valid submission', (
   contactDetailsPage,
   confirmPage
 ) => {
-  I.fillField(contactDetailsPage.id.name, contactDetailsPage.content.name);
-  I.checkOption(contactDetailsPage.id.emailOption);
+  contactDetailsPage.enterName();
+  contactDetailsPage.checkEmail();
   I.fillField(contactDetailsPage.id.email, contactDetailsPage.content.validEmail);
   I.submitForm();
   I.seeInCurrentUrl(confirmPage.url);

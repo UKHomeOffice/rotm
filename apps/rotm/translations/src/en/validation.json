@@ -11,7 +11,9 @@
   "name": {
     "required": "Tell us your full name"
   },
-  "contact-type": "Tell us how you would like to be contacted",
+  "contact-type": {
+    "required": "Tell us how you would like to be contacted"
+  },
   "email-address": {
     "required": "Tell us your email address",
     "email": "Enter a valid email address"

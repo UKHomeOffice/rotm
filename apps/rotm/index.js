@@ -48,7 +48,8 @@ module.exports = {
       ],
       next: '/confirm',
       locals: {
-        section: 'contact-details'
+        section: 'contact-details',
+        privacy: 'privacy'
       }
     },
     '/confirm': {}
