@@ -1,24 +1,22 @@
 'use strict';
 
 module.exports = {
+  'where': {
+    mixin: 'input-text',
+    validate: 'required'
+  },
   'url': {
     mixin: 'input-text',
-    validate: ['required', {
-      type: 'regex',
-      arguments: [
-        /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/
-      ]
-    }],
-  },
-  'location': {
-    mixin: 'textarea',
-    'ignore-defaults': true,
-    formatter: ['trim', 'hyphens']
+    validate: 'url',
+    child: 'partials/url-details'
   },
   'description': {
     mixin: 'textarea',
     'ignore-defaults': true,
-    formatter: ['trim', 'hyphens']
+    formatter: ['trim', 'hyphens'],
+    child: `<div class="form-hint">
+              {{> partials-bullet-list}}
+            </div>`
   },
   'anonymous': {
     validate: 'required',

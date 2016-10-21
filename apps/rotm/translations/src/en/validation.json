@@ -1,6 +1,8 @@
 {
+  "where": {
+    "required": "Tell us where you found the material"
+  },
   "url": {
-    "required": "Specify the web address that contains the material",
     "regex": "Submit a valid URL"
   },
   "anonymous": {

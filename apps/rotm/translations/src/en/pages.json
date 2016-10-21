@@ -1,10 +1,7 @@
 {
-  "reports": {
+  "report": {
     "header": "Report online terrorist material",
-    "cta-999": "If you're reporting a crime that's happening right now or if there's a threat to someone's life, call 999 immediately.",
-    "advice-additional-reports": "If you have more than one page to report, you can add the other page(s) later.",
-    "additional-report-header-pre": "Please add another report or",
-    "additional-report-header-link": "review your existing reports"
+    "cta-999": "If you're reporting a crime that's happening right now or if there's a threat to someone's life, call 999 immediately."
   },
   "confirm": {
     "header": "Check the details before submitting the report",

@@ -5,19 +5,23 @@ pipeline:
       - npm --loglevel warn install -g npm@3
       - npm --loglevel warn install
       - npm run test:ci
+    when:
+      event: [push, pull_request]
 
   build_5:
     image: node:5
     commands:
       - npm --loglevel warn install
       - npm run test:ci
+    when:
+      event: [push, pull_request]
 
   build_app:
     image: docker:1.11
     environment:
       - DOCKER_HOST=tcp://127.0.0.1:2375
     commands:
-      - docker build -t app .
+      - docker build -t rotm .
     when:
       event: pull_request
 
@@ -26,9 +30,19 @@ pipeline:
     environment:
       - DOCKER_HOST=tcp://127.0.0.1:2375
     commands:
-      - docker build -t app .
+      - docker build -t rotm .
+    when:
+      event: pull_request
+
+  build_app:
+    image: docker:1.11
+    environment:
+      - DOCKER_HOST=tcp://127.0.0.1:2375
+    commands:
+      - docker build -t rotm .
     when:
       branch: master
+      event: push
 
   build_acceptance:
     image: docker:1.11
@@ -47,13 +61,14 @@ pipeline:
       - docker build -f Dockerfile-acceptance -t acceptance .
     when:
       branch: master
+      event: push
 
   test_acceptance:
     image: docker:1.11
     environment:
       - DOCKER_HOST=tcp://127.0.0.1:2375
     commands:
-      - docker run -e NODE_ENV=ci -d --net host app
+      - docker run -e NODE_ENV=ci -d --net host rotm
       - docker run --rm --net host acceptance
     when:
       event: pull_request
@@ -63,10 +78,11 @@ pipeline:
     environment:
       - DOCKER_HOST=tcp://127.0.0.1:2375
     commands:
-      - docker run -e NODE_ENV=ci -d --net host app
+      - docker run -e NODE_ENV=ci -d --net host rotm
       - docker run --rm --net host acceptance
     when:
       branch: master
+      event: push
 
   image_to_quay:
     image: docker:1.11
@@ -74,10 +90,11 @@ pipeline:
       - DOCKER_HOST=tcp://127.0.0.1:2375
     commands:
       - docker login -u="ukhomeofficedigital+drone" -p=${DOCKER_PASSWORD} quay.io
-      - docker tag app quay.io/ukhomeofficedigital/rotm:${DRONE_COMMIT_SHA}
+      - docker tag rotm quay.io/ukhomeofficedigital/rotm:${DRONE_COMMIT_SHA}
       - docker push quay.io/ukhomeofficedigital/rotm:${DRONE_COMMIT_SHA}
     when:
       branch: master
+      event: push
 
   trigger_deploy_to_rotm_dev:
     image: quay.io/ukhomeofficedigital/drone-trigger:latest
@@ -106,3 +123,6 @@ services:
   dind:
     image: docker:1.11-dind
     privileged: true
+    command:
+      - "-s"
+      - "overlay"
