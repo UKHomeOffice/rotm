@@ -28,5 +28,50 @@ module.exports = {
       'true',
       'false'
     ]
+  },
+  name: {
+    mixin: 'input-text',
+    validate: 'required'
+  },
+  'contact-type': {
+    validate: 'required',
+    legend: {
+      className: 'form-label-bold'
+    },
+    mixin: 'radio-group',
+    options: [{
+      value: 'email',
+      toggle: 'email-address',
+      child: 'input-text'
+    }, {
+      value: 'phone',
+      toggle: 'phone-number',
+      child: 'input-text'
+    }, {
+      value: 'text-message',
+      toggle: 'phone-number-2',
+      child: 'input-text'
+    }]
+  },
+  'email-address': {
+    validate: ['required', 'email'],
+    dependent: {
+      field: 'contact-type',
+      value: 'email'
+    }
+  },
+  'phone-number': {
+    validate: ['required', 'numeric'],
+    dependent: {
+      field: 'contact-type',
+      value: 'phone'
+    }
+  },
+  'phone-number-2': {
+    validate: ['required', 'numeric'],
+    dependent: {
+      field: 'contact-type',
+      value: 'text-message'
+    }
   }
 };

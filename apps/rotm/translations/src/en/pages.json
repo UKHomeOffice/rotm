@@ -6,6 +6,9 @@
   "consent": {
     "header": " "
   },
+  "contact-details": {
+    "header": "What are your contact details?"
+  },
   "confirm": {
     "header": "Check the details before submitting the report",
     "check-details": "Check details of the report",
