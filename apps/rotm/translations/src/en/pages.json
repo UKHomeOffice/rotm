@@ -3,6 +3,9 @@
     "header": "Report online terrorist material",
     "cta-999": "If you're reporting a crime that's happening right now or if there's a threat to someone's life, call 999 immediately."
   },
+  "consent": {
+    "header": " "
+  },
   "confirm": {
     "header": "Check the details before submitting the report",
     "check-details": "Check details of the report",
