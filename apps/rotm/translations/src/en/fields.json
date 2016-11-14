@@ -9,10 +9,12 @@
     "legend": "Confirmation details about terrorist material"
   },
   "where": {
+    "summary": "Where you found the information",
     "label": "Where did you find the material?",
     "hint": "Give the website / app name."
   },
   "url": {
+    "summary": "Web address",
     "label": "What's the web address? (optional)",
     "details": {
       "title": "What's a web address?",
@@ -20,6 +22,7 @@
     }
   },
   "description": {
+    "summary": "More information",
     "label": "Tell us more about the material you found (optional)",
     "hint": "Include any further information you can to help us investigate. Important things to tell us include:",
     "items": [
@@ -32,6 +35,7 @@
     ]
   },
   "contact-consent": {
+    "summary": "Contact consent",
     "legend": "Can we contact you for more information?",
     "hint": "Being able to contact you may help us with our enquiries.",
     "options": {
@@ -44,9 +48,11 @@
     }
   },
   "name": {
+    "summary": "Full name",
     "label": "What is your full name?"
   },
   "contact-type": {
+    "summary": "Contact preference",
     "legend": "How would you prefer to be contacted?",
     "options": {
       "email": {
@@ -61,12 +67,15 @@
     }
   },
   "email-address": {
+    "summary": "Email address",
     "label": "What is your email address?"
   },
   "phone-number": {
+    "summary": "Phone number",
     "label": "What is your phone number?"
   },
   "phone-number-2": {
+    "summary": "Phone number",
     "label": "What is your phone number?"
   }
 }
