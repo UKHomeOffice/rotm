@@ -17,14 +17,16 @@ Scenario('I see the correct table values', function *(
 ) {
   yield I.setSessionData(steps.name, confirmPage.data);
   yield I.refreshPage();
-  I.seeElements(Object.keys(confirmPage.data).map(key => `[data-value='${confirmPage.data[key]}']`));
+  I.seeElements(Object.keys(confirmPage.confirmData).map(key => `[data-value='${confirmPage.confirmData[key]}']`));
 });
 
-Scenario('I am taken to the confirmation page on submit', (
+Scenario('I am taken to the confirmation page on submit', function *(
   I,
   confirmPage,
   confirmationPage
-) => {
+) {
+  yield I.setSessionData(steps.name, confirmPage.data);
+  yield I.refreshPage();
   I.submitForm();
   I.seeInCurrentUrl(confirmationPage.url);
 });
