@@ -19,7 +19,7 @@ module.exports = {
       ],
       next: '/contact-consent',
       locals: {
-        section: 'report'
+        section: 'report-section'
       }
     },
     '/contact-consent': {
@@ -35,7 +35,7 @@ module.exports = {
         }
       }],
       locals: {
-        section: 'consent'
+        section: 'contact-section'
       }
     },
     '/contact-details': {
@@ -53,9 +53,11 @@ module.exports = {
       }
     },
     '/confirm': {
-      controller: require('./controllers/confirm'),
-      config: require('./confirm-step-config'),
+      controller: controllers.confirm,
+      fieldsConfig: require('./fields'),
+      emailConfig: require('../../config').email,
       next: '/confirmation',
+      customerEmailField: 'email-address',
       locals: {
         section: 'confirm'
       }

@@ -1,10 +1,16 @@
 {
+  "report-section": {
+    "header": "Report Details"
+  },
+  "contact-section": {
+    "header": "Contact Details"
+  },
+  "contact-consent": {
+    "header": ""
+  },
   "report": {
     "header": "Report online terrorist material",
     "cta-999": "If you're reporting a crime that's happening right now or if there's a threat to someone's life, call 999 immediately."
-  },
-  "consent": {
-    "header": " "
   },
   "contact-details": {
     "header": "What are your contact details?",
@@ -13,25 +19,10 @@
   },
   "confirm": {
     "header": "Check the details before submitting the report",
-    "check-details": "Check details of the report",
-    "table": {
-      "headers": {
-        "report": "Report Details",
-        "contact-details": "Contact Details",
-        "where": "Where you found the information",
-        "url": "Web address",
-        "description": "More information",
-        "contact-consent": "Contact consent",
-        "name": "Full name",
-        "contact-type": "Contact preference",
-        "email-address": "Email address",
-        "phone-number": "Phone number",
-        "phone-number-2": "Phone number"
-      }
-    }
+    "check-details": "Check details of the report"
   },
   "confirmation": {
-    "header": " ",
+    "header": "",
     "subheader": "Thank you, we have received your report.",
     "thankyou": "Thankyou for your submission. Alerting the authorities to terrorist material can help save lives.",
     "whats-next": "What happens next",
