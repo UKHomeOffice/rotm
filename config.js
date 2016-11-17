@@ -31,6 +31,6 @@ module.exports = {
     region: process.env.EMAIL_REGION || ''
   },
   ga: {
-    tagId: process.env.GA_TAG_ID
+    tagId: process.env.GA_TAG
   }
 };
