@@ -23,16 +23,12 @@ module.exports = {
   },
   email: {
     caseworker: process.env.CASEWORKER_EMAIL || '',
-    port: process.env.EMAIL_PORT || '',
-    host: process.env.EMAIL_HOST || '',
     from: process.env.FROM_ADDRESS || '',
     replyTo: process.env.REPLY_TO || '',
-    ignoreTLS: process.env.EMAIL_IGNORE_TLS || false,
-    secure: process.env.EMAIL_SECURE || false,
-    auth: {
-      user: process.env.SMTP_USER || '',
-      pass: process.env.SMTP_PASSWORD || ''
-    }
+    accessKeyId: process.env.AWS_USER || '',
+    secretAccessKey: process.env.AWS_PASSWORD || '',
+    transportType: 'ses',
+    region: process.env.EMAIL_REGION || ''
   },
   ga: {
     tagId: process.env.GA_TAG_ID
