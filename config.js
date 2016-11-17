@@ -35,6 +35,6 @@ module.exports = {
     }
   },
   ga: {
-    tagId: process.env.GA_TAG_ID
+    tagId: process.env.GA_TAG
   }
 };
