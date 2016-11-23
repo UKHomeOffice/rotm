@@ -9,10 +9,8 @@ describe('Report Controller', () => {
   beforeEach(() => {
     StubController.prototype.locals = sinon.stub().returns({});
     Controller = proxyquire('../../../../../apps/rotm/controllers/report', {
-      hof: {
-        controllers: {
-          base: StubController
-        }
+      'hof-controllers': {
+        base: StubController
       }
     });
     controller = new Controller();
