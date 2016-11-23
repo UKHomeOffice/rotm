@@ -1,6 +1,6 @@
  'use strict';
 
-const controllers = require('hof').controllers;
+const controllers = require('hof-controllers');
 
 module.exports = {
   name: 'rotm',
