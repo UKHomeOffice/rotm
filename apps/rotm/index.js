@@ -57,7 +57,7 @@ module.exports = {
       fieldsConfig: require('./fields'),
       emailConfig: require('../../config').email,
       next: '/confirmation',
-      customerEmailField: 'email-address',
+      emailUser: false,
       locals: {
         section: 'confirm'
       }
