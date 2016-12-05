@@ -24,7 +24,16 @@ module.exports = {
   content: {
     name: 'Sterling Archer',
     invalidEmail: 'sterlingarcher',
-    invalidPhone: 'invalid phone',
+    invalidPhoneNumbers: [
+      'invalid phone',
+      '+44 (020) 98347347898!',
+      '+44 (020) 98347347898abc'
+    ],
+    validPhoneNumbers: [
+      '+44 020 98347347898',
+      '+44 (020) 8934783749',
+      '+44-20-98174793489'
+    ],
     validEmail: 'sterling@archer.com'
   },
 

@@ -20,10 +20,10 @@
   },
   "phone-number": {
     "required": "Tell us your phone number",
-    "numeric": "Enter a valid phone number"
+    "phoneNumber": "Enter a valid phone number"
   },
   "phone-number-2": {
     "required": "Tell us your phone number",
-    "numeric": "Enter a valid phone number"
+    "phoneNumber": "Enter a valid phone number"
   }
 }
