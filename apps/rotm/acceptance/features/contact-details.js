@@ -79,11 +79,28 @@ Scenario('I see an error if I submit the form with an invalid phone number (phon
   I,
   contactDetailsPage
 ) => {
-  contactDetailsPage.enterName();
-  contactDetailsPage.checkPhone();
-  I.fillField(contactDetailsPage.id.phone, contactDetailsPage.content.invalidPhone);
-  I.submitForm();
-  I.seeErrors(contactDetailsPage.id.phone);
+  contactDetailsPage.content.invalidPhoneNumbers.forEach(number => {
+    contactDetailsPage.enterName();
+    contactDetailsPage.checkPhone();
+    I.fillField(contactDetailsPage.id.phone, number);
+    I.submitForm();
+    I.seeErrors(contactDetailsPage.id.phone);
+  });
+});
+
+Scenario('phone numbers are accepted with certain special characters (phone)', (
+  I,
+  contactDetailsPage,
+  confirmPage
+) => {
+  contactDetailsPage.content.validPhoneNumbers.forEach(number => {
+    I.visitPage(contactDetailsPage, steps);
+    contactDetailsPage.enterName();
+    contactDetailsPage.checkPhone();
+    I.fillField(contactDetailsPage.id.phone, number);
+    I.submitForm();
+    I.seeInCurrentUrl(confirmPage.url)
+  });
 });
 
 Scenario('I see an error if I submit the form without a phone number (text)', (
@@ -101,11 +118,28 @@ Scenario('I see an error if I submit the form with an invalid phone number (text
   I,
   contactDetailsPage
 ) => {
-  contactDetailsPage.enterName();
-  contactDetailsPage.checkText();
-  I.fillField(contactDetailsPage.id.phone2, contactDetailsPage.content.invalidPhone);
-  I.submitForm();
-  I.seeErrors(contactDetailsPage.id.phone2);
+  contactDetailsPage.content.invalidPhoneNumbers.forEach(number => {
+    contactDetailsPage.enterName();
+    contactDetailsPage.checkText();
+    I.fillField(contactDetailsPage.id.phone2, number);
+    I.submitForm();
+    I.seeErrors(contactDetailsPage.id.phone2);
+  });
+});
+
+Scenario('I am able to enter a number with certain special characters (text)', (
+  I,
+  contactDetailsPage,
+  confirmPage
+) => {
+  contactDetailsPage.content.validPhoneNumbers.forEach(number => {
+    I.visitPage(contactDetailsPage, steps);
+    contactDetailsPage.enterName();
+    contactDetailsPage.checkText();
+    I.fillField(contactDetailsPage.id.phone2, number);
+    I.submitForm();
+    I.seeInCurrentUrl(confirmPage.url);
+  });
 });
 
 Scenario('I am taken to the confirm page on a valid submission', (

@@ -1,5 +1,9 @@
 'use strict';
 
+function phoneNumber(number) {
+  return number.match(/^[\d-+ ()]+$/);
+}
+
 module.exports = {
   'where': {
     mixin: 'input-text',
@@ -61,14 +65,14 @@ module.exports = {
     }
   },
   'phone-number': {
-    validate: ['required', 'numeric'],
+    validate: ['required', phoneNumber],
     dependent: {
       field: 'contact-type',
       value: 'phone'
     }
   },
   'phone-number-2': {
-    validate: ['required', 'numeric'],
+    validate: ['required', phoneNumber],
     dependent: {
       field: 'contact-type',
       value: 'text-message'
