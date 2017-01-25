@@ -17,7 +17,7 @@ describe('Report Controller', () => {
   });
 
   it('has a locals method', () => {
-    controller.locals.should.be.a('function');
+    controller.should.have.property('locals').that.is.a('function');
   });
 
   describe('public methods', () => {

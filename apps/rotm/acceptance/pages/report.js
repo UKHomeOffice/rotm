@@ -11,6 +11,8 @@ module.exports = {
   },
   content: {
     where: 'A site',
-    invalidUrl: 'something'
+    invalidUrl: 'something',
+    validUrl: 'http://www.a-site.com',
+    description: 'Some text'
   }
 };
