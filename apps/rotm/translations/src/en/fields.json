@@ -15,8 +15,7 @@
   },
   "url": {
     "summary": "Web address",
-    "label": "What's the web address?",
-    "hint": "If you do not have the web address, please leave this blank and provide clear details of how to find the materials in the \"Tell us more\" field below.",
+    "label": "What's the web address? (optional)",
     "details": {
       "title": "What's a web address?",
       "content": "You can find the web address at the top of the browser window. It usually starts with \"www.\", \"http://\" or \"https://\"."
@@ -24,7 +23,7 @@
   },
   "description": {
     "summary": "More information",
-    "label": "Tell us more about the material you found",
+    "label": "Tell us more about the material you found (optional)",
     "hint": "Include any further information you can to help us investigate. Important things to tell us include:",
     "items": [
       "where on the page is the material?",
