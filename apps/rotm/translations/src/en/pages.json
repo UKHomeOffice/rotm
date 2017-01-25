@@ -9,7 +9,7 @@
     "header": ""
   },
   "report": {
-    "header": "Report online terrorist material",
+    "header": "Report online material promoting terrorism or extremism",
     "cta-999": "If you're reporting a crime that's happening right now or if there's a threat to someone's life, call 999 immediately."
   },
   "contact-details": {
@@ -34,7 +34,7 @@
     "feedback-time": "(takes 30 seconds)"
   },
   "email": {
-    "subject": "Report Online Terrorist Materials: Form submitted",
+    "subject": "Report online material promoting terrorism or extremism: Form submitted",
     "intro": {
       "customer": "Thank you for your report regarding terrorist materials. Here is the data which we have recorded:"
     }
