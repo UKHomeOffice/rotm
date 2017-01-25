@@ -17,6 +17,11 @@ module.exports = {
   'description': {
     mixin: 'textarea',
     'ignore-defaults': true,
+    validate: 'required',
+    dependent: {
+      field: 'url',
+      value: ''
+    },
     formatter: ['trim', 'hyphens'],
     child: `<div class="form-hint">
               {{> partials-bullet-list}}
