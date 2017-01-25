@@ -40,33 +40,12 @@ Scenario('An error is shown if an invalid URL is entered', (
   I.seeErrors(reportPage.id.url);
 });
 
-Scenario('An Error is shown if url and description are left blank', (
-  I,
-  reportPage
-) => {
-  I.fillField(reportPage.id.where, reportPage.content.where);
-  I.submitForm();
-  I.seeErrors(reportPage.id.description);
-});
-
-Scenario('No error is shown if url is entered and description is left blank', (
+Scenario('On valid submission I am taken to the content-consent step', (
   I,
   reportPage,
   contactConsentPage
 ) => {
   I.fillField(reportPage.id.where, reportPage.content.where);
-  I.fillField(reportPage.id.url, reportPage.content.validUrl);
-  I.submitForm();
-  I.seeInCurrentUrl(contactConsentPage.url);
-});
-
-Scenario('No error is shown if the url is left blank and a description is entered', (
-  I,
-  reportPage,
-  contactConsentPage
-) => {
-  I.fillField(reportPage.id.where, reportPage.content.where);
-  I.fillField(reportPage.id.description, reportPage.content.description);
   I.submitForm();
   I.seeInCurrentUrl(contactConsentPage.url);
 });
