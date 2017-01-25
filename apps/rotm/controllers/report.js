@@ -1,6 +1,8 @@
 'use strict';
 
-const BaseController = require('hof-controllers').base;
+const controllers = require('hof-controllers');
+const BaseController = controllers.base;
+const ErrorController = controllers.error;
 
 module.exports = class ReportController extends BaseController {
   locals(req, res, next) {
@@ -8,5 +10,17 @@ module.exports = class ReportController extends BaseController {
     return Object.assign({}, locals, {
       items: req.translate('fields.description.items')
     });
+  }
+
+  validateField(key, req) {
+    if (key === 'description') {
+      if (!req.form.values.url && !req.form.values[key]) {
+        return new ErrorController(key, {
+          key,
+          type: 'required'
+        });
+      }
+    }
+    return super.validateField(key, req);
   }
 };
