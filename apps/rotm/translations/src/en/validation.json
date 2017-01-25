@@ -5,6 +5,9 @@
   "url": {
     "regex": "Submit a valid URL"
   },
+  "description": {
+    "required": "Tell us how you found the material"
+  },
   "contact-consent": {
     "required": "Let us know whether we can contact you for more information"
   },
