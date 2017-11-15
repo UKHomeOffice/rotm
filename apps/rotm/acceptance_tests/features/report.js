@@ -59,14 +59,3 @@ Scenario('No error is shown if url is entered and description is left blank', (
   I.submitForm();
   I.seeInCurrentUrl(contactConsentPage.url);
 });
-
-Scenario('No error is shown if the url is left blank and a description is entered', (
-  I,
-  reportPage,
-  contactConsentPage
-) => {
-  I.fillField(reportPage.id.where, reportPage.content.where);
-  I.fillField(reportPage.id.description, reportPage.content.description);
-  I.submitForm();
-  I.seeInCurrentUrl(contactConsentPage.url);
-});
