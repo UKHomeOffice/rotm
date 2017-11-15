@@ -2,7 +2,7 @@ public
 node_modules
 coverage
 apps/**/translations/**/default.json
-apps/**/acceptance_tests/**/*.js
+apps/**/acceptance/**/*.js
 LICENSE
 README.md
 CONTRIBUTING.md
