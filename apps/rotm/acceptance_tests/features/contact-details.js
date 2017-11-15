@@ -99,7 +99,7 @@ Scenario('phone numbers are accepted with certain special characters (phone)', (
     contactDetailsPage.checkPhone();
     I.fillField(contactDetailsPage.id.phone, number);
     I.submitForm();
-    I.seeInCurrentUrl(confirmPage.url)
+    I.seeInCurrentUrl(confirmPage.url);
   });
 });
 

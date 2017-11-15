@@ -1,7 +1,5 @@
 'use strict';
 
-let I;
-
 module.exports = {
   url: 'report',
   id: {
