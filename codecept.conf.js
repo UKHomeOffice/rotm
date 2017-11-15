@@ -3,11 +3,11 @@
 const path = require('path');
 
 const pagesPath = filename => path.resolve(__dirname,
-  `./apps/rotm/acceptance/pages/${filename}`);
+  `./apps/rotm/acceptance_tests/pages/${filename}`);
 
-module.exports = {
+module.exports = require('so-acceptance').extend({
   name: 'rotm',
-  features: './apps/*/acceptance/features/**/*.js',
+  tests: './apps/*/acceptance_tests/features/**/*.js',
   include: {
     reportPage: pagesPath('report.js'),
     contactConsentPage: pagesPath('contact-consent.js'),
@@ -15,4 +15,4 @@ module.exports = {
     confirmPage: pagesPath('confirm.js'),
     confirmationPage: pagesPath('confirmation.js')
   }
-};
+});
