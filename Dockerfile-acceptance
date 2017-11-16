@@ -1,18 +1,16 @@
-FROM node:5
+FROM quay.io/ukhomeofficedigital/nodejs-base:v6
+
+RUN yum install bzip2 -y
+RUN yum install freetype -y
+RUN yum install fontconfig -y
 
 WORKDIR /test
-
-ENV PHANTOM_JS phantomjs-2.1.1-linux-x86_64
-
-RUN wget https://github.com/Medium/phantomjs/releases/download/v2.1.1/${PHANTOM_JS}.tar.bz2 && \
-    tar xjf ${PHANTOM_JS}.tar.bz2
 
 COPY package.json package.json
 COPY codecept.conf.js codecept.conf.js
 COPY config.js config.js
 COPY apps apps/
-COPY test.sh test.sh
 
-RUN npm --loglevel warn install --ignore-scripts
+RUN npm --loglevel warn install
 
-CMD /test/test.sh
+CMD npm run test:acceptance
