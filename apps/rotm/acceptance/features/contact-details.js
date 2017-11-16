@@ -5,10 +5,14 @@ const steps = require('../../');
 Feature('Contact Details Step');
 
 Before((
-  I,
-  contactDetailsPage
+  I
 ) => {
-  I.visitPage(contactDetailsPage, steps);
+  I.amOnPage('/');
+  I.completeToStep('/contact-details', {
+    'where': 'facebook',
+    'url': 'www.fb.com',
+    'contact-consent': 'true'
+  });
 });
 
 Scenario('The correct fields are on the page', (
