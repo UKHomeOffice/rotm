@@ -1,1 +1,9 @@
-{}
+{
+  "source": {
+    "label": "Link or website",
+    "hint": "For example, 'https://www.gov.uk/report-terrorism' or 'Facebook'",
+    "validation": {
+      "required": "Tell us where you found the material"
+    }
+  }
+}

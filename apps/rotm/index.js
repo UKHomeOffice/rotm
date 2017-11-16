@@ -4,7 +4,10 @@ module.exports = {
   name: 'rotm',
   params: '/:action?',
   steps: {
-    '/report': {
+    '/source': {
+      fields: [
+        'source'
+      ],
       next: '/confirm'
     },
     '/confirm': {
