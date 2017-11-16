@@ -39,6 +39,7 @@ module.exports = {
       }
     },
     '/contact-details': {
+      behaviours: [require('./behaviours/filter-fields')],
       fields: [
         'name',
         'contact-type',
