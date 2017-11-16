@@ -3,7 +3,7 @@ pipeline:
     image: node:6
     commands:
       - npm --loglevel warn install
-      - npm run test:ci
+      - npm run test
     when:
       event: [push, pull_request]
 
@@ -11,7 +11,7 @@ pipeline:
     image: node:8
     commands:
       - npm --loglevel warn install
-      - npm run test:ci
+      - npm run test
     when:
       event: [push, pull_request]
 
