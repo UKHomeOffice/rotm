@@ -1,12 +1,5 @@
 'use strict';
 
-const hof = require('hof');
+const app = require('./');
 
-hof({
-  translations: './apps/rotm/translations',
-  views: false,
-  fields: false,
-  routes: [
-    require('./apps/rotm')
-  ]
-});
+app.start();
