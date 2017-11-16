@@ -1,8 +1,8 @@
 'use strict';
 
-const bootstrap = require('hof-bootstrap');
+const hof = require('hof');
 
-bootstrap({
+hof({
   translations: './apps/rotm/translations',
   views: false,
   fields: false,
