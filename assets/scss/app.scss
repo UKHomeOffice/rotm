@@ -4,6 +4,22 @@
   @include phase-banner(alpha);
 }
 
+ul {
+  @extend .list-bullet;
+}
+
+details {
+  margin-bottom: $gutter;
+
+  .panel-indent {
+    margin-bottom: $gutter-half;
+  }
+}
+
+textarea.form-control {
+  @extend .form-control-3-4;
+}
+
 #step {
   @include core-16;
   a {

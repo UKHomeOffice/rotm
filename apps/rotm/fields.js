@@ -3,5 +3,8 @@
 module.exports = {
   source: {
     validate: 'required'
+  },
+  'more-info': {
+    mixin: 'textarea'
   }
 };
