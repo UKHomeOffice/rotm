@@ -68,7 +68,7 @@ pipeline:
     environment:
       - DOCKER_HOST=tcp://127.0.0.1:2375
     commands:
-      - docker run -e NODE_ENV=ci -d --net host rotm-${DRONE_COMMIT_SHA}
+      - docker run -e NODE_ENV=ci -e DISABLE_CSP=true -d --net host rotm-${DRONE_COMMIT_SHA}
       - docker run --rm --net host acceptance-${DRONE_COMMIT_SHA}
     when:
       branch: master
