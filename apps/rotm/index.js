@@ -8,6 +8,12 @@ module.exports = {
       fields: [
         'source'
       ],
+      next: '/more-info'
+    },
+    '/more-info': {
+      fields: [
+        'more-info'
+      ],
       next: '/confirm'
     },
     '/confirm': {
