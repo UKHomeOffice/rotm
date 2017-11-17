@@ -1,12 +1,5 @@
 'use strict';
 
-const bootstrap = require('hof-bootstrap');
+const app = require('./');
 
-bootstrap({
-  translations: './apps/rotm/translations',
-  views: false,
-  fields: false,
-  routes: [
-    require('./apps/rotm')
-  ]
-});
+app.start();

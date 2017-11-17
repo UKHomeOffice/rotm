@@ -3,7 +3,7 @@ pipeline:
     image: node:6
     commands:
       - npm --loglevel warn install
-      - npm run test:ci
+      - npm run test
     when:
       event: [push, pull_request]
 
@@ -11,7 +11,7 @@ pipeline:
     image: node:8
     commands:
       - npm --loglevel warn install
-      - npm run test:ci
+      - npm run test
     when:
       event: [push, pull_request]
 
@@ -20,7 +20,7 @@ pipeline:
     environment:
       - DOCKER_HOST=tcp://127.0.0.1:2375
     commands:
-      - docker build -t rotm .
+      - docker build -t rotm-${DRONE_COMMIT_SHA} .
     when:
       event: pull_request
 
@@ -29,16 +29,7 @@ pipeline:
     environment:
       - DOCKER_HOST=tcp://127.0.0.1:2375
     commands:
-      - docker build -t rotm .
-    when:
-      event: pull_request
-
-  build_app:
-    image: docker:1.11
-    environment:
-      - DOCKER_HOST=tcp://127.0.0.1:2375
-    commands:
-      - docker build -t rotm .
+      - docker build -t rotm-${DRONE_COMMIT_SHA} .
     when:
       branch: master
       event: push
@@ -48,7 +39,7 @@ pipeline:
     environment:
       - DOCKER_HOST=tcp://127.0.0.1:2375
     commands:
-      - docker build -f Dockerfile-acceptance -t acceptance .
+      - docker build -f Dockerfile-acceptance -t acceptance-${DRONE_COMMIT_SHA} .
     when:
       event: pull_request
 
@@ -57,7 +48,7 @@ pipeline:
     environment:
       - DOCKER_HOST=tcp://127.0.0.1:2375
     commands:
-      - docker build -f Dockerfile-acceptance -t acceptance .
+      - docker build -f Dockerfile-acceptance -t acceptance-${DRONE_COMMIT_SHA} .
     when:
       branch: master
       event: push
@@ -67,8 +58,8 @@ pipeline:
     environment:
       - DOCKER_HOST=tcp://127.0.0.1:2375
     commands:
-      - docker run -e NODE_ENV=ci -d --net host rotm
-      - docker run --rm --net host acceptance
+      - docker run -e NODE_ENV=ci -e DISABLE_CSP=true -d --net host rotm-${DRONE_COMMIT_SHA}
+      - docker run --rm --net host acceptance-${DRONE_COMMIT_SHA}
     when:
       event: pull_request
 
@@ -77,8 +68,8 @@ pipeline:
     environment:
       - DOCKER_HOST=tcp://127.0.0.1:2375
     commands:
-      - docker run -e NODE_ENV=ci -d --net host rotm
-      - docker run --rm --net host acceptance
+      - docker run -e NODE_ENV=ci -d --net host rotm-${DRONE_COMMIT_SHA}
+      - docker run --rm --net host acceptance-${DRONE_COMMIT_SHA}
     when:
       branch: master
       event: push
@@ -89,7 +80,7 @@ pipeline:
       - DOCKER_HOST=tcp://127.0.0.1:2375
     commands:
       - docker login -u="ukhomeofficedigital+drone" -p=${DOCKER_PASSWORD} quay.io
-      - docker tag rotm quay.io/ukhomeofficedigital/rotm:${DRONE_COMMIT_SHA}
+      - docker tag rotm-${DRONE_COMMIT_SHA} quay.io/ukhomeofficedigital/rotm:${DRONE_COMMIT_SHA}
       - docker push quay.io/ukhomeofficedigital/rotm:${DRONE_COMMIT_SHA}
     when:
       branch: master

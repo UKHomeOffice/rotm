@@ -1,9 +1,6 @@
 .idea/
 node_modules
 public
-*.log
-.DS_Store
-Gemfile.lock
-apps/**/translations/en
+apps/**/translations/**
 coverage
-artefacts
+package-lock.json

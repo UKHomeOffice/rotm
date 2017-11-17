@@ -4,14 +4,8 @@
 
 'use strict';
 
-process.title = 'rtm';
-
 module.exports = {
-  env: process.env.NODE_ENV || 'local',
-  siteroot: process.env.SITEROOT || '',
   port: process.env.PORT || 8080,
-  listen_host: process.env.LISTEN_HOST || '0.0.0.0',
-  secureProtocol: process.env.SECURE_PROTOCOL || false,
   session: {
     secret: process.env.SESSION_SECRET || 'howdoesyourgardengrow',
     ttl: process.env.SESSION_TTL || 1800, /* 30 mins timeout */
@@ -29,8 +23,5 @@ module.exports = {
     secretAccessKey: process.env.AWS_PASSWORD || '',
     transportType: 'ses',
     region: process.env.EMAIL_REGION || ''
-  },
-  ga: {
-    tagId: process.env.GA_TAG
   }
 };
