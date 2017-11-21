@@ -14,7 +14,17 @@ module.exports = {
       fields: [
         'more-info'
       ],
+      next: '/image'
+    },
+    '/image': {
+      next: '/add-image'
+    },
+    '/add-image': {
       next: '/confirm'
+    },
+    '/check-your-report': {
+      next: 'confirm',
+      backLink: 'image'
     },
     '/confirm': {
       behaviours: ['complete'],

@@ -1,0 +1,7 @@
+extends:
+  - '../.eslintrc'
+  - 'homeoffice/config/default'
+
+env:
+  es6: true
+  browser: true
