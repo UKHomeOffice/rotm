@@ -20,6 +20,22 @@ textarea.form-control {
   @extend .form-control-3-4;
 }
 
+// styles for rh column borrowed from govuk prototype kit
+.govuk-related-items {
+  margin-top: $gutter;
+  border-top: 10px solid $govuk-blue;
+  padding-top: 5px;
+
+  h2 {
+    margin-top: 0.3em;
+    margin-bottom: 0.5em;
+  }
+
+  img {
+    width: 100%;
+  }
+}
+
 #step {
   @include core-16;
   a {
