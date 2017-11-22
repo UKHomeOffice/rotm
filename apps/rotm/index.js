@@ -20,7 +20,11 @@ module.exports = {
     },
     '/image': {
       next: '/add-image',
-      behaviours: skipStep
+      behaviours: skipStep,
+      forks: [{
+        target: '/check-your-report',
+        condition: (req) => req.form.values['file-upload'] === ''
+        }]
     },
     '/add-image': {
       next: '/check-your-report'
