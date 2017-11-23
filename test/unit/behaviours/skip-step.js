@@ -16,6 +16,7 @@ describe('apps/behaviours/skip-step', () => {
   let sessionModel;
   let instance;
   let SkipStep;
+  let values;
 
   beforeEach(() => {
     sessionModel = {
@@ -42,18 +43,30 @@ describe('apps/behaviours/skip-step', () => {
       Base.prototype.getValues.restore();
     });
 
-    it('adds the next step to completed steps in the sessionModel if it is not there', () => {
-      req.sessionModel.get.withArgs('steps').returns(['step1']);
+    it('adds the next step to completed steps in the sessionModel if it is not there', (done) => {
+      values = {
+        steps: ['step1']
+      };
+      Base.prototype.getValues.yields(null, values);
       req.form.options.route = 'step2';
-      instance.getValues(req, res);
-      expect(sessionModel.set).to.have.been.calledWith('steps', ['step1', 'step2']);
+      instance.getValues(req, res, (err) => {
+        expect(err).not.to.exist;
+        expect(sessionModel.set).to.have.been.calledWith('steps', ['step1', 'step2']);
+        done();
+      });
     });
 
-    it('does not add a step to completed steps in the sessionModel if it is already there', () => {
-      req.sessionModel.get.withArgs('steps').returns(['step1', 'step2']);
+    it('does not add a step to completed steps in the sessionModel if it is already there', (done) => {
+      values = {
+        steps: ['step1', 'step2']
+      };
+      Base.prototype.getValues.yields(null, values);
       req.form.options.route = 'step2';
-      instance.getValues(req, res);
-      expect(sessionModel.set).to.not.have.been.called;
+      instance.getValues(req, res, (err) => {
+        expect(err).not.to.exist;
+        expect(sessionModel.set).to.not.have.been.called;
+        done();
+      });
     });
   });
 });
