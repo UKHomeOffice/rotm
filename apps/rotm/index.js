@@ -1,6 +1,8 @@
  'use strict';
 
-const skipStep = require('./behaviours/skip-step');
+const skipStep = require('./behaviours/skip-step')({
+  steps: ['/add-image']
+});
 
 module.exports = {
   name: 'rotm',
@@ -20,11 +22,7 @@ module.exports = {
     },
     '/image': {
       next: '/add-image',
-      behaviours: skipStep,
-      forks: [{
-        target: '/check-your-report',
-        condition: (req) => req.form.values['file-upload'] === ''
-        }]
+      behaviours: skipStep
     },
     '/add-image': {
       next: '/check-your-report'
