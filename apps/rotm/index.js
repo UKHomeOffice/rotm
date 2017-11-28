@@ -1,8 +1,6 @@
  'use strict';
 
-const skipStep = require('./behaviours/skip-step')({
-  steps: ['/add-image']
-});
+const skipStep = require('./behaviours/skip-step');
 
 module.exports = {
   name: 'rotm',
@@ -28,9 +26,9 @@ module.exports = {
       next: '/check-your-report'
     },
     '/check-your-report': {
+      prereqs: ['/image'],
       behaviours: ['complete'],
-      next: '/confirmation',
-      backLink: 'image'
+      next: '/confirmation'
     },
     '/confirmation': {
       backLink: false
