@@ -1,5 +1,7 @@
  'use strict';
 
+const skipStep = require('./behaviours/skip-step');
+
 module.exports = {
   name: 'rotm',
   params: '/:action?',
@@ -14,9 +16,17 @@ module.exports = {
       fields: [
         'more-info'
       ],
-      next: '/confirm'
+      next: '/image'
     },
-    '/confirm': {
+    '/image': {
+      next: '/add-image',
+      behaviours: skipStep
+    },
+    '/add-image': {
+      next: '/check-your-report'
+    },
+    '/check-your-report': {
+      prereqs: ['/image'],
       behaviours: ['complete'],
       next: '/confirmation'
     },

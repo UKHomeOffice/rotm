@@ -7,5 +7,15 @@
     "header": "Can you tell us more about the material?",
     "intro": "So we can find it, please provide any information you think is helpful. You can provide a screenshot or photo on the next page.",
     "summary": "Information that can help us"
+  },
+  "image": {
+    "header": "Do you want to add a photo or screenshot?",
+    "link": "Continue without adding an image"
+  },
+  "add-image": {
+    "header": "Placeholder page"
+  },
+  "check-your-report": {
+    "header": "Placeholder page"
   }
 }

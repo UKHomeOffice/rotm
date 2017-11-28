@@ -58,3 +58,11 @@ textarea.form-control {
     color: $secondary-text-colour;
   }
 }
+
+.link-margin {
+  margin-top: 2em;
+}
+
+.js-enabled .file-upload {
+  @extend .visuallyhidden;
+}
