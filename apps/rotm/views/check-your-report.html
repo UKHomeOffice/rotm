@@ -6,7 +6,7 @@
           {{#fields}}
             <tr{{#className}} class="{{className}}"{{/className}}>
               <th>{{label}}</th>
-              <td data-value="{{value}}">{{value}}</td>
+              <td data-value="{{value}}" data-field="{{field}}">{{value}}</td>
               <td><a href="{{baseUrl}}{{step}}/edit#{{field}}" id="{{field}}-change">{{#t}}buttons.change{{/t}}</a></td>
             </tr>
           {{/fields}}

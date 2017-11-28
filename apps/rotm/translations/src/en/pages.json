@@ -19,6 +19,7 @@
     "header": "Check your report"
   },
   "confirm": {
+    "undefined": "Not given",
     "fields": {
       "source": {
         "label": "Where you found the information"

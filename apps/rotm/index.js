@@ -29,6 +29,7 @@ module.exports = {
     '/check-your-report': {
       prereqs: ['/image'],
       behaviours: [require('hof-behaviour-summary-page'), 'complete'],
+      nullValue: 'pages.confirm.undefined',
       sections: {
         'summary': [
           'source',
