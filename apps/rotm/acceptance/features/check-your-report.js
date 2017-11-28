@@ -23,9 +23,10 @@ Scenario('I can edit "more info" field and return to summary page', (
   });
   I.click('#more-info-change');
   I.seeInCurrentUrl('/more-info');
+  // work around bug in phantom tht won't fill <textarea>s if they have focus
+  I.click('body');
   I.fillField('more-info', 'Some information');
   I.click('input[type="submit"]');
-
   I.seeInCurrentUrl('/check-your-report');
   I.see('Some information', 'td[data-field="more-info"]');
 });
