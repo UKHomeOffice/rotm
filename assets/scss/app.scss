@@ -75,3 +75,11 @@ textarea.form-control {
 .js-enabled .file-upload {
   @extend .visuallyhidden;
 }
+
+.image-thumb {
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid $panel-colour;
+  margin: 10px 0;
+  overflow: hidden;
+}

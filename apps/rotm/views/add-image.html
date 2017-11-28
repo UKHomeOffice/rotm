@@ -1,0 +1,16 @@
+{{<partials-page}}
+  {{$page-content}}
+    {{#image-preview}}
+      <div class="image-wrapper">
+        <img src="{{image-preview}}" alt="" width="200" class="image-preview" />
+      </div>
+    {{/image-preview}}
+    {{#image-name}}
+      <p>{{image-name}}</p>
+    {{/image-name}}
+    {{#fields}}
+      {{#renderField}}{{/renderField}}
+    {{/fields}}
+    {{#input-submit}}continue{{/input-submit}}
+  {{/page-content}}
+{{/partials-page}}
