@@ -2,25 +2,26 @@
 
 Feature('Check your report');
 
-Scenario('Optional fields show as "Not given" on summary page', (
+Before((
   I
 ) => {
   I.amOnPage('/');
-  I.completeToStep('/check-your-report', {
+  I.completeToStep('/image', {
     source: 'Facebook',
     'more-info': ''
   });
+  I.click('a[href*="/check-your-report"]');
+});
+
+Scenario('Optional fields show as "Not given" on summary page', (
+  I
+) => {
   I.see('Not given', 'td[data-field="more-info"]');
 });
 
 Scenario('I can edit "more info" field and return to summary page', (
   I
 ) => {
-  I.amOnPage('/');
-  I.completeToStep('/check-your-report', {
-    source: 'Facebook',
-    'more-info': ''
-  });
   I.click('#more-info-change');
   I.seeInCurrentUrl('/more-info');
   // work around bug in phantom tht won't fill <textarea>s if they have focus
@@ -34,11 +35,6 @@ Scenario('I can edit "more info" field and return to summary page', (
 Scenario('I can edit "source" field and return to summary page', (
   I
 ) => {
-  I.amOnPage('/');
-  I.completeToStep('/check-your-report', {
-    source: 'Facebook',
-    'more-info': ''
-  });
   I.click('#source-change');
   I.seeInCurrentUrl('/source');
   I.fillField('source', 'A different source');
