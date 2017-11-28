@@ -1,7 +1,7 @@
 {
   "name": "ROTM",
   "version": "0.0.4",
-  "main": "index.js",
+  "main": "app.js",
   "description": "A Home Office application for reporting online terrorist material.",
   "license": "GPL-2.0",
   "repository": {
@@ -11,10 +11,10 @@
   "bugs": "https://github.com/UKHomeOffice/rotm/issues",
   "scripts": {
     "start": "node app.js",
-    "dev": "hof-build watch",
+    "dev": "NODE_ENV=development hof-build watch",
     "dev:ci": "NODE_ENV=ci DISABLE_CSP=true npm run dev",
     "test": "npm run test:unit && npm run lint",
-    "test:unit": "mocha",
+    "test:unit": "_mocha",
     "test:acceptance": "funkie so-acceptance --steps",
     "lint": "eslint .",
     "build": "hof-build",
@@ -23,10 +23,15 @@
   },
   "author": "HomeOffice",
   "dependencies": {
-    "hof": "^13.1.0",
+    "busboy-body-parser": "^0.3.1",
+    "express": "^4.16.2",
+    "hof": "^13.2.1",
     "hof-behaviour-summary-page": "^3.1.0",
     "hof-build": "^1.5.0",
-    "hof-theme-govuk": "^4.1.0"
+    "hof-form-controller": "^5.1.0",
+    "hof-model": "^3.1.2",
+    "hof-theme-govuk": "^4.1.0",
+    "lodash": "^4.17.4"
   },
   "devDependencies": {
     "chai": "^4.1.2",
@@ -35,8 +40,9 @@
     "eslint-config-homeoffice": "^2.2.0",
     "funkie": "0.0.6",
     "funkie-phantom": "0.0.1",
+    "hof-util-reqres": "^1.1.0",
+    "mock-fs": "^4.4.2",
     "pre-commit": "^1.0.10",
-    "reqres": "^2.1.0",
     "sinon": "^4.1.2",
     "sinon-chai": "^2.14.0",
     "so-acceptance": "^5.0.1"

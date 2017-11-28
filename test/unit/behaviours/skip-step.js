@@ -1,6 +1,6 @@
 'use strict';
 
-const reqres = require('reqres');
+const reqres = require('hof-util-reqres');
 const Behaviour = require('../../../apps/rotm/behaviours/skip-step');
 
 describe('apps/behaviours/skip-step', () => {

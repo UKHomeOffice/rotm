@@ -1,10 +1,25 @@
 'use strict';
 
 const hof = require('hof');
+const config = require('./config');
+const mockAPIs = require('./mock-apis');
+const bodyParser = require('busboy-body-parser');
 
-module.exports = hof({
+const options = {
   start: false,
   routes: [
     require('./apps/rotm')
-  ]
-});
+  ],
+  csp: config.csp
+};
+
+const app = hof(options);
+
+if (config.useMocks) {
+  app.use(mockAPIs);
+}
+
+app.use(bodyParser({limit: config.upload.maxFileSize}));
+
+module.exports = app;
+

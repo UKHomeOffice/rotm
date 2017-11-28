@@ -1,8 +1,9 @@
 {{<partials-page}}
+  {{$encoding}}enctype="multipart/form-data"{{/encoding}}
   {{$page-content}}
     {{#markdown}}image{{/markdown}}
     <div class="file-upload">
-      <input name="file-upload" id="file-upload" type="file" accept=".png, .jpg, .jpeg">
+      <input name="image" id="file-upload" type="file" accept=".png, .jpg, .jpeg">
       {{#input-submit}}submit image-submit{{/input-submit}}
     </div>
     <button type="button" id="add-image-button" class="button add-image-button visuallyhidden">{{#t}}buttons.add-image{{/t}}</button>

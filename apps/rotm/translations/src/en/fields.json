@@ -8,5 +8,27 @@
   },
   "more-info": {
     "label": "Additional information (optional)"
+  },
+  "image": {
+    "label": "Select an image",
+    "validation": {
+      "required": "Select an image",
+      "extname": "Select a valid file type (jpg, jpeg, png)",
+      "unsaved": "We have not been able to upload the photo or screenshot"
+    }
+  },
+  "add-image": {
+    "legend": "Is this correct?",
+    "options": {
+      "yes": {
+        "label": "Yes, add this image"
+      },
+      "no": {
+        "label": "No, I want to change the image"
+      }
+    },
+    "validation": {
+      "required": "Tell us if you want to add this image"
+    }
   }
 }
