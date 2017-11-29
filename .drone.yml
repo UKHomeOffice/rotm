@@ -110,6 +110,8 @@ pipeline:
 services:
   redis:
     image: redis
+  selenium:
+    image: selenium/standalone-chrome
   dind:
     image: docker:1.11-dind
     privileged: true
