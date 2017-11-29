@@ -28,5 +28,9 @@
         "label": "Further information"
       }
     }
+  },
+  "confirmation": {
+    "alert-1": "Thank you",
+    "alert-2": "We’ve received your report."
   }
 }
