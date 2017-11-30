@@ -16,6 +16,17 @@
     "header": "Placeholder page"
   },
   "check-your-report": {
-    "header": "Placeholder page"
+    "header": "Check your report"
+  },
+  "confirm": {
+    "undefined": "Not given",
+    "fields": {
+      "source": {
+        "label": "Where you found the information"
+      },
+      "more-info": {
+        "label": "Further information"
+      }
+    }
   }
 }

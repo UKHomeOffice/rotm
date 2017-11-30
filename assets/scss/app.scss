@@ -36,6 +36,15 @@ textarea.form-control {
   }
 }
 
+.table-details {
+  th, td {
+    vertical-align: top;
+  }
+  th {
+    font-weight: bold;
+  }
+}
+
 #step {
   @include core-16;
   a {

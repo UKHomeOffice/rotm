@@ -23,7 +23,8 @@
   },
   "author": "HomeOffice",
   "dependencies": {
-    "hof": "^13.0.1",
+    "hof": "^13.1.0",
+    "hof-behaviour-summary-page": "^3.1.0",
     "hof-build": "^1.5.0",
     "hof-theme-govuk": "^4.1.0"
   },

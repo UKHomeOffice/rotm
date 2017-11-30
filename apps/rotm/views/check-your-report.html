@@ -1,0 +1,18 @@
+{{<partials-page}}
+  {{$page-content}}
+    {{#rows}}
+      <table class="table-details">
+        <tbody>
+          {{#fields}}
+            <tr{{#className}} class="{{className}}"{{/className}}>
+              <th>{{label}}</th>
+              <td data-value="{{value}}" data-field="{{field}}">{{value}}</td>
+              <td><a href="{{baseUrl}}{{step}}/edit#{{field}}" id="{{field}}-change">{{#t}}buttons.change{{/t}}</a></td>
+            </tr>
+          {{/fields}}
+        </tbody>
+      </table>
+    {{/rows}}
+    {{#input-submit}}submit{{/input-submit}}
+  {{/page-content}}
+{{/partials-page}}

@@ -5,6 +5,7 @@ const skipStep = require('./behaviours/skip-step');
 module.exports = {
   name: 'rotm',
   params: '/:action?',
+  confirmStep: '/check-your-report',
   steps: {
     '/source': {
       fields: [
@@ -27,7 +28,14 @@ module.exports = {
     },
     '/check-your-report': {
       prereqs: ['/image'],
-      behaviours: ['complete'],
+      behaviours: [require('hof-behaviour-summary-page'), 'complete'],
+      nullValue: 'pages.confirm.undefined',
+      sections: {
+        'summary': [
+          'source',
+          'more-info'
+        ]
+      },
       next: '/confirmation'
     },
     '/confirmation': {
