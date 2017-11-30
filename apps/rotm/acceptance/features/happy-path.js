@@ -1,13 +1,14 @@
 'use strict';
 
+const path = require('path');
+
 Feature('Happy Path');
 
 Scenario('I can complete an application', (
   I
 ) => {
   I.amOnPage('/');
-  I.completeToStep('/image');
-  I.click('a[href="/check-your-report"]');
-  I.submitForm();
-  I.seeInCurrentUrl('/confirmation');
+  I.completeToStep('/confirmation', {
+    'file-upload': path.resolve(__dirname, '../screenshot.png')
+  });
 });
