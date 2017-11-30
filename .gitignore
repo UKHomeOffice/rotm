@@ -1,7 +1,7 @@
 .idea/
 node_modules
 public
-apps/**/translations/**
-!apps/*/translations/src
+apps/**/translations/*
+!apps/**/translations/src
 coverage
 package-lock.json
