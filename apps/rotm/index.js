@@ -1,8 +1,8 @@
  'use strict';
 
 const skipStep = require('./behaviours/skip-step');
-const getImage = require('./behaviours/get-image');
 const saveImage = require('./behaviours/save-image');
+const createThumbnail = require('./behaviours/create-thumbnail');
 
 module.exports = {
   name: 'rotm',
@@ -25,14 +25,13 @@ module.exports = {
       fields: [
         'image'
       ],
-      behaviours: [skipStep, saveImage],
+      behaviours: [skipStep, saveImage, createThumbnail],
       next: '/add-image'
     },
     '/add-image': {
       fields: [
         'add-image'
       ],
-      behaviours: [getImage],
       forks: [{
         target: '/image',
         condition: {

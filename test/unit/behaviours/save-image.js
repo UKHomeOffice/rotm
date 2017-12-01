@@ -52,10 +52,10 @@ describe('behaviours/save-image', () => {
 
     describe('when an image is present', () => {
 
-      it('assigns the image with name to form values', (done) => {
+      it('assigns the image name to form values', (done) => {
         instance.process(req, res, (err) => {
           expect(err).not.to.exist;
-          expect(req.form.values.image).to.have.property('name').and.to.equal(filename);
+          expect(req.form.values).to.have.property('image').and.to.equal(filename);
           done();
         });
       });
@@ -131,20 +131,10 @@ describe('behaviours/save-image', () => {
           Model.prototype.save.resolves(result);
         });
 
-        it('the result.url is assigned to the image and form values', (done) => {
+        it('the result url is assigned to the form values', (done) => {
           instance.saveValues(req, res, (err) => {
             expect(err).not.to.exist;
-            expect(req.form.values.image).to.have.property('saved-url').and.equal(result.url);
-            done();
-          });
-        });
-
-        it('the image is assigned to the form values', (done) => {
-          instance.saveValues(req, res, (err) => {
-            expect(err).not.to.exist;
-            expect(req.form.values.image).to.have.property('name').and.equal(filename);
-            expect(req.form.values.image).to.have.property('data').and.equal(data);
-            expect(req.form.values.image).to.have.property('mimetype').and.equal(mimetype);
+            expect(req.form.values).to.have.property('image-url').and.equal(result.url);
             done();
           });
         });

@@ -7,11 +7,13 @@ const ValidationError = require('hof-form-controller').ValidationError;
 module.exports = superclass => class extends superclass {
 
   process(req) {
+    req.sessionModel.unset('image-url');
+    req.sessionModel.unset('image');
     if (req.files && req.files.image) {
       // set image name on values for filename extension validation
       // N:B validation controller gets values from
       // req.form.values and not on req.files
-      req.form.values.image = _.pick(req.files.image, 'name');
+      req.form.values.image = req.files.image.name;
     }
     super.process.apply(this, arguments);
   }
@@ -24,8 +26,7 @@ module.exports = superclass => class extends superclass {
       return model.save()
         .then((result) => {
           req.log('debug', 'Image saved to S3');
-          image['saved-url'] = result.url;
-          req.form.values.image = image;
+          req.form.values['image-url'] = result.url;
           super.saveValues(req, res, next);
         })
         .catch((err) => {

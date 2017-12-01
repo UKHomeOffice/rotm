@@ -1,13 +1,13 @@
 {{<partials-page}}
   {{$page-content}}
-    {{#image-preview}}
+    {{#values.image-preview}}
       <div class="image-wrapper">
-        <img src="{{image-preview}}" alt="" width="200" class="image-preview" />
+        <img src="{{values.image-preview}}" alt="" width="200" class="image-preview" />
       </div>
-    {{/image-preview}}
-    {{#image-name}}
-      <p>{{image-name}}</p>
-    {{/image-name}}
+    {{/values.image-preview}}
+    {{#values.image}}
+      <p>{{values.image}}</p>
+    {{/values.image}}
     {{#fields}}
       {{#renderField}}{{/renderField}}
     {{/fields}}
