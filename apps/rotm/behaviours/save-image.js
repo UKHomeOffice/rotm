@@ -7,6 +7,8 @@ const ValidationError = require('hof-form-controller').ValidationError;
 module.exports = superclass => class extends superclass {
 
   process(req) {
+    req.sessionModel.unset('image-url');
+    req.sessionModel.unset('image-name');
     if (req.files && req.files.image) {
       // set image name on values for filename extension validation
       // N:B validation controller gets values from
