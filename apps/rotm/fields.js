@@ -25,7 +25,7 @@ module.exports = {
   'image': {
     mixin: 'input-file',
     validate: [function extname(value) {
-      return extensions.includes(path.extname(value.name));
+      return extensions.includes(path.extname(value));
     }]
   }
 };
