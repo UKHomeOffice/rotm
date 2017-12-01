@@ -7,6 +7,6 @@ Scenario('I can upload an image', (
 ) => {
   I.amOnPage('/');
   I.completeToStep('/image');
-  I.attachFile('input[name="file-upload"]', './apps/rotm/acceptance/screenshot.png');
+  I.attachFile('input[name="image"]', './apps/rotm/acceptance/screenshot.png');
   I.seeInCurrentUrl('/add-image');
 });
