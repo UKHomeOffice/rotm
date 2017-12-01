@@ -3,7 +3,6 @@
 const Behaviour = require('../../../apps/rotm/behaviours/save-image');
 const reqres = require('hof-util-reqres');
 const Model = require('../../../apps/rotm/models/image-upload');
-const ValidationError = require('hof-form-controller').ValidationError;
 
 describe('behaviours/save-image', () => {
 
@@ -169,8 +168,7 @@ describe('behaviours/save-image', () => {
 
         it('the next callback is called with a Validation error', (done) => {
           instance.saveValues(req, res, (err) => {
-            expect(err).to.be.an.instanceof(ValidationError);
-            expect(err.key).to.equal('unsaved');
+            expect(err).to.equal(error);
             done();
           });
         });
