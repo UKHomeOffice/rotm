@@ -1,6 +1,6 @@
 'use strict';
 
-const sharp = require('sharp');
+const jimp = require('jimp');
 
 module.exports = superclass => class extends superclass {
 
@@ -15,15 +15,19 @@ module.exports = superclass => class extends superclass {
         return next(err);
       }
       if (req.files.image && req.files.image.data) {
-        const image = req.files.image;
-        sharp(req.files.image.data)
-          .resize(200)
-          .toBuffer()
-          .then(data => {
-            const base64 = data.toString('base64');
-            req.sessionModel.set('image-preview', `data:${image.mimetype};base64,${base64}`);
-            next();
+        jimp.read(req.files.image.data)
+          .then(image => {
+            image.resize(200, jimp.AUTO);
+            return new Promise((resolve, reject) => {
+              image.getBase64(req.files.image.mimetype, (e, data) => {
+                return e ? reject(e) : resolve(data);
+              });
+            });
           })
+          .then(data => {
+            req.sessionModel.set('image-preview', data);
+          })
+          .then(() => next())
           .catch(next);
       }
     });
