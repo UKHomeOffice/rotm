@@ -31,7 +31,8 @@
     "hof-form-controller": "^5.1.0",
     "hof-model": "^3.1.2",
     "hof-theme-govuk": "^4.1.0",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "sharp": "^0.18.4"
   },
   "devDependencies": {
     "chai": "^4.1.2",

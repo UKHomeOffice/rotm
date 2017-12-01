@@ -24,8 +24,8 @@ module.exports = superclass => class extends superclass {
       return model.save()
         .then((result) => {
           req.log('debug', 'Image saved to S3');
-          image['saved-url'] = result.url;
-          req.form.values.image = image;
+          req.form.values['image-url'] = result.url;
+          req.form.values['image-name'] = image.name;
           super.saveValues(req, res, next);
         })
         .catch((err) => {
