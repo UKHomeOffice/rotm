@@ -9,6 +9,7 @@ Scenario('I can complete an application', (
 ) => {
   I.amOnPage('/');
   I.completeToStep('/confirmation', {
-    image: path.resolve(__dirname, '../screenshot.png')
+    image: path.resolve(__dirname, '../screenshot.png'),
+    'add-image': 'yes'
   });
 });
