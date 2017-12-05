@@ -1,16 +1,17 @@
 'use strict';
 
+const defaults = require('../defaults');
+
 Feature('Check your report');
 
 Before((
   I
 ) => {
   I.amOnPage('/');
-  I.completeToStep('/image', {
+  I.completeToStep('/check-your-report', defaults({
     source: 'Facebook',
     'more-info': ''
-  });
-  I.click('a[href*="/check-your-report"]');
+  }));
 });
 
 Scenario('Optional fields show as "Not given" on summary page', (
@@ -24,8 +25,6 @@ Scenario('I can edit "more info" field and return to summary page', (
 ) => {
   I.click('#more-info-change');
   I.seeInCurrentUrl('/more-info');
-  // work around bug in phantom tht won't fill <textarea>s if they have focus
-  I.click('body');
   I.fillField('more-info', 'Some information');
   I.click('input[type="submit"]');
   I.seeInCurrentUrl('/check-your-report');

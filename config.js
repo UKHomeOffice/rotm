@@ -36,7 +36,7 @@ module.exports = {
   },
   upload: {
     maxFileSize: '100mb',
-    hostname: process.env.FILE_VAULT_URL ?
+    hostname: !useMocks && process.env.FILE_VAULT_URL ?
       process.env.FILE_VAULT_URL :
       `http://${localhost()}/api/image-upload`
 
