@@ -1,6 +1,6 @@
 'use strict';
 
-const path = require('path');
+const defaults = require('../defaults');
 
 Feature('Happy Path');
 
@@ -8,8 +8,5 @@ Scenario('I can complete an application', (
   I
 ) => {
   I.amOnPage('/');
-  I.completeToStep('/confirmation', {
-    image: path.resolve(__dirname, '../screenshot.png'),
-    'add-image': 'yes'
-  });
+  I.completeToStep('/confirmation', defaults());
 });

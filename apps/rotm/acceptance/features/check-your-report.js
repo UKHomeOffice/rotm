@@ -1,16 +1,17 @@
 'use strict';
 
+const defaults = require('../defaults');
+
 Feature('Check your report');
 
 Before((
   I
 ) => {
   I.amOnPage('/');
-  I.completeToStep('/image', {
+  I.completeToStep('/check-your-report', defaults({
     source: 'Facebook',
     'more-info': ''
-  });
-  I.click('a[href*="/check-your-report"]');
+  }));
 });
 
 Scenario('Optional fields show as "Not given" on summary page', (
