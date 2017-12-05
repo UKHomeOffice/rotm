@@ -2,7 +2,6 @@
 
 const _ = require('lodash');
 const Model = require('../models/image-upload');
-const ValidationError = require('hof-form-controller').ValidationError;
 
 module.exports = superclass => class extends superclass {
 
@@ -31,7 +30,7 @@ module.exports = superclass => class extends superclass {
         })
         .catch((err) => {
           req.log('debug', 'Image not saved to S3');
-          next(new ValidationError('unsaved', err));
+          next(err);
         });
     }
     super.saveValues.apply(this, arguments);
