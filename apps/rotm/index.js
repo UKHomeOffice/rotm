@@ -49,6 +49,7 @@ module.exports = {
         'summary': [
           'source',
           'more-info'
+          // image preview is hardcoded in the page template
         ]
       },
       next: '/confirmation'

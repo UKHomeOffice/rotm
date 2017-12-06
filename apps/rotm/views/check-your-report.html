@@ -10,6 +10,16 @@
               <td><a href="{{baseUrl}}{{step}}/edit#{{field}}" id="{{field}}-change">{{#t}}buttons.change{{/t}}</a></td>
             </tr>
           {{/fields}}
+          <tr>
+            <th>{{#t}}pages.confirm.fields.image-preview.label{{/t}}</th>
+            {{#values.image-preview}}
+              <td data-field="image"><img src="{{values.image-preview}}" /></td>
+            {{/values.image-preview}}
+            {{^values.image-preview}}
+              <td data-field="image">{{#t}}pages.confirm.undefined{{/t}}</td>
+            {{/values.image-preview}}
+            <td><a href="{{baseUrl}}/image/edit" id="image-change">{{#t}}buttons.change{{/t}}</a></td>
+          </tr>
         </tbody>
       </table>
     {{/rows}}
