@@ -26,7 +26,8 @@ module.exports = {
         'image'
       ],
       behaviours: [skipStep, saveImage, createThumbnail],
-      next: '/add-image'
+      next: '/add-image',
+      continueOnEdit: true
     },
     '/add-image': {
       fields: [
@@ -39,7 +40,8 @@ module.exports = {
           value: 'no'
         }
       }],
-      next: '/check-your-report'
+      next: '/check-your-report',
+      continueOnEdit: true
     },
     '/check-your-report': {
       prereqs: ['/image'],
@@ -49,6 +51,7 @@ module.exports = {
         'summary': [
           'source',
           'more-info'
+          // image preview is hardcoded in the page template
         ]
       },
       next: '/confirmation'

@@ -26,6 +26,9 @@
       },
       "more-info": {
         "label": "Further information"
+      },
+      "image-preview": {
+        "label": "Image"
       }
     }
   },

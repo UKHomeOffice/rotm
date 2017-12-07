@@ -42,3 +42,10 @@ Scenario('I can edit "source" field and return to summary page', (
   I.seeInCurrentUrl('/check-your-report');
   I.see('A different source', 'td[data-field="source"]');
 });
+
+Scenario('I see an image thumbnail if I have uploaded an image', (
+  I
+) => {
+  I.seeElement('td[data-field="image"] img');
+});
+
