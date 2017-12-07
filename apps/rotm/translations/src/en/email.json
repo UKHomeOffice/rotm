@@ -1,0 +1,19 @@
+{
+  "caseworker": {
+    "subject": "Report on Terrorism Material: new request",
+    "fields": {
+      "submitted": {
+        "label": "Date and time of submission"
+      },
+      "source": {
+        "label": "Source"
+      },
+      "more-info": {
+        "label": "More information"
+      },
+      "image": {
+        "label": "Image"
+      }
+    }
+  }
+}
