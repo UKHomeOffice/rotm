@@ -12,7 +12,7 @@ module.exports = class UploadModel extends Model {
       };
       const reqConf = url.parse(this.url(attributes));
       reqConf.formData = {
-        image: {
+        document: {
           value: this.get('data'),
           options: {
             filename: this.get('name'),

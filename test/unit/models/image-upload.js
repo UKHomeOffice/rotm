@@ -71,7 +71,7 @@ describe('models/image-upload', () => {
       return response.then(() => {
         expect(uploadedFile.request).to.have.been.calledWith(sinon.match({
           formData: {
-            image: {
+            document: {
               value: 'foo',
               options: {
                 filename: 'myfile.png',
