@@ -4,6 +4,7 @@ const Emailer = require('hof-behaviour-emailer');
 const path = require('path');
 const moment = require('moment');
 const config = require('../../../config');
+const uuidv1 = require('uuid/v1');
 
 
 const getDataRows = (model, translate) => {
@@ -11,6 +12,7 @@ const getDataRows = (model, translate) => {
   return [
       {
         table: [
+          { label: getLabel('uniqueId'), value: uuidv1() },
           { label: getLabel('submitted'), value: moment().format(config.dateTimeFormat) },
           { label: getLabel('source'), value: model.source },
           { label: getLabel('more-info'), value: model['more-info'] }

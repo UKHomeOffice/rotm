@@ -2,6 +2,9 @@
   "caseworker": {
     "subject": "Report on Terrorism Material: new request",
     "fields": {
+      "uniqueId": {
+        "label": "Application ID"
+      },
       "submitted": {
         "label": "Date and time of submission"
       },
