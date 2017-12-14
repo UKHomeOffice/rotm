@@ -10,6 +10,7 @@ const options = {
   routes: [
     require('./apps/rotm')
   ],
+  redis: config.redis,
   csp: config.csp
 };
 
