@@ -31,4 +31,4 @@ $ npm run dev
 For anything else ROTM-related, look in [package.json](./package.json) for a full list of scripts etc, and
 [config.js](./config.js) for environment variables.
 
-Otherwise, see [HOF-Bootstrap](https://github.com/UKHomeOffice/hof-bootstrap).
+Otherwise, see [HOF](https://github.com/UKHomeOffice/hof).
