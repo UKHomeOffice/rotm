@@ -12,7 +12,7 @@ module.exports = class UploadModel extends Model {
       };
       const reqConf = url.parse(this.url(attributes));
       reqConf.formData = {
-        document: {
+        image: {
           value: this.get('data'),
           options: {
             filename: this.get('name'),
@@ -26,6 +26,11 @@ module.exports = class UploadModel extends Model {
           return reject(err);
         }
         resolve(data);
+      });
+    }).then(data => {
+      return this.auth().then(bearer => {
+        data.url = (data.url.replace('/file', '/vault')) + '&token=' + bearer.bearer;
+        return data;
       });
     });
   }

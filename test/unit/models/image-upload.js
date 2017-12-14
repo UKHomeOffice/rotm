@@ -49,7 +49,7 @@ describe('models/image-upload', () => {
       const response = model.save();
       return expect(response).to.eventually.deep.equal({
         api: 'response',
-        url: '/file/12341212132123?foo=bar'
+        url: '/vault/12341212132123?foo=bar&token=myaccesstoken'
       });
     });
 
@@ -71,7 +71,7 @@ describe('models/image-upload', () => {
       return response.then(() => {
         expect(uploadedFile.request).to.have.been.calledWith(sinon.match({
           formData: {
-            document: {
+            image: {
               value: 'foo',
               options: {
                 filename: 'myfile.png',
