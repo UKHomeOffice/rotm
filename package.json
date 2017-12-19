@@ -1,6 +1,6 @@
 {
   "name": "ROTM",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "main": "app.js",
   "description": "A Home Office application for reporting online terrorist material.",
   "license": "GPL-2.0",
