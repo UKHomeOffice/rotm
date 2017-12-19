@@ -1,25 +1,18 @@
 <h1>A Report on terrorism material has been made</h1>
 
-{{#data}}
-  <table width="100%" cellspacing="0" cellpadding="0" rules="none">
-    {{#table}}
-      {{#linebreak}}
-      <tr>
-        <td colspan="2" style="border-bottom:1px solid #333;"></td>
-      </tr>
-      {{/linebreak}}
-      {{#value}}
-      <tr>
-        <td width="40%" style="padding: 15px 0;border-bottom:1px solid #ccc;">{{label}}</td>
-        <td width="60%" style="padding: 15px 0;border-bottom:1px solid #ccc;">{{value}}</td>
-      </tr>
-      {{/value}}
-    {{/table}}
+<table width="100%" cellspacing="0" cellpadding="0" rules="none">
+  {{#table}}
+    {{#value}}
     <tr>
-      {{#image-url}}
-        <td width="40%" style="padding: 15px 0;border-bottom:1px solid #ccc;">Image</td>
-        <td width="60%" style="padding: 15px 0;border-bottom:1px solid #ccc;"><a href="{{image-url}}">View the image</a></td>
-      {{/image-url}}
+      <td width="40%" style="padding: 15px 0;border-bottom:1px solid #ccc;">{{label}}</td>
+      <td width="60%" style="padding: 15px 0;border-bottom:1px solid #ccc;">{{value}}</td>
     </tr>
-  </table>
-{{/data}}
+    {{/value}}
+  {{/table}}
+  {{#image}}
+    <tr>
+      <td width="40%" style="padding: 15px 0;border-bottom:1px solid #ccc;">Image</td>
+      <td width="60%" style="padding: 15px 0;border-bottom:1px solid #ccc;"><a href="{{image}}">View the image</a></td>
+    </tr>
+  {{/image}}
+</table>

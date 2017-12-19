@@ -7,18 +7,17 @@ const config = require('../../../config');
 const uuidv1 = require('uuid/v1');
 
 
-const getDataRows = (model, translate) => {
+const parse = (model, translate) => {
   const getLabel = key => translate(`email.caseworker.fields.${key}.label`);
-  return [
-      {
-        table: [
-          { label: getLabel('uniqueId'), value: uuidv1() },
-          { label: getLabel('submitted'), value: moment().format(config.dateTimeFormat) },
-          { label: getLabel('source'), value: model.source },
-          { label: getLabel('more-info'), value: model['more-info'] }
-        ]
-      }
-    ];
+  return {
+    image: model['image-url'],
+    table: [
+      { label: getLabel('uniqueId'), value: uuidv1() },
+      { label: getLabel('submitted'), value: moment().format(config.dateTimeFormat) },
+      { label: getLabel('source'), value: model.source },
+      { label: getLabel('more-info'), value: model['more-info'] }
+    ]
+  };
 };
 
 module.exports = settings => {
@@ -33,6 +32,6 @@ module.exports = settings => {
       translate('email.caseworker.subject');
     },
     template: path.resolve(__dirname, '../emails/caseworker.html'),
-    parse: (model, translate) => Object.assign(model, { data: getDataRows(model, translate) })
+    parse
   }));
 };
