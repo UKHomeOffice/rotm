@@ -1,6 +1,6 @@
 {
   "caseworker": {
-    "subject": "Report on Terrorism Material: new request",
+    "subject": "You have a new report of online terrorist material",
     "fields": {
       "uniqueId": {
         "label": "Application ID"
