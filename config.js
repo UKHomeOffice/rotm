@@ -14,6 +14,7 @@ module.exports = {
     imgSrc: ['data:']
   },
   useMocks: useMocks,
+  dateTimeFormat: 'DD-MM-YYYY, hh:mma',
   port: process.env.PORT || 8080,
   session: {
     secret: process.env.SESSION_SECRET || 'howdoesyourgardengrow',
@@ -26,13 +27,19 @@ module.exports = {
     password: process.env.REDIS_PASSWORD
   },
   email: {
-    caseworker: process.env.CASEWORKER_EMAIL || '',
     from: process.env.FROM_ADDRESS || '',
     replyTo: process.env.REPLY_TO || '',
-    accessKeyId: process.env.AWS_USER || '',
-    secretAccessKey: process.env.AWS_PASSWORD || '',
-    transportType: 'ses',
-    region: process.env.EMAIL_REGION || ''
+    region: process.env.EMAIL_REGION || '',
+    transport: process.env.EMAIL_TRANSPORT || 'ses',
+    caseworker: process.env.CASEWORKER_EMAIL || '',
+    transportOptions: {
+      accessKeyId: process.env.HOF_SES_USER || process.env.AWS_USER || '',
+      secretAccessKey: process.env.HOF_SES_PASSWORD || process.env.AWS_PASSWORD || '',
+      port: process.env.TRANSPORT_PORT || '',
+      host: process.env.TRANSPORT_HOST || '',
+      ignoreTLS: process.env.TRANSPORT_IGNORE_TLS || '',
+      secure: process.env.TRANSPORT_SECURE || ''
+    }
   },
   upload: {
     maxFileSize: '100mb',

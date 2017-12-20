@@ -1,0 +1,19 @@
+{
+  "caseworker": {
+    "subject": "You have a new report of online terrorist material",
+    "fields": {
+      "uniqueId": {
+        "label": "Application ID"
+      },
+      "submitted": {
+        "label": "Date and time of submission"
+      },
+      "source": {
+        "label": "Source"
+      },
+      "more-info": {
+        "label": "More information"
+      }
+    }
+  }
+}
