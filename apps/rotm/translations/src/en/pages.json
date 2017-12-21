@@ -1,7 +1,10 @@
 {
   "source": {
     "header": "Where did you find the material?",
-    "intro": "A link or URL to the page is really helpful. If you don't have one, the name of the company or website is fine."
+    "intro": "A link or URL to the page is really helpful. If you don't have one, the name of the company or website is fine.",
+    "image": {
+      "alt": "You can find the link in the address bar above the page. It usually starts with www or http"
+    }
   },
   "more-info": {
     "header": "Can you tell us more about the material?",
