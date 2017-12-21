@@ -49,17 +49,13 @@ module.exports = class UploadModel extends Model {
       },
       method: 'POST'
     };
-    // eslint-disable-next-line no-console
-    console.log(tokenReq);
+
     return new Promise((resolve, reject) => {
       this._request(tokenReq, (err, response) => {
         if (err) {
           return reject(err);
         }
-        if (response.statusCode !== 200) {
-          // eslint-disable-next-line no-console
-          console.log(response.body);
-        }
+
         resolve({
           'bearer': JSON.parse(response.body).access_token
         });
