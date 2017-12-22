@@ -107,6 +107,16 @@ pipeline:
     when:
       event: tag
 
+  smoke_test:
+    image: docker:1.11
+    environment:
+      - DOCKER_HOST=tcp://127.0.0.1:2375
+    commands:
+      - docker build -f Dockerfile-acceptance -t acceptance-${DRONE_COMMIT_SHA} .
+      - docker run -e TEST_URL=https://${DRONE_DEPLOY_TO}.notprod.homeoffice.gov.uk --rm --net host acceptance-${DRONE_COMMIT_SHA}
+    when:
+      event: deployment
+
 services:
   redis:
     image: redis
