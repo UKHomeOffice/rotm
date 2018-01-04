@@ -5,6 +5,7 @@ const saveImage = require('./behaviours/save-image');
 const createThumbnail = require('./behaviours/create-thumbnail');
 const config = require('../../config');
 const caseworkerEmailer = require('./behaviours/caseworker-email')(config.email);
+const backLinkCheckReport = require('./behaviours/back-link-check-report');
 
 module.exports = {
   name: 'rotm',
@@ -47,7 +48,7 @@ module.exports = {
     },
     '/check-your-report': {
       prereqs: ['/image'],
-      behaviours: [require('hof-behaviour-summary-page'), 'complete', caseworkerEmailer],
+      behaviours: [require('hof-behaviour-summary-page'), 'complete', caseworkerEmailer, backLinkCheckReport],
       nullValue: 'pages.confirm.undefined',
       sections: {
         'summary': [
