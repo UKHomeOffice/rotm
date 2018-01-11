@@ -12,7 +12,6 @@
   "scripts": {
     "start": "node app.js",
     "dev": "NODE_ENV=development hof-build watch",
-    "dev:ci": "NODE_ENV=ci DISABLE_CSP=true npm run dev",
     "test": "npm run test:unit && npm run lint",
     "test:unit": "mocha",
     "test:acceptance": "so-acceptance --steps",
