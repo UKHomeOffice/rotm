@@ -16,72 +16,72 @@ pipeline:
       event: [push, pull_request]
 
   build_app:
-    image: docker:1.11
+    image: docker:17.09.1
     environment:
-      - DOCKER_HOST=tcp://127.0.0.1:2375
+      - DOCKER_HOST=tcp://172.17.0.1:2375
     commands:
-      - docker build -t rotm-${DRONE_COMMIT_SHA} .
+      - docker build -t rotm-$${DRONE_COMMIT_SHA} .
     when:
       event: pull_request
 
   build_app:
-    image: docker:1.11
+    image: docker:17.09.1
     environment:
-      - DOCKER_HOST=tcp://127.0.0.1:2375
+      - DOCKER_HOST=tcp://172.17.0.1:2375
     commands:
-      - docker build -t rotm-${DRONE_COMMIT_SHA} .
+      - docker build -t rotm-$${DRONE_COMMIT_SHA} .
     when:
       branch: master
       event: push
 
   build_acceptance:
-    image: docker:1.11
+    image: docker:17.09.1
     environment:
-      - DOCKER_HOST=tcp://127.0.0.1:2375
+      - DOCKER_HOST=tcp://172.17.0.1:2375
     commands:
-      - docker build -f Dockerfile-acceptance -t acceptance-${DRONE_COMMIT_SHA} .
+      - docker build -f Dockerfile-acceptance -t acceptance-$${DRONE_COMMIT_SHA} .
     when:
       event: pull_request
 
   build_acceptance:
-    image: docker:1.11
+    image: docker:17.09.1
     environment:
-      - DOCKER_HOST=tcp://127.0.0.1:2375
+      - DOCKER_HOST=tcp://172.17.0.1:2375
     commands:
-      - docker build -f Dockerfile-acceptance -t acceptance-${DRONE_COMMIT_SHA} .
+      - docker build -f Dockerfile-acceptance -t acceptance-$${DRONE_COMMIT_SHA} .
     when:
       branch: master
       event: push
 
   test_acceptance:
-    image: docker:1.11
+    image: docker:17.09.1
     environment:
-      - DOCKER_HOST=tcp://127.0.0.1:2375
+      - DOCKER_HOST=tcp://172.17.0.1:2375
     commands:
-      - docker run -e NODE_ENV=ci -e DISABLE_CSP=true -e EMAIL_TRANSPORT=stub -e CASEWORKER_EMAIL=test@example.com -d --net host rotm-${DRONE_COMMIT_SHA}
-      - docker run --rm --net host acceptance-${DRONE_COMMIT_SHA}
+      - docker run -e NODE_ENV=ci -e DISABLE_CSP=true -e EMAIL_TRANSPORT=stub -e CASEWORKER_EMAIL=test@example.com -d --userns host --net host rotm-$${DRONE_COMMIT_SHA}
+      - docker run --rm --userns host --net host acceptance-$${DRONE_COMMIT_SHA}
     when:
       event: pull_request
 
   test_acceptance:
-    image: docker:1.11
+    image: docker:17.09.1
     environment:
-      - DOCKER_HOST=tcp://127.0.0.1:2375
+      - DOCKER_HOST=tcp://172.17.0.1:2375
     commands:
-      - docker run -e NODE_ENV=ci -e DISABLE_CSP=true -d -e EMAIL_TRANSPORT=stub -e CASEWORKER_EMAIL=test@example.com --net host rotm-${DRONE_COMMIT_SHA}
-      - docker run --rm --net host acceptance-${DRONE_COMMIT_SHA}
+      - docker run -e NODE_ENV=ci -e DISABLE_CSP=true -d -e EMAIL_TRANSPORT=stub -e CASEWORKER_EMAIL=test@example.com --userns host --net host rotm-$${DRONE_COMMIT_SHA}
+      - docker run --rm --userns host --net host acceptance-$${DRONE_COMMIT_SHA}
     when:
       branch: master
       event: push
 
   image_to_quay:
-    image: docker:1.11
+    image: docker:17.09.1
     environment:
-      - DOCKER_HOST=tcp://127.0.0.1:2375
+      - DOCKER_HOST=tcp://172.17.0.1:2375
     commands:
-      - docker login -u="ukhomeofficedigital+drone" -p=${DOCKER_PASSWORD} quay.io
-      - docker tag rotm-${DRONE_COMMIT_SHA} quay.io/ukhomeofficedigital/rotm:${DRONE_COMMIT_SHA}
-      - docker push quay.io/ukhomeofficedigital/rotm:${DRONE_COMMIT_SHA}
+      - docker login -u="ukhomeofficedigital+drone" -p=$${DOCKER_PASSWORD} quay.io
+      - docker tag rotm-$${DRONE_COMMIT_SHA} quay.io/ukhomeofficedigital/rotm:$${DRONE_COMMIT_SHA}
+      - docker push quay.io/ukhomeofficedigital/rotm:$${DRONE_COMMIT_SHA}
     when:
       branch: master
       event: push
@@ -91,7 +91,7 @@ pipeline:
     drone_server: https://drone.digital.homeoffice.gov.uk
     repo: UKHomeOffice/kube-rotm
     branch: master
-    deploy_to: rotm-dev
+    deploy_to: dev
     params: APP_IMAGE_TAG=${DRONE_COMMIT_SHA},KUBE_NAMESPACE=rotm-dev
     when:
       branch: master
@@ -102,18 +102,30 @@ pipeline:
     drone_server: https://drone.digital.homeoffice.gov.uk
     repo: UKHomeOffice/kube-rotm
     branch: master
-    deploy_to: rotm-preprod
+    deploy_to: preprod
     params: APP_IMAGE_TAG=${DRONE_COMMIT_SHA},KUBE_NAMESPACE=rotm-preprod
     when:
-      event: tag
+      event: deployment
+      environment: preprod
+
+  trigger_deploy_to_rotm_prod:
+    image: quay.io/ukhomeofficedigital/drone-trigger:latest
+    drone_server: https://drone.digital.homeoffice.gov.uk
+    repo: UKHomeOffice/kube-rotm
+    branch: master
+    deploy_to: prod
+    params: APP_IMAGE_TAG=${DRONE_COMMIT_SHA},KUBE_NAMESPACE=rotm
+    when:
+      event: deployment
+      environment: prod
 
   smoke_test:
-    image: docker:1.11
+    image: docker:17.09.1
     environment:
-      - DOCKER_HOST=tcp://127.0.0.1:2375
+      - DOCKER_HOST=tcp://172.17.0.1:2375
     commands:
-      - docker build -f Dockerfile-acceptance -t acceptance-${DRONE_COMMIT_SHA} .
-      - docker run -e TEST_URL=https://${DRONE_DEPLOY_TO}.notprod.homeoffice.gov.uk --rm --net host acceptance-${DRONE_COMMIT_SHA}
+      - docker build -f Dockerfile-acceptance -t acceptance-$${DRONE_COMMIT_SHA} .
+      - docker run -e TEST_URL=https://$${DRONE_DEPLOY_TO}.notprod.homeoffice.gov.uk --rm --userns host --net host acceptance-$${DRONE_COMMIT_SHA}
     when:
       event: deployment
 
@@ -122,9 +134,3 @@ services:
     image: redis
   selenium:
     image: selenium/standalone-chrome
-  dind:
-    image: docker:1.11-dind
-    privileged: true
-    command:
-      - "-s"
-      - "overlay"
