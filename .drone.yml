@@ -58,6 +58,7 @@ pipeline:
     environment:
       - DOCKER_HOST=tcp://172.17.0.1:2375
     commands:
+      - docker run -d --userns host --net host selenium/standalone-chrome
       - docker run -e NODE_ENV=ci -e DISABLE_CSP=true -e EMAIL_TRANSPORT=stub -e CASEWORKER_EMAIL=test@example.com -d --userns host --net host rotm-$${DRONE_COMMIT_SHA}
       - docker run --rm --userns host --net host acceptance-$${DRONE_COMMIT_SHA}
     when:
@@ -68,7 +69,8 @@ pipeline:
     environment:
       - DOCKER_HOST=tcp://172.17.0.1:2375
     commands:
-      - docker run -e NODE_ENV=ci -e DISABLE_CSP=true -d -e EMAIL_TRANSPORT=stub -e CASEWORKER_EMAIL=test@example.com --userns host --net host rotm-$${DRONE_COMMIT_SHA}
+      - docker run -d --userns host --net host selenium/standalone-chrome
+      - docker run -e NODE_ENV=ci -e DISABLE_CSP=true -e EMAIL_TRANSPORT=stub -e CASEWORKER_EMAIL=test@example.com -d --userns host --net host rotm-$${DRONE_COMMIT_SHA}
       - docker run --rm --userns host --net host acceptance-$${DRONE_COMMIT_SHA}
     when:
       branch: master
@@ -132,5 +134,3 @@ pipeline:
 services:
   redis:
     image: redis
-  selenium:
-    image: selenium/standalone-chrome
