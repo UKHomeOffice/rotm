@@ -58,9 +58,10 @@ pipeline:
     environment:
       - DOCKER_HOST=tcp://172.17.0.1:2375
     commands:
-      - docker run -d --userns host --net host selenium/standalone-chrome
-      - docker run -e NODE_ENV=ci -e DISABLE_CSP=true -e EMAIL_TRANSPORT=stub -e CASEWORKER_EMAIL=test@example.com -d --userns host --net host rotm-$${DRONE_COMMIT_SHA}
-      - docker run --rm --userns host --net host acceptance-$${DRONE_COMMIT_SHA}
+      - docker run -d --name=redis redis
+      - docker run -d -e NODE_ENV=ci -e DISABLE_CSP=true -e EMAIL_TRANSPORT=stub -e CASEWORKER_EMAIL=test@example.com --net=container:redis --name=app rotm-$${DRONE_COMMIT_SHA}
+      - docker run -d --net=container:app selenium/standalone-chrome
+      - docker run --rm --net=container:app acceptance-$${DRONE_COMMIT_SHA}
     when:
       event: pull_request
 
@@ -69,9 +70,10 @@ pipeline:
     environment:
       - DOCKER_HOST=tcp://172.17.0.1:2375
     commands:
-      - docker run -d --userns host --net host selenium/standalone-chrome
-      - docker run -e NODE_ENV=ci -e DISABLE_CSP=true -e EMAIL_TRANSPORT=stub -e CASEWORKER_EMAIL=test@example.com -d --userns host --net host rotm-$${DRONE_COMMIT_SHA}
-      - docker run --rm --userns host --net host acceptance-$${DRONE_COMMIT_SHA}
+      - docker run -d --name=redis redis
+      - docker run -d -e NODE_ENV=ci -e DISABLE_CSP=true -e EMAIL_TRANSPORT=stub -e CASEWORKER_EMAIL=test@example.com --net=container:redis --name=app rotm-$${DRONE_COMMIT_SHA}
+      - docker run -d --net=container:app selenium/standalone-chrome
+      - docker run --rm --net=container:app acceptance-$${DRONE_COMMIT_SHA}
     when:
       branch: master
       event: push
@@ -127,10 +129,13 @@ pipeline:
       - DOCKER_HOST=tcp://172.17.0.1:2375
     commands:
       - docker build -f Dockerfile-acceptance -t acceptance-$${DRONE_COMMIT_SHA} .
-      - docker run -e TEST_URL=https://$${DRONE_DEPLOY_TO}.notprod.homeoffice.gov.uk --rm --userns host --net host acceptance-$${DRONE_COMMIT_SHA}
+      - docker run -e TEST_URL=https://rotm-$${DRONE_DEPLOY_TO}.notprod.homeoffice.gov.uk --rm --net host acceptance-$${DRONE_COMMIT_SHA}
     when:
       event: deployment
+      environment: [dev, preprod]
 
 services:
   redis:
     image: redis
+  selenium:
+    image: selenium/standalone-chrome

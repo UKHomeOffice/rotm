@@ -9,4 +9,4 @@ COPY apps apps/
 
 RUN npm --loglevel warn install
 
-CMD npm run test:acceptance
+CMD npm run test:acceptance:local
