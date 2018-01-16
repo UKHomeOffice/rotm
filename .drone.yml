@@ -137,5 +137,3 @@ pipeline:
 services:
   redis:
     image: redis
-  selenium:
-    image: selenium/standalone-chrome
