@@ -134,5 +134,3 @@ services:
     image: redis
   selenium:
     image: selenium/standalone-chrome
-    commands:
-      -  docker run -d -p 4444:4444 -v /dev/shm:/dev/shm --rm --userns host --net host selenium/standalone-chrome
