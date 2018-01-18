@@ -2,6 +2,7 @@
 
 const skipStep = require('./behaviours/skip-step');
 const saveImage = require('./behaviours/save-image');
+const deleteImage = require('./behaviours/delete-image');
 const createThumbnail = require('./behaviours/create-thumbnail');
 const config = require('../../config');
 const caseworkerEmailer = require('./behaviours/caseworker-email')(config.email);
@@ -33,6 +34,7 @@ module.exports = {
       continueOnEdit: true
     },
     '/add-image': {
+      behaviours: deleteImage,
       fields: [
         'add-image'
       ],
