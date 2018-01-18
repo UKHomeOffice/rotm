@@ -98,7 +98,7 @@ pipeline:
     image: quay.io/ukhomeofficedigital/drone-trigger:latest
     secrets:
       - DRONE_TOKEN
-    drone_server: https://drone.digital.homeoffice.gov.uk
+    drone_server: https://drone.acp.homeoffice.gov.uk
     repo: UKHomeOffice/kube-rotm
     branch: master
     deploy_to: dev
@@ -111,7 +111,7 @@ pipeline:
     image: quay.io/ukhomeofficedigital/drone-trigger:latest
     secrets:
       - DRONE_TOKEN
-    drone_server: https://drone.digital.homeoffice.gov.uk
+    drone_server: https://drone.acp.homeoffice.gov.uk
     repo: UKHomeOffice/kube-rotm
     branch: master
     deploy_to: preprod
@@ -124,7 +124,7 @@ pipeline:
     image: quay.io/ukhomeofficedigital/drone-trigger:latest
     secrets:
       - DRONE_TOKEN
-    drone_server: https://drone.digital.homeoffice.gov.uk
+    drone_server: https://drone.acp.homeoffice.gov.uk
     repo: UKHomeOffice/kube-rotm
     branch: master
     deploy_to: prod
