@@ -62,6 +62,7 @@ pipeline:
       - docker run -d -e NODE_ENV=ci -e DISABLE_CSP=true -e EMAIL_TRANSPORT=stub -e CASEWORKER_EMAIL=test@example.com --net=container:redis-$${DRONE_COMMIT_SHA} --name=app-$${DRONE_COMMIT_SHA} rotm-$${DRONE_COMMIT_SHA}
       - docker run -d --net=container:app-$${DRONE_COMMIT_SHA} selenium/standalone-chrome
       - docker run --rm --net=container:app-$${DRONE_COMMIT_SHA} acceptance-$${DRONE_COMMIT_SHA}
+      - docker rm -vf "app-$${DRONE_COMMIT_SHA}" "redis-$${DRONE_COMMIT_SHA}"
     when:
       event: pull_request
 
@@ -74,6 +75,7 @@ pipeline:
       - docker run -d -e NODE_ENV=ci -e DISABLE_CSP=true -e EMAIL_TRANSPORT=stub -e CASEWORKER_EMAIL=test@example.com --net=container:redis-$${DRONE_COMMIT_SHA} --name=app-$${DRONE_COMMIT_SHA} rotm-$${DRONE_COMMIT_SHA}
       - docker run -d --net=container:app-$${DRONE_COMMIT_SHA} selenium/standalone-chrome
       - docker run --rm --net=container:app-$${DRONE_COMMIT_SHA} acceptance-$${DRONE_COMMIT_SHA}
+      - docker rm -vf "app-$${DRONE_COMMIT_SHA}" "redis-$${DRONE_COMMIT_SHA}"
     when:
       branch: master
       event: push
