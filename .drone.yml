@@ -82,6 +82,8 @@ pipeline:
 
   image_to_quay:
     image: docker:17.09.1
+    secrets:
+      - DOCKER_PASSWORD
     environment:
       - DOCKER_HOST=tcp://172.17.0.1:2375
     commands:
@@ -94,6 +96,8 @@ pipeline:
 
   trigger_deploy_to_rotm_dev:
     image: quay.io/ukhomeofficedigital/drone-trigger:latest
+    secrets:
+      - DRONE_TOKEN
     drone_server: https://drone.digital.homeoffice.gov.uk
     repo: UKHomeOffice/kube-rotm
     branch: master
@@ -105,6 +109,8 @@ pipeline:
 
   trigger_deploy_to_rotm_preprod:
     image: quay.io/ukhomeofficedigital/drone-trigger:latest
+    secrets:
+      - DRONE_TOKEN
     drone_server: https://drone.digital.homeoffice.gov.uk
     repo: UKHomeOffice/kube-rotm
     branch: master
@@ -116,6 +122,8 @@ pipeline:
 
   trigger_deploy_to_rotm_prod:
     image: quay.io/ukhomeofficedigital/drone-trigger:latest
+    secrets:
+      - DRONE_TOKEN
     drone_server: https://drone.digital.homeoffice.gov.uk
     repo: UKHomeOffice/kube-rotm
     branch: master
