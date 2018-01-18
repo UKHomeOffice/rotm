@@ -142,7 +142,6 @@ pipeline:
       - docker run -e TEST_URL=https://rotm-$${DRONE_DEPLOY_TO}.notprod.homeoffice.gov.uk --rm --net host acceptance-$${DRONE_COMMIT_SHA}
     when:
       event: deployment
-      environment: [dev, preprod]
 
 services:
   redis:
