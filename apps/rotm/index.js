@@ -2,7 +2,7 @@
 
 const skipStep = require('./behaviours/skip-step');
 const saveImage = require('./behaviours/save-image');
-const deleteImage = require('./behaviours/delete-image');
+const removeImage = require('./behaviours/remove-image');
 const createThumbnail = require('./behaviours/create-thumbnail');
 const config = require('../../config');
 const caseworkerEmailer = require('./behaviours/caseworker-email')(config.email);
@@ -34,7 +34,6 @@ module.exports = {
       continueOnEdit: true
     },
     '/add-image': {
-      behaviours: deleteImage,
       fields: [
         'add-image'
       ],
@@ -50,7 +49,13 @@ module.exports = {
     },
     '/check-your-report': {
       prereqs: ['/image'],
-      behaviours: [require('hof-behaviour-summary-page'), 'complete', caseworkerEmailer, checkReportBackLink],
+      behaviours: [
+        require('hof-behaviour-summary-page'),
+        'complete',
+        caseworkerEmailer,
+        checkReportBackLink,
+        removeImage
+      ],
       nullValue: 'pages.confirm.undefined',
       sections: {
         'summary': [
