@@ -1,4 +1,4 @@
-FROM quay.io/ukhomeofficedigital/nodejs-base:v6
+FROM quay.io/ukhomeofficedigital/nodejs-base:v8
 
 WORKDIR /test
 
@@ -9,4 +9,4 @@ COPY apps apps/
 
 RUN npm --loglevel warn install
 
-CMD npm run test:acceptance:local
+CMD npm run test:acceptance
