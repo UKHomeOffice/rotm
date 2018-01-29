@@ -95,7 +95,7 @@ pipeline:
       event: push
 
   trigger_deploy_to_rotm_dev:
-    image: quay.io/ukhomeofficedigital/drone-trigger:latest
+    image: quay.io/ukhomeofficedigital/drone-trigger:v0.3.0
     secrets:
       - DRONE_TOKEN
     drone_server: https://drone.acp.homeoffice.gov.uk
@@ -108,7 +108,7 @@ pipeline:
       event: push
 
   trigger_deploy_to_rotm_preprod:
-    image: quay.io/ukhomeofficedigital/drone-trigger:latest
+    image: quay.io/ukhomeofficedigital/drone-trigger:v0.3.0
     secrets:
       - DRONE_TOKEN
     drone_server: https://drone.acp.homeoffice.gov.uk
@@ -121,7 +121,7 @@ pipeline:
       environment: preprod
 
   trigger_deploy_to_rotm_prod:
-    image: quay.io/ukhomeofficedigital/drone-trigger:latest
+    image: quay.io/ukhomeofficedigital/drone-trigger:v0.3.0
     secrets:
       - DRONE_TOKEN
     drone_server: https://drone.acp.homeoffice.gov.uk
