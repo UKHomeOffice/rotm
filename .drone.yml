@@ -141,5 +141,4 @@ pipeline:
       - docker run -e TEST_URL=https://rotm-$${DRONE_DEPLOY_TO}.notprod.homeoffice.gov.uk --rm --userns host --net host acceptance-$${DRONE_COMMIT_SHA}
       - docker rm -vf "selenium-$${DRONE_COMMIT_SHA}"
     when:
-      event: deployment
-      branch: smoke_test
+      event: smoke_test
