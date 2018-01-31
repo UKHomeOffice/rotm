@@ -1,11 +1,4 @@
 pipeline:
-  build_6:
-    image: node:6
-    commands:
-      - npm --loglevel warn install
-      - npm run test
-    when:
-      event: [push, pull_request]
 
   build_8:
     image: node:8
@@ -119,6 +112,8 @@ pipeline:
     when:
       event: deployment
       environment: preprod
+      branch:
+        exclude: smoke_test
 
   trigger_deploy_to_rotm_prod:
     image: quay.io/ukhomeofficedigital/drone-trigger:v0.3.0
@@ -132,6 +127,8 @@ pipeline:
     when:
       event: deployment
       environment: prod
+      branch:
+        exclude: smoke_test
 
   smoke_test:
     image: docker:17.09.1
@@ -141,8 +138,8 @@ pipeline:
       - docker build -f Dockerfile-acceptance -t acceptance-$${DRONE_COMMIT_SHA} .
       - docker run -d --userns host --net host --name=selenium-$${DRONE_COMMIT_SHA} selenium/standalone-chrome
       - sleep 10
-      - echo "$${DRONE_DEPLOY_TO}"
       - docker run -e TEST_URL=https://rotm-$${DRONE_DEPLOY_TO}.notprod.homeoffice.gov.uk --rm --userns host --net host acceptance-$${DRONE_COMMIT_SHA}
       - docker rm -vf "selenium-$${DRONE_COMMIT_SHA}"
     when:
       event: deployment
+      branch: smoke_test
