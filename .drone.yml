@@ -131,11 +131,11 @@ pipeline:
     environment:
       - DOCKER_HOST=tcp://172.17.0.1:2375
     commands:
-      - echo "$${DEPLOY_ENV}"
+      - echo "Run tests against https://rotm-$${DEPLOY_ENV}.notprod.homeoffice.gov.uk"
       - docker build -f Dockerfile-acceptance -t acceptance-$${DRONE_COMMIT_SHA} .
       - docker run -d --userns host --net host --name=selenium-$${DRONE_COMMIT_SHA} selenium/standalone-chrome
       - sleep 10
-      - docker run -e TEST_URL=https://rotm-$${DRONE_DEPLOY_TO}.notprod.homeoffice.gov.uk --rm --userns host --net host acceptance-$${DRONE_COMMIT_SHA}
+      - docker run -e TEST_URL=https://rotm-$${DEPLOY_ENV}.notprod.homeoffice.gov.uk --rm --userns host --net host acceptance-$${DRONE_COMMIT_SHA}
       - docker rm -vf "selenium-$${DRONE_COMMIT_SHA}"
     when:
       event: deployment
