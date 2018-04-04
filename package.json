@@ -48,7 +48,7 @@
     "pre-commit": "^1.0.10",
     "sinon": "^4.1.2",
     "sinon-chai": "^2.14.0",
-    "so-acceptance": "^5.0.1"
+    "so-acceptance": "^5.1.0"
   },
   "pre-commit": [
     "lint",
