@@ -13,7 +13,7 @@
           <tr>
             <th>{{#t}}pages.confirm.fields.image-preview.label{{/t}}</th>
             {{#values.image-preview}}
-              <td data-field="image"><img src="{{values.image-preview}}" /></td>
+              <td data-field="image"><img src="{{values.image-preview}}" alt="{{values.image}}" /></td>
             {{/values.image-preview}}
             {{^values.image-preview}}
               <td data-field="image">{{#t}}pages.confirm.undefined{{/t}}</td>
