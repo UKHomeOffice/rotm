@@ -88,26 +88,40 @@ pipeline:
       event: push
 
   trigger_deploy_to_rotm_dev:
-    image: quay.io/ukhomeofficedigital/drone-trigger:latest
+    image: quay.io/ukhomeofficedigital/drone-trigger:v0.3.0
+    secrets:
+      - DRONE_TOKEN
     drone_server: https://drone.digital.homeoffice.gov.uk
     repo: UKHomeOffice/kube-rotm
-    branch: master
+    branch: release
     deploy_to: rotm-dev
     params: APP_IMAGE_TAG=${DRONE_COMMIT_SHA},KUBE_NAMESPACE=rotm-dev
     when:
-      branch: master
+      branch: release
       event: push
 
   trigger_deploy_to_rotm_preprod:
-    image: quay.io/ukhomeofficedigital/drone-trigger:latest
+    image: quay.io/ukhomeofficedigital/drone-trigger:v0.3.0
+    secrets:
+      - DRONE_TOKEN
+    drone_server: https://drone.digital.homeoffice.gov.uk
+    repo: UKHomeOffice/kube-rotm
+    branch: release
+    deploy_to: preprod
+    params: APP_IMAGE_TAG=${DRONE_COMMIT_SHA},KUBE_NAMESPACE=rotm-preprod
+    when:
+      event: deployment
+      environment: preprod
+
+  trigger_deploy_to_rotm_prod:
+    image: quay.io/ukhomeofficedigital/drone-trigger:v0.3.0
+    secrets:
+      - DRONE_TOKEN
     drone_server: https://drone.digital.homeoffice.gov.uk
     repo: UKHomeOffice/kube-rotm
     branch: master
-    deploy_to: rotm-preprod
-    params: APP_IMAGE_TAG=${DRONE_COMMIT_SHA},KUBE_NAMESPACE=rotm-preprod
+    deploy_to: preprod
+    params: APP_IMAGE_TAG=${DRONE_COMMIT_SHA},KUBE_NAMESPACE=rotm
     when:
-      event: tag
-
-services:
-  redis:
-    image: redis
+      event: deployment
+      environment: prod
