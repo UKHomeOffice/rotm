@@ -50,8 +50,10 @@ pipeline:
     environment:
       - DOCKER_HOST=tcp://172.17.0.1:2375
     commands:
-      - docker run -e NODE_ENV=ci -d --net host app-$${DRONE_COMMIT_SHA}
-      - docker run --rm --net host acceptance
+      - docker run -d --name=redis-$${DRONE_COMMIT_SHA} redis
+      - docker run -d -e NODE_ENV=ci -e DISABLE_CSP=true -e CASEWORKER_EMAIL=test@example.com --net=container:redis-$${DRONE_COMMIT_SHA} --name=app-$${DRONE_COMMIT_SHA} app-$${DRONE_COMMIT_SHA}
+      - docker run --rm -e CASEWORKER_EMAIL=test@example.com --net=container:app-$${DRONE_COMMIT_SHA} acceptance-$${DRONE_COMMIT_SHA}
+      - docker rm -vf "app-$${DRONE_COMMIT_SHA}" "redis-$${DRONE_COMMIT_SHA}"
     when:
       event: pull_request
 
@@ -60,8 +62,10 @@ pipeline:
     environment:
       - DOCKER_HOST=tcp://172.17.0.1:2375
     commands:
-      - docker run -e NODE_ENV=ci -d --net host app-$${DRONE_COMMIT_SHA}
-      - docker run --rm --net host acceptance
+      - docker run -d --name=redis-$${DRONE_COMMIT_SHA} redis
+      - docker run -d -e NODE_ENV=ci -e DISABLE_CSP=true -e CASEWORKER_EMAIL=test@example.com --net=container:redis-$${DRONE_COMMIT_SHA} --name=app-$${DRONE_COMMIT_SHA} app-$${DRONE_COMMIT_SHA}
+      - docker run --rm -e CASEWORKER_EMAIL=test@example.com --net=container:app-$${DRONE_COMMIT_SHA} acceptance-$${DRONE_COMMIT_SHA}
+      - docker rm -vf "app-$${DRONE_COMMIT_SHA}" "redis-$${DRONE_COMMIT_SHA}"
     when:
       branch: release
       event: push
