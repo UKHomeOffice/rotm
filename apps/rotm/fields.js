@@ -11,7 +11,7 @@ module.exports = {
   },
   'url': {
     mixin: 'input-text',
-    validate: ['url', 'required'],
+    validate: 'url',
     child: 'partials/url-details'
   },
   'description': {
