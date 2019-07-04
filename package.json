@@ -18,8 +18,9 @@
     "test:acceptance:local": "funkie --driver chromedriver npm run test:acceptance",
     "lint": "eslint .",
     "build": "hof-build",
-    "prepublish": "npm run build",
-    "postinstall": "npm run build"
+    "prepublish": "npm run snyk-protect; npm run build",
+    "postinstall": "npm run build",
+    "snyk-protect": "snyk protect"
   },
   "author": "HomeOffice",
   "dependencies": {
@@ -34,7 +35,8 @@
     "jimp": "^0.2.28",
     "lodash": "^4.17.4",
     "moment": "^2.19.3",
-    "uuid": "^3.1.0"
+    "uuid": "^3.1.0",
+    "snyk": "^1.190.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",
@@ -53,5 +55,6 @@
   "pre-commit": [
     "lint",
     "test"
-  ]
+  ],
+  "snyk": true
 }
