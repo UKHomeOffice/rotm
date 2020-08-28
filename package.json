@@ -25,7 +25,7 @@
   "dependencies": {
     "busboy-body-parser": "^0.3.1",
     "express": "^4.16.2",
-    "hof": "^13.2.1",
+    "hof": "^16.0.0",
     "hof-behaviour-emailer": "^2.2.0",
     "hof-behaviour-summary-page": "^3.1.0",
     "hof-build": "^1.6.0",
