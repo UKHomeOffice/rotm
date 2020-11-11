@@ -9,13 +9,22 @@ const uuidv1 = require('uuid/v1');
 
 const parse = (model, translate) => {
   const getLabel = key => translate(`email.caseworker.fields.${key}.label`);
+  const fields = [
+    'evidence-written',
+    'contact-details-name',
+    'contact-email',
+    'contact-phone'
+  ];
   return {
-    image: model['image-url'],
+    urls: model.urls,
+    images: model.images,
     table: [
       { label: getLabel('uniqueId'), value: uuidv1() },
       { label: getLabel('submitted'), value: moment().format(config.dateTimeFormat) },
-      { label: getLabel('source'), value: model.source },
-      { label: getLabel('more-info'), value: model['more-info'] }
+      ...fields.map(f => ({
+        label: getLabel(f),
+        value: model[f]
+      }))
     ]
   };
 };

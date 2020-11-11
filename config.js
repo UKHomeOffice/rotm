@@ -38,7 +38,7 @@ module.exports = {
       port: process.env.TRANSPORT_PORT || '',
       host: process.env.TRANSPORT_HOST || '',
       ignoreTLS: process.env.TRANSPORT_IGNORE_TLS || '',
-      secure: process.env.TRANSPORT_SECURE || ''
+      secure: process.env.TRANSPORT_SECURE || false
     }
   },
   upload: {

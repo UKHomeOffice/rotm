@@ -1,51 +1,110 @@
  'use strict';
 
+const config = require('../../config');
 const skipStep = require('./behaviours/skip-step');
+const urlRepeater = require('./behaviours/url-repeater');
 const saveImage = require('./behaviours/save-image');
 const removeImage = require('./behaviours/remove-image');
-const createThumbnail = require('./behaviours/create-thumbnail');
-const config = require('../../config');
+const unsetValue = require('./behaviours/unset-value');
+const checkDeviceType = require('./behaviours/check-device-type');
 const caseworkerEmailer = require('./behaviours/caseworker-email')(config.email);
-const checkReportBackLink = require('./behaviours/check-report-back-link');
+const checkReport = require('./behaviours/check-report');
 
 module.exports = {
   name: 'rotm',
   params: '/:action?',
   confirmStep: '/check-your-report',
+  pages: {
+    '/accessibility': 'accessibility'
+  },
   steps: {
-    '/source': {
+    '/evidence-url': {
       fields: [
-        'source'
+        'url',
+        'another-url-1',
+        'another-url-2',
+        'another-url-3',
+        'another-url-4',
+        'evidence-url'
       ],
-      next: '/more-info'
+      next: '/evidence-upload',
+      behaviours: [urlRepeater]
     },
-    '/more-info': {
+    '/evidence-upload': {
       fields: [
-        'more-info'
+        'image',
+        'evidence-upload'
       ],
-      next: '/image'
-    },
-    '/image': {
-      fields: [
-        'image'
+      forks: [
+        {
+          target: '/evidence-upload-confirm',
+          condition: {
+            field: 'evidence-upload',
+            value: 'yes'
+          }
+        },
+        {
+          target: '/evidence-written',
+          condition: {
+              field: 'evidence-upload',
+              value: 'no'
+          }
+        }
       ],
-      behaviours: [skipStep, saveImage, createThumbnail],
-      next: '/add-image',
+      behaviours: [skipStep, saveImage('image'), checkDeviceType],
       continueOnEdit: true
     },
-    '/add-image': {
+    '/evidence-upload-confirm': {
       fields: [
-        'add-image'
+        'evidence-upload-more',
+        'another-image'
+      ],
+      forks: [
+        {
+          target: '/evidence-upload-confirm',
+          condition: {
+            field: 'evidence-upload-more',
+            value: 'yes'
+          }
+        },
+        {
+          target: '/evidence-written',
+          condition: {
+              field: 'evidence-upload-more',
+              value: 'no'
+          }
+        }
+      ],
+      behaviours: [saveImage('another-image'), removeImage, unsetValue('evidence-upload-more')]
+    },
+    '/evidence-written': {
+      fields: [
+        'evidence-written',
+      ],
+      next: '/can-we-contact'
+    },
+    '/can-we-contact': {
+      fields: [
+        'can-we-contact'
       ],
       forks: [{
-        target: '/image',
+        target: '/contact-details',
         condition: {
-          field: 'add-image',
-          value: 'no'
+          field: 'can-we-contact',
+          value: 'yes'
         }
       }],
       next: '/check-your-report',
       continueOnEdit: true
+    },
+    '/contact-details': {
+      fields: [
+        'contact-details-name',
+        'contact-details-method',
+        'contact-email',
+        'contact-phone'
+      ],
+      next: '/check-your-report'
     },
     '/check-your-report': {
       prereqs: ['/image'],
@@ -53,15 +112,18 @@ module.exports = {
         require('hof-behaviour-summary-page'),
         'complete',
         caseworkerEmailer,
-        checkReportBackLink,
-        removeImage
+        checkReport
       ],
       nullValue: 'pages.confirm.undefined',
       sections: {
-        'summary': [
-          'source',
-          'more-info'
-          // image preview is hardcoded in the page template
+        summary: [
+          'evidence-written',
+          'can-we-contact'
+        ],
+        contact: [
+          'contact-details-name',
+          'contact-email',
+          'contact-phone'
         ]
       },
       next: '/confirmation'

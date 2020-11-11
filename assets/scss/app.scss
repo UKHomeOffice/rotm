@@ -1,4 +1,5 @@
 @import "hof-theme-govuk";
+@import "govuk-frontend/govuk/components/tabs/tabs";
 
 .phase-banner {
   @include phase-banner(alpha);
@@ -6,6 +7,7 @@
 
 ul {
   @extend .list-bullet;
+  // @extend .list-number;
 }
 
 details {
@@ -82,4 +84,90 @@ textarea.form-control {
   border: 1px solid $panel-colour;
   margin: 10px 0;
   overflow: hidden;
+}
+
+.govuk-warning-text__icon {
+    font-family: "GDS Transport",Arial,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 700;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    min-width: 29px;
+    min-height: 29px;
+    margin-top: -7px;
+    border: 3px solid #0b0c0c;
+    border-radius: 50%;
+    color: #fff;
+    background: #0b0c0c;
+    font-size: 30px;
+    line-height: 29px;
+    text-align: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.govuk-warning-text__text {
+    font-family: "GDS Transport",Arial,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 700;
+
+    line-height: 1.25;
+    color: #0b0c0c;
+    display: block;
+    padding-left: 45px;
+}
+
+.govuk-warning-text {
+    position: relative;
+    margin-bottom: 20px;
+    padding: 10px 0;
+}
+
+.govuk-inset-text {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+    line-height: 1.25;
+    color: #0b0c0c;
+    padding: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    clear: both;
+    border-left: 10px solid #b1b4b6;
+}
+
+// stying upload input
+#image {
+    padding: 30px;
+    background-color: #f3f2f1;
+    border: none;
+    width: 100%;
+    text-align: center;
+  }
+
+// fixing tab sizes
+.govuk-tabs__tab {
+  font-size: 19px;
+}
+
+.source-help {
+  max-width: 75%;
+}
+
+.repeater {
+  .form-group:last-of-type {
+    margin-bottom: 0;
+  }
+  .form-control {
+    float: left;
+  }
+  .remove {
+    padding-top: 5px;
+    float: right;
+  }
 }

@@ -1,34 +1,130 @@
 {
-  "source": {
-    "label": "Link or website",
-    "hint": "For example, 'https://www.gov.uk/report-terrorism' or 'Facebook'",
-    "validation": {
-      "required": "Tell us where you found the material"
-    }
-  },
-  "more-info": {
-    "label": "Additional information (optional)"
-  },
   "image": {
-    "label": "Select an image",
+    "label": "Select or drag evidence here",
     "validation": {
-      "required": "Select an image",
-      "extname": "Select a valid file type (jpg, jpeg, png)",
-      "unsaved": "We have not been able to upload the photo or screenshot"
+      "required": "Select a file",
+      "extname": "Select a valid file type (png, jpg, jpeg, gif, tiff, mp4, mov, wmv, flv, avi, pdf, m4a, mp3, flac, mp4, wav, wma, aac)",
+      "unsaved": "We have not been able to upload evidence"
     }
   },
-  "add-image": {
-    "legend": "Is this correct?",
+  "another-image": {
+    "label": "Select or drag evidence here",
+    "validation": {
+      "required": "Select a file",
+      "extname": "Select a valid file type (png, jpg, jpeg, gif, tiff, mp4, mov, wmv, flv, avi, pdf, m4a, mp3, flac, mp4, wav, wma, aac)",
+      "unsaved": "We have not been able to upload evidence"
+    }
+  },
+  "evidence-upload": {
     "options": {
       "yes": {
-        "label": "Yes, add this image"
+        "label": "Yes, I have evidence"
       },
       "no": {
-        "label": "No, I want to change the image"
+        "label": "No, I don’t have anything"
       }
     },
     "validation": {
-      "required": "Tell us if you want to add this image"
+      "required": "Select whether you have some evidence you can share"
     }
+  },
+  "evidence-upload-more": {
+    "options": {
+      "yes": {
+        "label": "Yes"
+      },
+      "no": {
+        "label": "No"
+      }
+    },
+    "validation": {
+      "required": "Select whether you have any more evidence you can share"
+    }
+  },
+  "yes-upload": {
+    "label": "Paste or drag a file here"
+  },
+  "evidence-written": {
+    "label": "Additional details"
+  },
+  "evidence-url": {
+    "options": {
+      "yes": {
+        "label": "Yes, I have a link to the material"
+      },
+      "no": {
+        "label": "No, I don’t have a link"
+      }
+    },
+    "validation": {
+      "required": "Select whether you have a link to the material or not"
+    }
+  },
+  "url": {
+    "label": "Link",
+    "hint": "For example, www.gov.uk/page/1234/content#"
+  },
+  "another-url-1": {
+    "label": "Link"
+  },
+  "another-url-2": {
+    "label": "Link"
+  },
+  "another-url-3": {
+    "label": "Link"
+  },
+  "another-url-4": {
+    "label": "Link"
+  },
+  "can-we-contact": {
+    "label": "Can we contact you?",
+    "options": {
+      "yes": {
+        "label": "Yes, I’ll give my contact details"
+      },
+      "no": {
+        "label": "No, I don’t want to be contacted"
+      }
+    },
+    "validation": {
+      "required": "Select whether or not you’re willing to share your contact details"
+    }
+  },
+  "contact-details-name": {
+    "label": "Full name",
+    "validation": {
+      "required": "Enter your full name"
+    }
+  },
+  "contact-details-method": {
+    "hint": "How would you like to be contacted?",
+    "options": {
+      "email": {
+        "label": "Email"
+      },
+      "phone": {
+        "label": "Telephone"
+      }
+    },
+    "validation": {
+			"required": "Select how you would like to be contacted"
+		}
+  },
+  "contact-email": {
+    "label": "Email address",
+    "validation": {
+			"required": "Enter an email we can contact you on",
+			"email": "Enter an email address in the correct format, like name@example.com"
+		}
+  },
+  "contact-phone": {
+    "label": "Telephone number",
+    "hint": "For international numbers include the country code",
+    "validation": {
+			"required": "Enter a phone number we can contact you on"
+		}
+  },
+  "images": {
+    "label": "Image"
   }
 }

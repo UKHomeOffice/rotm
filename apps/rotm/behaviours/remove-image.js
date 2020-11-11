@@ -2,12 +2,14 @@
 
 module.exports = superclass => class extends superclass {
 
-  getValues(req, res, callback) {
-    if (req.get('Referrer').includes('/image')) {
-      req.sessionModel.unset('image');
-      req.sessionModel.unset('image-preview');
-      req.sessionModel.unset('image-url');
+  configure(req, res, next) {
+    if (req.query.delete) {
+      const images = req.sessionModel.get('images') || [];
+      const remaining = images.filter(i => i.id !== req.query.delete);
+      req.sessionModel.set('images', remaining);
+      return res.redirect(req.path);
     }
-    super.getValues(req, res, callback);
+    return super.configure(req, res, next);
   }
+
 };

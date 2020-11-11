@@ -1,8 +1,24 @@
-{{<partials-page}}
+  {{<partials-page}}
   {{$page-content}}
-    {{#rows}}
-      <table class="table-details">
-        <tbody>
+    <table class="table-details">
+      <tbody>
+        <tr>
+          <th>{{#t}}pages.confirm.fields.urls.label{{/t}}</th>
+          <td data-field="url" class="no-white-space">
+            {{#urls.length}}
+              <ul>
+              {{#urls}}
+                <li>{{.}}</li>
+              {{/urls}}
+              </ul>
+            {{/urls.length}}
+            {{^urls.length}}
+              {{#t}}pages.confirm.undefined{{/t}}
+            {{/urls.length}}
+          </td>
+          <td><a href="{{baseUrl}}/evidence-url/edit">{{#t}}buttons.change{{/t}}</a></td>
+        </tr>
+        {{#rows}}
           {{#fields}}
             <tr{{#className}} class="{{className}}"{{/className}}>
               <th>{{label}}</th>
@@ -10,19 +26,23 @@
               <td><a href="{{baseUrl}}{{step}}/edit#{{field}}" id="{{field}}-change">{{#t}}buttons.change{{/t}}</a></td>
             </tr>
           {{/fields}}
-          <tr>
-            <th>{{#t}}pages.confirm.fields.image-preview.label{{/t}}</th>
-            {{#values.image-preview}}
-              <td data-field="image"><img src="{{values.image-preview}}" alt="{{values.image}}" /></td>
-            {{/values.image-preview}}
-            {{^values.image-preview}}
-              <td data-field="image">{{#t}}pages.confirm.undefined{{/t}}</td>
-            {{/values.image-preview}}
-            <td><a href="{{baseUrl}}/image/edit" id="image-change">{{#t}}buttons.change{{/t}}</a></td>
-          </tr>
-        </tbody>
-      </table>
-    {{/rows}}
+        {{/rows}}
+        <tr>
+          <th>{{#t}}pages.confirm.fields.image-preview.label{{/t}}</th>
+          <td data-field="image" class="no-white-space">
+            {{#images}}
+              <p>{{name}}</p>
+              <p><img src="{{thumbnail}}" alt="" /></p>
+            {{/images}}
+            {{^images.length}}
+              {{#t}}pages.confirm.undefined{{/t}}
+            {{/images.length}}
+          </td>
+          <td><a href="{{baseUrl}}/evidence-upload-confirm/edit" id="image-change">{{#t}}buttons.change{{/t}}</a></td>
+        </tr>
+
+      </tbody>
+    </table>
     {{#input-submit}}send-report{{/input-submit}}
   {{/page-content}}
 {{/partials-page}}

@@ -1,0 +1,15 @@
+{{<partials-page}}
+  {{$encoding}}enctype="multipart/form-data"{{/encoding}}
+  {{$page-content}}
+    <p>{{#t}}pages.evidence-url.summary{{/t}}</p>
+    {{>partials-help-link}}
+
+    {{#fields}}
+      {{#renderField}}{{/renderField}}
+    {{/fields}}
+
+    {{#input-submit}}continue{{/input-submit}}
+
+  {{/page-content}}
+
+{{/partials-page}}

@@ -7,10 +7,16 @@
     </tr>
     {{/value}}
   {{/table}}
-  {{#image}}
+  {{#urls}}
+    <tr>
+      <td width="40%" style="padding: 15px 0;border-bottom:1px solid #ccc;">Link</td>
+      <td width="60%" style="padding: 15px 0;border-bottom:1px solid #ccc;">{{.}}</td>
+    </tr>
+  {{/urls}}
+  {{#images}}
     <tr>
       <td width="40%" style="padding: 15px 0;border-bottom:1px solid #ccc;">Image</td>
-      <td width="60%" style="padding: 15px 0;border-bottom:1px solid #ccc;"><a href="{{image}}">View the image</a></td>
+      <td width="60%" style="padding: 15px 0;border-bottom:1px solid #ccc;"><a href="{{url}}">{{name}}</a></td>
     </tr>
-  {{/image}}
+  {{/images}}
 </table>

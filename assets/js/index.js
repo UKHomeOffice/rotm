@@ -1,19 +1,9 @@
 'use strict';
 
 require('hof-theme-govuk');
+const repeater = require('./repeater');
+const govuk = require('govuk-frontend');
 
-document.getElementById('add-image-button').classList.remove('visuallyhidden');
+govuk.initAll();
 
-document.getElementById('file-upload').tabIndex = -1;
-
-document.getElementById('image-submit').tabIndex = -1;
-
-document.getElementById('add-image-button').removeAttribute('tabindex');
-
-document.getElementById('add-image-button').addEventListener('click', function imgClick() {
-  document.getElementById('file-upload').click();
-});
-
-document.getElementById('file-upload').addEventListener('change', function fileUploadChangeEvent() {
-  this.form.submit();
-});
+repeater.init();

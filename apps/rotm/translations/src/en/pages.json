@@ -1,18 +1,36 @@
 {
-  "source": {
-    "header": "Where did you find the material?"
+  "start": {
+    "header": "Report online material promoting terrorism or extremism"
   },
-  "more-info": {
-    "header": "Can you tell us more about the material?",
-    "intro": "So we can find it, please provide any information you think is helpful. You can provide a screenshot or photo on the next page.",
-    "summary": "Information that can help us"
+  "evidence-upload": {
+    "header": "Do you have any evidence?",
+    "summary": "This is helpful if the material gets deleted. Don’t worry about saving images to your device, it’s safe because you’re reporting them.",
+    "link": "Continue without providing any evidence"
   },
-  "image": {
-    "header": "Do you want to add a photo or screenshot?",
-    "link": "Continue without adding an image"
+  "evidence-upload-confirm": {
+    "header": "Do you want to upload another file?",
+    "summary": "This is helpful if the material gets deleted. Don’t worry about saving images to your device, it’s safe because you’re reporting them.",
+    "link": "Continue without providing any evidence"
   },
-  "add-image": {
-    "header": "Is this correct?"
+  "evidence-url": {
+    "header": "Do you have a link to the material?",
+    "summary": "It’s helpful if you can send us links to the relevant pages, or posts if it was posted on social media. ",
+    "link": "Continue without adding a url"
+  },
+  "evidence-written": {
+    "header": "Is there anything else you can tell us?",
+    "summary": "Tell us what you found ",
+    "link": "Continue without providing a written statement"
+  },
+  "can-we-contact": {
+    "header": "Are you willing to be contacted, if necessary?"
+  },
+  "contact-details": {
+    "header": "What are your contact details?"
+  },
+  "contact-details-method": {
+    "header": "How would you like to be contacted?",
+    "label": "How would you like to be contacted?"
   },
   "check-your-report": {
     "header": "Check your report"
@@ -26,13 +44,22 @@
       "more-info": {
         "label": "Further information"
       },
+      "urls": {
+        "label": "Link"
+      },
       "image-preview": {
         "label": "Image"
       }
     }
   },
   "confirmation": {
-    "alert-1": "Thank you",
-    "alert-2": "We’ve received your report."
+    "alert-1": "Report sent",
+    "alert-2": "If you would like a copy of your report emailed to you, please provide an email address."
+  },
+  "404": {
+    "header": "Sorry, there’s a problem with this service"
+  },
+  "timeout": {
+    "header": "Sorry, you’ll have to start again."
   }
 }

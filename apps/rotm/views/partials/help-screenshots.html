@@ -1,0 +1,21 @@
+{{$content-outer}}
+  <details class="govuk-details" data-module="govuk-details">
+    <summary class="govuk-details__summary">
+      <span class="govuk-details__summary-text">
+        Help me take a screenshot
+      </span>
+    </summary>
+    {{#device-desktop}}
+      {{>partials-help-screenshots-desktop}}
+    {{/device-desktop}}
+    {{#device-phone}}
+      {{>partials-help-screenshots-phone}}
+    {{/device-phone}}
+    {{#device-unknown}}
+      <h2 class="govuk-heading-m">How to take a screenshot on a desktop computer</h2>
+      {{>partials-help-screenshots-desktop}}
+      <h2 class="govuk-heading-m">How to take a screenshot on a mobile phone</h2>
+      {{>partials-help-screenshots-phone}}
+    {{/device-unknown}}
+  </details>
+{{/content-outer}}

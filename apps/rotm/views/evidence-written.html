@@ -1,0 +1,26 @@
+{{<partials-page}}
+  {{$encoding}}enctype="multipart/form-data"{{/encoding}}
+  {{$page-content}}
+ 
+    <p>Details may include:</p>
+    <ul class="gouvk-list">
+      <li>
+        who shared the material
+      </li>
+      <li>
+        when it was shared
+      </li>
+      <li>
+        a description, if you haven’t provided a link or evidence
+      </li>
+    </ul>
+    <br>
+    {{#fields}}
+      {{#renderField}}{{/renderField}}
+    {{/fields}}
+
+    {{#input-submit}}continue{{/input-submit}}
+
+  {{/page-content}}
+
+{{/partials-page}}

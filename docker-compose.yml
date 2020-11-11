@@ -3,16 +3,19 @@ services:
   app:
     build: .
     environment:
-      - NODE_ENV=docker-compose
-      - EMAIL_IGNORE_TLS=true
-      - EMAIL_HOST=maildev
-      - EMAIL_PORT=25
+      - NODE_ENV=development
+      - TRANSPORT_SECURE=false
+      - TRANSPORT_IGNORE_TLS=true
+      - TRANSPORT_HOST=maildev
+      - TRANSPORT_PORT=25
       - CASEWORKER_EMAIL=caseworker@gov.uk.test
       - REDIS_HOST=redis
       - REDIS_PORT=6379
+      - SESSION_SECRET=test
+      - FROM_ADDRESS=test@test.com
+      - EMAIL_TRANSPORT=smtp
     links:
       - redis
-      - maildev
     ports:
       - "8080:8080"
     volumes:

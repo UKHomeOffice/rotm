@@ -1,0 +1,23 @@
+{{<partials-page}}
+  {{$encoding}}enctype="multipart/form-data"{{/encoding}}
+  {{$page-content}}
+    {{#fields}}
+      {{#renderField}}{{/renderField}}
+    {{/fields}}
+
+    {{#input-submit}}continue{{/input-submit}}
+
+    {{^values.images}}
+    <h2 class="govuk-heading-m">No files added</h2>
+    {{/values.images}}
+    {{#values.images.length}}
+    <h2 class="govuk-heading-m">Files added</h2>
+    {{/values.images.length}}
+    {{#values.images}}
+      <p>{{name}} - <a href="?delete={{id}}">Delete</a></p>
+      <div class="image-wrapper">
+        <img src="{{thumbnail}}" width="300px">
+      </div>
+    {{/values.images}}
+  {{/page-content}}
+{{/partials-page}}

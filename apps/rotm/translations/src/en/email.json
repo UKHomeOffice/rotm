@@ -3,16 +3,28 @@
     "subject": "You have a new report of online terrorist material",
     "fields": {
       "uniqueId": {
-        "label": "Application ID"
+        "label": "Submission ID"
       },
       "submitted": {
         "label": "Date and time of submission"
       },
-      "source": {
-        "label": "Source"
+      "url": {
+        "label": "Link"
       },
-      "more-info": {
-        "label": "More information"
+      "evidence-written": {
+        "label": "Additional details"
+      },
+      "url": {
+        "label": "Link"
+      },
+      "contact-details-name": {
+        "label": "Full name"
+      },
+      "contact-email": {
+        "label": "Email address"
+      },
+      "contact-phone": {
+        "label": "Telephone number"
       }
     }
   }

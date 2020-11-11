@@ -1,7 +1,9 @@
 ##What happens next
 
-We have sent your anonymous report to the police team dealing with online terrorist material.
+The Counter-Terrorism Internet Referral Unit will investigate your report and take any action needed.  
 
-[What did you think of this service? (takes 30 seconds)](https://eforms.homeoffice.gov.uk/outreach/Feedback.ofml?FormName=terrorism_reporting/)
+###Removing evidence from your device
 
-[Start a new report](/source)
+You don't need to keep any copies of the evidence. They can now be deleted.  
+
+Thank you for your report.
