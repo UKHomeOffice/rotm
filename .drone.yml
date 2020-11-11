@@ -28,15 +28,18 @@ pipeline:
       event: push
 
   image_to_quay:
-    image: docker:17.09.1
+    image: quay.io/ukhomeofficedigital/drone-docker
     secrets:
-      - DOCKER_PASSWORD
+      - docker_password
     environment:
-      - DOCKER_HOST=tcp://172.17.0.1:2375
-    commands:
-      - docker login -u="ukhomeofficedigital+drone" -p=$${DOCKER_PASSWORD} quay.io
-      - docker tag rotm-$${DRONE_COMMIT_SHA} quay.io/ukhomeofficedigital/rotm:$${DRONE_COMMIT_SHA}
-      - docker push quay.io/ukhomeofficedigital/rotm:$${DRONE_COMMIT_SHA}
+      - DOCKER_USERNAME=ukhomeofficedigital+drone
+    registry: quay.io
+    branch: master
+    repo: quay.io/ukhomeofficedigital/rotm
+    tags:
+      - ${DRONE_COMMIT_SHA}
+      - build-${DRONE_BUILD_NUMBER}
+      - latest
     when:
       branch: master
       event: push
