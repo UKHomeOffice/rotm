@@ -1,6 +1,6 @@
 {
   "image": {
-    "label": "Select or drag evidence here",
+    "label": "Choose file to upload",
     "validation": {
       "required": "Select a file",
       "extname": "Select a valid file type (png, jpg, jpeg, gif, tiff, mp4, mov, wmv, flv, avi, pdf, m4a, mp3, flac, mp4, wav, wma, aac)",
@@ -8,7 +8,7 @@
     }
   },
   "another-image": {
-    "label": "Select or drag evidence here",
+    "label": "Choose file to upload",
     "validation": {
       "required": "Select a file",
       "extname": "Select a valid file type (png, jpg, jpeg, gif, tiff, mp4, mov, wmv, flv, avi, pdf, m4a, mp3, flac, mp4, wav, wma, aac)",
