@@ -21,6 +21,10 @@ const options = {
 
 const app = hof(options);
 
+app.use('/report', (req, res) => {
+  res.redirect(301, '/');
+});
+
 if (config.useMocks) {
   app.use(mockAPIs);
 }
