@@ -11,7 +11,7 @@ steps:
   - npm --loglevel warn install
   - npm run test
   when:
-    event: [ pull_request, push ]
+    event: push
 
 - name: build_rotm
   pull: if-not-exists
@@ -24,7 +24,7 @@ steps:
       path: /var/run
   when:
     branch: [ master, features/* ]
-    event: [ pull_request, push ]
+    event: push
 
 - name: image_to_quay
   pull: if-not-exists
