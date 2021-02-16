@@ -1,84 +1,136 @@
-pipeline:
+---
+kind: pipeline
+name: default
+type: kubernetes
 
-  build_8:
-    image: node:8
-    commands:
-      - npm --loglevel warn install
-      - npm run test
-    when:
-      event: [push, pull_request]
+steps:
+- name: build
+  pull: if-not-exists
+  image: node:8
+  commands:
+  - npm --loglevel warn install
+  - npm run test
+  when:
+    event: push
 
-  build_app:
-    image: docker:17.09.1
-    environment:
-      - DOCKER_HOST=tcp://172.17.0.1:2375
-    commands:
-      - docker build -t rotm-$${DRONE_COMMIT_SHA} .
-    when:
-      event: pull_request
+- name: build_rotm
+  pull: if-not-exists
+  image: docker:dind
+  commands:
+  - n=0; while [ "$n" -lt 60 ] && [ ! -e /var/run/docker.sock ]; do n=$(( n + 1 )); sleep 1; done
+  - docker build -t rotm-$${DRONE_COMMIT_SHA} .
+  volumes:
+    - name: dockersock
+      path: /var/run
+  when:
+    branch: [ master, features/* ]
+    event: push
 
-  build_app:
-    image: docker:17.09.1
-    environment:
-      - DOCKER_HOST=tcp://172.17.0.1:2375
-    commands:
-      - docker build -t rotm-$${DRONE_COMMIT_SHA} .
-    when:
-      branch: master
-      event: push
-
-  image_to_quay:
-    image: quay.io/ukhomeofficedigital/drone-docker
-    secrets:
-      - docker_password
-    environment:
-      - DOCKER_USERNAME=ukhomeofficedigital+drone
-    registry: quay.io
+- name: image_to_quay
+  pull: if-not-exists
+  image: docker:dind
+  environment:
+    DOCKER_PASSWORD:
+      from_secret: DOCKER_PASSWORD
+  commands:
+    - docker login -u="ukhomeofficedigital+drone" -p=$${DOCKER_PASSWORD} quay.io
+    - docker tag rotm-$${DRONE_COMMIT_SHA} quay.io/ukhomeofficedigital/rotm:${DRONE_COMMIT_SHA}
+    - docker push quay.io/ukhomeofficedigital/rotm:${DRONE_COMMIT_SHA}
+  volumes:
+    - name: dockersock
+      path: /var/run
+  when:
     branch: master
-    repo: quay.io/ukhomeofficedigital/rotm
-    tags:
-      - ${DRONE_COMMIT_SHA}
-      - build-${DRONE_BUILD_NUMBER}
-      - latest
-    when:
-      branch: master
-      event: push
+    event: push
 
-  trigger_deploy_to_rotm_dev:
-    image: quay.io/ukhomeofficedigital/drone-trigger:v0.3.0
-    secrets:
-      - DRONE_TOKEN
-    drone_server: https://drone.acp.homeoffice.gov.uk
-    repo: UKHomeOffice/kube-rotm
+- name: clone_repo_build
+  pull: if-not-exists
+  image: docker:git
+  environment:
+    DRONE_GIT_USERNAME:
+      from_secret: DRONE_GIT_USERNAME
+    DRONE_GIT_TOKEN:
+      from_secret: DRONE_GIT_TOKEN
+  commands:
+    - git clone https://$${DRONE_GIT_USERNAME}:$${DRONE_GIT_TOKEN}@github.com/UKHomeOffice/kube-rotm.git
+  when:
     branch: master
-    deploy_to: dev
-    params: APP_IMAGE_TAG=${DRONE_COMMIT_SHA},KUBE_NAMESPACE=rotm-dev
-    when:
-      branch: master
-      event: push
+    event: push
 
-  trigger_deploy_to_rotm_preprod:
-    image: quay.io/ukhomeofficedigital/drone-trigger:v0.3.0
-    secrets:
-      - DRONE_TOKEN
-    drone_server: https://drone.acp.homeoffice.gov.uk
-    repo: UKHomeOffice/kube-rotm
-    branch: master
-    deploy_to: preprod
-    params: APP_IMAGE_TAG=${DRONE_COMMIT_SHA},KUBE_NAMESPACE=rotm-preprod
-    when:
-      event: deployment
-      environment: preprod
+- name: clone_repo_promote
+  pull: if-not-exists
+  image: docker:git
+  environment:
+    DRONE_GIT_USERNAME:
+      from_secret: DRONE_GIT_USERNAME
+    DRONE_GIT_TOKEN:
+      from_secret: DRONE_GIT_TOKEN
+  commands:
+    - git clone https://$${DRONE_GIT_USERNAME}:$${DRONE_GIT_TOKEN}@github.com/UKHomeOffice/kube-rotm.git
+  when:
+    event: promote
+    target: [ preprod, prod ]
 
-  trigger_deploy_to_rotm_prod:
-    image: quay.io/ukhomeofficedigital/drone-trigger:v0.3.0
-    secrets:
-      - DRONE_TOKEN
-    drone_server: https://drone.acp.homeoffice.gov.uk
-    repo: UKHomeOffice/kube-rotm
+- name: deploy_to_dev
+  pull: if-not-exists
+  image: quay.io/ukhomeofficedigital/kd:v1.14.0
+  commands:
+    - cd kube-rotm
+    - bin/deploy.sh
+  environment:
+    KUBE_SERVER_DEV:
+      from_secret: kube_server_dev
+    KUBE_TOKEN_DEV:
+      from_secret: kube_token_dev
+    KUBE_NAMESPACE: rotm-dev
+    APP_IMAGE_TAG: ${DRONE_COMMIT_SHA}
+  when:
     branch: master
-    deploy_to: prod
-    params: APP_IMAGE_TAG=${DRONE_COMMIT_SHA},KUBE_NAMESPACE=rotm
-    when:
-      event: deployment
-      environment: prod
+    event: push
+
+- name: deploy_to_preprod
+  pull: if-not-exists
+  image: quay.io/ukhomeofficedigital/kd:v1.14.0
+  commands:
+    - cd kube-rotm
+    - bin/deploy.sh
+  environment:
+    KUBE_SERVER_DEV:
+      from_secret: kube_server_dev
+    KUBE_TOKEN_DEV:
+      from_secret: kube_token_dev
+    KUBE_NAMESPACE: rotm-preprod
+    APP_IMAGE_TAG: ${DRONE_COMMIT_SHA}
+  when:
+    event: promote
+    target: preprod
+
+- name: deploy_to_prod
+  pull: if-not-exists
+  image: quay.io/ukhomeofficedigital/kd:v1.14.0
+  commands:
+    - cd kube-rotm
+    - bin/deploy.sh
+  environment:
+    KUBE_SERVER_PROD:
+      from_secret: kube_server_prod
+    KUBE_TOKEN_PROD:
+      from_secret: kube_token_prod
+    KUBE_NAMESPACE: rotm
+    APP_IMAGE_TAG: ${DRONE_COMMIT_SHA}
+  when:
+    event: promote
+    target: prod
+
+services:
+  - name: docker
+    image: docker:dind
+    volumes:
+      - name: dockersock
+        path: /var/run
+
+volumes:
+  - name: dockersock
+    temp: {}
+
+...
