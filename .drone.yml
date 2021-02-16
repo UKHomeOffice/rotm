@@ -53,6 +53,9 @@ steps:
       from_secret: DRONE_GIT_TOKEN
   commands:
     - git clone https://$${DRONE_GIT_USERNAME}:$${DRONE_GIT_TOKEN}@github.com/UKHomeOffice/kube-rotm.git
+    - cd kube-rotm
+    - git tag dev-${DRONE_COMMIT_SHA}
+    - git push origin --tags
   when:
     branch: master
     event: push
@@ -67,6 +70,9 @@ steps:
       from_secret: DRONE_GIT_TOKEN
   commands:
     - git clone https://$${DRONE_GIT_USERNAME}:$${DRONE_GIT_TOKEN}@github.com/UKHomeOffice/kube-rotm.git
+    - cd kube-rotm
+    - git tag ${DRONE_DEPLOY_TO}-${DRONE_COMMIT_SHA}
+    - git push origin --tags
   when:
     event: promote
     target: [ preprod, prod ]
