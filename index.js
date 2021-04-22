@@ -5,7 +5,8 @@ const hof = require('hof');
 const config = require('./config');
 const mockAPIs = require('./mock-apis');
 const bodyParser = require('busboy-body-parser');
-const fs = require('fs');
+
+const sessionCookiesTable = require('./apps/rotm/translations/src/en/cookies.json');
 
 if (process.env.REDIS_URL) {
   config.redis = process.env.REDIS_URL;
@@ -16,6 +17,7 @@ const options = {
   routes: [
     require('./apps/rotm')
   ],
+  getCookies: false,
   redis: config.redis,
   csp: config.csp
 };
@@ -30,26 +32,27 @@ if (config.useMocks) {
   app.use(mockAPIs);
 }
 
-app.use((req, res, next) => {
+const addGenericLocals = (req, res, next) => {
+  // Set HTML Language
   res.locals.htmlLang = 'en';
+  // Set feedback and footer links
+  res.locals.feedbackUrl = '/feedback';
   res.locals.footerSupportLinks = [
     { path: '/cookies', property: 'base.cookies' },
     { path: '/terms-and-conditions', property: 'base.terms' },
     { path: '/accessibility', property: 'base.accessibility' },
   ];
+  // set service name for cookie banner
+  res.locals.serviceName = 'Report online terrorist material';
   next();
-});
+};
 
-fs.readFile('node_modules/hof-template-partials/translations/src/en/cookies.json', 'utf8', (e, data) => {
-  const obj = JSON.parse(data);
-  obj['session-cookies-table'].rows[0][0] = 'hod.sid';
-  fs.writeFile('node_modules/hof-template-partials/translations/src/en/cookies.json',
-    JSON.stringify(obj, null, 2), (err) => {
-      if (err) {
-        // eslint-disable-next-line no-console
-        console.err(err);
-      }
-    });
+app.use((req, res, next) => addGenericLocals(req, res, next));
+
+app.use('/cookies', (req, res, next) => {
+  res.locals = Object.assign({}, res.locals, req.translate('cookies'));
+  res.locals['session-cookies-table'] = sessionCookiesTable['session-cookies-table'];
+  next();
 });
 
 app.use(bodyParser({limit: config.upload.maxFileSize}));
