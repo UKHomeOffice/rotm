@@ -27,14 +27,14 @@ module.exports = {
     password: process.env.REDIS_PASSWORD
   },
   email: {
-    from: process.env.FROM_ADDRESS || 'gad',
-    replyTo: process.env.REPLY_TO || 'gad',
-    region: process.env.EMAIL_REGION || 'gad',
+    from: process.env.FROM_ADDRESS || '',
+    replyTo: process.env.REPLY_TO || '',
+    region: process.env.EMAIL_REGION || '',
     transport: process.env.EMAIL_TRANSPORT || 'ses',
-    caseworker: process.env.CASEWORKER_EMAIL || 'gad',
+    caseworker: process.env.CASEWORKER_EMAIL || '',
     transportOptions: {
-      accessKeyId: process.env.HOF_SES_USER || process.env.AWS_USER || 'daga',
-      secretAccessKey: process.env.HOF_SES_PASSWORD || process.env.AWS_PASSWORD || 'gadga',
+      accessKeyId: process.env.HOF_SES_USER || process.env.AWS_USER || '',
+      secretAccessKey: process.env.HOF_SES_PASSWORD || process.env.AWS_PASSWORD || '',
       port: process.env.TRANSPORT_PORT || '',
       host: process.env.TRANSPORT_HOST || '',
       ignoreTLS: process.env.TRANSPORT_IGNORE_TLS || '',
