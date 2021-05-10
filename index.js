@@ -6,8 +6,6 @@ const config = require('./config');
 const mockAPIs = require('./mock-apis');
 const bodyParser = require('busboy-body-parser');
 
-const sessionCookiesTable = require('./apps/rotm/translations/src/en/cookies.json');
-
 if (process.env.REDIS_URL) {
   config.redis = process.env.REDIS_URL;
 }
@@ -32,7 +30,7 @@ if (config.useMocks) {
   app.use(mockAPIs);
 }
 
-const addGenericLocals = (req, res, next) => {
+app.use((req, res, next) => {
   // Set HTML Language
   res.locals.htmlLang = 'en';
   // Set feedback and footer links
@@ -45,13 +43,10 @@ const addGenericLocals = (req, res, next) => {
   // set service name for cookie banner
   res.locals.serviceName = 'Report online terrorist material';
   next();
-};
-
-app.use((req, res, next) => addGenericLocals(req, res, next));
+});
 
 app.use('/cookies', (req, res, next) => {
   res.locals = Object.assign({}, res.locals, req.translate('cookies'));
-  res.locals['session-cookies-table'] = sessionCookiesTable['session-cookies-table'];
   next();
 });
 
