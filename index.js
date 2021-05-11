@@ -15,6 +15,7 @@ const options = {
   routes: [
     require('./apps/rotm')
   ],
+  getCookies: false,
   redis: config.redis,
   csp: config.csp
 };
@@ -30,11 +31,22 @@ if (config.useMocks) {
 }
 
 app.use((req, res, next) => {
+  // Set HTML Language
+  res.locals.htmlLang = 'en';
+  // Set feedback and footer links
+  res.locals.feedbackUrl = '/feedback';
   res.locals.footerSupportLinks = [
     { path: '/cookies', property: 'base.cookies' },
     { path: '/terms-and-conditions', property: 'base.terms' },
     { path: '/accessibility', property: 'base.accessibility' },
   ];
+  // set service name for cookie banner
+  res.locals.serviceName = 'Report online terrorist material';
+  next();
+});
+
+app.use('/cookies', (req, res, next) => {
+  res.locals = Object.assign({}, res.locals, req.translate('cookies'));
   next();
 });
 
