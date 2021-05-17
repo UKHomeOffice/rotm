@@ -29,6 +29,7 @@
     "hof-build": "^2.0.0",
     "hof-model": "^3.1.2",
     "hof-template-partials": "5.4.1",
+    "hof-theme-govuk": "^5.2.4",
     "jimp": "^0.14.0",
     "lodash": "^4.17.4",
     "moment": "^2.19.3",
