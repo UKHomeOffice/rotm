@@ -93,7 +93,8 @@
   "contact-details-name": {
     "label": "Full name",
     "validation": {
-      "required": "Enter your full name"
+      "required": "Enter your full name",
+      "notUrl" : "Enter your full name"
     }
   },
   "contact-details-method": {
