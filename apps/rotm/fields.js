@@ -184,7 +184,7 @@ module.exports = {
     legend: {
       className: 'visuallyhidden'
     },
-    validate: 'required'
+    validate: ['required', 'notUrl']
   },
   'contact-details-method': {
     mixin: 'checkbox-group',
@@ -208,7 +208,7 @@ module.exports = {
       field: 'contact-details-method',
       value: 'email'
     },
-    validate: 'required'
+    validate: ['required', 'email']
   },
   'contact-phone': {
     disableRender: true,
@@ -216,6 +216,6 @@ module.exports = {
       field: 'contact-details-method',
       value: 'phone'
     },
-    validate: 'required'
+    validate: ['required', 'internationalPhoneNumber']
   }
 };

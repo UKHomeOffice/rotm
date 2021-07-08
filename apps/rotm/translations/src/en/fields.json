@@ -93,7 +93,8 @@
   "contact-details-name": {
     "label": "Full name",
     "validation": {
-      "required": "Enter your full name"
+      "required": "Enter your full name",
+      "notUrl" : "Enter your full name"
     }
   },
   "contact-details-method": {
@@ -121,7 +122,8 @@
     "label": "Telephone number",
     "hint": "For international numbers include the country code",
     "validation": {
-			"required": "Enter a phone number we can contact you on"
+			"required": "Enter a phone number we can contact you on",
+      "internationalPhoneNumber": "Enter a phone number we can contact you on"
 		}
   },
   "images": {
