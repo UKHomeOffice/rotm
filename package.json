@@ -27,6 +27,7 @@
     "hof-behaviour-emailer": "^2.2.1",
     "hof-behaviour-summary-page": "^3.1.0",
     "hof-build": "^2.0.0",
+    "hof-middleware": "^2.2.4",
     "hof-model": "^3.1.2",
     "hof-template-partials": "5.4.1",
     "hof-theme-govuk": "^5.2.4",
