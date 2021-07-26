@@ -1,10 +1,10 @@
 'use strict';
 
-const Emailer = require('hof-behaviour-emailer');
+const Emailer = require('hof').components.emailer;
 const path = require('path');
 const moment = require('moment');
 const config = require('../../../config');
-const uuidv1 = require('uuid/v1');
+const uuidv1 = require('uuid').v1();
 
 
 const parse = (model, translate) => {

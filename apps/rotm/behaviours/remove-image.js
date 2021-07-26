@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = superclass => class extends superclass {
-
   configure(req, res, next) {
     if (req.query.delete) {
       const images = req.sessionModel.get('images') || [];
@@ -11,5 +10,4 @@ module.exports = superclass => class extends superclass {
     }
     return super.configure(req, res, next);
   }
-
 };

@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = superclass => class extends superclass {
-
   configure(req, res, next) {
     if (req.sessionModel.get('can-we-contact') === 'no') {
       delete req.form.options.sections.contact;

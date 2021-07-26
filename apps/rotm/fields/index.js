@@ -42,9 +42,9 @@ module.exports = {
     },
     {
       value: 'no'
-    }],
+    }]
   },
-  'url': {
+  url: {
     mixin: 'textarea',
     validate: 'required',
     disableRender: true,
@@ -123,7 +123,7 @@ module.exports = {
       value: 'no'
     }]
   },
-  'image': {
+  image: {
     mixin: 'input-file',
     disableRender: true,
     dependent: {

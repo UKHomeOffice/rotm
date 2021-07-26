@@ -1,4 +1,4 @@
- 'use strict';
+'use strict';
 
 const config = require('../../config');
 const skipStep = require('./behaviours/skip-step');
@@ -16,7 +16,7 @@ module.exports = {
   confirmStep: '/check-your-report',
   pages: {
     '/accessibility': 'accessibility',
-    '/cookies': 'cookies',
+    '/cookies': 'cookies'
   },
   steps: {
     '/evidence-url': {
@@ -47,8 +47,8 @@ module.exports = {
         {
           target: '/evidence-written',
           condition: {
-              field: 'evidence-upload',
-              value: 'no'
+            field: 'evidence-upload',
+            value: 'no'
           }
         }
       ],
@@ -71,8 +71,8 @@ module.exports = {
         {
           target: '/evidence-written',
           condition: {
-              field: 'evidence-upload-more',
-              value: 'no'
+            field: 'evidence-upload-more',
+            value: 'no'
           }
         }
       ],
@@ -80,7 +80,7 @@ module.exports = {
     },
     '/evidence-written': {
       fields: [
-        'evidence-written',
+        'evidence-written'
       ],
       next: '/can-we-contact'
     },
@@ -110,7 +110,7 @@ module.exports = {
     '/check-your-report': {
       prereqs: ['/image'],
       behaviours: [
-        require('hof-behaviour-summary-page'),
+        require('hof').components.summary,
         'complete',
         caseworkerEmailer,
         checkReport

@@ -10,17 +10,17 @@ if (process.env.REDIS_URL) {
   config.redis = process.env.REDIS_URL;
 }
 
-const options = {
-  start: false,
-  routes: [
-    require('./apps/rotm')
-  ],
+let settings = require('./hof.settings');
+
+settings = Object.assign({}, settings, {
+  behaviours: settings.behaviours.map(require),
+  routes: settings.routes.map(require),
   getCookies: false,
   redis: config.redis,
   csp: config.csp
-};
+});
 
-const app = hof(options);
+const app = hof(settings);
 
 app.use('/report', (req, res) => {
   res.redirect(301, '/');
@@ -38,10 +38,10 @@ app.use((req, res, next) => {
   res.locals.footerSupportLinks = [
     { path: '/cookies', property: 'base.cookies' },
     { path: '/terms-and-conditions', property: 'base.terms' },
-    { path: '/accessibility', property: 'base.accessibility' },
+    { path: '/accessibility', property: 'base.accessibility' }
   ];
   // set service name for cookie banner
-  res.locals.serviceName = 'Report online terrorist material';
+  res.locals.serviceName = 'Report Online Terrorist Material';
   next();
 });
 
@@ -53,4 +53,3 @@ app.use('/cookies', (req, res, next) => {
 app.use(bodyParser({limit: config.upload.maxFileSize}));
 
 module.exports = app;
-

@@ -1,7 +1,8 @@
+/* eslint-disable node/no-deprecated-api, consistent-return */
 'use strict';
 
 const url = require('url');
-const Model = require('hof-model');
+const Model = require('hof').model;
 const jimp = require('jimp');
 const uuid = require('uuid').v4;
 const fs = require('fs');
@@ -11,7 +12,6 @@ const noPreview = 'data:image/png;base64,' + fs.readFileSync('assets/images/no-p
 const config = require('../../../config');
 
 module.exports = class UploadModel extends Model {
-
   constructor(...args) {
     super(...args);
     this.set('id', uuid());
@@ -40,15 +40,15 @@ module.exports = class UploadModel extends Model {
         resolve(data);
       });
     })
-    .then(result => {
-      return this.set({ url: result.url });
-    })
-    .then(() => {
-      return this.thumbnail();
-    })
-    .then(() => {
-      return this.unset('data');
-    });
+      .then(result => {
+        return this.set({ url: result.url });
+      })
+      .then(() => {
+        return this.thumbnail();
+      })
+      .then(() => {
+        return this.unset('data');
+      });
   }
 
   thumbnail() {
@@ -82,9 +82,9 @@ module.exports = class UploadModel extends Model {
       form: {
         username: config.keycloak.username,
         password: config.keycloak.password,
-        'grant_type': 'password',
-        'client_id': config.keycloak.clientId,
-        'client_secret': config.keycloak.secret
+        grant_type: 'password',
+        client_id: config.keycloak.clientId,
+        client_secret: config.keycloak.secret
       },
       method: 'POST'
     };
@@ -96,7 +96,7 @@ module.exports = class UploadModel extends Model {
         }
 
         resolve({
-          'bearer': JSON.parse(response.body).access_token
+          bearer: JSON.parse(response.body).access_token
         });
       });
     });

@@ -1,0 +1,13 @@
+{
+  "appName": "Report Online Terrorist Material",
+  "theme": "govUK",
+  "behaviours": [
+    "hof/components/clear-session"
+  ],
+  "routes": [
+    "./apps/rotm"
+  ],
+  "session": {
+    "name": "report-online-terrorist-material.hof.sid"
+  }
+}
