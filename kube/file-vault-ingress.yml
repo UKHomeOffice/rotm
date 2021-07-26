@@ -1,0 +1,35 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: file-vault-ingress
+{{ file .INGRESS_EXTERNAL_ANNOTATIONS | indent 2 }}
+spec:
+  tls:
+  - hosts:
+    {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+    - fv-dev.notprod.{{ .DRONE_BUILD_NUMBER }}.homeoffice.gov.uk
+    - fv-dev.notprod.{{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}.homeoffice.gov.uk
+    {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
+    - fv-dev.notprod.{{ .APP_NAME }}.homeoffice.gov.uk
+    {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
+    - fv-preprod.notprod.{{ .APP_NAME }}.homeoffice.gov.uk
+    {{ else if eq .KUBE_NAMESPACE .PROD_ENV }}
+    - fv.prod.{{ .APP_NAME }}.homeoffice.gov.uk
+    {{ end }}
+    secretName: file-vault-cert
+  rules:
+  {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+  - host: fv-dev.notprod.{{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}.homeoffice.gov.uk
+  {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
+  - host: fv-dev.notprod.{{ .APP_NAME }}.homeoffice.gov.uk
+  {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
+  - host: fv-preprod.notprod.{{ .APP_NAME }}.homeoffice.gov.uk
+  {{ else if eq .KUBE_NAMESPACE .PROD_ENV }}
+  - host: fv.prod.{{ .APP_NAME }}.homeoffice.gov.uk
+  {{ end }}
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: file-vault
+          servicePort: 10443

@@ -1,0 +1,169 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
+  name: {{ .APP_NAME }}
+  {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+  annotations:
+    downscaler/uptime: {{ .NON_PROD_AVAILABILITY }}
+  name: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}
+  {{ else }}
+  annotations:
+    downscaler/uptime: {{ .NON_PROD_AVAILABILITY }}
+  name: {{ .APP_NAME }}
+  {{ end }}
+spec:
+  {{ if or (eq .KUBE_NAMESPACE .STG_ENV) (eq .KUBE_NAMESPACE .PROD_ENV) }}
+  replicas: 2
+  {{ else }}
+  replicas: 1
+  {{ end }}
+  selector:
+    matchLabels:
+      {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+      name: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}
+      {{ else }}
+      name: {{ .APP_NAME }}
+      {{ end }}
+  template:
+    metadata:
+      labels:
+        {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+        name: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}
+        app: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}
+        service: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}
+        {{ else }}
+        name: {{ .APP_NAME }}
+        app: {{ .APP_NAME }}
+        service: {{ .APP_NAME }}
+        {{ end }}
+    spec:
+      containers:
+        - name: {{ .APP_NAME }}
+          image: {{ .IMAGE_URL }}/{{ .IMAGE_REPO }}:{{.DRONE_COMMIT_SHA}}
+          imagePullPolicy: Always
+          securityContext:
+            runAsNonRoot: true
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+                name: {{ .APP_NAME }}-configmap-{{ .DRONE_SOURCE_BRANCH }}
+                {{ else }}
+                name: {{ .APP_NAME }}-configmap
+                {{ end }}
+          env:
+            # because some internal services have self signed certs
+            - name: TZ
+              value: Europe/London
+            - name: NODE_TLS_REJECT_UNAUTHORIZED
+              value: "0"
+            - name: REDIS_PORT
+              value: "6379"
+            - name: REDIS_HOST
+              {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+              value: redis-{{ .DRONE_SOURCE_BRANCH }}
+              {{ else }}
+              value: redis
+              {{ end }}
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: redis
+                  key: pass
+            - name: USE_MOCKS
+              value: "false"
+            - name: AWS_USER
+              valueFrom:
+                secretKeyRef:
+                  name: aws
+                  key: user
+            - name: AWS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: aws
+                  key: password
+            - name: KEYCLOAK_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-client
+                  key: secret
+            - name: KEYCLOAK_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-client
+                  key: id
+            - name: KEYCLOAK_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-user
+                  key: username
+            - name: KEYCLOAK_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-user
+                  key: password
+            {{ if or (eq .KUBE_NAMESPACE .STG_ENV) (eq .KUBE_NAMESPACE .PROD_ENV) }}
+            - name: SESSION_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: rotm-session
+                  key: token
+            {{ end }}
+            - name: FILE_VAULT_URL
+            {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
+              value: https://fv.prod.{{ .APP_NAME }}.homeoffice.gov.uk/file
+            {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
+              value: https://fv-preprod.notprod.{{ .APP_NAME }}.homeoffice.gov.uk/file
+            {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
+              value: https://fv-dev.notprod.{{ .APP_NAME }}.homeoffice.gov.uk/file
+            {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+              value: https://fv-dev.notprod.{{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}.homeoffice.gov.uk/file
+            {{ end }}
+          {{ if not (eq .KUBE_NAMESPACE .BRANCH_ENV) }}
+          livenessProbe:
+            httpGet:
+              path: /healthz/ping
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /healthz/readiness
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 5
+          {{ end }}
+          resources:
+            requests:
+              memory: 30Mi
+              cpu: 30m
+            limits:
+              memory: 512Mi
+              cpu: 600m
+          volumeMounts:
+            - mountPath: /public
+              name: public
+        - name: nginx-proxy
+          image: quay.io/ukhomeofficedigital/nginx-proxy-govuk:v3
+          resources:
+            requests:
+              memory: 10Mi
+              cpu: 10m
+            limits:
+              memory: 256Mi
+              cpu: 300m
+          env:
+{{ file .NGINX_SETTINGS | indent 12 }}
+          ports:
+            - containerPort: 10443
+          volumeMounts:
+            - mountPath: /public
+              name: public
+          securityContext:
+            runAsNonRoot: true
+      volumes:
+        - name: public
+          emptyDir: {}
