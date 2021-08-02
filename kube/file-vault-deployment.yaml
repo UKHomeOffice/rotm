@@ -2,7 +2,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+  name: file-vault-{{ .DRONE_SOURCE_BRANCH }}
+  {{ else }}
   name: file-vault
+  {{ end }}
 spec:
   {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
   replicas: 3
@@ -11,13 +15,23 @@ spec:
   {{ end }}
   selector:
     matchLabels:
+      {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+      name: file-vault-{{ .DRONE_SOURCE_BRANCH }}
+      service: file-vault-{{ .DRONE_SOURCE_BRANCH }}
+      {{ else }}
       name: file-vault
       service: file-vault
+      {{ end }}
   template:
     metadata:
       labels:
+        {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+        name: file-vault-{{ .DRONE_SOURCE_BRANCH }}
+        service: file-vault-{{ .DRONE_SOURCE_BRANCH }}
+        {{ else }}
         name: file-vault
         service: file-vault
+        {{ end }}
     spec:
       containers:
         - name: file-vault
