@@ -120,7 +120,7 @@ spec:
             {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
               value: https://fv-dev.notprod.{{ .APP_NAME }}.homeoffice.gov.uk/file
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-              value: https://fv-dev.notprod.{{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}.homeoffice.gov.uk/file
+              value: https://{{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}.fv-dev.sas-notprod.homeoffice.gov.uk/file
             {{ end }}
           {{ if not (eq .KUBE_NAMESPACE .BRANCH_ENV) }}
           livenessProbe:

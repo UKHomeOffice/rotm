@@ -46,7 +46,7 @@ spec:
             {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
               value: https://fv-dev.notprod.{{ .APP_NAME }}.homeoffice.gov.uk
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-              value: https://fv-dev.notprod.{{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}.homeoffice.gov.uk
+              value: https://{{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}.fv-dev.sas-notprod.homeoffice.gov.uk
             {{ end }}
             - name: PORT
               value: "3000"
@@ -105,7 +105,7 @@ spec:
             {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
               value: https://fv-dev.notprod.{{ .APP_NAME }}.homeoffice.gov.uk
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-              value: https://fv-dev.notprod.{{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}.homeoffice.gov.uk
+              value: https://{{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}.fv-dev.sas-notprod.homeoffice.gov.uk
             {{ end }}
           args:
             - --listen=:10443
