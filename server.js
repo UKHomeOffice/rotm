@@ -31,6 +31,7 @@ if (config.useMocks) {
 }
 
 app.use((req, res, next) => {
+  res.locals.appName = 'Report Online Terrorist Material Service';
   // Set HTML Language
   res.locals.htmlLang = 'en';
   // Set feedback and footer links
