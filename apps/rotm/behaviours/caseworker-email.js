@@ -4,7 +4,7 @@ const Emailer = require('hof').components.emailer;
 const path = require('path');
 const moment = require('moment');
 const config = require('../../../config');
-const uuidv1 = require('uuid').v1();
+const uuid = require('uuid');
 
 
 const parse = (model, translate) => {
@@ -19,7 +19,7 @@ const parse = (model, translate) => {
     urls: model.urls,
     images: model.images,
     table: [
-      { label: getLabel('uniqueId'), value: uuidv1() },
+      { label: getLabel('uniqueId'), value: uuid.v1() },
       { label: getLabel('submitted'), value: moment().format(config.dateTimeFormat) },
       ...fields.map(f => ({
         label: getLabel(f),
