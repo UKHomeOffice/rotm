@@ -35,12 +35,15 @@ spec:
     spec:
       containers:
         - name: file-vault
-          image: quay.io/ukhomeofficedigital/file-vault:2936ce44e4ca1ad90b3b0526b9abf73c46000de2
+          image: quay.io/ukhomeofficedigital/file-vault:0e842053908695f0719bb0f500e92b4cd7ba75ad
           imagePullPolicy: Always
           resources:
+            requests:
+              memory: 128Mi
+              cpu: 128m
             limits:
-              memory: "1024Mi"
-              cpu: 200m
+              memory: 512Mi
+              cpu: 600m
           envFrom:
             - configMapRef:
                 {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
@@ -62,8 +65,6 @@ spec:
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
               value: https://{{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}.fv-dev.sas-notprod.homeoffice.gov.uk
             {{ end }}
-            - name: PORT
-              value: "3000"
             - name: CLAMAV_REST_URL
               value: https://clamav.virus-scan.svc.cluster.local/scan
             - name: AWS_ACCESS_KEY_ID
@@ -91,15 +92,27 @@ spec:
                 secretKeyRef:
                   name: passwordhash
                   key: passwordhash
+            - name: FILE_EXTENSION_WHITELIST
+              value: 'pdf,doc,docx,txt,jpg,jpeg,png,xls,xlsx,odt,ods'
           securityContext:
             runAsNonRoot: true
 
         - name: keycloak-proxy
-          image: quay.io/ukhomeofficedigital/keycloak-gatekeeper:8.0.2
+          image: quay.io/ukhomeofficedigital/go-keycloak-proxy:v2.2.2
           resources:
             limits:
-              memory: "1024Mi"
-              cpu: 200m
+              cpu: 250m
+              memory: 256Mi
+            requests:
+              cpu: 15m
+              memory: 10Mi
+          envFrom:
+            - configMapRef:
+                {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+                name: {{ .APP_NAME }}-configmap-{{ .DRONE_SOURCE_BRANCH }}
+                {{ else }}
+                name: {{ .APP_NAME }}-configmap
+                {{ end }}
           env:
             - name: PROXY_CLIENT_SECRET
               valueFrom:
@@ -111,6 +124,10 @@ spec:
                 secretKeyRef:
                   name: keycloak-client
                   key: id
+            - name: PROXY_LISTEN
+              value: 127.0.0.1:3001
+            - name: PROXY_UPSTREAM_URL
+              value: "http://127.0.0.1:3000"
             - name: PROXY_REDIRECTION_URL
             {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
               value: https://fv.prod.{{ .APP_NAME }}.homeoffice.gov.uk
@@ -121,58 +138,34 @@ spec:
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
               value: https://{{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}.fv-dev.sas-notprod.homeoffice.gov.uk
             {{ end }}
-          args:
-            - --listen=:10443
-            # the url which is used to retrieve the OpenID configuration
-            - --discovery-url=https://sso.digital.homeoffice.gov.uk/auth/realms/rotm
-            # the endpoint where requests are proxied to
-            - --upstream-url=https://127.0.0.1:10444
-            # URls that you wish to protect.
-            - --resources=uri=/*
-            - --tls-cert=/certs/tls.crt
-            - --tls-private-key=/certs/tls.key
-            {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-            - --verbose=true
-            {{ end }}
-          ports:
-            - containerPort: 10080
-            - containerPort: 10443
+          command:
+            - "/opt/keycloak-proxy"
+            - "--resources=uri=/file|methods=GET,POST|roles=caseworkers"
+            - "--resources=uri=/*"
+            - "--enable-logging=true"
+            - "--enable-json-logging=true"
           securityContext:
             runAsNonRoot: true
-          terminationMessagePath: /dev/termination-log
-          terminationMessagePolicy: File
-          volumeMounts:
-            - mountPath: /certs
-              name: certs
-            - mountPath: /etc/ssl/certs
-              name: bundle
-              readOnly: true
 
         - name: nginx-proxy
           image: quay.io/ukhomeofficedigital/nginx-proxy-govuk:v3
           resources:
             limits:
-              memory: "1024Mi"
-              cpu: 200m
+              cpu: 250m
+              memory: 256Mi
+            requests:
+              cpu: 10m
+              memory: 10Mi
           env:
 {{ file .FILEVAULT_NGINX_SETTINGS | indent 12 }}
+          ports:
+            - containerPort: 10080
+            - containerPort: 10443
+          volumeMounts:
+            - mountPath: /public
+              name: public
           securityContext:
             runAsNonRoot: true
-          volumeMounts:
-            - mountPath: /certs
-              name: certs
-              readOnly: true
-            - name: bundle
-              mountPath: /etc/ssl/certs
-              readOnly: true
       volumes:
-        - name: certs
-          secret:
-            {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-            secretName: file-vault-cert-{{ .DRONE_SOURCE_BRANCH }}
-            {{ else }}
-            secretName: file-vault-cert
-            {{ end }}
-        - name: bundle
-          configMap:
-            name: bundle
+        - name: public
+          emptyDir: {}
