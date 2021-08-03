@@ -165,7 +165,11 @@ spec:
       volumes:
         - name: certs
           secret:
+            {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+            secretName: file-vault-cert-{{ .DRONE_SOURCE_BRANCH }}
+            {{ else }}
             secretName: file-vault-cert
+            {{ end }}
         - name: bundle
           configMap:
             name: bundle
