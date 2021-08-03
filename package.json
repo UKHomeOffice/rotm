@@ -4,6 +4,9 @@
   "main": "server.js",
   "description": "A Home Office application for reporting online terrorist material.",
   "license": "GPL-2.0",
+  "engines": {
+    "node": "^14.15.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/UKHomeOffice/rotm.git"
