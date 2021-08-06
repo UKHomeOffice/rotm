@@ -1,7 +1,0 @@
-public
-node_modules
-coverage
-apps/**/translations/**/default.json
-LICENSE
-README.md
-CONTRIBUTING.md

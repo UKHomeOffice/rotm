@@ -4,9 +4,9 @@
 
 'use strict';
 
-const env = process.env.NODE_ENV || 'production';
+const env = process.env.NODE_ENV;
 const localhost = () => `${process.env.LISTEN_HOST || '0.0.0.0'}:${process.env.PORT || 8080}`;
-const useMocks = process.env.USE_MOCKS ? process.env.USE_MOCKS === 'true' : env !== 'production';
+const useMocks = process.env.USE_MOCKS === 'true' || !env;
 
 module.exports = {
   env: env,
@@ -54,5 +54,5 @@ module.exports = {
     password: process.env.KEYCLOAK_PASSWORD,
     clientId: process.env.KEYCLOAK_CLIENT_ID,
     secret: process.env.KEYCLOAK_SECRET
-  },
+  }
 };

@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = superclass => class extends superclass {
-
   saveValues(req, res, next) {
     req.form.values.urls = [
       req.form.values.url,
@@ -24,5 +23,4 @@ module.exports = superclass => class extends superclass {
       next(err, values);
     });
   }
-
 };

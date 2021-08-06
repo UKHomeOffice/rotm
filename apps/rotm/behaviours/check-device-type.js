@@ -2,7 +2,6 @@
 const device = require('device');
 
 module.exports = superclass => class extends superclass {
-
   locals(req, res, callback) {
     const client = device(req.get('user-agent'), {
       emptyUserAgentDeviceType: 'unknown',

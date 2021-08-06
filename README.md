@@ -6,7 +6,6 @@ This project is built with [HOF](https://github.com/UKHomeOffice/hof) and uses [
 
 ## Getting started
 
-
 Get the project from Github
 ```bash
 $ git clone git@github.com:UKHomeOffice/rotm.git && cd rotm

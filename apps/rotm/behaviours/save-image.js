@@ -4,7 +4,6 @@ const _ = require('lodash');
 const Model = require('../models/image-upload');
 
 module.exports = name => superclass => class extends superclass {
-
   process(req) {
     if (req.files && req.files[name]) {
       // set image name on values for filename extension validation
@@ -36,5 +35,4 @@ module.exports = name => superclass => class extends superclass {
     }
     return super.saveValues.apply(this, arguments);
   }
-
 };

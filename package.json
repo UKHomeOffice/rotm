@@ -1,49 +1,49 @@
 {
   "name": "ROTM",
   "version": "2.0.1",
-  "main": "app.js",
+  "main": "server.js",
   "description": "A Home Office application for reporting online terrorist material.",
   "license": "GPL-2.0",
+  "engines": {
+    "node": "^14.15.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/UKHomeOffice/rotm.git"
   },
   "bugs": "https://github.com/UKHomeOffice/rotm/issues",
   "scripts": {
-    "start": "node app.js",
-    "dev": "NODE_ENV=development hof-build watch --env",
-    "test": "npm run lint",
-    "lint": "eslint .",
+    "start": "node server.js",
+    "start:dev": "hof-build watch",
+    "test": "yarn run test:lint",
+    "test:lint": "eslint . --config ./node_modules/eslint-config-hof/default.js",
+    "test:snyk": "snyk config set api=SNYK_TOKEN && snyk test",
     "build": "hof-build",
-    "postinstall": "npm run build"
+    "postinstall": "yarn run build"
   },
   "author": "HomeOffice",
   "dependencies": {
-    "busboy-body-parser": "^0.3.1",
-    "device": "^0.3.11",
-    "express": "^4.16.2",
-    "govuk-frontend": "^3.5.0",
-    "hof": "^18.2.4",
-    "hof-behaviour-emailer": "^2.2.1",
-    "hof-behaviour-summary-page": "^3.1.0",
-    "hof-build": "^2.0.0",
-    "hof-middleware": "^2.2.4",
-    "hof-model": "^3.1.2",
-    "hof-template-partials": "5.4.1",
-    "hof-theme-govuk": "^5.2.4",
-    "jimp": "^0.14.0",
-    "lodash": "^4.17.4",
-    "moment": "^2.19.3",
-    "uuid": "^3.4.0"
+    "busboy-body-parser": "^0.3.2",
+    "device": "^0.3.12",
+    "express": "^4.17.1",
+    "govuk-frontend": "^3.13.0",
+    "hof": "^19.5.3",
+    "jimp": "^0.16.1",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.1",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "chai": "^4.1.2",
+    "chai": "^4.3.4",
     "chai-as-promised": "^7.1.1",
-    "eslint": "^4.11.0",
-    "eslint-config-homeoffice": "^2.2.0",
-    "hof-util-reqres": "^1.1.0",
-    "mock-fs": "^4.4.2",
-    "sinon": "^4.1.2",
-    "sinon-chai": "^2.14.0"
+    "eslint": "^7.30.0",
+    "eslint-config-hof": "^1.1.0",
+    "mock-fs": "^5.0.0",
+    "sinon": "^11.1.1",
+    "sinon-chai": "^3.7.0",
+    "snyk": "^1.667.0"
+  },
+  "resolutions": {
+    "underscore": "^1.12.1"
   }
 }

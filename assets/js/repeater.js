@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 'use strict';
 
 const hide = function hide(e) {
@@ -85,5 +86,5 @@ const init = function init() {
 };
 
 module.exports = {
-  'init': init
+  init: init
 };
