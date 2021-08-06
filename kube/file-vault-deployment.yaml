@@ -35,9 +35,7 @@ spec:
     spec:
       containers:
         - name: file-vault
-          # TEMP to maintain production integrity
-          image: quay.io/ukhomeofficedigital/file-vault:2936ce44e4ca1ad90b3b0526b9abf73c46000de2
-          # image: quay.io/ukhomeofficedigital/file-vault:bab000624c4323823cd4df723b44bc3bd29fec2c
+          image: quay.io/ukhomeofficedigital/file-vault:bab000624c4323823cd4df723b44bc3bd29fec2c
           imagePullPolicy: Always
           resources:
             limits:
