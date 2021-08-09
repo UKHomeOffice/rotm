@@ -7,9 +7,6 @@ metadata:
   name: file-vault-ingress
   {{ end }}
 {{ file .INGRESS_EXTERNAL_ANNOTATIONS | indent 2 }}
-    {{ if not (eq .KUBE_NAMESPACE .PROD_ENV) }}
-    cert-manager.io/cluster-issuer: letsencrypt-staging
-    {{ end }}
 spec:
   tls:
   - hosts:
