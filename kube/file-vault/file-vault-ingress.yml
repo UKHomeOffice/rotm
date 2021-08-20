@@ -11,8 +11,7 @@ spec:
   tls:
   - hosts:
     {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-    - {{ .DRONE_BUILD_NUMBER }}.fv-dev.sas-notprod.homeoffice.gov.uk
-    - {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}.fv-dev.sas-notprod.homeoffice.gov.uk
+    - fv-{{ .DRONE_SOURCE_BRANCH }}.{{ .BRANCH_ENV }}.homeoffice.gov.uk
     {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
     - fv-dev.notprod.{{ .APP_NAME }}.homeoffice.gov.uk
     {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
@@ -21,13 +20,13 @@ spec:
     - fv.prod.{{ .APP_NAME }}.homeoffice.gov.uk
     {{ end }}
     {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-    secretName: file-vault-cert-{{ .DRONE_SOURCE_BRANCH }}
+    secretName: branch-tls-external
     {{ else }}
     secretName: file-vault-cert
     {{ end }}
   rules:
   {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-  - host: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}.fv-dev.sas-notprod.homeoffice.gov.uk
+  - host: fv-{{ .DRONE_SOURCE_BRANCH }}.{{ .BRANCH_ENV }}.homeoffice.gov.uk
   {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
   - host: fv-dev.notprod.{{ .APP_NAME }}.homeoffice.gov.uk
   {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
