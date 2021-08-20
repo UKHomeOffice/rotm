@@ -11,6 +11,7 @@ spec:
   tls:
   - hosts:
     {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+    - fv-{{ .DRONE_BUILD_NUMBER }}.{{ .BRANCH_ENV }}.homeoffice.gov.uk
     - fv-{{ .DRONE_SOURCE_BRANCH }}.{{ .BRANCH_ENV }}.homeoffice.gov.uk
     {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
     - fv-dev.notprod.{{ .APP_NAME }}.homeoffice.gov.uk
