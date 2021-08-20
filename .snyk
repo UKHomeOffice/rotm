@@ -6,4 +6,8 @@ ignore:
     - device > useragent:
         reason: No available patch currently in circulation
         expires: '2021-11-01T17:02:21.865Z'
+  SNYK-JS-REQUEST-1314897:
+    - hof > request:
+        reason: Need to replace request in HOF
+        expires: '2022-09-18T14:58:46.388Z'
 patch: {}
