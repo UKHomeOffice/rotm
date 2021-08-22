@@ -30,11 +30,11 @@ elif [[ ${KUBE_NAMESPACE} == ${UAT_ENV} ]]; then
   $kd -f kube/app/ingress-external.yml -f kube/app/networkpolicy-external.yml
   $kd -f kube/redis -f kube/file-vault -f kube/app/deployment.yml
 elif [[ ${KUBE_NAMESPACE} == ${STG_ENV} ]]; then
-  $kd -f kube/configmaps/configmap.yml
+  $kd -f kube/configmaps/configmap.yml  -f kube/app/service.yml
   $kd -f kube/app/ingress-external.yml -f kube/app/networkpolicy-external.yml
   $kd -f kube/redis -f kube/file-vault -f kube/app/deployment.yml
 elif [[ ${KUBE_NAMESPACE} == ${PROD_ENV} ]]; then
-  $kd -f kube/configmaps/configmap.yml
+  $kd -f kube/configmaps/configmap.yml  -f kube/app/service.yml
   $kd -f kube/app/ingress-external.yml -f kube/app/networkpolicy-external.yml
   $kd -f kube/redis -f kube/file-vault -f kube/app/deployment.yml
 fi
