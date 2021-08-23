@@ -15,12 +15,26 @@ let settings = require('./hof.settings');
 settings = Object.assign({}, settings, {
   behaviours: settings.behaviours.map(require),
   routes: settings.routes.map(require),
-  getCookies: false,
   redis: config.redis,
-  csp: config.csp
+  csp: config.csp,
+  getCookies: false,
+  getTerms: false
 });
 
 const app = hof(settings);
+
+// Terms & Cookies added to have visibility on accessibility statement
+// in the footer. Once HOF has updated with that we can remove these
+// including the getTerms: false, getCookies: false config and common directory
+app.use('/terms-and-conditions', (req, res, next) => {
+  res.locals = Object.assign({}, res.locals, req.translate('terms'));
+  next();
+});
+
+app.use('/cookies', (req, res, next) => {
+  res.locals = Object.assign({}, res.locals, req.translate('cookies'));
+  next();
+});
 
 app.use('/report', (req, res) => {
   res.redirect(301, '/');
@@ -31,23 +45,16 @@ if (config.useMocks) {
 }
 
 app.use((req, res, next) => {
-  res.locals.appName = 'Report Online Terrorist Material Service';
   // Set HTML Language
   res.locals.htmlLang = 'en';
   // Set feedback and footer links
   res.locals.feedbackUrl = '/feedback';
+  // Below can be removed once generic accessibility footer link is added to HOF
   res.locals.footerSupportLinks = [
     { path: '/cookies', property: 'base.cookies' },
     { path: '/terms-and-conditions', property: 'base.terms' },
     { path: '/accessibility', property: 'base.accessibility' }
   ];
-  // set service name for cookie banner
-  res.locals.serviceName = 'Report Online Terrorist Material';
-  next();
-});
-
-app.use('/cookies', (req, res, next) => {
-  res.locals = Object.assign({}, res.locals, req.translate('cookies'));
   next();
 });
 
