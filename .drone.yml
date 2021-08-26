@@ -7,7 +7,7 @@ environment:
   APP_NAME: report-terrorist-material
   PROD_ENV: rotm
   STG_ENV: rotm-preprod
-  UAT_ENV: rotm-dev
+  UAT_ENV: rotm-uat
   BRANCH_ENV: rotm-branch
   PRODUCTION_URL: www.report-terrorist-material.homeoffice.gov.uk
   IMAGE_URL: quay.io/ukhomeofficedigital
