@@ -142,7 +142,7 @@ steps:
       - bin/deploy.sh $${UAT_ENV}
     when:
       branch: master
-      event: push
+      event: pull_request
 
   # Deploy to pull request UAT environment
   - name: deploy_to_branch
