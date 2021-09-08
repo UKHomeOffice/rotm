@@ -58,7 +58,7 @@ spec:
             {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
               value: https://fv-preprod.notprod.{{ .APP_NAME }}.homeoffice.gov.uk
             {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
-              value: https://fv-dev.notprod.{{ .APP_NAME }}.homeoffice.gov.uk
+              value: https://fv-rotm.uat.sas-notprod.homeoffice.gov.uk
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
               value: https://fv-{{ .DRONE_SOURCE_BRANCH }}.{{ .BRANCH_ENV }}.homeoffice.gov.uk
             - name: DEBUG
@@ -119,7 +119,7 @@ spec:
             {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
               value: https://fv-preprod.notprod.{{ .APP_NAME }}.homeoffice.gov.uk
             {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
-              value: https://fv-dev.notprod.{{ .APP_NAME }}.homeoffice.gov.uk
+              value: https://fv-rotm.uat.sas-notprod.homeoffice.gov.uk
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
               value: https://fv-{{ .DRONE_SOURCE_BRANCH }}.{{ .BRANCH_ENV }}.homeoffice.gov.uk
             {{ end }}
