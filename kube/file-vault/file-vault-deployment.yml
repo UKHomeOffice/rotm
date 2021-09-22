@@ -56,7 +56,7 @@ spec:
             {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
               value: https://fv.prod.{{ .APP_NAME }}.homeoffice.gov.uk
             {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
-              value: https://fv-preprod.notprod.{{ .APP_NAME }}.homeoffice.gov.uk
+              value: https://fv-stg.prod.{{ .APP_NAME }}.homeoffice.gov.uk
             {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
               value: https://fv-uat.notprod.{{ .APP_NAME }}.homeoffice.gov.uk
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
@@ -117,7 +117,7 @@ spec:
             {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
               value: https://fv.prod.{{ .APP_NAME }}.homeoffice.gov.uk
             {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
-              value: https://fv-preprod.notprod.{{ .APP_NAME }}.homeoffice.gov.uk
+              value: https://fv-stg.prod.{{ .APP_NAME }}.homeoffice.gov.uk
             {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
               value: https://fv-uat.notprod.{{ .APP_NAME }}.homeoffice.gov.uk
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}

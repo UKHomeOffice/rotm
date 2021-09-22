@@ -114,9 +114,9 @@ spec:
             {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
               value: https://fv.prod.{{ .APP_NAME }}.homeoffice.gov.uk/file
             {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
-              value: https://fv-preprod.notprod.{{ .APP_NAME }}.homeoffice.gov.uk/file
+              value: https://fv-stg.prod.{{ .APP_NAME }}.homeoffice.gov.uk/file
             {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
-              value: https://fv-dev.notprod.{{ .APP_NAME }}.homeoffice.gov.uk/file
+              value: https://fv-uat.notprod.{{ .APP_NAME }}.homeoffice.gov.uk/file
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
               value: https://fv-{{ .DRONE_SOURCE_BRANCH }}.{{ .BRANCH_ENV }}.homeoffice.gov.uk/file
             {{ end }}

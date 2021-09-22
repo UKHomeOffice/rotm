@@ -16,7 +16,7 @@ spec:
     {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
     - fv-uat.notprod.{{ .APP_NAME }}.homeoffice.gov.uk
     {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
-    - fv-preprod.notprod.{{ .APP_NAME }}.homeoffice.gov.uk
+    - fv-stg.prod.{{ .APP_NAME }}.homeoffice.gov.uk
     {{ else if eq .KUBE_NAMESPACE .PROD_ENV }}
     - fv.prod.{{ .APP_NAME }}.homeoffice.gov.uk
     {{ end }}
@@ -31,7 +31,7 @@ spec:
   {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
   - host: fv-uat.notprod.{{ .APP_NAME }}.homeoffice.gov.uk
   {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
-  - host: fv-preprod.notprod.{{ .APP_NAME }}.homeoffice.gov.uk
+  - host: fv-stg.prod.{{ .APP_NAME }}.homeoffice.gov.uk
   {{ else if eq .KUBE_NAMESPACE .PROD_ENV }}
   - host: fv.prod.{{ .APP_NAME }}.homeoffice.gov.uk
   {{ end }}

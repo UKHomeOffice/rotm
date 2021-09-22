@@ -18,7 +18,6 @@ spec:
         - rotm.uat.internal.sas-notprod.homeoffice.gov.uk
       {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
         - stg.internal.rotm.sas.homeoffice.gov.uk
-        - stg.internal.{{ .APP_NAME }}.sas.homeoffice.gov.uk
       {{ end }}
       {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
       secretName: branch-tls-internal
@@ -31,7 +30,7 @@ spec:
     {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
     - host: rotm.uat.internal.sas-notprod.homeoffice.gov.uk
     {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
-    - host: stg.internal.{{ .APP_NAME }}.sas.homeoffice.gov.uk
+    - host: stg.internal.rotm.sas.homeoffice.gov.uk
     {{ end }}
       http:
         paths:
