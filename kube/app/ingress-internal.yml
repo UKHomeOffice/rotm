@@ -16,10 +16,8 @@ spec:
         - {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}.internal.{{ .BRANCH_ENV }}.homeoffice.gov.uk
       {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
         - rotm.uat.internal.sas-notprod.homeoffice.gov.uk
-        - {{ .APP_NAME }}.uat.internal.sas-notprod.homeoffice.gov.uk
       {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
         - stg.internal.rotm.sas.homeoffice.gov.uk
-        - stg.internal.{{ .APP_NAME }}.sas.homeoffice.gov.uk
       {{ end }}
       {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
       secretName: branch-tls-internal
@@ -30,9 +28,9 @@ spec:
     {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
     - host: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}.internal.{{ .BRANCH_ENV }}.homeoffice.gov.uk
     {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
-    - host: {{ .APP_NAME }}.uat.internal.sas-notprod.homeoffice.gov.uk
+    - host: rotm.uat.internal.sas-notprod.homeoffice.gov.uk
     {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
-    - host: stg.internal.{{ .APP_NAME }}.sas.homeoffice.gov.uk
+    - host: stg.internal.rotm.sas.homeoffice.gov.uk
     {{ end }}
       http:
         paths:
