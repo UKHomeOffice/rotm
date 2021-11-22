@@ -41,6 +41,9 @@ module.exports = {
       secure: process.env.TRANSPORT_SECURE || false
     }
   },
+  hosts: {
+    acceptanceTests: process.env.ACCEPTANCE_HOST_NAME || `http://localhost:${process.env.PORT || 8080}`
+  },
   upload: {
     maxFileSize: '100mb',
     hostname: !useMocks && process.env.FILE_VAULT_URL ?
