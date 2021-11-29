@@ -45,7 +45,7 @@ module.exports = {
     // if mocks set use file service served up by app otherwise use filevault's port 3000
     hostname: !useMocks && process.env.FILE_VAULT_URL ?
       process.env.FILE_VAULT_URL :
-      (useMocks ? `http://localhost:${process.env.PORT || 8080}/file` : 'http://localhost:3000/file')
+      `http://localhost:${useMocks ? (process.env.PORT || 8080) : 3000}/file`
   },
   keycloak: {
     token: process.env.KEYCLOAK_TOKEN_URL,
