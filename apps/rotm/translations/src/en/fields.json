@@ -3,6 +3,7 @@
     "label": "Choose file to upload",
     "validation": {
       "required": "Select a file",
+      "filesize": "The selected document is too large - maximum 50mb",
       "extname": "Select a valid file type (png, jpg, jpeg, gif, tiff, mp4, mov, wmv, flv, avi, pdf, m4a, mp3, flac, mp4, wav, wma, aac)",
       "unsaved": "We have not been able to upload evidence"
     }
@@ -11,6 +12,7 @@
     "label": "Choose file to upload",
     "validation": {
       "required": "Select a file",
+      "filesize": "The selected document is too large - maximum 50mb",
       "extname": "Select a valid file type (png, jpg, jpeg, gif, tiff, mp4, mov, wmv, flv, avi, pdf, m4a, mp3, flac, mp4, wav, wma, aac)",
       "unsaved": "We have not been able to upload evidence"
     }
