@@ -96,7 +96,7 @@ spec:
             - name: MAX_FILE_SIZE
               value: '5000857600'
             - name: REQUEST_TIMEOUT
-              value: '10000'
+              value: '400'
           securityContext:
             runAsNonRoot: true
 
