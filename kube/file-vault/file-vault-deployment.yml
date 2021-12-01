@@ -94,9 +94,9 @@ spec:
                   name: passwordhash
                   key: passwordhash
             - name: MAX_FILE_SIZE
-              value: '5000857600'
+              value: '0'
             - name: REQUEST_TIMEOUT
-              value: '200'
+              value: '0'
           securityContext:
             runAsNonRoot: true
 
