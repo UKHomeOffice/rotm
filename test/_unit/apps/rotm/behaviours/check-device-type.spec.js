@@ -6,7 +6,6 @@ const expect = require('chai').expect;
 const chai = require('chai').use(require('sinon-chai'));
 const reqres = require('hof').utils.reqres;
 const sinon = require('sinon');
-const device = require('device');
 
 
 describe('apps/rotm \'check-device-type\' behaviour should ', () => {
@@ -20,25 +19,27 @@ describe('apps/rotm \'check-device-type\' behaviour should ', () => {
 
     let req;
     let res;
+    let next;
     let instance;
-    const callback = 'foo';
 
     beforeEach(() => {
       req = reqres.req();
       res = reqres.res();
+      next = 'foo';
     });
 
     describe('The locals method', () => {
         beforeEach(() => {
-            sinon.stub(Base.prototype, 'locals').returns(res);
+            sinon.stub(Base.prototype, 'locals').returns(req, res, next);
             instance = new (Behaviour(Base))();
+            req['user-agent'] = 'phone';
             instance.locals(req, res);
         });
         it('always calls super.locals', () => {
             expect(Base.prototype.locals).to.have.been.called;
         });
         it('checks that device type is returned in the response is always unknown', () => {
-            const checkReturnedData = instance.locals(req, res).locals;
+            const checkReturnedData = res.locals;
             // TODO or CHECK - currently function will always back an 'unknown' for device type as useragent not atached to sessionModel
             // and 'get' method will not retrieve user-agent straight from the request.
             expect(checkReturnedData['device-desktop']).to.be.false;

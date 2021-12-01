@@ -7,9 +7,6 @@ const chai = require('chai').use(require('sinon-chai'));
 const reqres = require('hof').utils.reqres;
 const sinon = require('sinon');
 
-// TODO - Getting a 'TypeError: Behaviour(...) is not a constructor' error.
-
-
 describe("apps/rotm 'save-image' behaviour should ", () => {
   it('export a function', () => {
     expect(Behaviour).to.be.a('function');
@@ -25,20 +22,26 @@ describe("apps/rotm 'save-image' behaviour should ", () => {
   let req;
   let res;
   let instance;
-  const next = 'foo';
+  let next;
+  let file;
 
   beforeEach(() => {
     req = reqres.req();
     res = reqres.res();
+    next = 'foo'
   });
 
   describe('The save-image method', () => {
     before(() => {
-      // sinon.stub(Base.prototype, 'process').withArgs('file');
-      // instance = new (Behaviour(Base))();
+      sinon.stub(Base.prototype, 'process').returns(req, res, next);
+      instance = new (Behaviour(Base))();
+      instance.process(req, res, next);
     });
-    it('always calls super.configure', () => {
-      // console.log(req);
+    //TODO - Currently getting error
+    // TypeError: Behaviour(...) is not a constructor
+
+    it('always calls super.process', () => {
+      expect(Base.prototype.process).to.have.been.called;
     });
   });
 });

@@ -27,13 +27,16 @@ describe("apps/rotm 'unset-value' behaviour should ", () => {
   });
 
   describe('The locals method', () => {
-    beforeEach(() => {
-      // sinon.stub(Base.prototype, 'locals');
-      // instance = new (Behaviour(Base))();
-      // instance.locals(req, res);
+    before(() => {
+      sinon.stub(Base.prototype, 'locals').returns(res, res, next);
+      instance = new (Behaviour(Base))();
+      instance.locals(req, res);
     });
     it('always calls super.locals', () => {
-      // expect(Base.prototype.locals).to.have.been.called;
+      expect(Base.prototype.locals).to.have.been.called;
+    });
+    after(() => {
+      Base.prototype.locals.restore();
     });
   });
 });

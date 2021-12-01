@@ -58,8 +58,7 @@ describe('apps/rotm \'remove-image\' behaviour should ', () => {
             req.sessionModel.set('images', images);
             req.query.delete = images[0].id;
             expect(Base.prototype.configure).to.not.have.been.called;
-            expect(Base.prototype.configure).to.not.have.been.called;
-            // Test for redirect??
+            //TODO Test for redirect??
         })
         afterEach(() => {
             Base.prototype.configure.restore();
