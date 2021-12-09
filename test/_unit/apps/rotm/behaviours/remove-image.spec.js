@@ -1,12 +1,6 @@
 'use strict';
 
-// TODO Why are test files not loading from setup.js
 const Behaviour = require('../../../../../apps/rotm/behaviours/remove-image');
-const expect = require('chai').expect;
-const chai = require('chai').use(require('sinon-chai'));
-const reqres = require('hof').utils.reqres;
-reqres.sinon = require('sinon');
-const sinon = require('sinon');
 
 describe('apps/rotm \'remove-image\' behaviour should ', () => {
     it('exports a function', () => {

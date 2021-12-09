@@ -1,12 +1,6 @@
 'use strict';
 
-// TODO Why are test files not loading from setup.js
 const Behaviour = require('../../../../../apps/rotm/behaviours/check-device-type');
-const expect = require('chai').expect;
-const chai = require('chai').use(require('sinon-chai'));
-const reqres = require('hof').utils.reqres;
-const sinon = require('sinon');
-
 
 describe('apps/rotm \'check-device-type\' behaviour should ', () => {
     it('export a function', () => {

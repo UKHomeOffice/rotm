@@ -1,11 +1,8 @@
 'use strict';
 
+const { expect } = require('chai');
 // TODO Why are test files not loading from setup.js
 const Behaviour = require('../../../../../apps/rotm/behaviours/unset-value');
-const expect = require('chai').expect;
-const chai = require('chai').use(require('sinon-chai'));
-const reqres = require('hof').utils.reqres;
-const sinon = require('sinon');
 
 describe("apps/rotm 'unset-value' behaviour should ", () => {
   it('export a function', () => {
@@ -19,21 +16,35 @@ describe("apps/rotm 'unset-value' behaviour should ", () => {
   let req;
   let res;
   let instance;
-  const next = 'foo';
+  let next;
 
   beforeEach(() => {
-    req = reqres.req({ form: { errors: ['testError'] } });
+    req = reqres.req();
     res = reqres.res();
   });
 
-  describe('The locals method', () => {
+  describe('The locals method checks', () => {
     before(() => {
-      sinon.stub(Base.prototype, 'locals').returns(res, res, next);
-      instance = new (Behaviour(Base))();
-      instance.locals(req, res);
+      sinon.stub(Base.prototype, 'locals').returns(req, res, next);
+      next = sinon.spy();
+      instance = new (Behaviour('image')(Base));
     });
-    it('always calls super.locals', () => {
+    it('the method has been called', () => {
+      req.form.errors = {};
+      instance.locals(req, res, next);
       expect(Base.prototype.locals).to.have.been.called;
+    });
+    it('form values equal null if there are no form errors and form values do not equal \'no\' ', () => {
+      req.form.errors = {};
+      req.form.values['image'] = 'yes';
+      instance.locals(req, res, next);
+      expect(req.form.values['image']).to.eql(null);
+    });
+    it('form values do not equal null if errors and there are no form values', () => {
+      req.form.errors = {error: 'error'};
+      req.form.values['image'] = 'no';
+      instance.locals(req, res, next);
+      expect(req.form.values['image']).to.not.eql(null);
     });
     after(() => {
       Base.prototype.locals.restore();
