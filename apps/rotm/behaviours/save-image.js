@@ -2,16 +2,26 @@
 
 const _ = require('lodash');
 const Model = require('../models/image-upload');
+const config = require('../../../config');
 
 module.exports = name => superclass => class extends superclass {
-  process(req) {
-    if (req.files && req.files[name]) {
-      // set image name on values for filename extension validation
-      // N:B validation controller gets values from
-      // req.form.values and not on req.files
-      req.form.values[name] = req.files[name].name;
+
+  async process(req, res, next) {
+    const file = req.files[name];
+    if (file && file.truncated) {
+      const err = await new this.ValidationError('image', {
+        type: 'filesize',
+        arguments: [config.upload.maxfilesize]
+      }, req, res);
+      return next({
+        'image': err
+      });
     }
-    super.process.apply(this, arguments);
+    // set image name on values for filename extension validation
+    // N:B validation controller gets values from
+    // req.form.values and not on req.files
+    req.form.values[name] = req.files[name].name;
+    await super.process.apply(this, arguments);
   }
 
   locals(req, res, next) {
