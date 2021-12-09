@@ -3,7 +3,7 @@
 const Behaviour = require('../../../../../apps/rotm/behaviours/skip-step');
 const EventEmitter = require('events').EventEmitter;
 
-describe.only('apps/rotm \'skip-step\' behaviour should ', () => {
+describe('apps/rotm \'skip-step\' behaviour should ', () => {
     it('export a function', () => {
       expect(Behaviour).to.be.a('function');
     });

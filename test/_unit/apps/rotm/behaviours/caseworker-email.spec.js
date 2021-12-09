@@ -3,7 +3,7 @@
 const { expect } = require('chai');
 const Behaviour = require('../../../../../apps/rotm/behaviours/caseworker-email');
 
-describe.skip('apps/rotm \'caseworker-email\' behaviour should ', () => {
+describe('apps/rotm \'caseworker-email\' behaviour should ', () => {
     it('exports a function', () => {
         expect(Behaviour).to.be.a('function');
     });
@@ -33,7 +33,6 @@ describe.skip('apps/rotm \'caseworker-email\' behaviour should ', () => {
     let res;
     let next = 'foo';
     let instance;
-    let instanceSpy
 
     beforeEach(() => {
         req = reqres.req();
@@ -42,13 +41,12 @@ describe.skip('apps/rotm \'caseworker-email\' behaviour should ', () => {
 
     describe('Checks \'caseworker-email\' ', () => {
         beforeEach(() => {
-            instance = Behaviour(settings);
-            instanceSpy = sinon.spy(instance);
-            instance();
+            sinon.stub(Base.prototype, 'constructor').returns({});
+            instance = Behaviour(Base);
         });
 
         it('is being called', () => {
-            expect(instanceSpy).to.be.called;
+            expect(instance).to.be.called;
         });
     });
 });
