@@ -1,8 +1,8 @@
 'use strict';
 
-const Behaviour = require('../../../../../apps/rotm/behaviours/save-image');
-const Controller = require('hof').controller;
 const expect = chai.expect;
+const Behaviour = require('../../../../../apps/rotm/behaviours/save-image');
+const Model = require('../../../../../apps/rotm/models/image-upload');
 
 describe("apps/rotm 'save-image' behaviour should ", () => {
   it('export a function', () => {
@@ -18,113 +18,103 @@ describe("apps/rotm 'save-image' behaviour should ", () => {
   let req;
   let res;
   let next;
-  const name = 'image'
 
   let instance;
-  
-  const images = {
+
+  const imageFiles = {
     image: {
       name: 'test1.png',
       encoding: '7bit',
-      mimetype: 'test1.png',
+      mimetype: 'png',
       truncated: false,
       size: 144148
     }
-  }
+  };
 
   beforeEach(() => {
     req = reqres.req();
     res = reqres.res();
-    req.files = images;
+    req.files = imageFiles;
   });
 
-  describe('The save-image \' process \' method', () => {
-
+  describe("The save-image ' process ' method", () => {
     before(() => {
       sinon.stub(Base.prototype, 'process');
-      instance = new (Behaviour('name')(Base));
+      instance = new (Behaviour('image')(Base))();
     });
 
-    it('is called ', () => {
-      req.files = images;
+    it('should be called ', () => {
       instance.process(req);
       expect(Base.prototype.process).to.have.been.called;
     });
 
-    it('has a file attached to it', () => {
-      expect(req.files).to.eql(images);
-    })
+    it('should have a file attached to it', () => {
+      req.files = imageFiles;
+      instance.process(req);
+      expect(req.files).to.eql(imageFiles);
+    });
 
-    it('adds files to form.values', () => {
-      req.files['images'] = images;
-      instance.process(req, res, next => {
-        expect(req.form.values['name']).to.be.true.and.to.eql('test1.png');
-      });
-    })
+    it('should add files to form.values', () => {
+      req.files.images = imageFiles;
+      instance.process(req);
+      expect(req.form.values.image).to.eql('test1.png');
+    });
 
     after(() => {
       Base.prototype.process.restore();
-    })
+    });
   });
 
-  describe('The save-image \' locals \' method', () => {
-
+  describe("The save-image ' locals ' method", () => {
     before(() => {
       sinon.stub(Base.prototype, 'locals').returns(req, res, next);
-      next = sinon.spy();
-      instance = new (Behaviour('name')(Base));
+      instance = new (Behaviour('name')(Base))();
     });
 
-    it('is called ', () => {
+    it('should be called ', () => {
       req.form.errors = {};
       instance.locals(req, res, next);
-      expect(Base.prototype.locals).to.have.been.calledOnce;
-    });
-    
-    it('returns the next step if no errors', () => {
-      req.form.errors = {};;
-      instance.locals(req, res, next => {
-        expect(next).to.have.been.called;
-      });
+      expect(Base.prototype.locals).to.have.been.called;
     });
 
-    it('does not return next if there are errors', () => {
-      req.form.errors = {errors: 'Error'};
-      instance.locals(req, res, next => {
-        expect(next).to.not.have.been.called;
-        expect(req.form.values['evidence-upload']).to.eql(null);
-      }); 
+    it("should not return null to 'evidence-upload' on request form values if errors", () => {
+      req.form.errors = { error: 'err' };
+      instance.locals(req, res, next);
+      expect(req.form.values['evidence-upload']).to.not.eql(null);
+      expect(req.form.values['evidence-upload']).to.eql();
+    });
+
+    it("should return null to 'evidence-upload' on request form values if there are no errors", () => {
+      req.form.errors = {};
+      instance.locals(req, res, next);
+      expect(req.form.values['evidence-upload']).to.eql(null);
     });
 
     after(() => {
       Base.prototype.locals.restore();
-    })
+    });
   });
 
-  describe('The save-image \' saveValues \' method', () => {
-
+  describe("The save-image ' saveValues ' method", () => {
     before(() => {
       sinon.stub(Base.prototype, 'saveValues').returns(req, res, next);
-      next = sinon.spy();
-      instance = new (Behaviour('name')(Base));
+      instance = new (Behaviour('name')(Base))();
     });
 
-    it('is called ', () => {
+    it('should be called ', () => {
       instance.saveValues(req, res, next);
       expect(Base.prototype.saveValues).to.have.been.calledOnce;
     });
 
-    it('returns a model ', () => {
-      req.sessionModel.set('images', images);
-      instance.saveValues(req, res, next => {
-        expect(req.sessionModel.images).to.be.true;
-        expect(req.sessionModel.get('images').image.name).to.eql('test1.png');
-        expect(next).to.not.have.been.called;
-      });
+    it('should attach files to the sessionModel ', () => {
+      req.sessionModel.set('images', imageFiles);
+      instance.saveValues(req, res, next);
+      const sessionModel = req.sessionModel.get('images');
+      expect(sessionModel.image.name).to.eql('test1.png');
     });
 
     after(() => {
       Base.prototype.saveValues.restore();
-    })
+    });
   });
 });

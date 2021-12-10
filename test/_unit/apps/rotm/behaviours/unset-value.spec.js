@@ -23,28 +23,28 @@ describe("apps/rotm 'unset-value' behaviour should ", () => {
     res = reqres.res();
   });
 
-  describe('The locals method checks', () => {
+  describe('The \'locals\' method', () => {
     before(() => {
       sinon.stub(Base.prototype, 'locals').returns(req, res, next);
       next = sinon.spy();
       instance = new (Behaviour('image')(Base));
     });
-    it('the method has been called', () => {
+    it('should be called', () => {
       req.form.errors = {};
       instance.locals(req, res, next);
       expect(Base.prototype.locals).to.have.been.called;
     });
-    it('form values equal null if there are no form errors and form values do not equal \'no\' ', () => {
+    it('should check form values equal null if there are no form errors and form values do not equal \'no\' ', () => {
       req.form.errors = {};
-      req.form.values['image'] = 'yes';
+      req.form.values.image = 'yes';
       instance.locals(req, res, next);
-      expect(req.form.values['image']).to.eql(null);
+      expect(req.form.values.image).to.eql(null);
     });
-    it('form values do not equal null if errors and there are no form values', () => {
+    it('should check form values do not equal null if errors and there are no form values', () => {
       req.form.errors = {error: 'error'};
-      req.form.values['image'] = 'no';
+      req.form.values.image = 'no';
       instance.locals(req, res, next);
-      expect(req.form.values['image']).to.not.eql(null);
+      expect(req.form.values.image).to.not.eql(null);
     });
     after(() => {
       Base.prototype.locals.restore();

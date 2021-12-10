@@ -23,7 +23,7 @@ describe("apps/rotm 'url-repeater' behaviour should ", () => {
     res = reqres.res();
   });
 
-  describe('The saveValues method', () => {
+  describe('The \'saveValues\' method', () => {
     beforeEach(() => {
       sinon.stub(Base.prototype, 'saveValues').returns(res, res, next);
       instance = new (Behaviour(Base))();
@@ -36,7 +36,7 @@ describe("apps/rotm 'url-repeater' behaviour should ", () => {
       ];
       instance.saveValues(req, res, next);
     });
-    it('always calls saveValues', () => {
+    it('should be called', () => {
       expect(Base.prototype.saveValues).to.have.been.called;
     });
     it('eliminates empty urls from the form', () => {
@@ -50,14 +50,14 @@ describe("apps/rotm 'url-repeater' behaviour should ", () => {
     });
   });
 
-  describe('The getValues method', () => {
+  describe('The \'getValues\' method', () => {
     beforeEach(() => {
       sinon.stub(Base.prototype, 'getValues').returns(req, res, next);
       instance = new (Behaviour(Base))();
       instance.getValues(req, res, next);
     });
 
-    it('gets callee', () => {
+    it('should be called', () => {
       expect(Base.prototype.getValues).to.have.been.called;
     });
 
