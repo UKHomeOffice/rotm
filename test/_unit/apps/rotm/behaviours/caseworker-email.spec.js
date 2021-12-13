@@ -1,52 +1,41 @@
 'use strict';
 
-const { expect } = require('chai');
-const Behaviour = require('../../../../../apps/rotm/behaviours/caseworker-email');
+const proxyquire = require('proxyquire');
+const { config } = require('chai');
+const chai = require('chai')
+const should = chai.should();
+const expect = chai.expect;
+const sinon = require('sinon');
 
-describe("apps/rotm 'caseworker-email' behaviour should ", () => {
-  it('exports a function', () => {
-    expect(Behaviour).to.be.a('function');
-  });
-
-  class Base {
-    constructor() {}
+const configStub = {}
+let hofStub = {
+  components: {
+    emailer: sinon.stub()
   }
-
-  let settings = {
-    from: 'h@h.com',
-    replyTo: 'd@d.com',
-    region: 'fakestring',
-    transport: 'stub',
-    caseworker: 'caseWorker@caseWorkder.com',
-    transportOptions: {
-      accessKeyId: 'fakeemail',
-      secretAccessKey: 'randompass',
-      port: '',
-      host: '',
-      ignoreTLS: '',
-      secure: false
-    }
-  };
-
-  let req;
-  let res;
-  const next = 'foo';
-  let instance;
-
-  beforeEach(() => {
-    req = reqres.req();
-    res = reqres.res();
-  });
-
-  describe("Checks 'caseworker-email' ", () => {
-    beforeEach(() => {
-      sinon.stub(Base.prototype, 'constructor').returns({req, res, next});
-      instance = Behaviour(Base);
-    });
-
-    it('is being called', () => {
-      instance(req, res, next);
-      expect(instance).to.be.called;
-    });
-  });
+}
+const emailer = proxyquire('../../../../../apps/rotm/behaviours/caseworker-email', {
+  '../../../config': configStub,
+  'hof': hofStub 
 });
+// const emailer = require('../../../../apps/rotm/behaviours/caseworker-email');
+
+// somewhere in the settings which is being pulled from config is the email values
+
+describe.only('apps/rotm/behaviours/caseworker-email', () => {
+  it('exports a function', () => {
+    expect(emailer).to.be.a('function');
+  });
+
+  describe('Emailer', () => {
+    it('returns an extended object', () => {
+      const settings = {
+        transport: 'stub',
+        caseworker: 'mohamed@lycos.com'
+      }
+      const result = emailer(settings);
+      console.log('result ========> ', JSON.stringify(result, undefined, 4));
+      console.log('hofStub ========>', JSON.stringify(hofStub, undefined, 4));
+      console.log('========>', result);
+    })
+  })
+})
