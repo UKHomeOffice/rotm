@@ -1,6 +1,6 @@
 'use strict';
 
-const assert = require('assert');
+const { expect } = require('chai');
 const Behaviour = require('../../../../../apps/rotm/behaviours/skip-step');
 
 describe("apps/rotm 'skip-step' behaviour should ", () => {
@@ -21,20 +21,20 @@ describe("apps/rotm 'skip-step' behaviour should ", () => {
   beforeEach(() => {
     req = reqres.req();
     res = reqres.res();
-    instance = new (Behaviour(Base))();
-    spy = sinon.spy(instance, 'get');
-    instance.on('complete', spy);
+    
   });
 
   describe("The 'get' method", () => {
     beforeEach(() => {
       // sinon.stub(Base.prototype, 'get');
-
-      instance.get(req, res, next);
+      
     });
-    it('Check things', () => {
+    it('Check \'get\' is called', () => {
+      instance = new (Behaviour(Base));
+      spy = sinon.spy()
+
+      instance.on('complete', spy);
       instance.get(req, res, next);
-      assert(spy.called);
     });
   });
 });

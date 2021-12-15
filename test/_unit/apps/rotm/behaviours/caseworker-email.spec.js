@@ -21,7 +21,7 @@ const emailer = proxyquire('../../../../../apps/rotm/behaviours/caseworker-email
 
 // somewhere in the settings which is being pulled from config is the email values
 
-describe.only('apps/rotm/behaviours/caseworker-email', () => {
+describe('apps/rotm/behaviours/caseworker-email', () => {
   it('exports a function', () => {
     expect(emailer).to.be.a('function');
   });

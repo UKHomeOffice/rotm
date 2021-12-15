@@ -26,7 +26,7 @@ describe("apps/rotm 'unset-value' behaviour should ", () => {
   describe('The \'locals\' method', () => {
     before(() => {
       sinon.stub(Base.prototype, 'locals').returns(req, res, next);
-      next = sinon.spy();
+      // next = sinon.spy();
       instance = new (Behaviour('image')(Base));
     });
     it('should be called', () => {
