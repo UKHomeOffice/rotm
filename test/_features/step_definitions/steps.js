@@ -36,6 +36,14 @@ Then('I click the {string} button', async function (name) {
   await this.page.click(`text=${name}`);
 }.bind(World));
 
+Then('I click the {string} button to go back a page', async function (name) {
+  await this.page.click(`.${name}`);
+}.bind(World));
+
+Then('I click the {string} locator', async function (name) {
+  await this.page.click(`a >> nth=0`);
+}.bind(World));
+
 Then('I submit the application', { timeout: 4 * 5000 }, async function () {
   await this.page.click('input[type="submit"]');
 }.bind(World));
