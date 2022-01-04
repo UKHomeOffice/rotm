@@ -40,8 +40,8 @@ Then('I click the {string} button to go back a page', async function (name) {
   await this.page.click(`.${name}`);
 }.bind(World));
 
-Then('I click the {string} locator', async function (name) {
-  await this.page.click(`a >> nth=0`);
+Then('I click the {string} link', async function (name) {
+  await this.page.click(`[href="/${name}"]`);
 }.bind(World));
 
 Then('I submit the application', { timeout: 4 * 5000 }, async function () {

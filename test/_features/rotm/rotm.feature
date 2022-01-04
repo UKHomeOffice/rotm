@@ -1,6 +1,15 @@
 @feature @rotm
 Feature: A user should access the correct service and be able to log an issue
 
+    Scenario: I upload a file larger than 100mb
+        Given I start the 'base' application journey
+        Then I should be on the 'evidence-url' page showing 'Do you have a link to the material?'
+        Then I check 'evidence-url-no'
+        Then I select 'Continue'
+        Then I should be on the 'evidence-upload' page showing 'Do you have any evidence?'
+        Then I check 'evidence-upload-yes'        
+        Then I should see 'Choose file to upload' on the page
+
     Scenario: I don't have a link to the material and don't have any evidence and don't want to be contacted
         Given I start the 'base' application journey
         Then I should be on the 'evidence-url' page showing 'Do you have a link to the material?'
@@ -313,7 +322,7 @@ Feature: A user should access the correct service and be able to log an issue
         Then I should be on the 'evidence-upload' page showing 'There is a problem'
         Then I should see the 'Select a file' error
 
-    Scenario: I want to change the link when I check my report
+    Scenario: I want to change contact details on my report
         Given I start the 'base' application journey
         Then I should be on the 'evidence-url' page showing 'Do you have a link to the material?'
         Then I check 'evidence-url-yes'
@@ -339,7 +348,35 @@ Feature: A user should access the correct service and be able to log an issue
         Then I check 'contact-details-method-phone'
         Then I should see 'Telephone number' on the page
         Then I fill 'contact-phone' with '07123456789'
+        Then I check 'contact-details-method-email'
+        Then I should see 'Email address' on the page
+        Then I fill 'contact-email' with 'ronnn@testman.com'
         Then I select 'Continue'
         Then I should be on the 'check-your-report' page showing 'Check your report'
+        Then I click the 'evidence-url/edit' link
+        Then I should be on the 'evidence-url/edit' page showing 'Do you have a link to the material?'
+        Then I fill 'url' text area with 'www.test2.co.uk'
+        Then I select 'Continue'
+        Then I should be on the 'check-your-report' page showing 'www.test2.co.uk'
+        Then I click the 'contact-details/edit#contact-details-name' link
+        Then I should be on the 'contact-details/edit' page showing 'What are your contact details?'
+        Then I fill 'contact-details-name' with 'Ronnie Testman'
+        Then I select 'Continue'
+        Then I should be on the 'check-your-report' page showing 'Ronnie Testman'
+        Then I click the 'contact-details/edit#contact-phone' link
+        Then I should be on the 'contact-details/edit' page showing 'What are your contact details?'
+        Then I fill 'contact-phone' with '07876543210'
+        Then I select 'Continue'
+        Then I should be on the 'check-your-report' page showing '07876543210'     
+        Then I click the 'contact-details/edit#contact-email' link
+        Then I should be on the 'contact-details/edit' page showing 'What are your contact details?'
+        Then I fill 'contact-email' with 'ron@testman.com'
+        Then I select 'Continue'
+        Then I should be on the 'check-your-report' page showing 'ron@testman.com'
+        Then I click the 'can-we-contact/edit#can-we-contact' link
+        Then I should be on the 'can-we-contact/edit' page showing 'Are you willing to be contacted, if necessary?'
+        Then I check 'can-we-contact-no'
+        Then I select 'Continue'
+        Then I should be on the 'check-your-report' page showing 'No, I don’t want to be contacted'
         Then I click the 'send report' button
-        Then I click the 'Change' locator
+
