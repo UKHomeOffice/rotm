@@ -2,7 +2,6 @@
 
 const expect = chai.expect;
 const Behaviour = require('../../../../../apps/rotm/behaviours/save-image');
-const Model = require('../../../../../apps/rotm/models/image-upload');
 
 describe("apps/rotm 'save-image' behaviour should ", () => {
   it('export a function', () => {
