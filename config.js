@@ -5,7 +5,6 @@
 'use strict';
 
 const env = process.env.NODE_ENV;
-const localhost = () => `${process.env.LISTEN_HOST || '0.0.0.0'}:${process.env.PORT || 8080}`;
 const useMocks = process.env.USE_MOCKS === 'true' || !env;
 
 module.exports = {
@@ -46,10 +45,10 @@ module.exports = {
   },
   upload: {
     maxFileSize: '100mb',
+    // if mocks set use file service served up by app otherwise use filevault's port 3000
     hostname: !useMocks && process.env.FILE_VAULT_URL ?
       process.env.FILE_VAULT_URL :
-      `http://${localhost()}/api/image-upload`
-
+      `http://localhost:${useMocks ? (process.env.PORT || 8080) : 3000}/file`
   },
   keycloak: {
     token: process.env.KEYCLOAK_TOKEN_URL,
