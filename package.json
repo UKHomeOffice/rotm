@@ -17,6 +17,7 @@
     "start:dev": "hof-build watch",
     "test": "yarn run test:lint",
     "test:lint": "eslint . --config ./node_modules/eslint-config-hof/default.js",
+    "test:unit": "mocha \"test/test.setup.js\" \"test/_unit/**/*.spec.js\"",
     "test:acceptance": "TAGS=\"${TAGS:=@feature}\" npm run test:cucumber",
     "test:acceptance_browser": "ACCEPTANCE_WITH_BROWSER=true TAGS=\"${TAGS:=@feature}\" yarn run test:cucumber",
     "test:cucumber": "cucumber-js -f @cucumber/pretty-formatter \"test/_features/**/*.feature\" --require test/_features/test.setup.js --require \"test/_features/step_definitions/**/*.js\" --tags $TAGS",
@@ -35,6 +36,7 @@
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "tar": "6.1.9",
+    "proxyquire": "^2.1.3",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
