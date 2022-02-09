@@ -5,10 +5,29 @@ const path = require('path');
 const moment = require('moment');
 const config = require('../../../config');
 const uuid = require('uuid');
+const { createLogger, format, transports } = require('winston');
+const { combine, timestamp, json } = format;
 
+const logger = createLogger({
+  format: combine(
+    timestamp(),
+    json()
+  ),
+  transports: [
+    new transports.Console({level: 'info',
+      handleExceptions: true
+    })]
+});
 
 const parse = (model, translate) => {
   const getLabel = key => translate(`email.caseworker.fields.${key}.label`);
+  const submissionID = uuid.v4();
+
+  logger.log({
+    level: 'info',
+    message: 'Submission ID: ' + submissionID
+  });
+
   const fields = [
     'evidence-written',
     'contact-details-name',
@@ -19,7 +38,7 @@ const parse = (model, translate) => {
     urls: model.urls,
     images: model.images,
     table: [
-      { label: getLabel('uniqueId'), value: uuid.v1() },
+      { label: getLabel('uniqueId'), value: submissionID },
       { label: getLabel('submitted'), value: moment().format(config.dateTimeFormat) },
       ...fields.map(f => ({
         label: getLabel(f),
