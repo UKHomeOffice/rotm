@@ -214,48 +214,48 @@ steps:
       branch: master
       event: pull_request
 
-  # Snyk & Anchore security scans which run after branch deployment to prevent blocking of PR UAT tests
-  - name: snyk_scan
-    pull: if-not-exists
-    image: node:14
-    environment:
-      SNYK_TOKEN:
-        from_secret: snyk_token
-    commands:
-      - yarn run test:snyk
-    when:
-      branch:
-        include:
-          - master
-          - feature/*
-      event: pull_request
-
-  - name: anchore_scan
-    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/anchore-submission:latest
-    pull: always
-    environment:
-      IMAGE_NAME: rotm:${DRONE_COMMIT_SHA}
-      LOCAL_IMAGE: true
-      TOLERATE: medium
-      WHITELIST_FILE: hof-services-config/Report_Online_Terrorist_Material/anchore-cve-exceptions.txt
-    when:
-      branch: master
-      event: pull_request
-
-      # Deploy to Staging environment
-  # - name: TEST_deploy_to_stg
+  # # Snyk & Anchore security scans which run after branch deployment to prevent blocking of PR UAT tests
+  # - name: snyk_scan
   #   pull: if-not-exists
-  #   image: quay.io/ukhomeofficedigital/kd:v1.14.0
+  #   image: node:14
   #   environment:
-  #     KUBE_SERVER:
-  #       from_secret: kube_server_prod
-  #     KUBE_TOKEN:
-  #       from_secret: kube_token_sas_prod
+  #     SNYK_TOKEN:
+  #       from_secret: snyk_token
   #   commands:
-  #     - bin/deploy.sh $${STG_ENV}
+  #     - yarn run test:snyk
+  #   when:
+  #     branch:
+  #       include:
+  #         - master
+  #         - feature/*
+  #     event: pull_request
+  #
+  # - name: anchore_scan
+  #   image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/anchore-submission:latest
+  #   pull: always
+  #   environment:
+  #     IMAGE_NAME: rotm:${DRONE_COMMIT_SHA}
+  #     LOCAL_IMAGE: true
+  #     TOLERATE: medium
+  #     WHITELIST_FILE: hof-services-config/Report_Online_Terrorist_Material/anchore-cve-exceptions.txt
   #   when:
   #     branch: master
   #     event: pull_request
+
+      # Deploy to Staging environment
+  - name: TEST_deploy_to_stg
+    pull: if-not-exists
+    image: quay.io/ukhomeofficedigital/kd:v1.14.0
+    environment:
+      KUBE_SERVER:
+        from_secret: kube_server_stg
+      KUBE_TOKEN:
+        from_secret: kube_token_sas_stg
+    commands:
+      - bin/deploy.sh $${STG_ENV}
+    when:
+      branch: master
+      event: pull_request
 
   # Deploy to Master UAT environment
   - name: deploy_to_uat
