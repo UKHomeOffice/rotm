@@ -221,8 +221,8 @@ steps:
     environment:
       SNYK_TOKEN:
         from_secret: snyk_token
-      commands:
-        - yarn run test:snyk
+    commands:
+      - yarn run test:snyk
     when:
       branch:
         include:
