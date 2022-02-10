@@ -222,7 +222,7 @@ steps:
       SNYK_TOKEN:
         from_secret: snyk_token
       commands:
-      - yarn run test:snyk
+        - yarn run test:snyk
     when:
       branch:
         include:
