@@ -214,7 +214,7 @@ steps:
       branch: master
       event: pull_request
 
-  # Snyk & Anchore security scans which run after branch deployment to prevent blocking of PR UAT tests
+# Snyk & Anchore security scans which run after branch deployment to prevent blocking of PR UAT tests
   - name: snyk_scan
     pull: if-not-exists
     image: node:14
@@ -242,15 +242,15 @@ steps:
       branch: master
       event: pull_request
 
-      # Deploy to Staging environment
+      #TEST Deploy to Staging environment
   # - name: TEST_deploy_to_stg
   #   pull: if-not-exists
   #   image: quay.io/ukhomeofficedigital/kd:v1.14.0
   #   environment:
   #     KUBE_SERVER:
-  #       from_secret: kube_server_prod
+  #       from_secret: kube_server_stg
   #     KUBE_TOKEN:
-  #       from_secret: kube_token_sas_prod
+  #       from_secret: kube_token_sas_stg
   #   commands:
   #     - bin/deploy.sh $${STG_ENV}
   #   when:
@@ -322,20 +322,20 @@ steps:
 
   # DISABLE DEPLOY TO PREPROD UNTIL THERE IS A STAGING ENVIRONMENT
 
-  #   # Deploy to Staging environment
-  # - name: deploy_to_stg
-  #   pull: if-not-exists
-  #   image: quay.io/ukhomeofficedigital/kd:v1.14.0
-  #   environment:
-  #     KUBE_SERVER:
-  #       from_secret: kube_server_prod
-  #     KUBE_TOKEN:
-  #       from_secret: kube_token_sas_prod
-  #   commands:
-  #     - bin/deploy.sh $${STG_ENV}
-  #   when:
-  #     branch: master
-  #     event: push
+    # Deploy to Staging environment
+  - name: deploy_to_stg
+    pull: if-not-exists
+    image: quay.io/ukhomeofficedigital/kd:v1.14.0
+    environment:
+      KUBE_SERVER:
+        from_secret: kube_server_stg
+      KUBE_TOKEN:
+        from_secret: kube_token_sas_stg
+    commands:
+      - bin/deploy.sh $${STG_ENV}
+    when:
+      branch: master
+      event: push
 
   # Checks a build being promoted has passed, is on master which effectively means a healthy build on Staging
   - name: sanity_check_build_prod
