@@ -12,14 +12,14 @@ module.exports = superclass => class extends superclass {
       req.form.values['another-url-4']
     ].filter(Boolean);
     req.form.values.submissionID = uuid;
-    req.log('info', `>>>>>>>>>>>>>>>>>>>> Submission ID: ${uuid}, Saving Urls: ${req.form.values.urls}`);
-    console.log(`>>>>>>>>>>>>>>>>>>>> Submission ID: ${uuid}, Saving Urls: ${req.form.values.urls}`);
+    req.log('info', `Submission ID: ${uuid}, Saving Urls: ${req.form.values.urls}`);
     return super.saveValues(req, res, next);
   }
 
   getValues(req, res, next) {
     super.getValues(req, res, (err, values) => {
       const urls = req.sessionModel.get('urls') || [];
+      req.log('info', `Submission ID: ${uuid}, Urls >>>>>>>>>>>>>>>>: ${urls.join(', ')}`);
       values.url = urls[0] || '';
       values['another-url-1'] = urls[1] || '';
       values['another-url-2'] = urls[2] || '';
