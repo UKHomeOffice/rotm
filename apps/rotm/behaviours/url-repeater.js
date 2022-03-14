@@ -12,7 +12,7 @@ module.exports = superclass => class extends superclass {
       req.form.values['another-url-4']
     ].filter(Boolean);
     req.form.values.submissionID = uuid;
-    req.log('info', 'Submission ID: ' + uuid + ', Saving Urls: ' + req.form.values.urls);
+    req.log('info', '>>>>>>>>>>>>>>>>>>>> Submission ID: ' + uuid + ', Saving Urls: ' + req.form.values.urls);
     return super.saveValues(req, res, next);
   }
 
