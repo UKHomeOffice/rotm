@@ -13,7 +13,7 @@ module.exports = superclass => class extends superclass {
     ].filter(Boolean);
     req.form.values.submissionID = uuid;
     req.log('info', `>>>>>>>>>>>>>>>>>>>> Submission ID: ${uuid}, Saving Urls: ${req.form.values.urls}`);
-    console.log('info', `>>>>>>>>>>>>>>>>>>>> Submission ID: ${uuid}, Saving Urls: ${req.form.values.urls}`);
+    console.log(`>>>>>>>>>>>>>>>>>>>> Submission ID: ${uuid}, Saving Urls: ${req.form.values.urls}`);
     return super.saveValues(req, res, next);
   }
 

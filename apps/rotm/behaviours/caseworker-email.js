@@ -4,7 +4,7 @@ const Emailer = require('hof').components.emailer;
 const path = require('path');
 const moment = require('moment');
 const config = require('../../../config');
-const uuid = require('uuid');
+// const uuid = require('uuid');
 const { createLogger, format, transports } = require('winston');
 const { combine, timestamp, json } = format;
 
@@ -19,8 +19,8 @@ const logger = createLogger({
 const parse = (model, translate) => {
   const getLabel = key => translate(`email.caseworker.fields.${key}.label`);
 
-  //model.log('info', '>>>>>>>>>>>>>>>>>>> Submission ID: ' + model.submissionID);
-  //logger.info('Submission ID: ' + model.submissionID);
+  // model.log('info', '>>>>>>>>>>>>>>>>>>> Submission ID: ' + model.submissionID);
+  // logger.info('Submission ID: ' + model.submissionID);
 
   logger.log({
     level: 'info',
