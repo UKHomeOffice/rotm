@@ -9,23 +9,22 @@ const { createLogger, format, transports } = require('winston');
 const { combine, timestamp, json } = format;
 
 const logger = createLogger({
-  format: combine(
-    timestamp(),
-    json()
-  ),
+  level: 'info',
+  format: combine(timestamp(), json()),
   transports: [
-    new transports.Console({level: 'info',
-      handleExceptions: true
-    })]
+    new transports.Console({level: 'info', handleExceptions: true})
+  ]
 });
 
 const parse = (model, translate) => {
   const getLabel = key => translate(`email.caseworker.fields.${key}.label`);
-  const submissionID = uuid.v4();
+
+  model.log('info', 'Submission ID: ' + model.submissionID + ', Saving Urls: ' + req.form.values.urls);
+  //logger.info('Submission ID: ' + model.submissionID);
 
   logger.log({
     level: 'info',
-    message: 'Submission ID: ' + submissionID
+    message: 'Submission ID: ' + model.submissionID
   });
 
   const fields = [
@@ -38,7 +37,7 @@ const parse = (model, translate) => {
     urls: model.urls,
     images: model.images,
     table: [
-      { label: getLabel('uniqueId'), value: submissionID },
+      { label: getLabel('uniqueId'), value: model.submissionID },
       { label: getLabel('submitted'), value: moment().format(config.dateTimeFormat) },
       ...fields.map(f => ({
         label: getLabel(f),
