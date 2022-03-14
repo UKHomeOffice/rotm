@@ -19,7 +19,7 @@ const logger = createLogger({
 const parse = (model, translate) => {
   const getLabel = key => translate(`email.caseworker.fields.${key}.label`);
 
-  model.log('info', '>>>>>>>>>>>>>>>>>>> Submission ID: ' + model.submissionID);
+  //model.log('info', '>>>>>>>>>>>>>>>>>>> Submission ID: ' + model.submissionID);
   //logger.info('Submission ID: ' + model.submissionID);
 
   logger.log({

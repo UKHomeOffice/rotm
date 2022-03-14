@@ -12,7 +12,7 @@ module.exports = superclass => class extends superclass {
       req.form.values['another-url-4']
     ].filter(Boolean);
     req.form.values.submissionID = uuid;
-    req.log('info', '>>>>>>>>>>>>>>>>>>>> Submission ID: ' + uuid + ', Saving Urls: ' + req.form.values.urls);
+    req.log('info', `>>>>>>>>>>>>>>>>>>>> Submission ID: ${uuid}, Saving Urls: ${req.form.values.urls}`);
     return super.saveValues(req, res, next);
   }
 
@@ -24,7 +24,6 @@ module.exports = superclass => class extends superclass {
       values['another-url-2'] = urls[2] || '';
       values['another-url-3'] = urls[3] || '';
       values['another-url-4'] = urls[4] || '';
-      req.log('info', 'Submission ID: ' + uuid + ', Saving Urls: ' + req.form.values.urls);
       next(err, values);
     });
   }
