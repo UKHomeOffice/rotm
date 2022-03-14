@@ -19,7 +19,7 @@ module.exports = superclass => class extends superclass {
   getValues(req, res, next) {
     super.getValues(req, res, (err, values) => {
       const urls = req.sessionModel.get('urls') || [];
-      req.log('info', `Submission ID: ${uuid}, Urls >>>>>>>>>>>>>>>>: ${urls.join(', ')}`);
+      req.log('info', `Submission ID: ${uuid}, Saved Urls: ${urls}`);
       values.url = urls[0] || '';
       values['another-url-1'] = urls[1] || '';
       values['another-url-2'] = urls[2] || '';
