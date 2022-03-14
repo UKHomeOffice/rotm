@@ -24,7 +24,8 @@ module.exports = name => superclass => class extends superclass {
 
   saveValues(req, res, next) {
     const images = req.sessionModel.get('images') || [];
-    req.log('info', `Submission ID: ${req.form.values.submissionID}, Saving images >>>>>>>>>>>>>>: ${images.join(', ')}`);
+
+    req.log('info', `Submission ID: ${req.form.values.submissionID}, Saving images >>>>>>>>>>>>>>: ${JSON.stringify(images)}`);
     if (req.files && req.files[name]) {
       const image = _.pick(req.files[name], ['name', 'data', 'mimetype']);
       const model = new Model(image);
