@@ -4,41 +4,23 @@ const Emailer = require('hof').components.emailer;
 const path = require('path');
 const moment = require('moment');
 const config = require('../../../config');
-// const uuid = require('uuid');
-const { createLogger, format, transports } = require('winston');
-const { combine, timestamp, json } = format;
-
-const logger = createLogger({
-  level: 'info',
-  format: combine(timestamp(), json()),
-  transports: [
-    new transports.Console({level: 'info', handleExceptions: true})
-  ]
-});
 
 const parse = (model, translate) => {
   const getLabel = key => translate(`email.caseworker.fields.${key}.label`);
-
-  // model.log('info', '>>>>>>>>>>>>>>>>>>> Submission ID: ' + model.submissionID);
-  // logger.info('Submission ID: ' + model.submissionID);
-
-  logger.log({
-    level: 'info',
-    message: 'Submission ID: ' + model.submissionID
-  });
-
+  const submissionDateTime = moment().format(config.dateTimeFormat);
   const fields = [
     'evidence-written',
     'contact-details-name',
     'contact-email',
     'contact-phone'
   ];
+  model.log('info', `Submission ID: ${uuid}, Submitted: ${submissionDateTime}`);
   return {
     urls: model.urls,
     images: model.images,
     table: [
       { label: getLabel('uniqueId'), value: model.submissionID },
-      { label: getLabel('submitted'), value: moment().format(config.dateTimeFormat) },
+      { label: getLabel('submitted'), value: submissionDateTime },
       ...fields.map(f => ({
         label: getLabel(f),
         value: model[f]
