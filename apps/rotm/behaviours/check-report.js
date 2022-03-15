@@ -4,6 +4,8 @@ module.exports = superclass => class extends superclass {
   configure(req, res, next) {
     if (req.sessionModel.get('can-we-contact') === 'no') {
       delete req.form.options.sections.contact;
+      req.log('info', `Submission ID: ${req.sessionModel.get('submissionID')}, 
+                       Contact Details Given: ${req.sessionModel.get('can-we-contact')}`);
     }
     super.configure(req, res, next);
   }
