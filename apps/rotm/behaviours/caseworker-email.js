@@ -15,9 +15,7 @@ const parse = (model, translate) => {
     'contact-phone'
   ];
 
-  console.log('>>>>>>>>>>>>>>>>>>>', model);
-
-  //model.log('info', `Submission ID: ${model.submissionID}, Submitted: ${submissionDateTime}`);
+  model.log('info', `Submission ID: ${model.submissionID}, Submitted: ${submissionDateTime}`);
 
   return {
     urls: model.urls,
