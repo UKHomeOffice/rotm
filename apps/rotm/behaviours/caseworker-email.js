@@ -24,7 +24,7 @@ const parse = (model, translate) => {
 
   logger.log({
     level: 'info',
-    message: `Session ID: ${model.sessionId}, Submission ID: ${model.submissionID}, Email Submitted: ${submissionDateTime}`
+    message: `Session ID: ${model.session.id}, Submission ID: ${model.submissionID}, Email Submitted: ${submissionDateTime}`
   });
 
   return {
