@@ -4,42 +4,35 @@ const Emailer = require('hof').components.emailer;
 const path = require('path');
 const moment = require('moment');
 const config = require('../../../config');
-const uuid = require('uuid');
 const { createLogger, format, transports } = require('winston');
 const { combine, timestamp, json } = format;
+const submissionDateTime = moment().format(config.dateTimeFormat);
 
 const logger = createLogger({
-  format: combine(
-    timestamp(),
-    json()
-  ),
-  transports: [
-    new transports.Console({level: 'info',
-      handleExceptions: true
-    })]
+  format: combine(timestamp(), json()),
+  transports: [new transports.Console({level: 'info', handleExceptions: true})]
 });
 
 const parse = (model, translate) => {
   const getLabel = key => translate(`email.caseworker.fields.${key}.label`);
-  const submissionID = uuid.v4();
-
-  logger.log({
-    level: 'info',
-    message: 'Submission ID: ' + submissionID
-  });
-
   const fields = [
     'evidence-written',
     'contact-details-name',
     'contact-email',
     'contact-phone'
   ];
+
+  logger.log({
+    level: 'info',
+    message: `Submission ID: ${model.submissionID}, Email Submitted: ${submissionDateTime}`
+  });
+
   return {
     urls: model.urls,
     images: model.images,
     table: [
-      { label: getLabel('uniqueId'), value: submissionID },
-      { label: getLabel('submitted'), value: moment().format(config.dateTimeFormat) },
+      { label: getLabel('uniqueId'), value: model.submissionID },
+      { label: getLabel('submitted'), value: submissionDateTime },
       ...fields.map(f => ({
         label: getLabel(f),
         value: model[f]
