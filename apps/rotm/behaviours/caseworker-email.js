@@ -19,7 +19,7 @@ const parse = (model, translate) => {
     urls: model.urls,
     images: model.images,
     table: [
-      { label: getLabel('uniqueId'), value: model.submissionID },
+      { label: getLabel('uniqueId'), value: '000000000000' }, // model.submissionID
       { label: getLabel('submitted'), value: submissionDateTime },
       ...fields.map(f => ({
         label: getLabel(f),
