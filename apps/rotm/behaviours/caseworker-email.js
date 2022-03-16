@@ -15,6 +15,8 @@ const parse = (model, translate) => {
     'contact-phone'
   ];
 
+  console.log('>>>>>>>>>>>>>>>>>>>', model);
+
   //model.log('info', `Submission ID: ${model.submissionID}, Submitted: ${submissionDateTime}`);
 
   return {
@@ -32,11 +34,6 @@ const parse = (model, translate) => {
 };
 
 module.exports = settings => {
-
-  /*
-  model.log('info', `Submission ID: ${req.sessionModel.get('submissionID')},
-                     Submitted: ${submissionDateTime}`); */
-
   if (settings.transport !== 'stub' && !settings.from && !settings.replyTo) {
     // eslint-disable-next-line no-console
     console.warn('WARNING: Email `from` address must be provided. Falling back to stub email transport.');
