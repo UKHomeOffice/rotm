@@ -7,6 +7,7 @@ const config = require('../../../config');
 const { createLogger, format, transports } = require('winston');
 const { combine, timestamp, json } = format;
 const submissionDateTime = moment().format(config.dateTimeFormat);
+
 const logger = createLogger({
   format: combine(timestamp(), json()),
   transports: [new transports.Console({level: 'info', handleExceptions: true})]
