@@ -14,7 +14,7 @@ const parse = (model, translate) => {
     'contact-email',
     'contact-phone'
   ];
-  model.log('info', `Submission ID: ${uuid}, Submitted: ${submissionDateTime}`);
+  model.log('info', `Submission ID: ${model.submissionID}, Submitted: ${submissionDateTime}`);
   return {
     urls: model.urls,
     images: model.images,
