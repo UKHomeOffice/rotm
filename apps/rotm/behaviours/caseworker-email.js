@@ -8,7 +8,6 @@ const { createLogger, format, transports } = require('winston');
 const { combine, timestamp, json } = format;
 const submissionDateTime = moment().format(config.dateTimeFormat);
 const logger = createLogger({
-  level: 'info',
   format: combine(timestamp(), json()),
   transports: [new transports.Console({level: 'info', handleExceptions: true})]
 });
@@ -24,7 +23,7 @@ const parse = (model, translate) => {
 
   logger.log({
     level: 'info',
-    message: `Session ID: ${model.sessionId}, Submission ID: ${model.submissionID}, Email Submitted: ${submissionDateTime}`
+    message: `Submission ID: ${model.submissionID}, Email Submitted: ${submissionDateTime}`
   });
 
   return {

@@ -7,7 +7,6 @@ module.exports = superclass => class extends superclass {
       emptyUserAgentDeviceType: 'unknown',
       unknownUserAgentDeviceType: 'unknown'
     });
-
     res.locals['device-desktop'] = client.type === 'desktop';
     res.locals['device-phone'] = client.type === 'phone';
     res.locals['device-unknown'] = client.type !== 'desktop' && client.type !== 'phone';
