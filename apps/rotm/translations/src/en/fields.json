@@ -62,7 +62,10 @@
   },
   "url": {
     "label": "Link",
-    "hint": "For example, www.gov.uk/page/1234/content#"
+    "hint": "For example, www.gov.uk/page/1234/content#",
+    "validation": {
+      "required": "Enter a link to the material"
+    }
   },
   "another-url-1": {
     "label": "Link"
