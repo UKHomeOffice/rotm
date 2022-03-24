@@ -5,6 +5,7 @@ module.exports = superclass => class extends superclass {
     if (req.query.delete) {
       const images = req.sessionModel.get('images') || [];
       const remaining = images.filter(i => i.id !== req.query.delete);
+      req.log('info', `Submission ID: ${req.sessionModel.get('submissionID')}, Removing image: ${req.query.delete}`);
       req.sessionModel.set('images', remaining);
       return res.redirect(req.path);
     }

@@ -10,6 +10,8 @@ module.exports = name => superclass => class extends superclass {
       // N:B validation controller gets values from
       // req.form.values and not on req.files
       req.form.values[name] = req.files[name].name;
+      req.log('info', `Submission ID: ${req.sessionModel.get('submissionID')}, 
+                       Processing image: ${req.form.values[name]}`);
     }
     super.process.apply(this, arguments);
   }
@@ -24,6 +26,7 @@ module.exports = name => superclass => class extends superclass {
   saveValues(req, res, next) {
     const images = req.sessionModel.get('images') || [];
     if (req.files && req.files[name]) {
+      req.log('info', `Submission ID: ${req.sessionModel.get('submissionID')}, Saving image: ${req.files[name].name}`);
       const image = _.pick(req.files[name], ['name', 'data', 'mimetype']);
       const model = new Model(image);
       return model.save()
