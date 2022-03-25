@@ -13,7 +13,7 @@ $ git clone git@github.com:UKHomeOffice/rotm.git && cd rotm
 
 Install the dependencies and build the project resources
 ```bash
-$ npm install
+$ yarn
 ```
 
 [Install Docker Compose](https://docs.docker.com/compose/install/)
@@ -25,7 +25,7 @@ $ docker-compose up
 
 Getting your hands dirty (You'll need [Redis](http://redis.io/) for this)
 ```bash
-$ npm run dev
+$ yarn start:dev
 ```
 
 For anything else ROTM-related, look in [package.json](./package.json) for a full list of scripts etc, and
