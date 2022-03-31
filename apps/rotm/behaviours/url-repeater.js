@@ -18,7 +18,7 @@ module.exports = superclass => class extends superclass {
 
   getValues(req, res, next) {
     super.getValues(req, res, (err, values) => {
-      let submissionID = req.sessionModel.get('submissionID') || uuid.v4();
+      const submissionID = req.sessionModel.get('submissionID') || uuid.v4();
       req.sessionModel.set('submissionID', submissionID);
       const urls = req.sessionModel.get('urls') || [];
       req.log('info', `Submission ID: ${submissionID}, Saved Urls: ${urls}`);
