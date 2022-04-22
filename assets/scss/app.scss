@@ -1,5 +1,4 @@
 @import "hof/frontend/themes/gov-uk/styles/govuk";
-@import "govuk-frontend/govuk/components/tabs/tabs";
 
 .phase-banner {
   @include phase-banner(alpha);
@@ -7,7 +6,6 @@
 
 ul {
   @extend .list-bullet;
-  // @extend .list-number;
 }
 
 details {
@@ -56,7 +54,6 @@ textarea.form-control {
     border-bottom: $black 1px solid;
     color: $black;
     text-decoration: none;
-    background: url("../images/icons/icon-caret-left.png") no-repeat 0 4px;
     @include media(mobile) {
       background-position: 0 1px;
     }
@@ -160,14 +157,20 @@ textarea.form-control {
 }
 
 .repeater {
-  .form-group:last-of-type {
+  .govuk-form-group {
     margin-bottom: 0;
   }
-  .form-control {
-    float: left;
+  .govuk-textarea {
+    width: 82%;
   }
   .remove {
-    padding-top: 5px;
     float: right;
+    // to position the anchor next to the textarea
+    margin-top: -61px;
   }
+}
+
+// this is no longer out of the box with hof so added custom css
+.hidden {
+  display: none
 }

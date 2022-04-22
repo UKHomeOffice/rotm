@@ -32,3 +32,23 @@ For anything else ROTM-related, look in [package.json](./package.json) for a ful
 [config.js](./config.js) for environment variables.
 
 Otherwise, see [HOF](https://github.com/UKHomeOffice/hof).
+
+## Running acceptance tests
+
+To run the acceptance test
+
+```bash
+$ yarn test:acceptance
+```
+
+To run a test by tag, add a tag to your test e.g. @links and run the following command
+
+```bash
+$ yarn test:cucumber @links
+```
+
+To run a test by it's name (or grep) e.g. if the test has `I can select the 'back' button`
+
+```bash
+$ test:cucumber-name "I can select the 'back' button"
+```

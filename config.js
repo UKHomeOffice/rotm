@@ -26,22 +26,18 @@ module.exports = {
     password: process.env.REDIS_PASSWORD
   },
   email: {
-    from: process.env.FROM_ADDRESS || '',
-    replyTo: process.env.REPLY_TO || '',
-    region: process.env.EMAIL_REGION || '',
-    transport: process.env.EMAIL_TRANSPORT || 'smtp',
-    caseworker: process.env.CASEWORKER_EMAIL ||  'sas-hof-test@digital.homeoffice.gov.uk',
+    from: process.env.FROM_ADDRESS,
+    replyTo: process.env.REPLY_TO,
+    region: process.env.EMAIL_REGION,
+    transport: process.env.EMAIL_TRANSPORT,
+    caseworker: process.env.CASEWORKER_EMAIL,
     transportOptions: {
-      accessKeyId: process.env.HOF_SES_USER || process.env.AWS_USER || '',
-      secretAccessKey: process.env.HOF_SES_PASSWORD || process.env.AWS_PASSWORD || '',
-      port: process.env.TRANSPORT_PORT || '587',
-      host: process.env.TRANSPORT_HOST || 'email-smtp.eu-west-1.amazonaws.com',
-      ignoreTLS: process.env.TRANSPORT_IGNORE_TLS || '',
-      secure: process.env.TRANSPORT_SECURE || false,
-      auth: {
-        user: process.env.HOF_SES_USER || process.env.AWS_USER,
-        pass: process.env.HOF_SES_PASSWORD || process.env.AWS_PASSWORD
-      }
+      accessKeyId: process.env.HOF_SES_USER || process.env.AWS_USER,
+      secretAccessKey: process.env.HOF_SES_PASSWORD || process.env.AWS_PASSWORD,
+      port: process.env.TRANSPORT_PORT,
+      host: process.env.TRANSPORT_HOST,
+      ignoreTLS: process.env.TRANSPORT_IGNORE_TLS,
+      secure: process.env.TRANSPORT_SECURE
     }
   },
   hosts: {
