@@ -14,7 +14,7 @@ const init = function init() {
     return;
   }
 
-  const fields = [].map.call(container.querySelectorAll('.form-group'), function map(f) {
+  const fields = [].map.call(container.querySelectorAll('.govuk-form-group'), function map(f) {
     return f;
   });
   const inputs = fields.map(function map(f) {

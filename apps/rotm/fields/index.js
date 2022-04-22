@@ -125,6 +125,7 @@ module.exports = {
   },
   image: {
     mixin: 'input-file',
+    className: 'govuk-file-upload',
     disableRender: true,
     dependent: {
       field: 'evidence-upload',

@@ -5,7 +5,7 @@
   "description": "A Home Office application for reporting online terrorist material.",
   "license": "GPL-2.0",
   "engines": {
-    "node": "^14.15.0"
+    "node": ">=14.15.0"
   },
   "repository": {
     "type": "git",
@@ -15,6 +15,7 @@
   "scripts": {
     "start": "node server.js",
     "start:dev": "hof-build watch",
+    "dev": "hof-build watch --env",
     "test": "yarn run test:lint",
     "test:lint": "eslint . --config ./node_modules/eslint-config-hof/default.js",
     "test:unit": "mocha \"test/test.setup.js\" \"test/_unit/**/*.spec.js\"",
@@ -30,8 +31,8 @@
     "busboy-body-parser": "^0.3.2",
     "device": "^0.3.12",
     "express": "^4.17.1",
-    "govuk-frontend": "^3.13.0",
-    "hof": "^19.13.11",
+    "govuk-frontend": "3.14",
+    "hof": "20.0.0-beta.10",
     "jimp": "^0.16.1",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",

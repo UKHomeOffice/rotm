@@ -26,11 +26,11 @@ module.exports = {
     password: process.env.REDIS_PASSWORD
   },
   email: {
-    from: process.env.FROM_ADDRESS || '',
-    replyTo: process.env.REPLY_TO || '',
+    from: process.env.FROM_ADDRESS || 'sas-hof-test@digital.homeoffice.gov.uk',
+    replyTo: process.env.REPLY_TO || 'sas-hof-test@digital.homeoffice.gov.uk',
     region: process.env.EMAIL_REGION || '',
     transport: process.env.EMAIL_TRANSPORT || 'ses',
-    caseworker: process.env.CASEWORKER_EMAIL || '',
+    caseworker: process.env.CASEWORKER_EMAIL || 'sas-hof-test@digital.homeoffice.gov.uk',
     transportOptions: {
       accessKeyId: process.env.HOF_SES_USER || process.env.AWS_USER || '',
       secretAccessKey: process.env.HOF_SES_PASSWORD || process.env.AWS_PASSWORD || '',
