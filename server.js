@@ -47,8 +47,7 @@ if (config.useMocks) {
 app.use((req, res, next) => {
   // Set HTML Language
   res.locals.htmlLang = 'en';
-  // Set feedback and footer links
-  res.locals.feedbackUrl = '/feedback';
+
   // Below can be removed once generic accessibility footer link is added to HOF
   res.locals.footerSupportLinks = [
     { path: '/cookies', property: 'base.cookies' },
