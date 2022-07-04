@@ -39,9 +39,9 @@ module.exports = {
       ignoreTLS: process.env.TRANSPORT_IGNORE_TLS || '',
       secure: process.env.TRANSPORT_SECURE || false,
       auth: {
-        user: process.env.HOF_SES_USER || process.env.AWS_USER ,
+        user: process.env.HOF_SES_USER || process.env.AWS_USER,
         pass: process.env.HOF_SES_PASSWORD || process.env.AWS_PASSWORD
-      },
+      }
     }
   },
   hosts: {
