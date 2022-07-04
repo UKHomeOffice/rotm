@@ -14,7 +14,7 @@
   "bugs": "https://github.com/UKHomeOffice/rotm/issues",
   "scripts": {
     "start": "node server.js",
-    "start:dev": "hof-build watch",
+    "start:dev": "hof-build watch --env",
     "test": "yarn run test:lint",
     "test:lint": "eslint . --config ./node_modules/eslint-config-hof/default.js",
     "test:unit": "mocha \"test/test.setup.js\" \"test/_unit/**/*.spec.js\"",
