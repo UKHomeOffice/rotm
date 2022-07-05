@@ -15,7 +15,7 @@ ignore:
         reason: No upgrade or patch available
         expires: '2022-11-01T17:02:21.865Z'
   SNYK-JS-JPEGJS-2859218:
-    - jimp > jimp/types > jimp/jpeg > jpeg-js:
+    - '*':
         reason: No upgrade or patch available
         expires: '2022-11-01T17:02:21.865Z'
 patch: {}
