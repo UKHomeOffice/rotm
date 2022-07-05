@@ -33,6 +33,7 @@
     "govuk-frontend": "^3.13.0",
     "hof": "^19.13.11",
     "jimp": "^0.16.1",
+    "jpeg-js": "^0.4.4",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "proxyquire": "^2.1.3",
