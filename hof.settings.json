@@ -5,11 +5,7 @@
     "hof/components/clear-session"
   ],
   "routes": [
-    "./apps/rotm",
-    "./apps/common"
-  ],
-  "views": [
-    "./apps/common/views"
+    "./apps/rotm"
   ],
   "session": {
     "name": "report-online-terrorist-material.hof.sid"

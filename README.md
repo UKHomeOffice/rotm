@@ -50,5 +50,5 @@ $ yarn test:cucumber @links
 To run a test by it's name (or grep) e.g. if the test has `I can select the 'back' button`
 
 ```bash
-$ test:cucumber-name "I can select the 'back' button"
+$ yarn test:cucumber-name "I can select the 'back' button"
 ```

@@ -18,7 +18,8 @@ settings = Object.assign({}, settings, {
   redis: config.redis,
   csp: config.csp,
   getCookies: false,
-  getTerms: false
+  getTerms: true,
+  getAccessibility: false
 });
 
 const app = hof(settings);
