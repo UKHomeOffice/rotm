@@ -3035,10 +3035,10 @@ hmac-drbg@^1.0.1:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
 
-hof@^20.1.11:
-  version "20.1.11"
-  resolved "https://registry.yarnpkg.com/hof/-/hof-20.1.11.tgz#b6cf54ef11228fc5073f08e0f096f6a494176026"
-  integrity sha512-G4KhsfX7X/y/Yo9VqHF2riOhst7cheIoGt8nIVtUi7ccuqp/J0BwrNaA93l8wEOXjobh3+UgRaz/+Ww/cp+vpg==
+hof@^20.1.15:
+  version "20.1.15"
+  resolved "https://registry.yarnpkg.com/hof/-/hof-20.1.15.tgz#2e9cb659d9e6d67080061eeb95926ce4066e3721"
+  integrity sha512-Aka6ujuASdmnU7JO/LJHomcXrFuaZQ9eQIRiqxqhjfHBAk618sg5bTW7KguhViVxe2mG/Xp7aBjx0nhpP7fJNQ==
   dependencies:
     aliasify "^2.1.0"
     bluebird "^3.7.2"
@@ -3074,7 +3074,7 @@ hof@^20.1.11:
     libphonenumber-js "^1.9.37"
     lodash "^4.17.21"
     markdown-it "^12.3.2"
-    minimatch "^3.0.3"
+    minimatch "^3.0.7"
     minimist "^1.2.6"
     mixwith "^0.1.1"
     moment "^2.29.4"
@@ -3922,7 +3922,7 @@ minimalistic-crypto-utils@^1.0.1:
   resolved "https://registry.yarnpkg.com/minimalistic-crypto-utils/-/minimalistic-crypto-utils-1.0.1.tgz#f6c00c1c0b082246e5c4d99dfb8c7c083b2b582a"
   integrity sha512-JIYlbt6g8i5jKfJ3xz7rF0LXmv2TkDxBLUkiBeZ7bAx4GnnNMr8xFpGnOxn6GhTEHx3SjRrZEoU+j04prX1ktg==
 
-"minimatch@2 || 3", minimatch@^3.0.3, minimatch@^3.0.4, minimatch@^3.1.1, minimatch@^3.1.2:
+"minimatch@2 || 3", minimatch@^3.0.4, minimatch@^3.0.7, minimatch@^3.1.1, minimatch@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.1.2.tgz#19cd194bfd3e428f049a70817c038d89ab4be35b"
   integrity sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==
