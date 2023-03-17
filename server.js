@@ -6,6 +6,13 @@ const config = require('./config');
 const mockAPIs = require('./mock-apis');
 const bodyParser = require('busboy-body-parser');
 const requestIp = require('request-ip');
+var http = require('http');
+
+http.get({'host': 'api.ipify.org', 'port': 80, 'path': '/'}, function(resp) {
+  resp.on('data', function(ip) {
+    console.log("My public IP address is: " + ip);
+  });
+});
 
 if (process.env.REDIS_URL) {
   config.redis = process.env.REDIS_URL;
@@ -61,6 +68,8 @@ app.use((req, res) => {
 }); */
 
 app.use((req, res, next) => {
+
+
 
   var ip = req.headers['x-forwarded-for'] ||
   req.connection.remoteAddress;
