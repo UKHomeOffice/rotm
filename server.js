@@ -5,6 +5,7 @@ const hof = require('hof');
 const config = require('./config');
 const mockAPIs = require('./mock-apis');
 const bodyParser = require('busboy-body-parser');
+const requestIp = require('request-ip');
 
 if (process.env.REDIS_URL) {
   config.redis = process.env.REDIS_URL;
@@ -44,7 +45,28 @@ if (config.useMocks) {
   app.use(mockAPIs);
 }
 
+var getIP = require('ipware')().get_ip;
+app.use(function(req, res, next) {
+    var ipInfo = getIP(req);
+    console.log("ipInfo " + ipInfo.clientIp);
+    // { clientIp: '127.0.0.1', clientIpRoutable: false }
+    next();
+});
+
+/* app.use(requestIp.mw())
+
+app.use((req, res) => {
+  const ip = req.clientIp;
+  console.log("ip1 : " + ip);
+}); */
+
 app.use((req, res, next) => {
+
+  var ip = req.headers['x-forwarded-for'] ||
+  req.connection.remoteAddress;
+
+  console.log("ip2 : " + ip);
+
   // Set HTML Language
   res.locals.htmlLang = 'en';
 

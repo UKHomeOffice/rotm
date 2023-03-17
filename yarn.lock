@@ -3264,6 +3264,11 @@ ipaddr.js@1.9.1:
   resolved "https://registry.yarnpkg.com/ipaddr.js/-/ipaddr.js-1.9.1.tgz#bff38543eeb8984825079ff3a2a8e6cbd46781b3"
   integrity sha512-0KI/607xoxSToH7GjN1FfSbLoU0+btTicjsQSWQlh/hZykN8KpmMf7uYwPW3R+akZ6R/w18ZlXSHBYXiYUPO3g==
 
+ipware@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/ipware/-/ipware-2.0.0.tgz#5baa8977bb33411cb17d5dd2953a5c5c89be587c"
+  integrity sha512-xOqLoYyWIBcO6ANVZK7GgnuH9V7wbqDf6/MrRi4I+Ae1A11m6jcaNRtMSezypkupRUjiSSLq3F/DTvAM1cZfQw==
+
 is-arguments@^1.0.4:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/is-arguments/-/is-arguments-1.1.1.tgz#15b3f88fda01f2a97fec84ca761a560f123efa9b"
@@ -4845,6 +4850,11 @@ reqres@^3.0.1:
   dependencies:
     express "^4.17.1"
     sinon "^7.5.0"
+
+request-ip@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/request-ip/-/request-ip-3.3.0.tgz#863451e8fec03847d44f223e30a5d63e369fa611"
+  integrity sha512-cA6Xh6e0fDBBBwH77SLJaJPBmD3nWVAcF9/XAcsrIHdjhFzFiB5aNQFytdjCGPezU3ROwrR11IddKAM08vohxA==
 
 request@^2.79.0:
   version "2.88.2"
