@@ -3036,7 +3036,7 @@ hmac-drbg@^1.0.1:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
 
-hof@^19.14.13:
+hof@^19.14.17:
   version "19.14.17"
   resolved "https://registry.yarnpkg.com/hof/-/hof-19.14.17.tgz#bfa45c2da2f973778498391555b2b4d80646f5b4"
   integrity sha512-c8eHAEQlXM/1OkPYVKYiuWm4CHq9HEdUbWOkOYeLdr/Z0td+c1oUFTX6921Pu3D75N6Jb9xjvrQXPCsK1UCT9g==
