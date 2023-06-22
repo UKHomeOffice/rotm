@@ -16,9 +16,20 @@ settings = Object.assign({}, settings, {
   behaviours: settings.behaviours.map(require),
   routes: settings.routes.map(require),
   redis: config.redis,
-  csp: config.csp,
+  csp: {
+    imgSrc: [
+      'www.google-analytics.com',
+      'ssl.gstatic.com',
+      'www.google.co.uk/ads/ga-audiences'
+    ],
+    connectSrc: [
+      'https://www.google-analytics.com',
+      'https://region1.google-analytics.com',
+      'https://region1.analytics.google.com'
+    ]
+  },
   getCookies: false,
-  getTerms: false
+  getTerms: false,
 });
 
 const app = hof(settings);
