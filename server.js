@@ -29,7 +29,7 @@ settings = Object.assign({}, settings, {
     ]
   },
   getCookies: false,
-  getTerms: false,
+  getTerms: false
 });
 
 const app = hof(settings);
