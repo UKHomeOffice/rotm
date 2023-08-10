@@ -213,6 +213,7 @@ module.exports = {
   },
   'contact-phone': {
     disableRender: true,
+    className: ['govuk-input', 'govuk-input--width-20'],
     dependent: {
       field: 'contact-details-method',
       value: 'phone'
