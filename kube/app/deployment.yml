@@ -68,6 +68,11 @@ spec:
               {{ else }}
               value: redis
               {{ end }}
+            - name: NOTIFY_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: hof-notify-key
+                  key: hof-notify-key
             - name: REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
