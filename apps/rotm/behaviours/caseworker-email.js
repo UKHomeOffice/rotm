@@ -1,7 +1,6 @@
 'use strict';
 
 const hof = require('hof');
-//const Emailer = hof.components.emailer;
 const Notify = hof.components.notify;
 const path = require('path');
 const moment = require('moment');
@@ -16,7 +15,6 @@ const logger = createLogger({
 
 const parse = (model, translate) => {
   const getLabel = key => translate(`email.caseworker.fields.${key}.label`);
-  const format = label => label.includes('?') ? label : label + ':';
   const fields = [
     'evidence-written',
     'contact-details-name',
@@ -33,7 +31,7 @@ const parse = (model, translate) => {
 
   return {
     data: {
-      title: "You have a new report of online terrorist material",
+      title: 'You have a new report of online terrorist material',
       urls: model.urls,
       images: model.images,
       table: [
@@ -45,7 +43,7 @@ const parse = (model, translate) => {
         }))
       ]
     }
-  }
+  };
 };
 
 module.exports = settings => {
@@ -54,5 +52,5 @@ module.exports = settings => {
     subject: (model, translate) => translate('email.caseworker.subject'),
     template: path.resolve(__dirname, '../emails/caseworker.html'),
     parse
-  }))
+  }));
 };

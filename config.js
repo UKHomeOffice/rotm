@@ -30,7 +30,7 @@ module.exports = {
     replyTo: process.env.REPLY_TO || '',
     region: process.env.EMAIL_REGION || '',
     caseworker: process.env.CASEWORKER_EMAIL ||  'sas-hof-test@digital.homeoffice.gov.uk',
-    notifyApiKey: process.env.NOTIFY_KEY ,
+    notifyApiKey: process.env.NOTIFY_KEY,
     notifyTemplate: process.env.NOTIFY_TEMPLATE || '5734dfd3-ea54-4b86-8914-0458d8895559',
     applicant: 'email-text'
   },
