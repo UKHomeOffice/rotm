@@ -32,17 +32,20 @@ const parse = (model, translate) => {
   });
 
   return {
-    urls: model.urls,
-    images: model.images,
-    table: [
-      { label: getLabel('uniqueId'), value: model.submissionID },
-      { label: getLabel('submitted'), value: submissionDateTime },
-      ...fields.map(f => ({
-        label: getLabel(f),
-        value: model[f]
-      }))
-    ]
-  };
+    data: {
+      title: "You have a new report of online terrorist material",
+      urls: model.urls,
+      images: model.images,
+      table: [
+        {label: getLabel('uniqueId'), value: model.submissionID},
+        {label: getLabel('submitted'), value: submissionDateTime},
+        ...fields.map(f => ({
+          label: getLabel(f),
+          value: model[f]
+        }))
+      ]
+    }
+  }
 };
 
 module.exports = settings => {
