@@ -31,19 +31,7 @@ module.exports = {
     region: process.env.EMAIL_REGION || '',
     caseworker: process.env.CASEWORKER_EMAIL ||  'sas-hof-test@digital.homeoffice.gov.uk',
     notifyApiKey: process.env.NOTIFY_KEY,
-    notifyTemplate: process.env.NOTIFY_TEMPLATE || '5734dfd3-ea54-4b86-8914-0458d8895559',
-    transportOptions: {
-      accessKeyId: process.env.HOF_SES_USER || process.env.AWS_USER || '',
-      secretAccessKey: process.env.HOF_SES_PASSWORD || process.env.AWS_PASSWORD || '',
-      port: process.env.TRANSPORT_PORT || '587',
-      host: process.env.TRANSPORT_HOST || 'email-smtp.eu-west-1.amazonaws.com',
-      ignoreTLS: process.env.TRANSPORT_IGNORE_TLS || '',
-      secure: process.env.TRANSPORT_SECURE || false,
-      auth: {
-        user: process.env.HOF_SES_USER || process.env.AWS_USER,
-        pass: process.env.HOF_SES_PASSWORD || process.env.AWS_PASSWORD
-      }
-    }
+    notifyTemplate: process.env.NOTIFY_TEMPLATE || '5734dfd3-ea54-4b86-8914-0458d8895559'
   },
   hosts: {
     acceptanceTests: process.env.ACCEPTANCE_HOST_NAME || `http://localhost:${process.env.PORT || 8080}`
