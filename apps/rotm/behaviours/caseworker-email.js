@@ -32,8 +32,8 @@ const parse = (model, translate) => {
   return {
     data: {
       title: 'You have a new report of online terrorist material',
-      urls: model.urls.map(str => str.replace(/\s/g, '')),
-      images: model.images.map(str => str.replace(/\s/g, '')),
+      urls: model.urls,
+      images: model.images,
       table: [
         {label: getLabel('uniqueId'), value: model.submissionID},
         {label: getLabel('submitted'), value: submissionDateTime},
