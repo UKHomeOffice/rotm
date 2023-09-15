@@ -6,6 +6,7 @@
 
 const env = process.env.NODE_ENV;
 const useMocks = process.env.USE_MOCKS === 'true' || !env;
+const port = process.env.PORT || 8080;
 
 module.exports = {
   env: env,
@@ -14,30 +15,30 @@ module.exports = {
   },
   useMocks: useMocks,
   dateTimeFormat: 'DD-MM-YYYY, hh:mma',
-  port: process.env.PORT || 8080,
+  port: port,
   session: {
-    secret: process.env.SESSION_SECRET || 'howdoesyourgardengrow',
-    ttl: process.env.SESSION_TTL || 1800, /* 30 mins timeout */
-    name: process.env.SESSION_KEY || 'rotm.sid'
+    secret: process.env.SESSION_SECRET,
+    ttl: process.env.SESSION_TTL, /* 30 mins timeout */
+    name: process.env.SESSION_KEY
   },
   redis: {
-    port: process.env.REDIS_PORT || '6379',
-    host: process.env.REDIS_HOST || '127.0.0.1',
+    port: process.env.REDIS_PORT,
+    host: process.env.REDIS_HOST,
     password: process.env.REDIS_PASSWORD
   },
   email: {
-    from: process.env.FROM_ADDRESS || '',
-    replyTo: process.env.REPLY_TO || '',
-    region: process.env.EMAIL_REGION || '',
-    transport: process.env.EMAIL_TRANSPORT || 'smtp',
-    caseworker: process.env.CASEWORKER_EMAIL ||  'sas-hof-test@digital.homeoffice.gov.uk',
+    from: process.env.FROM_ADDRESS,
+    replyTo: process.env.REPLY_TO,
+    region: process.env.EMAIL_REGION,
+    transport: process.env.EMAIL_TRANSPORT,
+    caseworker: process.env.CASEWORKER_EMAIL,
     transportOptions: {
-      accessKeyId: process.env.HOF_SES_USER || process.env.AWS_USER || '',
-      secretAccessKey: process.env.HOF_SES_PASSWORD || process.env.AWS_PASSWORD || '',
-      port: process.env.TRANSPORT_PORT || '587',
-      host: process.env.TRANSPORT_HOST || 'email-smtp.eu-west-1.amazonaws.com',
-      ignoreTLS: process.env.TRANSPORT_IGNORE_TLS || '',
-      secure: process.env.TRANSPORT_SECURE || false,
+      accessKeyId: process.env.HOF_SES_USER || process.env.AWS_USER,
+      secretAccessKey: process.env.HOF_SES_PASSWORD || process.env.AWS_PASSWORD,
+      port: process.env.TRANSPORT_PORT,
+      host: process.env.TRANSPORT_HOST,
+      ignoreTLS: process.env.TRANSPORT_IGNORE_TLS,
+      secure: Boolean(process.env.TRANSPORT_SECURE),
       auth: {
         user: process.env.HOF_SES_USER || process.env.AWS_USER,
         pass: process.env.HOF_SES_PASSWORD || process.env.AWS_PASSWORD
@@ -45,14 +46,14 @@ module.exports = {
     }
   },
   hosts: {
-    acceptanceTests: process.env.ACCEPTANCE_HOST_NAME || `http://localhost:${process.env.PORT || 8080}`
+    acceptanceTests: process.env.ACCEPTANCE_HOST_NAME || `http://localhost:${port}`
   },
   upload: {
     maxFileSize: '100mb',
     // if mocks set use file service served up by app otherwise use filevault's port 3000
     hostname: !useMocks && process.env.FILE_VAULT_URL ?
       process.env.FILE_VAULT_URL :
-      `http://localhost:${useMocks ? (process.env.PORT || 8080) : 3000}/file`
+      `http://localhost:${useMocks ? port : 3000}/file`
   },
   keycloak: {
     token: process.env.KEYCLOAK_TOKEN_URL,
