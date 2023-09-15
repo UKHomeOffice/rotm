@@ -1,14 +1,14 @@
 {{<partials-page}}
-{{$page-content}}
-<p>Your details will be shared with the Counter-Terrorism Internet Referral Unit in case they need more information.
-  Your details will be kept confidential and won’t be used for any purposes other than those stated in the <a
-    class="govuk-link"
-    href="https://www.gov.uk/help/privacy-policy">privacy policy</a>.
-</p>
+  {{$page-content}}
+    <p>Your details will be shared with the Counter-Terrorism Internet Referral Unit in case they need more information.
+      Your details will be kept confidential and won’t be used for any purposes other than those stated in the <a
+      class="govuk-link"
+      href="https://www.gov.uk/help/privacy-policy">privacy policy</a>.
+    </p>
 
-{{#fields}}
-{{#renderField}}{{/renderField}}
-{{/fields}}
-{{#input-submit}}continue{{/input-submit}}
-{{/page-content}}
+    {{#fields}}
+      {{#renderField}}{{/renderField}}
+    {{/fields}}
+    {{#input-submit}}continue{{/input-submit}}
+  {{/page-content}}
 {{/partials-page}}
