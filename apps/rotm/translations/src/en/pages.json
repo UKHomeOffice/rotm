@@ -53,7 +53,6 @@
     }
   },
   "confirmation": {
-    "header": "Check your report",
     "alert-1": "Report sent",
     "alert-2": "If you would like a copy of your report emailed to you, please provide an email address."
   },
