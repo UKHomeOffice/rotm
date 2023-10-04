@@ -32,18 +32,8 @@ module.exports = {
     region: process.env.EMAIL_REGION,
     transport: process.env.EMAIL_TRANSPORT,
     caseworker: process.env.CASEWORKER_EMAIL,
-    transportOptions: {
-      accessKeyId: process.env.HOF_SES_USER || process.env.AWS_USER,
-      secretAccessKey: process.env.HOF_SES_PASSWORD || process.env.AWS_PASSWORD,
-      port: process.env.TRANSPORT_PORT,
-      host: process.env.TRANSPORT_HOST,
-      ignoreTLS: process.env.TRANSPORT_IGNORE_TLS,
-      secure: Boolean(process.env.TRANSPORT_SECURE),
-      auth: {
-        user: process.env.HOF_SES_USER || process.env.AWS_USER,
-        pass: process.env.HOF_SES_PASSWORD || process.env.AWS_PASSWORD
-      }
-    }
+    notifyApiKey: process.env.NOTIFY_KEY,
+    notifyTemplate: process.env.NOTIFY_TEMPLATE
   },
   hosts: {
     acceptanceTests: process.env.ACCEPTANCE_HOST_NAME || `http://localhost:${port}`
