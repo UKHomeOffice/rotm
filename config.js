@@ -6,7 +6,7 @@
 
 const env = process.env.NODE_ENV;
 const useMocks = process.env.USE_MOCKS === 'true' || !env;
-const port = process.env.PORT || 8080;
+const port = process.env.PORT;
 
 module.exports = {
   env: env,
@@ -18,7 +18,7 @@ module.exports = {
   port: port,
   session: {
     secret: process.env.SESSION_SECRET,
-    ttl: process.env.SESSION_TTL, /* 30 mins timeout */
+    ttl: process.env.SESSION_TTL,
     name: process.env.SESSION_KEY
   },
   redis: {

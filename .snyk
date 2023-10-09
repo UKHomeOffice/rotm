@@ -2,11 +2,6 @@
 version: v1.22.1
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
-  SNYK-JS-XML2JS-5414874:
-    - '*':
-        reason: nodemailer-ses-transport needs to be upgraded to latest version in hof
-        expires: 2024-09-15T00:00:00.000Z
-        created: 2023-09-15T13:10:47.350Z
   SNYK-JS-JSONWEBTOKEN-3180022:
     - '*':
         reason: notifications-node-client needs to be upgraded to latest version
