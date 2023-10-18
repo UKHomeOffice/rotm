@@ -8,3 +8,4 @@ package-lock.json
 .env
 output/
 .DS_Store
+dump.rdb

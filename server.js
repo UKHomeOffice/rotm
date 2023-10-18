@@ -18,7 +18,8 @@ settings = Object.assign({}, settings, {
   redis: config.redis,
   csp: config.csp,
   getCookies: false,
-  getTerms: false
+  getTerms: true,
+  getAccessibility: false
 });
 
 const app = hof(settings);
@@ -47,6 +48,9 @@ if (config.useMocks) {
 app.use((req, res, next) => {
   // Set HTML Language
   res.locals.htmlLang = 'en';
+
+  // Set feedback url, required to display phase banner
+  res.locals.feedbackUrl = 'https://eforms.homeoffice.gov.uk/outreach/feedback.ofml';
 
   // Below can be removed once generic accessibility footer link is added to HOF
   res.locals.footerSupportLinks = [

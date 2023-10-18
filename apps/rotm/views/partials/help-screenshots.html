@@ -1,7 +1,7 @@
 {{$content-outer}}
-  <details>
-    <summary role="button">
-      <span class="summary">{{#t}}Help me take a screenshot{{/t}}</span>
+  <details data-module="govuk-details">
+    <summary class="govuk-details__summary" role="button">
+      <span class="govuk-details__summary-text">{{#t}}Help me take a screenshot{{/t}}</span>
     </summary>
     {{#device-desktop}}
       {{>partials-help-screenshots-desktop}}
