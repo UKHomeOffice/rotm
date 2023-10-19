@@ -1,6 +1,7 @@
 'use strict';
 
-const Emailer = require('hof').components.emailer;
+const hof = require('hof');
+const Notify = hof.components.notify;
 const path = require('path');
 const moment = require('moment');
 const config = require('../../../config');
@@ -29,26 +30,24 @@ const parse = (model, translate) => {
   });
 
   return {
-    urls: model.urls,
-    images: model.images,
-    table: [
-      { label: getLabel('uniqueId'), value: model.submissionID },
-      { label: getLabel('submitted'), value: submissionDateTime },
-      ...fields.map(f => ({
-        label: getLabel(f),
-        value: model[f]
-      }))
-    ]
+    data: {
+      title: 'You have a new report of online terrorist material',
+      urls: model.urls,
+      images: model.images,
+      table: [
+        {label: getLabel('uniqueId'), value: model.submissionID},
+        {label: getLabel('submitted'), value: submissionDateTime},
+        ...fields.map(f => ({
+          label: getLabel(f),
+          value: model[f]
+        }))
+      ]
+    }
   };
 };
 
 module.exports = settings => {
-  if (settings.transport !== 'stub' && !settings.from && !settings.replyTo) {
-    // eslint-disable-next-line no-console
-    console.warn('WARNING: Email `from` address must be provided. Falling back to stub email transport.');
-  }
-  return Emailer(Object.assign({}, settings, {
-    transport: settings.from ? settings.transport : 'stub',
+  return Notify(Object.assign({}, settings, {
     recipient: settings.caseworker,
     subject: (model, translate) => translate('email.caseworker.subject'),
     template: path.resolve(__dirname, '../emails/caseworker.html'),

@@ -125,6 +125,7 @@ module.exports = {
   },
   image: {
     mixin: 'input-file',
+    className: 'govuk-file-upload',
     disableRender: true,
     dependent: {
       field: 'evidence-upload',
@@ -212,6 +213,7 @@ module.exports = {
   },
   'contact-phone': {
     disableRender: true,
+    className: ['govuk-input', 'govuk-input--width-20'],
     dependent: {
       field: 'contact-details-method',
       value: 'phone'

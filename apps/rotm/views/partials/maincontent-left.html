@@ -1,7 +1,7 @@
 {{$content-outer}}
   <div class="column-two-thirds">
     <header>
-      <h1>{{$header}}{{/header}}</h1>
+      {{#header}}<h1>{{$header}}{{/header}}</h1>{{/header}}
     </header>
     {{$validationSummary}}{{/validationSummary}}
     {{$content}}{{/content}}

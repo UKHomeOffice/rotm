@@ -280,7 +280,7 @@ Feature: A user should access the correct service and be able to log an issue
         Then I check 'evidence-url-no'
         Then I select 'Continue'
         Then I should be on the 'evidence-upload' page showing 'Do you have any evidence?'
-        Then I click the 'link-back' button to go back a page
+        Then I click the 'govuk-back-link' button to go back a page
         Then I should be on the 'evidence-url' page showing 'Do you have a link to the material?'
         Then I check 'evidence-url-no'
         Then I select 'Continue'
@@ -288,27 +288,27 @@ Feature: A user should access the correct service and be able to log an issue
         Then I check 'evidence-upload-no'
         Then I select 'Continue'
         Then I should be on the 'evidence-written' page showing 'Is there anything else you can tell us?'
-        Then I click the 'link-back' button to go back a page
+        Then I click the 'govuk-back-link' button to go back a page
         Then I should be on the 'evidence-upload' page showing 'Do you have any evidence?'
         Then I check 'evidence-upload-no'
         Then I select 'Continue'
         Then I should be on the 'evidence-written' page showing 'Is there anything else you can tell us?'
         Then I select 'Continue'
         Then I should be on the 'can-we-contact' page showing 'Are you willing to be contacted, if necessary?'
-        Then I click the 'link-back' button to go back a page
+        Then I click the 'govuk-back-link' button to go back a page
         Then I should be on the 'evidence-written' page showing 'Is there anything else you can tell us?'
         Then I select 'Continue'
         Then I should be on the 'can-we-contact' page showing 'Are you willing to be contacted, if necessary?'
         Then I check 'can-we-contact-no'
         Then I select 'Continue'
         Then I should be on the 'check-your-report' page showing 'Check your report'
-        Then I click the 'link-back' button to go back a page
+        Then I click the 'govuk-back-link' button to go back a page
         Then I should be on the 'can-we-contact' page showing 'Are you willing to be contacted, if necessary?'
-        Then I click the 'link-back' button to go back a page
+        Then I click the 'govuk-back-link' button to go back a page
         Then I should be on the 'evidence-written' page showing 'Is there anything else you can tell us?'
-        Then I click the 'link-back' button to go back a page
+        Then I click the 'govuk-back-link' button to go back a page
         Then I should be on the 'evidence-upload' page showing 'Do you have any evidence?'
-        Then I click the 'link-back' button to go back a page
+        Then I click the 'govuk-back-link' button to go back a page
         Then I should be on the 'evidence-url' page showing 'Do you have a link to the material?'
 
     Scenario: I have evidence, but I do not upload a file before continuing
