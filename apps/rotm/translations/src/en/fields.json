@@ -64,20 +64,33 @@
     "label": "Link",
     "hint": "For example, www.gov.uk/page/1234/content#",
     "validation": {
-      "required": "Enter a link to the material"
+      "required": "Enter a link to the material",
+      "regex": "Please enter a valid URL link"
     }
   },
   "another-url-1": {
-    "label": "Link"
+    "label": "Link",
+    "validation": {
+      "regex": "Please enter a valid URL link"
+    }
   },
   "another-url-2": {
-    "label": "Link"
+    "label": "Link",
+    "validation": {
+      "regex": "Please enter a valid URL link"
+    }
   },
   "another-url-3": {
-    "label": "Link"
+    "label": "Link",
+    "validation": {
+      "regex": "Please enter a valid URL link"
+    }
   },
   "another-url-4": {
-    "label": "Link"
+    "label": "Link",
+    "validation": {
+      "regex": "Please enter a valid URL link"
+    }
   },
   "can-we-contact": {
     "label": "Can we contact you?",
@@ -97,6 +110,7 @@
     "label": "Full name",
     "validation": {
       "required": "Enter your full name",
+      "maxlength": "Full name must be no longer than 30 characters",
       "notUrl" : "Enter your full name"
     }
   },
