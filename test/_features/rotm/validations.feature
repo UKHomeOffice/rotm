@@ -9,10 +9,10 @@ Feature: A user should see error messages for the following scenarios
         Then I fill 'url' text area with 'abc123'
         Then I select 'Continue'
         Then I should see the 'Please enter a valid URL link' error
-        Then I fill 'url' text area with 'http:/google.com44'
+        Then I fill 'url' text area with 'https:/google.com44'
         Then I select 'Continue'
         Then I should see the 'Please enter a valid URL link' error
-        Then I fill 'url' text area with 'http://missing-www'
+        Then I fill 'url' text area with 'https://missing-www'
         Then I select 'Continue'
         Then I should see the 'Please enter a valid URL link' error
         Then I fill 'url' text area with 'www.gov.'

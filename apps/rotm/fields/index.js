@@ -2,7 +2,7 @@
 
 const path = require('path');
 // First pattern of regex allows for URLs using "www" or "http://" or "https://" as a prefix
-const http = '(https?:\\/\\/)?(www\\.[a-zA-Z0-9-]{1,63}\\.[a-z]{2,6}([-a-zA-Z0-9@:%_\\+.~#?&//=]*)\\b(?!(\\w|\\d))';
+const http = '(https:\\/\\/)?(www\\.[a-zA-Z0-9-]{1,63}\\.[a-z]{2,6}([-a-zA-Z0-9@:%_\\+.~#?&//=]*)\\b(?!(\\w|\\d))';
 // Second pattern of regex allows for URLs with no prefix e.g. example.com
 const URL = '[a-zA-Z0-9-]{1,63}\\.[a-z]{2,6}([-a-zA-Z0-9@:%_\\+.~#?&//=]*)\\b(?!(\\w|\\d)))';
 // Combines the above two URL patterns and also allows for empty values
