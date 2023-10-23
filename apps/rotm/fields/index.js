@@ -1,6 +1,12 @@
 'use strict';
 
 const path = require('path');
+// First pattern of regex allows for URLs using "www" or "http://" or "https://" as a prefix
+const http = '(https:\\/\\/)?(www\\.[a-zA-Z0-9-]{1,63}\\.[a-z]{2,6}([-a-zA-Z0-9@:%_\\+.~#?&//=]*)\\b(?!(\\w|\\d))';
+// Second pattern of regex allows for URLs with no prefix e.g. example.com
+const URL = '[a-zA-Z0-9-]{1,63}\\.[a-z]{2,6}([-a-zA-Z0-9@:%_\\+.~#?&//=]*)\\b(?!(\\w|\\d)))';
+// Combines the above two URL patterns and also allows for empty values
+const URLRegex = new RegExp(`^$|^${http}|${URL}$`);
 
 function extname(value) {
   return value && [
@@ -46,7 +52,10 @@ module.exports = {
   },
   url: {
     mixin: 'textarea',
-    validate: 'required',
+    validate: ['required', {
+      type: 'regex',
+      arguments: URLRegex
+    }],
     disableRender: true,
     dependent: {
       field: 'evidence-url',
@@ -60,6 +69,7 @@ module.exports = {
   'another-url-1': {
     mixin: 'textarea',
     className: 'another-url',
+    validate: [{ type: 'regex', arguments: URLRegex }],
     disableRender: true,
     dependent: {
       field: 'evidence-url',
@@ -73,6 +83,7 @@ module.exports = {
   'another-url-2': {
     mixin: 'textarea',
     className: 'another-url',
+    validate: [{ type: 'regex', arguments: URLRegex }],
     disableRender: true,
     dependent: {
       field: 'evidence-url',
@@ -86,6 +97,7 @@ module.exports = {
   'another-url-3': {
     mixin: 'textarea',
     className: 'another-url',
+    validate: [{ type: 'regex', arguments: URLRegex }],
     disableRender: true,
     dependent: {
       field: 'evidence-url',
@@ -99,6 +111,7 @@ module.exports = {
   'another-url-4': {
     mixin: 'textarea',
     className: 'another-url',
+    validate: [{ type: 'regex', arguments: URLRegex }],
     disableRender: true,
     dependent: {
       field: 'evidence-url',
@@ -185,7 +198,7 @@ module.exports = {
     legend: {
       className: 'visuallyhidden'
     },
-    validate: ['required', 'notUrl']
+    validate: ['required', 'notUrl', {type: 'maxlength', arguments: [30]}]
   },
   'contact-details-method': {
     mixin: 'checkbox-group',

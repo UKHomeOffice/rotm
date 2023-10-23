@@ -33,7 +33,6 @@ For anything else ROTM-related, look in [package.json](./package.json) for a ful
 
 Otherwise, see [HOF](https://github.com/UKHomeOffice/hof).
 
-
 ## Running acceptance tests
 
 To run the acceptance test
