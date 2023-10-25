@@ -93,6 +93,8 @@ spec:
                 secretKeyRef:
                   name: passwordhash
                   key: passwordhash
+            - name: ALLOW_GENERATE_LINK_ROUTE
+              value: "yes"
           securityContext:
             runAsNonRoot: true
 
