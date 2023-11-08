@@ -48,4 +48,13 @@ ignore:
     - jimp > @jimp/custom > @jimp/core > file-type:
         reason: No valid upgrade path
         expires: '2024-08-25T12:03:06.412Z'
+  SNYK-JS-AXIOS-6032459:
+    - '*':
+        reason: Update notifications-node-client in HOF
+        expires: 2024-03-01T00:00:00.000Z
+        created: 2023-11-08T13:22:47.350Z
+  SNYK-JS-XML2JS-5414874:
+    - '*':
+  reason: No valid upgrade path
+        expires: '2024-08-25T12:03:06.412Z'
 patch: {}
