@@ -8,6 +8,7 @@ const removeImage = require('./behaviours/remove-image');
 const unsetValue = require('./behaviours/unset-value');
 const checkDeviceType = require('./behaviours/check-device-type');
 const caseworkerEmailer = require('./behaviours/caseworker-email')(config.email);
+const referralEmailer = require('./behaviours/caseworker-email')(config.referrals);
 const checkReport = require('./behaviours/check-report');
 
 module.exports = {
@@ -113,6 +114,7 @@ module.exports = {
         require('hof').components.summary,
         'complete',
         caseworkerEmailer,
+        referralEmailer,
         checkReport
       ],
       nullValue: 'pages.confirm.undefined',

@@ -36,6 +36,11 @@ module.exports = {
     notifyApiKey: process.env.NOTIFY_KEY,
     notifyTemplate: process.env.NOTIFY_TEMPLATE
   },
+  referrals: {
+    caseworker: process.env.REFERRALS_EMAIL,
+    notifyApiKey: process.env.NOTIFY_KEY,
+    notifyTemplate: process.env.NOTIFY_TEMPLATE
+  },
   hosts: {
     acceptanceTests: process.env.ACCEPTANCE_HOST_NAME || `http://localhost:${port}`
   },
