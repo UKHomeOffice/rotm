@@ -42,6 +42,7 @@ elif [[ ${KUBE_NAMESPACE} == ${STG_ENV} ]]; then
   $kd -f kube/redis -f kube/file-vault -f kube/app/deployment.yml
 elif [[ ${KUBE_NAMESPACE} == ${PROD_ENV} ]]; then
   export DISCOVERY_URL="https://sso.digital.homeoffice.gov.uk/auth/realms/rotm"
+  # NOTE: The discovery URL for prod will also be changed once ACP have upgraded our keycloak production realm
   $kd -f kube/file-vault/file-vault-ingress.yml
   $kd -f kube/configmaps/configmap.yml  -f kube/app/service.yml
   $kd -f kube/app/ingress-external.yml -f kube/app/networkpolicy-external.yml
