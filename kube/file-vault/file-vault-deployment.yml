@@ -97,11 +97,18 @@ spec:
             runAsNonRoot: true
 
         - name: keycloak-proxy
-          image: quay.io/ukhomeofficedigital/keycloak-gatekeeper:8.0.2
+          image: quay.io/ukhomeofficedigital/go-keycloak-proxy:v2.2.2
           resources:
             limits:
-              memory: "1024Mi"
+              memory: 1024Mi
               cpu: 200m
+          envFrom:
+            - configMapRef:
+                {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+                name: {{ .APP_NAME }}-configmap-{{ .DRONE_SOURCE_BRANCH }}
+                {{ else }}
+                name: {{ .APP_NAME }}-configmap
+                {{ end }}
           env:
             - name: PROXY_CLIENT_SECRET
               valueFrom:
@@ -113,6 +120,10 @@ spec:
                 secretKeyRef:
                   name: keycloak-client
                   key: id
+            - name: PROXY_LISTEN
+              value: 127.0.0.1:3001
+            - name: PROXY_UPSTREAM_URL
+              value: "https://127.0.0.1:3000"
             - name: PROXY_REDIRECTION_URL
             {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
               value: https://fv.prod.{{ .APP_NAME }}.homeoffice.gov.uk
@@ -123,19 +134,12 @@ spec:
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
               value: https://fv-{{ .DRONE_SOURCE_BRANCH }}.{{ .BRANCH_ENV }}.homeoffice.gov.uk
             {{ end }}
-          args:
-            - --listen=:10443
-            # the url which is used to retrieve the OpenID configuration
-            - --discovery-url={{ .DISCOVERY_URL }}
-            # the endpoint where requests are proxied to
-            - --upstream-url=https://127.0.0.1:10444
-            # URls that you wish to protect.
-            - --resources=uri=/*
-            - --tls-cert=/certs/tls.crt
-            - --tls-private-key=/certs/tls.key
-            {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-            - --verbose=true
-            {{ end }}
+          command:
+            - "/opt/keycloak-proxy"
+            - "--resources=uri=/file|methods=GET,POST|roles=caseworkers"
+            - "--resources=uri=/*"
+            - "--enable-logging=true"
+            - "--enable-json-logging=true"
           ports:
             - containerPort: 10080
             - containerPort: 10443
