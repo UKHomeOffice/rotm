@@ -35,11 +35,11 @@ spec:
     spec:
       containers:
         - name: file-vault
-          image: quay.io/ukhomeofficedigital/file-vault:bab000624c4323823cd4df723b44bc3bd29fec2c
+          image: quay.io/ukhomeofficedigital/file-vault:f4cd1ece1caddc3bfbc8f5db761c593fda79ef12
           imagePullPolicy: Always
           resources:
             limits:
-              memory: "1024Mi"
+              memory: 1024Mi
               cpu: 200m
           envFrom:
             - configMapRef:
@@ -93,6 +93,8 @@ spec:
                 secretKeyRef:
                   name: passwordhash
                   key: passwordhash
+            - name: ALLOW_GENERATE_LINK_ROUTE
+              value: "yes"
           securityContext:
             runAsNonRoot: true
 
@@ -136,7 +138,6 @@ spec:
             {{ end }}
           command:
             - "/opt/keycloak-proxy"
-            - "--resources=uri=/file|methods=GET,POST|roles=caseworkers"
             - "--resources=uri=/*"
             - "--enable-logging=true"
             - "--enable-json-logging=true"
