@@ -41,6 +41,8 @@ spec:
             limits:
               memory: 1024Mi
               cpu: 200m
+            requests:
+              memory: 512Mi
           envFrom:
             - configMapRef:
                 {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
@@ -104,6 +106,8 @@ spec:
             limits:
               memory: 1024Mi
               cpu: 200m
+            requests:
+              memory: 512Mi
           envFrom:
             - configMapRef:
                 {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
