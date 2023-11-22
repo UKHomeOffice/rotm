@@ -142,6 +142,7 @@ spec:
             {{ end }}
           command:
             - "/opt/keycloak-proxy"
+            - "--resources=uri=/file|methods=GET,POST|roles=caseworkers"
             - "--resources=uri=/*"
             - "--enable-logging=true"
             - "--enable-json-logging=true"
