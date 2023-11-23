@@ -35,12 +35,14 @@ spec:
     spec:
       containers:
         - name: file-vault
-          image: quay.io/ukhomeofficedigital/file-vault:bab000624c4323823cd4df723b44bc3bd29fec2c
+          image: quay.io/ukhomeofficedigital/file-vault:f4cd1ece1caddc3bfbc8f5db761c593fda79ef12
           imagePullPolicy: Always
           resources:
             limits:
-              memory: "1024Mi"
+              memory: 1024Mi
               cpu: 200m
+            requests:
+              memory: 512Mi
           envFrom:
             - configMapRef:
                 {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
@@ -97,22 +99,28 @@ spec:
             runAsNonRoot: true
 
         - name: keycloak-proxy
-          image: quay.io/ukhomeofficedigital/keycloak-gatekeeper:8.0.2
+          image: quay.io/ukhomeofficedigital/acp-auth-proxy
           resources:
             limits:
-              memory: "1024Mi"
+              memory: 1024Mi
               cpu: 200m
+            requests:
+              memory: 30Mi
           env:
-            - name: PROXY_CLIENT_SECRET
+            - name: CLIENT_SECRET
               valueFrom:
                 secretKeyRef:
                   name: keycloak-client
                   key: secret
-            - name: PROXY_CLIENT_ID
+            - name: CLIENT_ID
               valueFrom:
                 secretKeyRef:
                   name: keycloak-client
                   key: id
+            - name: DISCOVERY_URL
+              value: {{ .DISCOVERY_URL }}
+            - name: UPSTREAM_URL
+              value: "https://127.0.0.1:10444"
             - name: PROXY_REDIRECTION_URL
             {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
               value: https://fv.prod.{{ .APP_NAME }}.homeoffice.gov.uk
@@ -123,19 +131,11 @@ spec:
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
               value: https://fv-{{ .DRONE_SOURCE_BRANCH }}.{{ .BRANCH_ENV }}.homeoffice.gov.uk
             {{ end }}
-          args:
-            - --listen=:10443
-            # the url which is used to retrieve the OpenID configuration
-            - --discovery-url={{ .DISCOVERY_URL }}
-            # the endpoint where requests are proxied to
-            - --upstream-url=https://127.0.0.1:10444
-            # URls that you wish to protect.
-            - --resources=uri=/*
-            - --tls-cert=/certs/tls.crt
-            - --tls-private-key=/certs/tls.key
-            {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-            - --verbose=true
-            {{ end }}
+            - name: SESSION_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: s3-bucket
+                  key: secret_access_key
           ports:
             - containerPort: 10080
             - containerPort: 10443
