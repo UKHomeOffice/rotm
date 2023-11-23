@@ -120,7 +120,7 @@ spec:
             - name: DISCOVERY_URL
               value: {{ .DISCOVERY_URL }}
             - name: UPSTREAM_URL
-              value: "https://127.0.0.1:10444"
+              value: "http://127.0.0.1:3000"
             - name: PROXY_REDIRECTION_URL
             {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
               value: https://fv.prod.{{ .APP_NAME }}.homeoffice.gov.uk
@@ -165,8 +165,8 @@ spec:
             - mountPath: /certs
               name: certs
               readOnly: true
-            - name: bundle
-              mountPath: /etc/ssl/certs
+            - mountPath: /etc/ssl/certs
+              name: bundle
               readOnly: true
       volumes:
         - name: certs
