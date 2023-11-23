@@ -127,6 +127,19 @@ spec:
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
               value: https://fv-{{ .DRONE_SOURCE_BRANCH }}.{{ .BRANCH_ENV }}.homeoffice.gov.uk
             {{ end }}
+          args:
+            - --listen=:10443
+            # the url which is used to retrieve the OpenID configuration
+            - --discovery-url={{ .DISCOVERY_URL }}
+            # the endpoint where requests are proxied to
+            - --upstream-url=https://127.0.0.1:10444
+            # URls that you wish to protect.
+            - --resources=uri=/*
+            - --tls-cert=/certs/tls.crt
+            - --tls-private-key=/certs/tls.key
+            {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+            - --verbose=true
+            {{ end }}
           command:
             - "/opt/keycloak-proxy"
             - "--resources=uri=/file|methods=GET,POST|roles=caseworkers"
