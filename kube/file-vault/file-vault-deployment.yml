@@ -136,6 +136,10 @@ spec:
                 secretKeyRef:
                   name: s3-bucket
                   key: secret_access_key
+            - name: TLS_CERT
+              value: /certs/tls.crt
+            - name: TLS_PRIVATE_KEY
+              value: /certs/tls.key
           ports:
             - containerPort: 10080
             - containerPort: 10443
