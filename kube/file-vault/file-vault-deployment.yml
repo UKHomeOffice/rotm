@@ -95,6 +95,11 @@ spec:
                 secretKeyRef:
                   name: passwordhash
                   key: passwordhash
+            - name: SESSION_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: rotm-session
+                  key: token
           securityContext:
             runAsNonRoot: true
 
@@ -120,7 +125,7 @@ spec:
             - name: DISCOVERY_URL
               value: {{ .DISCOVERY_URL }}
             - name: UPSTREAM_URL
-              value: "http://127.0.0.1:3000"
+              value: "https://127.0.0.1:10444"
             - name: PROXY_REDIRECTION_URL
             {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
               value: https://fv.prod.{{ .APP_NAME }}.homeoffice.gov.uk
@@ -134,8 +139,8 @@ spec:
             - name: SESSION_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: s3-bucket
-                  key: secret_access_key
+                  name: rotm-session
+                  key: token
             - name: TLS_CERT
               value: /certs/tls.crt
             - name: TLS_PRIVATE_KEY
@@ -148,6 +153,9 @@ spec:
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           volumeMounts:
+            - name: auth-proxy-config
+              mountPath: /usr/local/openresty/nginx/conf/lua/authenticate.lua
+              subPath: authenticate.lua
             - mountPath: /certs
               name: certs
             - mountPath: /etc/ssl/certs
@@ -173,6 +181,9 @@ spec:
               name: bundle
               readOnly: true
       volumes:
+        - name: config
+          configMap:
+            name: configmap/auth-proxy-config
         - name: certs
           secret:
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
