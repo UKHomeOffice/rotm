@@ -104,7 +104,7 @@ spec:
             runAsNonRoot: true
 
         - name: keycloak-proxy
-          image: quay.io/ukhomeofficedigital/acp-auth-proxy
+          image: quay.io/ukhomeofficedigital/acp-auth-proxy:v1.1.1
           resources:
             limits:
               memory: 1024Mi
@@ -153,9 +153,6 @@ spec:
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           volumeMounts:
-            - name: auth-proxy-config
-              mountPath: /usr/local/openresty/nginx/conf/lua/authenticate.lua
-              subPath: authenticate.lua
             - mountPath: /certs
               name: certs
             - mountPath: /etc/ssl/certs
@@ -181,9 +178,6 @@ spec:
               name: bundle
               readOnly: true
       volumes:
-        - name: config
-          configMap:
-            name: configmap/auth-proxy-config
         - name: certs
           secret:
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
