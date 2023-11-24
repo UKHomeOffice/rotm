@@ -141,6 +141,8 @@ spec:
                 secretKeyRef:
                   name: rotm-session
                   key: token
+            - name: HTTP_LISTEN_PORT
+              value: "3001"
             - name: TLS_CERT
               value: /certs/tls.crt
             - name: TLS_PRIVATE_KEY
