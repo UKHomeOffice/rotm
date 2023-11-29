@@ -31,7 +31,7 @@
           <th>{{#t}}pages.confirm.fields.image-preview.label{{/t}}</th>
           <td data-field="image" class="no-white-space">
             {{#images}}
-              <p>{{name}}</p>
+              <p>{{name}} {{url}}</p>
               <p><img src="{{thumbnail}}" alt="" /></p>
             {{/images}}
             {{^images.length}}
