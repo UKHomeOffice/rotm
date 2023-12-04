@@ -155,6 +155,8 @@ steps:
       # NOTIFY_STUB: stub
       KEYCLOAK_CLIENT_ID:
         from_secret: kube_keycloak_client_id
+      KEYCLOAK_CLIENT_SECRET:
+        from_secret: kube_keycloak_client_secret_notprod
       KUBE_SERVER:
         from_secret: kube_server_dev
       KUBE_TOKEN:
