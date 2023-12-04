@@ -97,7 +97,7 @@ spec:
             runAsNonRoot: true
 
         - name: keycloak-proxy
-          image: quay.io/ukhomeofficedigital/keycloak-gatekeeper:10.0.0
+          image: quay.io/gogatekeeper/gatekeeper:2.9.1
           resources:
             limits:
               memory: "1024Mi"
@@ -129,6 +129,9 @@ spec:
             - --discovery-url={{ .DISCOVERY_URL }}
             # the endpoint where requests are proxied to
             - --upstream-url=https://127.0.0.1:10444
+            - --redirection-url={{ .REDIRECTION_URL }}
+            - --client-id={{ .KEYCLOAK_CLIENT_ID }}
+            - --client-id={{ .KEYCLOAK_SECRET }}
             # URls that you wish to protect.
             - --resources=uri=/*
             - --tls-cert=/certs/tls.crt
