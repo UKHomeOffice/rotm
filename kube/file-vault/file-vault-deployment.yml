@@ -130,8 +130,8 @@ spec:
             # the endpoint where requests are proxied to
             - --upstream-url=https://127.0.0.1:10444
             - --redirection-url={{ .REDIRECTION_URL }}
-            - --client-id={{ .KEYCLOAK_CLIENT_ID }}
-            - --client-secret={{ .KEYCLOAK_SECRET }}
+            - --client-id={{ .CLIENT_ID }}
+            - --client-secret={{ .CLIENT_SECRET }}
             # URls that you wish to protect.
             - --resources=uri=/*
             - --tls-cert=/certs/tls.crt
