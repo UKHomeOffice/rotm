@@ -131,7 +131,7 @@ spec:
             - --upstream-url=https://127.0.0.1:10444
             - --redirection-url={{ .REDIRECTION_URL }}
             - --client-id={{ .KEYCLOAK_CLIENT_ID }}
-            - --client-id={{ .KEYCLOAK_SECRET }}
+            - --client-secret={{ .KEYCLOAK_SECRET }}
             # URls that you wish to protect.
             - --resources=uri=/*
             - --tls-cert=/certs/tls.crt
