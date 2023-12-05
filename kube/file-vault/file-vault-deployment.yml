@@ -138,6 +138,7 @@ spec:
             - --tls-private-key=/certs/tls.key
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
             - --enable-json-logging=true
+            - --enable-default-deny=false
             - --enable-logging=true
             - --verbose=true
             {{ end }}
