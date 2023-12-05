@@ -123,6 +123,12 @@ spec:
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
               value: https://fv-{{ .DRONE_SOURCE_BRANCH }}.{{ .BRANCH_ENV }}.homeoffice.gov.uk
             {{ end }}
+          command:
+            - "/opt/keycloak-proxy"
+            - "--resources=uri=/file|methods=GET,POST|roles=caseworkers"
+            - "--resources=uri=/*"
+            - "--enable-logging=true"
+            - "--enable-json-logging=true"
           args:
             - --listen=:10443
             # the url which is used to retrieve the OpenID configuration
@@ -133,8 +139,7 @@ spec:
 #            - --client-id={{ .DRONE_KEYCLOAK_CLIENT_ID }}
 #            - --client-secret={{ .DRONE_KEYCLOAK_CLIENT_SECRET }}
             # URls that you wish to protect.
-#            - --resources="uri=/file/*|methods=GET,POST|roles=caseworkers"
-            - "--resources=uri=\"/file|methods=GET,POST|roles=caseworkers\""
+#            - "--resources=uri=\"/file|methods=GET,POST|roles=caseworkers\""
             - --tls-cert=/certs/tls.crt
             - --tls-private-key=/certs/tls.key
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
