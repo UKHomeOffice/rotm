@@ -134,8 +134,8 @@ spec:
             - --client-secret={{ .DRONE_KEYCLOAK_CLIENT_SECRET }}
             # URls that you wish to protect.
             - --resources=uri=/admin*|roles=admin
-            - --tls-cert=/certs/tls.crt
-            - --tls-private-key=/certs/tls.key
+            - --tls-cert=/certs/branch-tls-internal.crt
+#            - --tls-private-key=/certs/tls.key
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
             - --verbose=true
             {{ end }}
