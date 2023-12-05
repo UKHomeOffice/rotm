@@ -133,7 +133,7 @@ spec:
 #            - --client-id={{ .DRONE_KEYCLOAK_CLIENT_ID }}
 #            - --client-secret={{ .DRONE_KEYCLOAK_CLIENT_SECRET }}
             # URls that you wish to protect.
-            - --resources=uri="/file|methods=GET,POST|roles=caseworkers"
+            - --resources=uri=/file/*|methods=GET,POST|roles=caseworkers
             - --tls-cert=/certs/tls.crt
             - --tls-private-key=/certs/tls.key
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
