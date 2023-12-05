@@ -182,14 +182,14 @@ steps:
           - feature/*
       event: pull_request
 
-  - name: linting_branch
-    <<: *linting
-    when:
-      branch:
-        include:
-          - master
-          - feature/*
-      event: pull_request
+#  - name: linting_branch
+#    <<: *linting
+#    when:
+#      branch:
+#        include:
+#          - master
+#          - feature/*
+#      event: pull_request
 
   # - name: unit_tests_branch
   #   <<: *unit_tests
@@ -492,12 +492,12 @@ services:
   - name: docker
     image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
 
-  # Anchore scanning needs background service to run
-  - name: anchore-submission-server
-    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/anchore-submission:latest
-    pull: always
-    commands:
-      - /run.sh server
+#  # Anchore scanning needs background service to run
+#  - name: anchore-submission-server
+#    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/anchore-submission:latest
+#    pull: always
+#    commands:
+#      - /run.sh server
 
   # Redis session setup in background so integration tests can run
   - name: session

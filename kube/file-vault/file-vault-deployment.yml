@@ -123,12 +123,6 @@ spec:
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
               value: https://fv-{{ .DRONE_SOURCE_BRANCH }}.{{ .BRANCH_ENV }}.homeoffice.gov.uk
             {{ end }}
-          command:
-            - "/opt/keycloak-proxy"
-            - "--resources=uri=/file|methods=GET,POST|roles=caseworkers"
-            - "--resources=uri=/*"
-            - "--enable-logging=true"
-            - "--enable-json-logging=true"
           args:
             - --listen=:10443
             # the url which is used to retrieve the OpenID configuration
