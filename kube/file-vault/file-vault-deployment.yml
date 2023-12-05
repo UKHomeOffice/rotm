@@ -128,12 +128,12 @@ spec:
             # the url which is used to retrieve the OpenID configuration
             - --discovery-url={{ .DISCOVERY_URL }}
             # the endpoint where requests are proxied to
-            - --upstream-url=https://127.0.0.1:10444
+            - --upstream-url=http://127.0.0.1:3000
             - --redirection-url={{ .REDIRECTION_URL }}
 #            - --client-id={{ .DRONE_KEYCLOAK_CLIENT_ID }}
 #            - --client-secret={{ .DRONE_KEYCLOAK_CLIENT_SECRET }}
             # URls that you wish to protect.
-            - --resources=uri=/*|roles=admin
+            - --resources=uri=/file|methods=GET,POST|roles=caseworkers
             - --tls-cert=/certs/tls.crt
             - --tls-private-key=/certs/tls.key
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
