@@ -102,6 +102,13 @@ spec:
             limits:
               memory: "1024Mi"
               cpu: 200m
+          envFrom:
+            - configMapRef:
+                {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+                name: {{ .APP_NAME }}-configmap-{{ .DRONE_SOURCE_BRANCH }}
+                {{ else }}
+                name: {{ .APP_NAME }}-configmap
+                {{ end }}
           env:
             # Defines the binding interface for main listener, e.g. {address}:{port}. This is required
             - name: PROXY_LISTEN
