@@ -204,6 +204,7 @@ spec:
               value: |
                 location /vault/ {
                   if ($arg_token ~ "^$") {
+                    echo "something went wrong";
                     return 400;
                   }
                   set $token $arg_token;
