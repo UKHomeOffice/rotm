@@ -165,6 +165,9 @@ spec:
               cpu: 200m
           env:
 {{ file .FILEVAULT_NGINX_SETTINGS | indent 12 }}
+          ports:
+            - containerPort: 10080
+            - containerPort: 10443
           securityContext:
             runAsNonRoot: true
           volumeMounts:
