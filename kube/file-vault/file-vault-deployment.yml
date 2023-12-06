@@ -128,7 +128,7 @@ spec:
             # the url which is used to retrieve the OpenID configuration
             - --discovery-url={{ .DISCOVERY_URL }}
             # the endpoint where requests are proxied to
-            - --upstream-url=http://127.0.0.1:3000
+            - --upstream-url=https://127.0.0.1:10444
             - --redirection-url={{ .REDIRECTION_URL }}
 #            - --client-id={{ .DRONE_KEYCLOAK_CLIENT_ID }}
 #            - --client-secret={{ .DRONE_KEYCLOAK_CLIENT_SECRET }}
