@@ -161,7 +161,30 @@ spec:
               memory: "1024Mi"
               cpu: 200m
           env:
-{{ file .FILEVAULT_NGINX_SETTINGS | indent 12 }}
+            - name: PROXY_SERVICE_HOST
+              value: 127.0.0.1
+            - name: PROXY_SERVICE_PORT
+              value: "3001"
+            - name: ENABLE_UUID_PARAM
+              value: "FALSE"
+            - name: HTTPS_REDIRECT
+              value: "FALSE"
+            - name: NAXSI_USE_DEFAULT_RULES
+              value: "FALSE"
+            - name: PORT_IN_HOST_HEADER
+              value: "FALSE"
+            - name: VERBOSE_ERROR_PAGES
+              value: "TRUE"
+            - name: CLIENT_MAX_BODY_SIZE
+              value: "200"
+            - name: HTTPS_LISTEN_PORT
+              value: "10444"
+            - name: SERVER_CERT
+              value: /certs/tls.crt
+            - name: SERVER_KEY
+              value: /certs/tls.key
+            - name: SSL_CIPHERS
+              value: ECDHE-RSA-AES128-GCM-SHA256:AES256+EECDH:AES256+EDH:!aNULL
           securityContext:
             runAsNonRoot: true
           volumeMounts:
