@@ -103,6 +103,12 @@ spec:
               memory: "1024Mi"
               cpu: 200m
           env:
+            # Defines the binding interface for main listener, e.g. {address}:{port}. This is required
+            - name: PROXY_LISTEN
+              value: 127.0.0.1:3001
+            # Defines url for the upstream endpoint you wish to proxy
+            - name: PROXY_UPSTREAM_URL
+              value: "http://127.0.0.1:3000"
             - name: PROXY_CLIENT_SECRET
               valueFrom:
                 secretKeyRef:
@@ -124,12 +130,9 @@ spec:
               value: https://fv-{{ .DRONE_SOURCE_BRANCH }}.{{ .BRANCH_ENV }}.homeoffice.gov.uk
             {{ end }}
           args:
-            - --listen=:10443
             # the url which is used to retrieve the OpenID configuration
             - --discovery-url={{ .DISCOVERY_URL }}
-            # the endpoint where requests are proxied to
-            - --upstream-url=https://127.0.0.1:10444
-            - --redirection-url={{ .REDIRECTION_URL }}
+#            - --redirection-url={{ .REDIRECTION_URL }}
 #            - --client-id={{ .DRONE_KEYCLOAK_CLIENT_ID }}
 #            - --client-secret={{ .DRONE_KEYCLOAK_CLIENT_SECRET }}
             # URls that you wish to protect.
@@ -166,7 +169,50 @@ spec:
               memory: "1024Mi"
               cpu: 200m
           env:
-{{ file .FILEVAULT_NGINX_SETTINGS | indent 12 }}
+            - name: PROXY_SERVICE_HOST
+              value: 127.0.0.1
+            - name: PROXY_SERVICE_PORT
+              value: "3001"
+            - name: ENABLE_UUID_PARAM
+              value: "FALSE"
+            - name: HTTPS_REDIRECT
+              value: "FALSE"
+            - name: NAXSI_USE_DEFAULT_RULES
+              value: "FALSE"
+            - name: PORT_IN_HOST_HEADER
+              value: "FALSE"
+            - name: VERBOSE_ERROR_PAGES
+              value: "TRUE"
+            - name: CLIENT_MAX_BODY_SIZE
+              value: "200"
+            - name: SERVER_CERT
+              value: /certs/tls.crt
+            - name: SERVER_KEY
+              value: /certs/tls.key
+            - name: SSL_CIPHERS
+              value: ECDHE-RSA-AES128-GCM-SHA256:AES256+EECDH:AES256+EDH:!aNULL
+            - name: ADD_NGINX_SERVER_CFG
+              value: |
+                location /vault/ {
+                  if ($arg_token ~ "^$") {
+                    return 400;
+                  }
+                  set $token $arg_token;
+                  if ($args ~ (.*)token=[^&]*(.*)) {
+                    set $args $1$2;
+                  }
+                  if ($args ~ (.*)&&+(.*)) {
+                    set $args $1&$2;
+                  }
+                  if ($args ~ ^&(.*)) {
+                    set $args $1;
+                  }
+                  if ($args ~ (.*)&$) {
+                    set $args $1;
+                  }
+                  proxy_pass http://127.0.0.1:10080/file/;
+                  proxy_set_header Authorization 'Bearer $token';
+                }
           ports:
             - containerPort: 10080
             - containerPort: 10443
