@@ -135,6 +135,8 @@ spec:
             - --tls-private-key=/certs/tls.key
             - --enable-default-deny=false
             - --http-only-cookie=true
+            - --enable-security-filter=true  # is required for the https redirect
+            - --enable-https-redirection
             - –-skip-openid-provider-tls-verify=true
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
             - --enable-logging=true
