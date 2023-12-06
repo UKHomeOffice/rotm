@@ -144,13 +144,15 @@ spec:
 #            - --client-secret={{ .DRONE_KEYCLOAK_CLIENT_SECRET }}
             # URls that you wish to protect.
 #            - "--resources=uri=\"/file|methods=GET,POST|roles=caseworkers\""
+            - --resources=uri=/file/*
             - --tls-cert=/certs/tls.crt
             - --tls-private-key=/certs/tls.key
             - --enable-security-filter=true  # is required for the https redirect
-            - --enable-https-redirection
+            - --enable-request-id=true
+            - --http-only-cookie=true
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-            - --enable-json-logging=true
             - --enable-default-deny=false
+            - --enable-json-logging=true
             - --enable-logging=true
             - --verbose=true
             {{ end }}
