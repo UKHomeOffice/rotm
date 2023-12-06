@@ -113,10 +113,10 @@ spec:
           env:
             # Defines the binding interface for main listener, e.g. {address}:{port}. This is required
             - name: PROXY_LISTEN
-              value: 127.0.0.1:3001
+              value: 127.0.0.1:10443
             # Defines url for the upstream endpoint you wish to proxy
             - name: PROXY_UPSTREAM_URL
-              value: "http://127.0.0.1:3000"
+              value: "https://127.0.0.1:10444"
             - name: PROXY_CLIENT_SECRET
               valueFrom:
                 secretKeyRef:
@@ -183,9 +183,11 @@ spec:
             - name: PROXY_SERVICE_HOST
               value: 127.0.0.1
             - name: PROXY_SERVICE_PORT
-              value: "3001"
+              value: "3000"
             - name: ENABLE_UUID_PARAM
               value: "FALSE"
+            - name: HTTPS_LISTEN_PORT
+              value: "10444"
             - name: HTTPS_REDIRECT
               value: "FALSE"
             - name: NAXSI_USE_DEFAULT_RULES
