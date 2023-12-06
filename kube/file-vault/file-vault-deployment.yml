@@ -136,7 +136,6 @@ spec:
 #            - "--resources=uri=\"/file|methods=GET,POST|roles=caseworkers\""
             - --tls-cert=/certs/tls.crt
             - --tls-private-key=/certs/tls.key
-            - --skip-openid-provider-tls-verify=true
             - --enable-security-filter=true  # is required for the https redirect
             - --enable-https-redirection
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
