@@ -136,7 +136,8 @@ spec:
             - --enable-default-deny=false
             - --http-only-cookie=true
             - --enable-security-filter=true  # is required for the https redirect
-            - --enable-https-redirection
+            - --enable-https-redirection=true
+            - --preserve-host=true
             - –-skip-openid-provider-tls-verify=true
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
             - --enable-logging=true
