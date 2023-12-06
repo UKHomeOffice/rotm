@@ -181,14 +181,15 @@ spec:
               value: "TRUE"
             - name: CLIENT_MAX_BODY_SIZE
               value: "200"
-            - name: HTTPS_LISTEN_PORT
-              value: "10444"
             - name: SERVER_CERT
               value: /certs/tls.crt
             - name: SERVER_KEY
               value: /certs/tls.key
             - name: SSL_CIPHERS
               value: ECDHE-RSA-AES128-GCM-SHA256:AES256+EECDH:AES256+EDH:!aNULL
+          ports:
+            - containerPort: 10080
+            - containerPort: 10443
           securityContext:
             runAsNonRoot: true
           volumeMounts:
