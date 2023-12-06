@@ -163,7 +163,6 @@ spec:
           env:
 {{ file .NGINX_SETTINGS | indent 12 }}
           ports:
-            - containerPort: 10080
             - containerPort: 10443
           volumeMounts:
             - mountPath: /public
