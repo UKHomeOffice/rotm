@@ -134,6 +134,8 @@ spec:
             - --tls-cert=/certs/tls.crt
             - --tls-private-key=/certs/tls.key
             - --enable-default-deny=false
+            - --http-only-cookie=true
+            - –-skip-openid-provider-tls-verify=true
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
             - --enable-logging=true
             - --enable-json-logging=true
