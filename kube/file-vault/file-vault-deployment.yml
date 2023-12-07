@@ -137,7 +137,6 @@ spec:
             - --enable-default-deny=false
             - --http-only-cookie=true
             - --enable-security-filter=true  # is required for the https redirect
-            - --enable-https-redirection=true
             - --preserve-host=true
             - –-skip-openid-provider-tls-verify=true
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
@@ -183,16 +182,38 @@ spec:
               value: "TRUE"
             - name: CLIENT_MAX_BODY_SIZE
               value: "200"
-            - name: SERVER_CERT
-              value: /certs/tls.crt
-            - name: SERVER_KEY
-              value: /certs/tls.key
-            - name: SSL_CIPHERS
-              value: ECDHE-RSA-AES128-GCM-SHA256:AES256+EECDH:AES256+EDH:!aNULL
+#            - name: SERVER_CERT
+#              value: /certs/tls.crt
+#            - name: SERVER_KEY
+#              value: /certs/tls.key
+#            - name: SSL_CIPHERS
+#              value: ECDHE-RSA-AES128-GCM-SHA256:AES256+EECDH:AES256+EDH:!aNULL
             - name: NO_LOGGING_BODY
               value: "FALSE"
             - name: NO_LOGGING_RESPONSE
               value: "FALSE"
+            - name: ADD_NGINX_SERVER_CFG
+              value: |
+                location /vault/ {
+                  if ($arg_token ~ "^$") {
+                    return 400;
+                  }
+                  set $token $arg_token;
+                  if ($args ~ (.*)token=[^&]*(.*)) {
+                    set $args $1$2;
+                  }
+                  if ($args ~ (.*)&&+(.*)) {
+                    set $args $1&$2;
+                  }
+                  if ($args ~ ^&(.*)) {
+                    set $args $1;
+                  }
+                  if ($args ~ (.*)&$) {
+                    set $args $1;
+                  }
+                  proxy_pass http://127.0.0.1:10080/file/;
+                  proxy_set_header Authorization 'Bearer $token';
+                }
           ports:
             - containerPort: 10080
             - containerPort: 10443
