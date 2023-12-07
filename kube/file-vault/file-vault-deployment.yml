@@ -114,9 +114,9 @@ spec:
                   name: keycloak-client
                   key: id
             - name: PROXY_LISTEN
-              value: :3001
+              value: 127.0.0.1:3001
             - name: PROXY_UPSTREAM_URL
-              value: "https://127.0.0.1:10444"
+              value: "http://127.0.0.1:3000"
             - name: PROXY_REDIRECTION_URL
             {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
               value: https://fv.prod.{{ .APP_NAME }}.homeoffice.gov.uk
@@ -135,11 +135,9 @@ spec:
             - --tls-cert=/certs/tls.crt
             - --tls-private-key=/certs/tls.key
             - --enable-default-deny=false
-            - --http-only-cookie=true
             - --enable-security-filter=true  # is required for the https redirect
             - --preserve-host=true
             - –-skip-openid-provider-tls-verify=true
-            - --skip-authorization-header-identity=true
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
             - --enable-logging=true
             - --enable-json-logging=true
@@ -173,8 +171,6 @@ spec:
               value: "3001"
             - name: ENABLE_UUID_PARAM
               value: "FALSE"
-            - name: HTTPS_LISTEN_PORT
-              value: "10444"
             - name: HTTPS_REDIRECT
               value: "FALSE"
             - name: NAXSI_USE_DEFAULT_RULES
@@ -219,7 +215,7 @@ spec:
                 }
           ports:
             - containerPort: 10080
-            - containerPort: 10444
+            - containerPort: 10443
           securityContext:
             runAsNonRoot: true
           volumeMounts:
