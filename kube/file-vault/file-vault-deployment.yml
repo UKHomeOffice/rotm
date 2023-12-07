@@ -191,7 +191,6 @@ spec:
               value: ECDHE-RSA-AES128-GCM-SHA256:AES256+EECDH:AES256+EDH:!aNULL
           ports:
             - containerPort: 10080
-            - containerPort: 10443
           securityContext:
             runAsNonRoot: true
           volumeMounts:
