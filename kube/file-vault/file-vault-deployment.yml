@@ -114,9 +114,9 @@ spec:
                   name: keycloak-client
                   key: id
             - name: PROXY_LISTEN
-              value: 127.0.0.1:3001
+              value: :10443
             - name: PROXY_UPSTREAM_URL
-              value: "http://127.0.0.1:3000"
+              value: "https://127.0.0.1:10444"
             - name: PROXY_REDIRECTION_URL
             {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
               value: https://fv.prod.{{ .APP_NAME }}.homeoffice.gov.uk
@@ -169,9 +169,11 @@ spec:
             - name: PROXY_SERVICE_HOST
               value: 127.0.0.1
             - name: PROXY_SERVICE_PORT
-              value: "3001"
+              value: "3000"
             - name: ENABLE_UUID_PARAM
               value: "FALSE"
+            - name: HTTPS_LISTEN_PORT
+              value: "10444"
             - name: HTTPS_REDIRECT
               value: "FALSE"
             - name: NAXSI_USE_DEFAULT_RULES
@@ -182,12 +184,12 @@ spec:
               value: "TRUE"
             - name: CLIENT_MAX_BODY_SIZE
               value: "200"
-#            - name: SERVER_CERT
-#              value: /certs/tls.crt
-#            - name: SERVER_KEY
-#              value: /certs/tls.key
-#            - name: SSL_CIPHERS
-#              value: ECDHE-RSA-AES128-GCM-SHA256:AES256+EECDH:AES256+EDH:!aNULL
+            - name: SERVER_CERT
+              value: /certs/tls.crt
+            - name: SERVER_KEY
+              value: /certs/tls.key
+            - name: SSL_CIPHERS
+              value: ECDHE-RSA-AES128-GCM-SHA256:AES256+EECDH:AES256+EDH:!aNULL
             - name: NO_LOGGING_BODY
               value: "FALSE"
             - name: NO_LOGGING_RESPONSE
@@ -216,7 +218,7 @@ spec:
                 }
           ports:
             - containerPort: 10080
-            - containerPort: 10443
+            - containerPort: 10444
           securityContext:
             runAsNonRoot: true
           volumeMounts:
