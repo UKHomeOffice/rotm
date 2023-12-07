@@ -137,7 +137,7 @@ spec:
             - --enable-default-deny=false
             - --http-only-cookie=true
             - --enable-security-filter=true  # is required for the https redirect
-            - --enable-https-redirection=false
+            - --enable-https-redirection=true
             - --preserve-host=true
             - –-skip-openid-provider-tls-verify=true
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
@@ -195,6 +195,7 @@ spec:
               value: "FALSE"
           ports:
             - containerPort: 10080
+            - containerPort: 10443
           securityContext:
             runAsNonRoot: true
           volumeMounts:
