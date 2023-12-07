@@ -114,7 +114,7 @@ spec:
                   name: keycloak-client
                   key: id
             - name: PROXY_LISTEN
-              value: :3000
+              value: :3001
             - name: PROXY_UPSTREAM_URL
               value: "https://127.0.0.1:10444"
             - name: PROXY_REDIRECTION_URL
@@ -139,6 +139,7 @@ spec:
             - --enable-security-filter=true  # is required for the https redirect
             - --preserve-host=true
             - –-skip-openid-provider-tls-verify=true
+            - --skip-authorization-header-identity=true
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
             - --enable-logging=true
             - --enable-json-logging=true
@@ -169,7 +170,7 @@ spec:
             - name: PROXY_SERVICE_HOST
               value: 127.0.0.1
             - name: PROXY_SERVICE_PORT
-              value: "3000"
+              value: "3001"
             - name: ENABLE_UUID_PARAM
               value: "FALSE"
             - name: HTTPS_LISTEN_PORT
