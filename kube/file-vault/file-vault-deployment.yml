@@ -131,6 +131,7 @@ spec:
             # the url which is used to retrieve the OpenID configuration
             - --discovery-url={{ .DISCOVERY_URL }}
             # URls that you wish to protect.
+            - --resources=uri=/file
             - --tls-cert=/certs/tls.crt
             - --tls-private-key=/certs/tls.key
             - --enable-default-deny=false
