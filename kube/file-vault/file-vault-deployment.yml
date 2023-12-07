@@ -137,7 +137,7 @@ spec:
             - --enable-default-deny=false
             - --http-only-cookie=true
             - --enable-security-filter=true  # is required for the https redirect
-            - --enable-https-redirection=true
+            - --enable-https-redirection=false
             - --preserve-host=true
             - –-skip-openid-provider-tls-verify=true
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
@@ -171,6 +171,8 @@ spec:
               value: 127.0.0.1
             - name: PROXY_SERVICE_PORT
               value: "3001"
+            - name: HTTPS_LISTEN_PORT
+              value: "3000"
             - name: ENABLE_UUID_PARAM
               value: "FALSE"
             - name: HTTPS_REDIRECT
