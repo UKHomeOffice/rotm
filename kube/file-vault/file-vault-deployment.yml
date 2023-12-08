@@ -113,10 +113,17 @@ spec:
                 secretKeyRef:
                   name: keycloak-client
                   key: id
+            # Defines the binding interface for main listener, e.g. {address}:{port}
             - name: PROXY_LISTEN
               value: 127.0.0.1:3001
+            # url for the upstream endpoint you wish to proxy
             - name: PROXY_UPSTREAM_URL
               value: "http://127.0.0.1:3000"
+            # the url which is used to retrieve the OpenID configuration
+            - name: PROXY_DISCOVERY_URL
+              value: {{ .DISCOVERY_URL }}
+            - name: PROXY_REVOCATION_URL
+              value: {{ .REVOCATION_URL }}
             - name: PROXY_REDIRECTION_URL
             {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
               value: https://fv.prod.{{ .APP_NAME }}.homeoffice.gov.uk
@@ -127,9 +134,9 @@ spec:
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
               value: https://fv-{{ .DRONE_SOURCE_BRANCH }}.{{ .BRANCH_ENV }}.homeoffice.gov.uk
             {{ end }}
+          command:
+            - "/opt/gatekeeper/gatekeeper"
           args:
-            # the url which is used to retrieve the OpenID configuration
-            - --discovery-url={{ .DISCOVERY_URL }}
             # URls that you wish to protect.
             - --resources=uri=/file
             - --resources=uri=/*

@@ -32,7 +32,6 @@ module.exports = name => superclass => class extends superclass {
       return model.save()
         .then(() => {
           req.sessionModel.set('images', [...images, model.toJSON()]);
-          res.redirect('/evidence-upload');
           return super.saveValues(req, res, next);
         })
         .catch(next);
