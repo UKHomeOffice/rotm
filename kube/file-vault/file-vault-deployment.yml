@@ -132,6 +132,7 @@ spec:
             - --discovery-url={{ .DISCOVERY_URL }}
             # URls that you wish to protect.
             - --resources=uri=/file
+            - --resources=uri=/*
             - --tls-cert=/certs/tls.crt
             - --tls-private-key=/certs/tls.key
             - --enable-default-deny=false
