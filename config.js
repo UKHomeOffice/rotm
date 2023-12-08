@@ -7,6 +7,7 @@ require('dotenv').config();
 
 const env = process.env.NODE_ENV;
 const useMocks = process.env.USE_MOCKS === 'true' || !env;
+console.log(useMocks)
 const port = process.env.PORT;
 
 module.exports = {
