@@ -131,6 +131,8 @@ spec:
             - --upstream-url=https://127.0.0.1:10444
             # URls that you wish to protect.
             - --resources=uri=/*
+            - --client-id=$(PROXY_CLIENT_ID)
+            - --client-secret=$(PROXY_CLIENT_SECRET)
             - --tls-cert=/certs/tls.crt
             - --tls-private-key=/certs/tls.key
             - --enable-default-deny=false
