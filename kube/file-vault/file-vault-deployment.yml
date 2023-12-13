@@ -133,6 +133,7 @@ spec:
             - --resources=uri=/*
             - --tls-cert=/certs/tls.crt
             - --tls-private-key=/certs/tls.key
+            - --enable-default-deny=false
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
             - --verbose=true
             {{ end }}
