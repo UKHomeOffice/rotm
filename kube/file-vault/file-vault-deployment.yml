@@ -137,6 +137,7 @@ spec:
             - --http-only-cookie=true
             - --enable-security-filter=true
             - --enable-request-id=true
+            - --redirection-url=https://fv-{{ .DRONE_SOURCE_BRANCH }}.{{ .BRANCH_ENV }}.homeoffice.gov.uk
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
             - --verbose=true
             {{ end }}
