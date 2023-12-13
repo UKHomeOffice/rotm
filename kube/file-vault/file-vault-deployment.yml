@@ -138,7 +138,7 @@ spec:
             - --enable-security-filter=true
             - --enable-request-id=true
             - --redirection-url=https://fv-{{ .DRONE_SOURCE_BRANCH }}.{{ .BRANCH_ENV }}.homeoffice.gov.uk
-            - --tls-min-version=tlsv1.3
+            - --tls-min-version=tlsv1.2
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
             - --verbose=true
             {{ end }}
