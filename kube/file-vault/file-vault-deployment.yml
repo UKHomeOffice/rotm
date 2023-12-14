@@ -123,10 +123,20 @@ spec:
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
               value: https://fv-{{ .DRONE_SOURCE_BRANCH }}.{{ .BRANCH_ENV }}.homeoffice.gov.uk
             {{ end }}
+            - name: PROXY_DISCOVERY_URL
+            {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
+              value: https://sso.digital.homeoffice.gov.uk/auth/realms/rotm
+            {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
+              value: https://sso.digital.homeoffice.gov.uk/auth/realms/rotm
+            {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
+              value: https://acp-sso.notprod.acp.homeoffice.gov.uk/realms/rotm-dev
+            {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+              value: https://acp-sso.notprod.acp.homeoffice.gov.uk/realms/rotm-dev
+            {{ end }}
           args:
             - --listen=:10443
             # the url which is used to retrieve the OpenID configuration
-            - --discovery-url=https://sso.digital.homeoffice.gov.uk/auth/realms/rotm
+            - --discovery-url=$(PROXY_DISCOVERY_URL)
             # the endpoint where requests are proxied to
             - --upstream-url=https://127.0.0.1:10444
             # URls that you wish to protect.
