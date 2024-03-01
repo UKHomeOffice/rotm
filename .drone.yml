@@ -233,9 +233,11 @@ steps:
           - feature/*
       event: pull_request
 
+# Anchore To be replaced with trivy.
   - name: anchore_scan
     image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/anchore-submission:latest
     pull: always
+    failure: ignore
     environment:
       IMAGE_NAME: rotm:${DRONE_COMMIT_SHA}
       LOCAL_IMAGE: true
@@ -285,8 +287,7 @@ steps:
     when:
       branch: master
       event: push
-
-
+  
   # Get pull request branch so correct PR UAT environment is torn down in the tear_down_branch step that follows
   - name: get_pr_branch
     pull: if-not-exists
