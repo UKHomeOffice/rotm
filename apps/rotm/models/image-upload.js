@@ -6,9 +6,8 @@ const Model = require('hof').model;
 const jimp = require('jimp');
 const uuid = require('uuid').v4;
 const fs = require('fs');
-const noPreview = 'data:image/png;base64,' + fs.readFileSync('assets/images/no-preview.png', {encoding: 'base64'});
-
-
+const noPreview = 'data:image/png;base64,' + fs.readFileSync('assets/images/no-preview.png', { encoding: 'base64' });
+const FormData = require('form-data');
 const config = require('../../../config');
 
 module.exports = class UploadModel extends Model {
@@ -23,21 +22,21 @@ module.exports = class UploadModel extends Model {
         url: config.upload.hostname
       };
       const reqConf = url.parse(this.url(attributes));
-      reqConf.formData = {
-        document: {
-          value: this.get('data'),
-          options: {
-            filename: this.get('name'),
-            contentType: this.get('mimetype')
-          }
-        }
-      };
+      const formData = new FormData();
+      formData.append('document', this.get('data'), {
+        filename: this.get('name'),
+        contentType: this.get('mimetype')
+      });
+      reqConf.data = formData;
       reqConf.method = 'POST';
-      this.request(reqConf, (err, data) => {
+      reqConf.headers = {
+        ...formData.getHeaders()
+      };
+      return this.request(reqConf, (err, data) => {
         if (err) {
           return reject(err);
         }
-        resolve(data);
+        return resolve(data);
       });
     })
       .then(result => {
@@ -79,7 +78,8 @@ module.exports = class UploadModel extends Model {
     }
     const tokenReq = {
       url: config.keycloak.token,
-      form: {
+      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+      data: {
         username: config.keycloak.username,
         password: config.keycloak.password,
         grant_type: 'password',
@@ -88,17 +88,12 @@ module.exports = class UploadModel extends Model {
       },
       method: 'POST'
     };
-
-    return new Promise((resolve, reject) => {
-      this._request(tokenReq, (err, response) => {
-        if (err) {
-          return reject(err);
-        }
-
-        resolve({
-          bearer: JSON.parse(response.body).access_token
-        });
+    return this._request(tokenReq).then(response => {
+      return { bearer: response.data.access_token };
+    })
+      .catch(err => {
+        console.log(`Error: ${err.response.data.error} - ${err.response.data.error_description}`);
+        throw err;
       });
-    });
   }
 };
