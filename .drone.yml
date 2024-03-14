@@ -212,6 +212,7 @@ steps:
       - export ACCEPTANCE_HOST_NAME=https://$${APP_NAME}-$${DRONE_SOURCE_BRANCH}.internal.$${BRANCH_ENV}.homeoffice.gov.uk
       - export CUCUMBER_PUBLISH_ENABLED=true
       - npx playwright install
+      - npx playwright install-deps 
       - npm run test:acceptance
     when:
       branch: master
