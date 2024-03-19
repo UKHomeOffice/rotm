@@ -1,6 +1,5 @@
-const { Given, Then,When } = require('@cucumber/cucumber');
+const { Given, Then, When } = require('@cucumber/cucumber');
 const expect = require('chai').expect;
-const mock = require('mock-fs');
 const World = require('../test.setup.js');
 const config = require('../../../config');
 const domain = config.hosts.acceptanceTests;
@@ -61,10 +60,10 @@ Then('I fill {string} text area with {string}', async function (field, value) {
 // }.bind(World));
 
 When('I upload the {string} file', async function (file) {
-  //await this.page.setInputFiles('input#image', `${file}`);
+  // await this.page.setInputFiles('input#image', `${file}`);
   await this.page.setInputFiles('#image', `${file}`);
-  const $documentUpload = await page.$('#image');
-  const $parentUpload = await $documentUpload.$('xpath=..');
+  // const $documentUpload = await page.$('#image');
+  // const $parentUpload = await $documentUpload.$('xpath=..');
 }.bind(World));
 
 Then('I fill the date {string} with {string}', async function (field, date) {
