@@ -57,8 +57,8 @@ Feature: A user should access the correct service and be able to log an issue
         Then I should be on the 'evidence-upload' page showing 'Do you have any evidence?'
         Then I check 'evidence-upload-yes'        
         Then I should see 'Choose file to upload' on the page
-        When I upload the '_test-path/test.png' file
-        And I select 'Continue'
+        Then I upload the 'testPath/test.png' file
+        Then I select 'Continue'
         Then I should be on the 'evidence-upload-confirm' page showing 'Do you want to upload another file?'
         Then I should see 'Files added' on the page
         Then I check 'evidence-upload-more-no'
@@ -70,7 +70,8 @@ Feature: A user should access the correct service and be able to log an issue
         Then I select 'Continue'
         Then I should be on the 'check-your-report' page showing 'Check your report'
         Then I click the 'send report' button
-  Scenario: I don't have a link to the material but do have evidence and want to be contacted by email
+
+     Scenario: I don't have a link to the material but do have evidence and want to be contacted by email
         Given I start the 'base' application journey
         Then I should be on the 'evidence-url' page showing 'Do you have a link to the material?'
         Then I check 'evidence-url-no'
