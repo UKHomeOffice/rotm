@@ -1,18 +1,16 @@
-const { Given, Then } = require('@cucumber/cucumber');
+const { Given, Then,When } = require('@cucumber/cucumber');
 const expect = require('chai').expect;
 const mock = require('mock-fs');
 const World = require('../test.setup.js');
 const config = require('../../../config');
-
 const domain = config.hosts.acceptanceTests;
-
 
 Given('I start the {string} application journey', async function (subApp) {
   this.subApp = subApp === 'base' ? '' : `/${subApp}`;
   await this.page.goto(`${domain}${this.subApp}`);
 }.bind(World));
 
-Then('I select {string}', async function (name) {
+And('I select {string}', async function (name) {
   await this.page.click(`text=${name}`);
 }.bind(World));
 
@@ -56,10 +54,17 @@ Then('I fill {string} text area with {string}', async function (field, value) {
   await this.page.fill(`textarea[name="${field}"]`, value);
 }.bind(World));
 
-Then('I upload the {string} file', async function (file) {
-  mock({'testPath/test.png': Buffer.from([8, 6, 7, 5, 3, 0, 9]) });
-  await this.page.setInputFiles('input#image', `${file}`);
-  mock.restore();
+// Then('I upload the {string} file', async function (file) {
+//   mock({'../../testPath/test.png': Buffer.from([8, 6, 7, 5, 3, 0, 9]) });
+//   await this.page.setInputFiles('input#image', `${file}`);
+//   mock.restore();
+// }.bind(World));
+
+When('I upload the {string} file', async function (file) {
+  //await this.page.setInputFiles('input#image', `${file}`);
+  await this.page.setInputFiles('#image', `${file}`);
+  const $documentUpload = await page.$('#image');
+  const $parentUpload = await $documentUpload.$('xpath=..');
 }.bind(World));
 
 Then('I fill the date {string} with {string}', async function (field, date) {

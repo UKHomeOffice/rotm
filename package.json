@@ -5,7 +5,7 @@
   "description": "A Home Office application for reporting online terrorist material.",
   "license": "GPL-2.0",
   "engines": {
-    "node": "^18.12.1"
+    "node": ">=18.12.1"
   },
   "repository": {
     "type": "git",
