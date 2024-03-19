@@ -68,7 +68,6 @@ module.exports = class UploadModel extends Model {
         this.set('thumbnail', noPreview);
       });
   }
-
   auth() {
     if (!config.keycloak.token) {
       // eslint-disable-next-line no-console

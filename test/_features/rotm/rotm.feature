@@ -379,4 +379,3 @@ Feature: A user should access the correct service and be able to log an issue
         Then I select 'Continue'
         Then I should be on the 'check-your-report' page showing 'No, I don’t want to be contacted'
         Then I click the 'send report' button
-
