@@ -126,7 +126,8 @@ spec:
           args:
             - --listen=:10443
             # the url which is used to retrieve the OpenID configuration
-            - --discovery-url=https://sso.digital.homeoffice.gov.uk/auth/realms/rotm
+            # - --discovery-url=https://sso.digital.homeoffice.gov.uk/auth/realms/rotm
+            - --discovery-url={{ .DISCOVERY_URL }}
             # the endpoint where requests are proxied to
             - --upstream-url=https://127.0.0.1:10444
             # URls that you wish to protect.
