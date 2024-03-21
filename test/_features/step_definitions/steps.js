@@ -1,6 +1,6 @@
 const { Given, Then } = require('@cucumber/cucumber');
 const expect = require('chai').expect;
-// const mock = require('mock-fs');
+const mock = require('mock-fs');
 const World = require('../test.setup.js');
 const config = require('../../../config');
 const domain = config.hosts.acceptanceTests;
@@ -55,10 +55,9 @@ Then('I fill {string} text area with {string}', async function (field, value) {
 }.bind(World));
 
 Then('I upload the {string} file', async function (file) {
-  // mock({'testPath/test.png': Buffer.from([8, 6, 7, 5, 3, 0, 9]) });
-  console.log('URL !!!:', file);
+  mock({'_test-path/test.png': Buffer.from([8, 6, 7, 5, 3, 0, 9]) });
   await this.page.setInputFiles('input#image', `${file}`);
-  // mock.restore();
+  mock.restore();
 }.bind(World));
 
 // When('I upload the {string} file', async function (file) {

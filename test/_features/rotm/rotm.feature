@@ -57,7 +57,7 @@ Feature: A user should access the correct service and be able to log an issue
         Then I should be on the 'evidence-upload' page showing 'Do you have any evidence?'
         Then I check 'evidence-upload-yes'        
         Then I should see 'Choose file to upload' on the page
-        Then I upload the 'testPath/test.png' file
+        Then I upload the '_test-path/test.png' file
         Then I select 'Continue'
         Then I should be on the 'evidence-upload-confirm' page showing 'Do you want to upload another file?'
         Then I should see 'Files added' on the page
@@ -79,7 +79,7 @@ Feature: A user should access the correct service and be able to log an issue
         Then I should be on the 'evidence-upload' page showing 'Do you have any evidence?'
         Then I check 'evidence-upload-yes'        
         Then I should see 'Choose file to upload' on the page
-        Then I upload the 'testPath/test.png' file
+        Then I upload the '_test-path/test.png' file
         Then I select 'Continue'
         Then I should be on the 'evidence-upload-confirm' page showing 'Do you want to upload another file?'
         Then I should see 'Files added' on the page
@@ -106,7 +106,7 @@ Feature: A user should access the correct service and be able to log an issue
         Then I should be on the 'evidence-upload' page showing 'Do you have any evidence?'
         Then I check 'evidence-upload-yes'        
         Then I should see 'Choose file to upload' on the page
-        Then I upload the 'testPath/test.png' file
+        Then I upload the '_test-path/test.png' file
         Then I select 'Continue'
         Then I should be on the 'evidence-upload-confirm' page showing 'Do you want to upload another file?'
         Then I should see 'Files added' on the page
@@ -201,7 +201,7 @@ Feature: A user should access the correct service and be able to log an issue
         Then I should be on the 'evidence-upload' page showing 'Do you have any evidence?'
         Then I check 'evidence-upload-yes'        
         Then I should see 'Choose file to upload' on the page
-        Then I upload the 'testPath/test.png' file
+        Then I upload the '_test-path/test.png' file
         Then I select 'Continue'
         Then I should be on the 'evidence-upload-confirm' page showing 'Do you want to upload another file?'
         Then I should see 'Files added' on the page
@@ -225,7 +225,7 @@ Feature: A user should access the correct service and be able to log an issue
         Then I should be on the 'evidence-upload' page showing 'Do you have any evidence?'
         Then I check 'evidence-upload-yes'        
         Then I should see 'Choose file to upload' on the page
-        Then I upload the 'testPath/test.png' file
+        Then I upload the '_test-path/test.png' file
         Then I select 'Continue'
         Then I should be on the 'evidence-upload-confirm' page showing 'Do you want to upload another file?'
         Then I should see 'Files added' on the page
@@ -254,7 +254,7 @@ Feature: A user should access the correct service and be able to log an issue
         Then I should be on the 'evidence-upload' page showing 'Do you have any evidence?'
         Then I check 'evidence-upload-yes'        
         Then I should see 'Choose file to upload' on the page
-        Then I upload the 'testPath/test.png' file
+        Then I upload the '_test-path/test.png' file
         Then I select 'Continue'
         Then I should be on the 'evidence-upload-confirm' page showing 'Do you want to upload another file?'
         Then I should see 'Files added' on the page
@@ -332,7 +332,7 @@ Feature: A user should access the correct service and be able to log an issue
         Then I should be on the 'evidence-upload' page showing 'Do you have any evidence?'
         Then I check 'evidence-upload-yes'        
         Then I should see 'Choose file to upload' on the page
-        Then I upload the 'testPath/test.png' file
+        Then I upload the '_test-path/test.png' file
         Then I select 'Continue'
         Then I should be on the 'evidence-upload-confirm' page showing 'Do you want to upload another file?'
         Then I should see 'Files added' on the page
