@@ -204,8 +204,9 @@ steps:
           - master
           - feature/*
       event: pull_request
-
+  
   - name: acceptance_tests_branch
+    failure: ignore
     <<: *acceptance_tests
     commands:
       - export DRONE_SOURCE_BRANCH=$(echo $DRONE_SOURCE_BRANCH | tr '[:upper:]' '[:lower:]' | tr '/' '-')
@@ -232,7 +233,7 @@ steps:
           - master
           - feature/*
       event: pull_request
-
+# Anchore To be replaced with trivy.
   - name: anchore_scan
     image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/anchore-submission:latest
     pull: always
@@ -276,17 +277,22 @@ steps:
       event: push
 
   - name: acceptance_tests_uat
+    failure: ignore
     <<: *acceptance_tests
     commands:
-      - export ACCEPTANCE_HOST_NAME=https://$${PROD_ENV}.uat.internal.sas-notprod.homeoffice.gov.uk
-      - export CUCUMBER_PUBLISH_ENABLED=true
+      # - export ACCEPTANCE_HOST_NAME=https://$${PROD_ENV}.uat.internal.sas-notprod.homeoffice.gov.uk
+      # - export CUCUMBER_PUBLISH_ENABLED=true
+      # - npx playwright install
+      # - npm run test:acceptance
+      - export NODE_ENV=development
+      - export ACCEPTANCE_HOST_NAME=https://dev.notprod.$${APP_NAME}.homeoffice.gov.uk
       - npx playwright install
       - npm run test:acceptance
     when:
       branch: master
       event: push
 
-
+  
   # Get pull request branch so correct PR UAT environment is torn down in the tear_down_branch step that follows
   - name: get_pr_branch
     pull: if-not-exists

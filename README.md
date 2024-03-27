@@ -4,7 +4,7 @@
 
 This project is built with [HOF](https://github.com/UKHomeOffice/hof) and uses [Docker](https://www.docker.com/).
 
-## Getting started
+## Getting started 
 
 Get the project from GitHub
 ```bash
