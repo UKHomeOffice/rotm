@@ -274,12 +274,17 @@ steps:
     when:
       branch: master
       event: push
-
+  
   - name: acceptance_tests_uat
     <<: *acceptance_tests
+    # commands:
+    #   - export ACCEPTANCE_HOST_NAME=https://$${PROD_ENV}.uat.internal.sas-notprod.homeoffice.gov.uk
+    #   - export CUCUMBER_PUBLISH_ENABLED=true
+    #   - npx playwright install
+    #   - npm run test:acceptance
     commands:
-      - export ACCEPTANCE_HOST_NAME=https://$${PROD_ENV}.uat.internal.sas-notprod.homeoffice.gov.uk
-      - export CUCUMBER_PUBLISH_ENABLED=true
+      - export NODE_ENV=development
+      - export ACCEPTANCE_HOST_NAME=https://dev.notprod.$${APP_NAME}.homeoffice.gov.uk
       - npx playwright install
       - npm run test:acceptance
     when:
