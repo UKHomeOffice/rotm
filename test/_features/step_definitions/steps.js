@@ -3,9 +3,7 @@ const expect = require('chai').expect;
 const mock = require('mock-fs');
 const World = require('../test.setup.js');
 const config = require('../../../config');
-
 const domain = config.hosts.acceptanceTests;
-
 
 Given('I start the {string} application journey', async function (subApp) {
   this.subApp = subApp === 'base' ? '' : `/${subApp}`;
