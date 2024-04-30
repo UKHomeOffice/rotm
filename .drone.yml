@@ -217,7 +217,7 @@ steps:
       branch: master
       event: pull_request
 
-# Snyk & Anchore security scans which run after branch deployment to prevent blocking of PR UAT tests
+# Snyk security scans which run after branch deployment to prevent blocking of PR UAT tests
   - name: snyk_scan
     pull: if-not-exists
     image: node:18
@@ -231,20 +231,6 @@ steps:
         include:
           - master
           - feature/*
-      event: pull_request
-
-# Anchore To be replaced with trivy.
-  - name: anchore_scan
-    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/anchore-submission:latest
-    pull: always
-    failure: ignore
-    environment:
-      IMAGE_NAME: rotm:${DRONE_COMMIT_SHA}
-      LOCAL_IMAGE: true
-      TOLERATE: medium
-      WHITELIST_FILE: hof-services-config/Report_Online_Terrorist_Material/anchore-cve-exceptions.txt
-    when:
-      branch: master
       event: pull_request
 
       #TEST Deploy to Staging environment
@@ -399,7 +385,7 @@ steps:
       cron: tear_down_pr_envs
       event: cron
 
-  # CRON job steps that runs security scans using Snyk & Anchore
+  # CRON job steps that runs security scans using Snyk
   - name: cron_clone_repos
     image: alpine/git
     environment:
@@ -434,18 +420,6 @@ steps:
       - yarn install --frozen-lockfile
       - yarn run postinstall
       - yarn run test:snyk
-    when:
-      cron: security_scans
-      event: cron
-
-  - name: cron_anchore_scan
-    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/anchore-submission:latest
-    pull: always
-    environment:
-      IMAGE_NAME: rotm:${DRONE_COMMIT_SHA}
-      LOCAL_IMAGE: true
-      TOLERATE: medium
-      WHITELIST_FILE: hof-services-config/Report_Online_Terrorist_Material/anchore-cve-exceptions.txt
     when:
       cron: security_scans
       event: cron
@@ -488,13 +462,6 @@ steps:
 services:
   - name: docker
     image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
-
-  # Anchore scanning needs background service to run
-  - name: anchore-submission-server
-    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/anchore-submission:latest
-    pull: always
-    commands:
-      - /run.sh server
 
   # Redis session setup in background so integration tests can run
   - name: session
