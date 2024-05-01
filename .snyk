@@ -80,4 +80,8 @@ ignore:
     - hof > markdown-it:
       reason: Need to update markdown-it in HOF to version 13.0.2.
       expires: '2024-07-03T00:00:00.000Z'
+  SNYK-JS-PHIN-6598077:
+    - '*':
+      reason: no direct upgrade or patch available
+      expires: '2024-07-03T00:00:00.000Z'
 patch: {}
