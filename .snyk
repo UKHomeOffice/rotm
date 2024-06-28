@@ -2,6 +2,14 @@
 version: v1.22.1
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
+  SNYK-JS-ASYNC-7414156:
+    - '*':
+      reason: braces needs to be upgraded to the latest version
+      expires: '2025-02-09T00:00:00.000Z'
+  SNYK-JS-BRACES-6838727:
+    - '*':
+      reason: braces needs to be upgraded to the latest version
+      expires: '2024-09-28T00:00:00.000Z'
   SNYK-JS-EXPRESS-6474509:
     - '*':
         reason: express needs to be upgraded in HOF to lastest version
@@ -54,7 +62,7 @@ ignore:
   SNYK-JS-AXIOS-6032459:
     - '*':
         reason: Update notifications-node-client in HOF
-        expires: '2024-07-03T00:00:00.000Z'
+        expires: '2025-02-09T00:00:00.000Z'
         created: '2023-11-08T13:22:47.350Z'
   SNYK-JS-XML2JS-5414874:
     - '*':
