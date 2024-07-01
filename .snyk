@@ -2,6 +2,14 @@
 version: v1.22.1
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
+  SNYK-JS-ASYNC-7414156:
+    - '*':
+      reason: No available patch
+      expires: '2024-09-28T00:00:00.000Z'
+  SNYK-JS-BRACES-6838727:
+    - '*':
+      reason: braces needs to be upgraded to the latest version
+      expires: '2024-09-28T00:00:00.000Z'
   SNYK-JS-EXPRESS-6474509:
     - '*':
         reason: express needs to be upgraded in HOF to lastest version
