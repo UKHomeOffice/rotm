@@ -4,8 +4,8 @@ version: v1.22.1
 ignore:
   SNYK-JS-ASYNC-7414156:
     - '*':
-      reason: braces needs to be upgraded to the latest version
-      expires: '2025-02-09T00:00:00.000Z'
+      reason: No available patch
+      expires: '2025-01-02T00:00:00.000Z'
   SNYK-JS-BRACES-6838727:
     - '*':
       reason: braces needs to be upgraded to the latest version
@@ -62,7 +62,7 @@ ignore:
   SNYK-JS-AXIOS-6032459:
     - '*':
         reason: Update notifications-node-client in HOF
-        expires: '2025-02-09T00:00:00.000Z'
+        expires: '2025-01-10T00:00:00.000Z'
         created: '2023-11-08T13:22:47.350Z'
   SNYK-JS-XML2JS-5414874:
     - '*':
