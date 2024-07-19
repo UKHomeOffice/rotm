@@ -7,6 +7,14 @@ const moment = require('moment');
 const config = require('../../../config');
 const { createLogger, format, transports } = require('winston');
 const { combine, timestamp, json } = format;
+const http = require('http');
+
+let ipAddress = "";
+http.get({'host': 'api.ipify.org', 'port': 80, 'path': '/'}, function(resp) {
+  resp.on('data', function(ip) {
+    ipAddress = String.fromCharCode(...ip);
+  });
+});
 
 const logger = createLogger({
   format: combine(timestamp(), json()),
@@ -26,7 +34,7 @@ const parse = (model, translate) => {
 
   logger.log({
     level: 'info',
-    message: `Submission ID: ${model.submissionID}, Email Submitted: ${submissionDateTime}`
+    message: `Submission ID: ${model.submissionID}, Email Submitted: ${submissionDateTime}, IP Address:  ${ipAddress}`
   });
 
   return {
@@ -37,6 +45,7 @@ const parse = (model, translate) => {
       table: [
         {label: getLabel('uniqueId'), value: model.submissionID},
         {label: getLabel('submitted'), value: submissionDateTime},
+        {label: getLabel('ipaddress'), value: ipAddress},
         ...fields.map(f => ({
           label: getLabel(f),
           value: model[f]
@@ -47,7 +56,7 @@ const parse = (model, translate) => {
 };
 
 module.exports = settings => {
-  return Notify(Object.assign({}, settings, {
+return Notify(Object.assign({}, settings, {
     recipient: settings.caseworker,
     subject: (model, translate) => translate('email.caseworker.subject'),
     template: path.resolve(__dirname, '../emails/caseworker.html'),

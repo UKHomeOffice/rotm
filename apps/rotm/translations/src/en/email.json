@@ -8,14 +8,14 @@
       "submitted": {
         "label": "Date and time of submission"
       },
+      "ipaddress": {
+        "label": "User ip address"
+      },
       "url": {
         "label": "Link"
       },
       "evidence-written": {
         "label": "Additional details"
-      },
-      "url": {
-        "label": "Link"
       },
       "contact-details-name": {
         "label": "Full name"
