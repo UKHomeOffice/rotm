@@ -34,7 +34,7 @@ const parse = (model, translate) => {
 
   logger.log({
     level: 'info',
-    message: `Submission ID: ${model.submissionID}, Email Submitted: ${submissionDateTime}, IP Address:  ${ipAddress}`
+    message: `Submission ID: ${model.submissionID}, Email Submitted: ${submissionDateTime}, IP Address:  ${model.ip}`
   });
 
   return {
@@ -45,7 +45,7 @@ const parse = (model, translate) => {
       table: [
         {label: getLabel('uniqueId'), value: model.submissionID},
         {label: getLabel('submitted'), value: submissionDateTime},
-        {label: getLabel('ipaddress'), value: ipAddress},
+        {label: getLabel('ipaddress'), value: model.ip},
         ...fields.map(f => ({
           label: getLabel(f),
           value: model[f]

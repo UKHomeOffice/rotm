@@ -57,6 +57,10 @@ if (config.useMocks) {
 }
 
 app.use((req, res, next) => {
+  var ip = req.headers['x-forwarded-for'] ||
+  req.connection.remoteAddress;
+  console.log("ipaddress : " + ip);
+
   // Set HTML Language
   res.locals.htmlLang = 'en';
 
