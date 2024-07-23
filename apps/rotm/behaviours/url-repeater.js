@@ -23,8 +23,8 @@ module.exports = superclass => class extends superclass {
       const submissionID = req.sessionModel.get('submissionID') || uuid.v4();
       const ip = req.headers['x-forwarded-for'] ||
       req.connection.remoteAddress;
-      console.log("ipaddress : " + req.ip);
-      req.sessionModel.set('ip', req.ip);
+      console.log("ipaddress : " + ip);
+      req.sessionModel.set('ip', ip);
       req.sessionModel.set('submissionID', submissionID);
       const urls = req.sessionModel.get('urls') || [];
       req.log('info', `Submission ID: ${submissionID}, Saved Urls: ${urls}`);
