@@ -9,7 +9,7 @@ const bodyParser = require('busboy-body-parser');
 var express = require('express');
 var exp = express();
 
-exp.set('trust proxy', '127.0.0.1');
+exp.set('trust proxy', true);
 
 
 if (process.env.REDIS_URL) {
