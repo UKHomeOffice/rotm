@@ -14,7 +14,7 @@ module.exports = superclass => class extends superclass {
     const submissionID = req.sessionModel.get('submissionID');
     const ip = req.sessionModel.get('ip');
 
-    req.log('info', `Submission ID: ${submissionID}, Saving Urls: ${req.form.values.urls}`);
+    req.log('info', `Submission ID: ${submissionID}, Saving Urls: ${req.form.values.urls}, IP Address: ${ip}`);
     return super.saveValues(req, res, next);
   }
 
@@ -23,7 +23,8 @@ module.exports = superclass => class extends superclass {
       const submissionID = req.sessionModel.get('submissionID') || uuid.v4();
       const ip = req.headers['x-forwarded-for'] ||
       req.connection.remoteAddress;
-      console.log("ipaddress : " + ip);
+      // eslint-disable-next-line no-console
+      console.log('ipaddress : ' + ip);
       req.sessionModel.set('ip', ip);
       req.sessionModel.set('submissionID', submissionID);
       const urls = req.sessionModel.get('urls') || [];

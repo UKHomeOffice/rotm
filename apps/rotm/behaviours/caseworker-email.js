@@ -7,14 +7,14 @@ const moment = require('moment');
 const config = require('../../../config');
 const { createLogger, format, transports } = require('winston');
 const { combine, timestamp, json } = format;
-const http = require('http');
+// const http = require('http');
 
-let ipAddress = '';
-http.get({host: 'api.ipify.org', port: 80, path: '/'}, function (resp) {
-  resp.on('data', function (ip) {
-    ipAddress = String.fromCharCode(...ip);
-  });
-});
+// let ipAddress = '';
+// http.get({host: 'api.ipify.org', port: 80, path: '/'}, function (resp) {
+//   resp.on('data', function (ip) {
+//     ipAddress = String.fromCharCode(...ip);
+//   });
+// });
 
 const logger = createLogger({
   format: combine(timestamp(), json()),

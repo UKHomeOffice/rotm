@@ -6,8 +6,8 @@ const config = require('./config');
 const mockAPIs = require('./mock-apis');
 const bodyParser = require('busboy-body-parser');
 
-var express = require('express');
-var exp = express();
+const express = require('express');
+const exp = express();
 
 exp.set('trust proxy', true);
 
@@ -64,10 +64,10 @@ if (config.useMocks) {
 }
 
 app.use((req, res, next) => {
-
-  var ip = req.headers['x-forwarded-for'] ||
+  const ip = req.headers['x-forwarded-for'] ||
   req.connection.remoteAddress;
-  console.log("ipaddress : " + ip);
+  // eslint-disable-next-line no-console
+  console.log('ipaddress : ' + ip);
 
   // Set HTML Language
   res.locals.htmlLang = 'en';
