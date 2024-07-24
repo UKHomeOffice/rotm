@@ -21,8 +21,11 @@ module.exports = superclass => class extends superclass {
   getValues(req, res, next) {
     super.getValues(req, res, (err, values) => {
       const submissionID = req.sessionModel.get('submissionID') || uuid.v4();
-      const ip = req.headers['x-forwarded-for'] ||
-      req.connection.remoteAddress;
+      console.log('x-forwarded-for : ' + req.headers['x-forwarded-for']);
+      console.log('remoteAddress: ' + req.connection.remoteAddress);
+      console.log('x-Real-IP: ' + req.header('x-Real-IP'));
+      console.log('req.ip ' + req.ip);
+      const ip = req.header('x-Real-IP');
       // eslint-disable-next-line no-console
       console.log('ipaddress : ' + ip);
       req.sessionModel.set('ip', ip);
