@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 'use strict';
 
 const uuid = require('uuid');
@@ -25,7 +26,7 @@ module.exports = superclass => class extends superclass {
       console.log('remoteAddress: ' + req.connection.remoteAddress);
       console.log('x-Real-IP: ' + req.header('x-Real-IP'));
       console.log('req.ip ' + req.ip);
-      const ip = (req.headers['x-forwarded-for'] || req.connection.remoteAddress || '').split(',')[0].trim()
+      const ip = (req.headers['x-forwarded-for'] || req.connection.remoteAddress || '').split(',')[0].trim();
       // eslint-disable-next-line no-console
       console.log('ipaddress : ' + ip);
       req.sessionModel.set('ip', ip);
