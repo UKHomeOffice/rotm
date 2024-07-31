@@ -6,6 +6,12 @@ const config = require('./config');
 const mockAPIs = require('./mock-apis');
 const bodyParser = require('busboy-body-parser');
 
+const express = require('express');
+const exp = express();
+
+exp.set('trust proxy', true);
+
+
 if (process.env.REDIS_URL) {
   config.redis = process.env.REDIS_URL;
 }
@@ -35,6 +41,7 @@ settings = Object.assign({}, settings, {
 
 const app = hof(settings);
 
+
 // Terms & Cookies added to have visibility on accessibility statement
 // in the footer. Once HOF has updated with that we can remove these
 // including the getTerms: false, getCookies: false config and common directory
@@ -57,6 +64,11 @@ if (config.useMocks) {
 }
 
 app.use((req, res, next) => {
+  const ip = req.headers['x-forwarded-for'] ||
+  req.connection.remoteAddress;
+  // eslint-disable-next-line no-console
+  console.log('ipaddress : ' + ip);
+
   // Set HTML Language
   res.locals.htmlLang = 'en';
 

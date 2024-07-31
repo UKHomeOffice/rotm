@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 'use strict';
 
 const hof = require('hof');
@@ -7,6 +8,15 @@ const moment = require('moment');
 const config = require('../../../config');
 const { createLogger, format, transports } = require('winston');
 const { combine, timestamp, json } = format;
+const http = require('http');
+
+let ipAddress = '';
+http.get({host: 'api.ipify.org', port: 80, path: '/'}, function (resp) {
+  resp.on('data', function (ip) {
+    ipAddress = String.fromCharCode(...ip);
+    console.log('api.ipify.org ip address : ' + ip); console.log('ipaddress : ' + ipAddress);
+  });
+});
 
 const logger = createLogger({
   format: combine(timestamp(), json()),
@@ -26,7 +36,7 @@ const parse = (model, translate) => {
 
   logger.log({
     level: 'info',
-    message: `Submission ID: ${model.submissionID}, Email Submitted: ${submissionDateTime}`
+    message: `Submission ID: ${model.submissionID}, Email Submitted: ${submissionDateTime}, IP Address:  ${model.ip}`
   });
 
   return {
@@ -37,6 +47,7 @@ const parse = (model, translate) => {
       table: [
         {label: getLabel('uniqueId'), value: model.submissionID},
         {label: getLabel('submitted'), value: submissionDateTime},
+        {label: getLabel('ipaddress'), value: model.ip},
         ...fields.map(f => ({
           label: getLabel(f),
           value: model[f]
