@@ -47,7 +47,7 @@ const parse = (model, translate) => {
 };
 
 const getIPAddress = model => {
-  return String(model.ipadddress);
+  return String(model.ipaddress);
 };
 
 module.exports = settings => {
