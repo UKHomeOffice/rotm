@@ -14,7 +14,7 @@ environment:
   IMAGE_REPO: rotm
   GIT_REPO: UKHomeOffice/rotm
   HOF_CONFIG: hof-services-config/Report_Online_Terrorist_Material
-  NON_PROD_AVAILABILITY: Mon-Fri 08:00-23:00 Europe/London
+  NON_PROD_AVAILABILITY: Mon-Fri 07:00-23:00 Europe/London
   READY_FOR_TEST_DELAY: 20s
   NOTIFY_STUB: stub
 
@@ -294,7 +294,7 @@ steps:
     when:
       branch: master
       event: push
-  
+
   # Get pull request branch so correct PR UAT environment is torn down in the tear_down_branch step that follows
   - name: get_pr_branch
     pull: if-not-exists
