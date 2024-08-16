@@ -12,7 +12,8 @@ module.exports = superclass => class extends superclass {
       req.form.values['another-url-4']
     ].filter(Boolean);
     const submissionID = req.sessionModel.get('submissionID');
-    req.log('info', `Submission ID: ${submissionID}, Saving Urls: ${req.form.values.urls}`);
+    const ipaddress = req.sessionModel.get('ipaddress');
+    req.log('info', `Submission ID: ${submissionID}, Saving Urls: ${req.form.values.urls}, IP Address: ${ipaddress}`);
     return super.saveValues(req, res, next);
   }
 
@@ -20,6 +21,8 @@ module.exports = superclass => class extends superclass {
     super.getValues(req, res, (err, values) => {
       const submissionID = req.sessionModel.get('submissionID') || uuid.v4();
       req.sessionModel.set('submissionID', submissionID);
+      const ipaddress = (req.headers['x-forwarded-for'] || req.connection.remoteAddress || '').split(',')[0].trim();
+      req.sessionModel.set('ipaddress', ipaddress);
       const urls = req.sessionModel.get('urls') || [];
       req.log('info', `Submission ID: ${submissionID}, Saved Urls: ${urls}`);
       values.url = urls[0] || '';
