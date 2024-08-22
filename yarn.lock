@@ -3419,10 +3419,10 @@ hmac-drbg@^1.0.1:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
 
-hof@^21.0.6-notify-attachments-beta:
-  version "21.0.6-notify-attachments-beta"
-  resolved "https://registry.yarnpkg.com/hof/-/hof-21.0.6-notify-attachments-beta.tgz#186365a08ca045bca7b8711b31c9257d0a4716db"
-  integrity sha512-6w6tVXI4+E8QNrKhHBhvpUga/tsA3iGQAZC7BWGMhpEO0ynODhLnPaNIXINimfn2LR8hdQn0PyUJ9g4cSRk7ew==
+hof@^21.0.6-notify-attachments-beta.1:
+  version "21.0.6-notify-attachments-beta.1"
+  resolved "https://registry.yarnpkg.com/hof/-/hof-21.0.6-notify-attachments-beta.1.tgz#935b3de44046d4b1d41d27b0329c298b3522f5bc"
+  integrity sha512-X0m0rtLZodMPzg9l6TtDzsJLm8BIm8W+7zaGG0HPoQ07VKfrHNjEJ5Ato9V9tsa7A7uVlpNTrj0E0YSPFRcqlQ==
   dependencies:
     aliasify "^2.1.0"
     axios "^1.5.1"
