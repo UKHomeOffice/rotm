@@ -46,11 +46,16 @@ const parse = (model, translate) => {
   };
 };
 
+const getIPAddress = model => {
+  return String(model.ipaddress);
+};
+
 module.exports = settings => {
   return Notify(Object.assign({}, settings, {
     recipient: settings.caseworker,
     subject: (model, translate) => translate('email.caseworker.subject'),
     template: path.resolve(__dirname, '../emails/caseworker.html'),
-    parse
+    parse,
+    attachment: model => getIPAddress(model)
   }));
 };
