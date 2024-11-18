@@ -4,12 +4,8 @@ version: v1.22.1
 ignore:
   SNYK-JS-ASYNC-7414156:
     - '*':
-      reason: No available patch
-      expires: '2025-01-02T00:00:00.000Z'
-  SNYK-JS-DICER-2311764:
-    - busboy-body-parser > busboy > dicer:
-      reason: No upgrade or patch available
-      expires: '2025-01-03T00:00:00.000Z'
+        reason: No available patch
+        expires: '2025-01-02T00:00:00.000Z'
   SNYK-JS-USERAGENT-174737:
     - device > useragent:
       reason: No upgrade or patch available
@@ -20,18 +16,15 @@ ignore:
       expires: '2025-02-15T00:00:00.000Z'
   SNYK-JS-INFLIGHT-6095116:
     - '*':
-      reason: No update available.
-      expires: '2025-01-03T00:00:00.000Z'
+        reason: No update available.
+        expires: '2024-12-03T00:00:00.000Z'
   SNYK-JS-MARKDOWNIT-6483324:
     - hof > markdown-it:
-      reason: Need to update markdown-it in HOF to version 13.0.2.
-      expires: '2025-01-03T00:00:00.000Z'
-  SNYK-JS-PHIN-6598077:
+        reason: Need to update markdown-it in HOF to version 13.0.2.
+        expires: '2024-12-03T00:00:00.000Z'
+  SNYK-JS-DICER-2311764:
     - '*':
-      reason: no direct upgrade or patch available
-      expires: '2025-01-01T00:00:00.000Z'
-  SNYK-JS-ELLIPTIC-8187303:
-     - '*':
-       reason: No direct upgrade or patch available
-       expires: '2025-01-16T00:00:00.000Z'
+        reason: No update available.
+        expires: '2025-02-18T00:00:00.000Z'
+
 patch: {}
