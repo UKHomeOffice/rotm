@@ -36,6 +36,7 @@ module.exports = {
     notifyApiKey: process.env.NOTIFY_KEY,
     notifyTemplate: process.env.NOTIFY_TEMPLATE
   },
+  feedbackUrl: process.env.FEEDBACK_URL,
   referrals: {
     caseworker: process.env.REFERRALS_EMAIL,
     notifyApiKey: process.env.NOTIFY_KEY,

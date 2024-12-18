@@ -61,7 +61,7 @@ app.use((req, res, next) => {
   res.locals.htmlLang = 'en';
 
   // Set feedback url, required to display phase banner
-  res.locals.feedbackUrl = 'https://eforms.homeoffice.gov.uk/outreach/feedback.ofml';
+  res.locals.feedbackUrl = config.feedbackUrl;
 
   // Below can be removed once generic accessibility footer link is added to HOF
   res.locals.footerSupportLinks = [
