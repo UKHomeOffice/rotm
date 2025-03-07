@@ -59,7 +59,7 @@
   "404": {
     "header": "Sorry, there’s a problem with this service"
   },
-  "timeout": {
-    "header": "Sorry, you’ll have to start again."
+  "accessibility": {
+    "header": "Accessibility statement for Report Online Terrorist Materials"
   }
 }

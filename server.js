@@ -48,6 +48,11 @@ app.use('/cookies', (req, res, next) => {
   next();
 });
 
+app.use('/accessibility', (req, res, next) => {
+  res.locals = Object.assign({}, res.locals, req.translate('accessibility'));
+  next();
+});
+
 app.use('/report', (req, res) => {
   res.redirect(301, '/');
 });
