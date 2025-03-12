@@ -1,8 +1,17 @@
-{{<partials-page}}
-{{$header}}Accessibility statement for Report Online Terrorist Materials{{/header}}
-{{$page-content}}
-  <h1 class="govuk-heading-l">Accessibility statement for Report Online Terrorist Materials</h1>
-  <div>
+{{<layout}}
+  {{$journeyHeader}}
+    {{#t}}journey.header{{/t}}
+  {{/journeyHeader}}
+    
+  {{$propositionHeader}}
+    {{> partials-navigation}}
+  {{/propositionHeader}}
+    
+  {{$header}}
+    Accessibility statement for Report Online Terrorist Materials
+  {{/header}}
+  
+  {{$content}}
     <p>This accessibility statement applies to the Report Online Terrorist Materials service.</p>
     <p>This service is run by the Home Office. We want as many people as possible to be able to use this service. For example, that means you should be able to:</p>
     <ul class="govuk-list govuk-list--bullet">
@@ -56,6 +65,5 @@
     <p>This statement was prepared on 28 September 2020. It was last reviewed on 25 June 2024.</p>
     <p>This website was last tested on 24 March 2024. The test was carried out internally by the Home Office.</p>
     <p>We tested the service based on a user's ability to complete key journeys. All parts of the chosen journeys were tested, including documents. Journeys were chosen on a number of factors including usage statistics, risk assessments and subject matter.</p>
-  </div>
-{{/page-content}}
-{{/partials-page}}
+  {{/content}}
+{{/layout}}

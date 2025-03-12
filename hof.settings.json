@@ -2,7 +2,8 @@
   "appName": "Report Online Terrorist Material",
   "theme": "govUK",
   "behaviours": [
-    "hof/components/clear-session"
+    "hof/components/clear-session",
+    "hof/components/session-timeout-warning"
   ],
   "routes": [
     "./apps/rotm"
