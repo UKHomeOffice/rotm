@@ -38,4 +38,8 @@ ignore:
     - '*':
        reason: No direct upgrade or patch available
        expires: '2025-06-07T00:00:00.000Z'
+  SNYK-JS-AXIOS-9403194:
+    - '*':
+       reason: No direct upgrade or patch available
+       expires: '2025-06-07T00:00:00.000Z'
 patch: {}
