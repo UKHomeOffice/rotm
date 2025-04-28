@@ -30,12 +30,12 @@ if [[ ${KUBE_NAMESPACE} == ${BRANCH_ENV} ]]; then
 elif [[ ${KUBE_NAMESPACE} == ${UAT_ENV} ]]; then
   $kd -f kube/file-vault/file-vault-ingress.yml
   $kd -f kube/configmaps/configmap.yml -f kube/app/service.yml
-  $kd -f kube/app/ingress-internal.yml -f kube/app/networkpolicy-internal.yml
+  $kd -f kube/app/ingress-internal.yml -f kube/app/ingress-external.yml -f kube/app/networkpolicy-internal.yml
   $kd -f kube/redis -f kube/file-vault -f kube/app/deployment.yml
 elif [[ ${KUBE_NAMESPACE} == ${STG_ENV} ]]; then
   $kd -f kube/file-vault/file-vault-ingress.yml
   $kd -f kube/configmaps/configmap.yml  -f kube/app/service.yml
-  $kd -f kube/app/ingress-internal.yml -f kube/app/networkpolicy-internal.yml
+  $kd -f kube/app/ingress-internal.yml -f kube/app/ingress-external.yml -f kube/app/networkpolicy-internal.yml
   $kd -f kube/redis -f kube/file-vault -f kube/app/deployment.yml
 elif [[ ${KUBE_NAMESPACE} == ${PROD_ENV} ]]; then
   $kd -f kube/file-vault/file-vault-ingress.yml
