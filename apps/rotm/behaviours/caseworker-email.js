@@ -34,6 +34,8 @@ const parse = (model, translate) => {
       title: 'You have a new report of online terrorist material',
       urls: model.urls,
       images: model.images,
+      ipAddress: model.ipaddress,
+      timezone: new Date().toString().match(/([A-Z]+[\+-][0-9]+.*)/)[1],
       table: [
         {label: getLabel('uniqueId'), value: model.submissionID},
         {label: getLabel('submitted'), value: submissionDateTime},
