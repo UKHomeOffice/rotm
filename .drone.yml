@@ -48,7 +48,6 @@ sonar_scanner: &sonar_scanner
 acceptance_tests: &acceptance_tests
   pull: if-not-exists
   image: mcr.microsoft.com/playwright:v1.12.3-focal
-  environment:
 
 steps:
   - name: clone_repos
