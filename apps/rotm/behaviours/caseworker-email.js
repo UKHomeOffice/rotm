@@ -43,7 +43,7 @@ const parse = (model, translate) => {
           label: getLabel(f),
           value: model[f]
         }))
-      ]
+      ] 
     }
   };
 };
