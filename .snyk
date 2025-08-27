@@ -2,7 +2,7 @@
 version: v1.22.1
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
-SNYK-JS-TMP-11501554:
+  SNYK-JS-TMP-11501554:
     - device > useragent > tmp:
         reason: No upgrade or patch available
         expires: '2025-06-07T00:00:00.000Z'
