@@ -2,6 +2,14 @@
 version: v1.22.1
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
+  SNYK-JS-MARKDOWNIT-12143043:
+    - hof > markdown-it:
+        reason: Vulnerability acknowledged, awaiting HOF update to markdown-it >=13.0.2
+        expires: '2025-10-07T00:00:00.000Z'
+  SNYK-JS-TMP-11501554:
+    - device > useragent > tmp:
+        reason: No upgrade path, useragent is deprecated
+        expires: '2025-10-07T00:00:00.000Z'
   SNYK-JS-ASYNC-7414156:
     - '*':
       reason: No available patch
@@ -25,7 +33,7 @@ ignore:
   SNYK-JS-MARKDOWNIT-6483324:
     - hof > markdown-it:
       reason: Need to update markdown-it in HOF to version 13.0.2.
-      expires: '2025-06-07T00:00:00.000Z'
+      expires: '2025-10-07T00:00:00.000Z'
   SNYK-JS-PHIN-6598077:
     - '*':
       reason: no direct upgrade or patch available
