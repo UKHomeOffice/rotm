@@ -9,7 +9,7 @@ ignore:
   SNYK-JS-TMP-11501554:
     - device > useragent > tmp:
         reason: No upgrade path, useragent is deprecated
-        expires: '2025-10-07T00:00:00.000Z'
+        expires: '2026-05-07T00:00:00.000Z'
   SNYK-JS-ASYNC-7414156:
     - '*':
       reason: No available patch
