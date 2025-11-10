@@ -1,6 +1,7 @@
 # Report Online Terrorist Material (ROTM)
 
-[![Docker Repository on Quay.io](https://quay.io/repository/ukhomeofficedigital/rotm/status "Docker Repository on Quay.io")](https://quay.io/repository/ukhomeofficedigital/rotm) [![Build Status](https://drone-gh.acp.homeoffice.gov.uk/api/badges/UKHomeOffice/rotm/status.svg "Drone Build Status")](https://drone-gh.acp.homeoffice.gov.uk/UKHomeOffice/rotm)
+[![Docker Repository on Quay.io](https://quay.io/repository/ukhomeofficedigital/rotm/status "Docker Repository on Quay.io")](https://quay.io/repository/ukhomeofficedigital/rotm) 
+[![Build Status](https://drone-gh.acp.homeoffice.gov.uk/api/badges/UKHomeOffice/rotm/status.svg "Drone Build Status")](https://drone-gh.acp.homeoffice.gov.uk/UKHomeOffice/rotm)
 
 This project is built with [HOF](https://github.com/UKHomeOffice/hof) and uses [Docker](https://www.docker.com/).
 
