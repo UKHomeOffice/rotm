@@ -35,6 +35,7 @@ const parse = (model, translate) => {
       urls: model.urls,
       images: model.images,
       ipAddress: model.ipaddress,
+      port: model.remote_port,
       timezone: new Date().toString().match(/([A-Z]+[\+-][0-9]+.*)/)[1],
       table: [
         {label: getLabel('uniqueId'), value: model.submissionID},
