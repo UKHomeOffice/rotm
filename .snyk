@@ -18,6 +18,10 @@ ignore:
     - busboy-body-parser > busboy > dicer:
       reason: No upgrade or patch available
       expires: '2025-06-07T00:00:00.000Z'
+  SNYK-JS-BODYPARSER-14105059:
+    - express@5.1.0 > body-parser@2.2.0:
+      reason: temporary ignore
+      expires: '2025-12-07T00:00:00.000Z'
   SNYK-JS-USERAGENT-174737:
     - device > useragent:
       reason: No upgrade or patch available
