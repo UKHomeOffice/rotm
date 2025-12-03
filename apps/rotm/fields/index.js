@@ -1,13 +1,16 @@
 'use strict';
 
 const path = require('path');
-// First pattern of regex allows for URLs using "www" or "http://" or "https://" as a prefix
-// eslint-disable-next-line max-len
-const http = '(?:https?:\\/\\/(?!\\/\\/)(?:www\\.)?[a-zA-Z0-9-]{1,63}(?:\\.[a-zA-Z0-9-]{1,63})*\\.[a-z]{2,6}(?:[\\/?#][^\\s]*)?\\/?)';
-// Second pattern of regex allows for URLs with no prefix e.g. example.com
-const URL = '(?:[a-zA-Z0-9-]{1,63}(?:\\.[a-zA-Z0-9-]{1,63})*\\.[a-z]{2,6}(?:[\\/?#][^\\s]*)?\\/?)';
-// Combines the above two URL patterns and also allows for empty values
-const URLRegex = new RegExp(`^(?:$|${http}|${URL})$`);
+
+// Allow only https://, prevent extra slashes, exclude < and > in paths/fragments
+const https = '(?:https:\\/\\/(?=[^/])[a-zA-Z0-9-]{1,63}(?:\\.[a-zA-Z0-9-]{1,63})*\\.[a-z]{2,6}(?:[\\/?#][^<>\\s]*)?)';
+
+// No-protocol URLs, also excluding < > in path/fragment
+const URL = '(?:[a-zA-Z0-9-]{1,63}(?:\\.[a-zA-Z0-9-]{1,63})*\\.[a-z]{2,6}(?:[\\/?#][^<>\\s]*)?)';
+
+// Combined regex
+const URLRegex = new RegExp(`^(?:$|${https}|${URL})$`);
+
 
 function extname(value) {
   return value && [
