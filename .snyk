@@ -56,7 +56,7 @@ ignore:
        expires: '2025-06-07T00:00:00.000Z'
   SNYK-JS-NODEMAILER-14157156:
     - '*':
-      reason:  introduced by hof@22.10.4 > nodemailer@6.10.1 This issue was fixed in versions: 7.0.11
+      reason:  introduced by hof@22.10.4 > nodemailer@6.10.1
       expires: '2026-01-07T00:00:00.000Z'
   SNYK-JS-NODEMAILER-13378253:
     - '*':
