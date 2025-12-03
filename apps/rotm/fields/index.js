@@ -3,9 +3,11 @@
 const path = require('path');
 
 // Allow only https://, prevent extra slashes, exclude < and > in paths/fragments
+// eslint-disable-next-line max-len
 const https = '(?:https:\\/\\/[a-zA-Z0-9-]{1,63}(?:\\.[a-zA-Z0-9-]{1,63})*\\.[a-z]{2,6}(?:\\/[^\s<>#?]*)?(?:\\?[^\s<>#]*)?(?:#[^\s<>]*)?)';
 
 // No-protocol URLs, also excluding < > in path/fragment
+// eslint-disable-next-line max-len
 const URL = '(?:[a-zA-Z0-9-]{1,63}(?:\\.[a-zA-Z0-9-]{1,63})*\\.[a-z]{2,6}(?:\\/[^\s<>#?]*)?(?:\\?[^\s<>#]*)?(?:#[^\s<>]*)?)';
 
 // Combined regex
