@@ -235,7 +235,7 @@ steps:
           - feature/*
       event: pull_request
 
-      #TEST Deploy to Staging environment
+      # TEST Deploy to Staging environment
   # - name: TEST_deploy_to_stg
   #   pull: if-not-exists
   #   image: quay.io/ukhomeofficedigital/kd:v1.14.0
