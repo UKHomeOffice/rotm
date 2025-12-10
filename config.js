@@ -34,13 +34,15 @@ module.exports = {
     transport: process.env.EMAIL_TRANSPORT,
     caseworker: process.env.CASEWORKER_EMAIL,
     notifyApiKey: process.env.NOTIFY_KEY,
-    notifyTemplate: process.env.NOTIFY_TEMPLATE
+    notifyTemplate: process.env.NOTIFY_TEMPLATE,
+    quarantine: process.env.QUARANTINE_EMAIL
   },
   feedbackUrl: process.env.FEEDBACK_URL,
   referrals: {
     caseworker: process.env.REFERRALS_EMAIL,
     notifyApiKey: process.env.NOTIFY_KEY,
-    notifyTemplate: process.env.NOTIFY_TEMPLATE
+    notifyTemplate: process.env.NOTIFY_TEMPLATE,
+    quarantine: process.env.QUARANTINE_EMAIL
   },
   hosts: {
     acceptanceTests: process.env.ACCEPTANCE_HOST_NAME || `http://localhost:${port}`
