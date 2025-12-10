@@ -14,7 +14,7 @@ metadata:
   name: {{ .APP_NAME }}
   {{ end }}
 spec:
-  {{ if or (eq .KUBE_NAMESPACE .STG_ENV) (eq .KUBE_NAMESPACE .PROD_ENV) }}
+  {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
   replicas: 10
   {{ else }}
   replicas: 1

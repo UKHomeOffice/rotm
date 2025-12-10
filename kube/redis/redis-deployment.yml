@@ -41,12 +41,21 @@ spec:
           securityContext:
             runAsNonRoot: true
           resources:
+          {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
             requests:
               cpu: "200m"
               memory: "1000Mi"
             limits:
-              cpu: "200m"
+              cpu: "500m"
               memory: "1000Mi"
+          {{ else }}
+            requests:
+              cpu: "20m"
+              memory: "100Mi"
+            limits:
+              cpu: "100m"
+              memory: "200Mi"
+          {{ end }}
       volumes:
         - name: data
           emptyDir: {}
