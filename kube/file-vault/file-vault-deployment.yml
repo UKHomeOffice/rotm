@@ -151,7 +151,6 @@ spec:
               readOnly: true
 
         - name: nginx-proxy
-          # nginx-proxy-govuk:v4
           # nginx-proxy-govuk:v0.0.10 updated on 8th Dec 2025
           image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/sas/hof-docker-nginx-proxy:v0.0.10
           resources:
