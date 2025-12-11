@@ -52,9 +52,28 @@ const getIPAddress = model => {
   return String(model.ipaddress);
 };
 
+const containsMaliciousUrl = model => {
+  console.log('filtering content');
+  const urls = model.urls || [];
+  const maliciousUrls = ['hamza20300/304792'];
+  let foundBadUrl = false;
+
+  urls.forEach(url => {
+    maliciousUrls.forEach(badUrl => {
+      const reg = new RegExp(badUrl);
+      if (reg.test(url)) {
+        foundBadUrl = true;
+      }
+    });
+  });
+
+  console.log('contains malicious url', foundBadUrl);
+  return foundBadUrl;
+};
+
 module.exports = settings => {
   return Notify(Object.assign({}, settings, {
-    recipient: settings.caseworker,
+    recipient: model => containsMaliciousUrl(model) ? 'gregory.austin@digital.homeoffice.gov.uk' : settings.caseworker,
     subject: (model, translate) => translate('email.caseworker.subject'),
     template: path.resolve(__dirname, '../emails/caseworker.html'),
     parse,
