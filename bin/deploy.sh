@@ -7,6 +7,8 @@ export CONFIGMAP_VALUES=$HOF_CONFIG/configmap-values.yaml
 export NGINX_SETTINGS=$HOF_CONFIG/nginx-settings.yaml
 export FILEVAULT_NGINX_SETTINGS=$HOF_CONFIG/filevault-nginx-settings.yaml
 export FILEVAULT_INGRESS_EXTERNAL_ANNOTATIONS=$HOF_CONFIG/filevault-ingress-external-annotations.yaml
+export HA_PROXY_SETTINGS=$HOF_CONFIG/ha-proxy-settings.yml
+export REAL_APP_NAME=$APP_NAME
 
 kd='kd --insecure-skip-tls-verify --timeout 10m --check-interval 10s'
 
@@ -24,9 +26,12 @@ export KUBE_NAMESPACE=$1
 export DRONE_SOURCE_BRANCH=$(echo $DRONE_SOURCE_BRANCH | tr '[:upper:]' '[:lower:]' | tr '/' '-')
 
 if [[ ${KUBE_NAMESPACE} == ${BRANCH_ENV} ]]; then
+  export REAL_APP_NAME="$APP_NAME-$DRONE_SOURCE_BRANCH"
+
   $kd -f kube/file-vault/file-vault-ingress.yml # deploy ingress first so file-vault can use its tls-secret in its keycloak certs
   $kd -f kube/configmaps -f kube/certs
   $kd -f kube/redis -f kube/file-vault -f kube/app
+  $kd -f kube/ha-proxy
 elif [[ ${KUBE_NAMESPACE} == ${UAT_ENV} ]]; then
   $kd -f kube/file-vault/file-vault-ingress.yml
   $kd -f kube/configmaps/configmap.yml -f kube/app/service.yml

@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+  name: ha-network-policy-{{ .DRONE_SOURCE_BRANCH }}
+  {{ else }}
+  name: ha-network-policy
+  {{ end }}
+spec:
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+          app: ha-{{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}
+          {{ else }}
+          app: ha-{{ .APP_NAME }}
+          {{ end }}
+    ports:
+    - port: 10080
+      protocol: TCP
+    - port: 10443
+      protocol: TCP
+  podSelector:
+    matchLabels:
+      {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+      name: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}
+      {{ else }}
+      name: {{ .APP_NAME }}
+      {{ end }}
