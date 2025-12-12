@@ -151,9 +151,12 @@ spec:
           volumeMounts:
             - mountPath: /public
               name: public
+            - mountPath: /tmp
+              name: recaptcha-sa-key
+              readOnly: true
 
         - name: nginx-proxy
-         # nginx-proxy-govuk:v0.0.10 updated on 8th Dec 2025
+          # nginx-proxy-govuk:v4
           image: quay.io/ukhomeofficedigital/nginx-proxy-govuk@sha256:4470064d0b1d20ae08c5fd85551576cb687f342a22d6cb456fda9b2c4ce8c8df
           resources:
             requests:
@@ -174,3 +177,9 @@ spec:
       volumes:
         - name: public
           emptyDir: {}
+        - name: recaptcha-sa-key
+          secret:
+            secretName: recaptcha-sa-key
+            items:
+              - key: gc-key.json
+                path: gc-key.json
