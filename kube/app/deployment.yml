@@ -152,6 +152,9 @@ spec:
             - mountPath: /tmp
               name: recaptcha-sa-key
               readOnly: true
+            - mountPath: /tmp/config
+              name: app-configmap
+              readOnly: true
 
         - name: nginx-proxy
           # nginx-proxy-govuk:v4
