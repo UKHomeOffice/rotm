@@ -152,9 +152,9 @@ spec:
             - mountPath: /tmp
               name: recaptcha-sa-key
               readOnly: true
-            - mountPath: /tmp/config
-              name: app-configmap
-              readOnly: true
+            # - mountPath: /tmp/config
+            #   name: app-configmap
+            #   readOnly: true
 
         - name: nginx-proxy
           # nginx-proxy-govuk:v4
@@ -182,12 +182,12 @@ spec:
           secret:
             secretName: recaptcha-sa-key
             items:
-              - key: key.json
-                path: key.json
-        - name: app-configmap
-          configMap:
-            {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-            name: {{ .APP_NAME }}-configmap-{{ .DRONE_SOURCE_BRANCH }}
-            {{ else }}
-            name: {{ .APP_NAME }}-configmap
-            {{ end }}
+              - key: gc-key.json
+                path: gc-key.json
+        # - name: app-configmap
+        #   configMap:
+        #     {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+        #     name: {{ .APP_NAME }}-configmap-{{ .DRONE_SOURCE_BRANCH }}
+        #     {{ else }}
+        #     name: {{ .APP_NAME }}-configmap
+        #     {{ end }}
