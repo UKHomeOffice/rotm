@@ -43,11 +43,11 @@ spec:
           resources:
           {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
             requests:
-              cpu: "200m"
-              memory: "1000Mi"
+              cpu: "400m"
+              memory: "2000Mi"
             limits:
-              cpu: "500m"
-              memory: "1000Mi"
+              cpu: "1000m"
+              memory: "2000Mi"
           {{ else }}
             requests:
               cpu: "20m"
