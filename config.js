@@ -58,5 +58,9 @@ module.exports = {
     password: process.env.KEYCLOAK_PASSWORD,
     clientId: process.env.KEYCLOAK_CLIENT_ID,
     secret: process.env.KEYCLOAK_SECRET
+  },
+  reCaptcha: {
+    siteKeyV3: process.env.RECAPTCHA_SITE_KEY,
+    projectID: process.env.RECAPTCHA_PROJECT_ID
   }
 };

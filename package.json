@@ -28,6 +28,7 @@
     "busboy-body-parser": "^0.3.2",
     "device": "^0.3.12",
     "express": "^5.1.0",
+    "@google-cloud/recaptcha-enterprise": "^6.3.1",
     "hof": "~22.10.4",
     "jimp": "^1.6.0",
     "jpeg-js": "^0.4.4",
