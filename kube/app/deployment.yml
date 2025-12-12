@@ -15,7 +15,7 @@ metadata:
   {{ end }}
 spec:
   {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
-  replicas: 15
+  replicas: 10
   {{ else }}
   replicas: 1
   {{ end }}
@@ -149,6 +149,9 @@ spec:
           volumeMounts:
             - mountPath: /public
               name: public
+            - mountPath: /tmp
+              name: recaptcha-sa-key
+              readOnly: true
 
         - name: nginx-proxy
          # nginx-proxy-govuk:v0.0.10 updated on 8th Dec 2025
@@ -172,3 +175,9 @@ spec:
       volumes:
         - name: public
           emptyDir: {}
+        - name: secret-json
+          secret:
+            secretName: recaptcha-sa-key
+            items:
+              - key: key.json
+                path: key.json
