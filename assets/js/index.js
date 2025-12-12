@@ -5,7 +5,7 @@
 require('hof/frontend/themes/gov-uk/client-js');
 const repeater = require('./repeater');
 const govuk = require('govuk-frontend');
-const { reCaptchaSiteKeyV3 } = require('../../config');
+const reCaptchaSiteKeyV3 = window.reCaptchaSiteKeyV3;
 
 govuk.initAll();
 
