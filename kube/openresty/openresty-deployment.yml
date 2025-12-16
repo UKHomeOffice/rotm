@@ -1,0 +1,97 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
+  name: {{ .APP_NAME }}-openresty
+  {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+  annotations:
+    downscaler/uptime: {{ .NON_PROD_AVAILABILITY }}
+  name: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}-openresty
+  {{ else }}
+  annotations:
+    downscaler/uptime: {{ .NON_PROD_AVAILABILITY }}
+  name: {{ .APP_NAME }}-openresty
+  {{ end }}
+spec:
+  {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
+  replicas: 2
+  {{ else }}
+  replicas: 1
+  {{ end }}
+  selector:
+    matchLabels:
+      {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+      name: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}-openresty
+      {{ else }}
+      name: {{ .APP_NAME }}-openresty
+      {{ end }}
+  template:
+    metadata:
+      labels:
+        {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+        name: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}-openresty
+        app: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}-openresty
+        service: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}-openresty
+        {{ else }}
+        name: {{ .APP_NAME }}-openresty
+        app: {{ .APP_NAME }}-openresty
+        service: {{ .APP_NAME }}-openresty
+        {{ end }}
+    spec:
+      containers:
+        - name: openresty
+          image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/sas/hof-forms-waf:e002a7353227e30ddab2a41bf73f05a4acfcb7ed
+          resources:
+            requests:
+              memory: 100Mi
+              cpu: 10m
+            limits:
+              memory: 512Mi
+              cpu: 300m
+          ports:
+            - containerPort: 8080
+              name: public
+            - containerPort: 8081
+              name: metrics
+            - containerPort: 8082
+              name: admin
+            - containerPort: 8443
+              name: https
+
+          env:
+            - name: REDIS_PORT
+              value: "6379"
+            - name: REDIS_HOST
+              {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+              value: redis-{{ .DRONE_SOURCE_BRANCH }}.{{ .KUBE_NAMESPACE }}.svc.cluster.local
+              {{ else }}
+              value: redis.{{ .KUBE_NAMESPACE }}.svc.cluster.local
+              {{ end }}
+            - name: WAF_SYNC_INTERVAL
+              value: "${WAF_SYNC_INTERVAL:-30}"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8081
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8081
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          volumeMounts:
+          - name: nginx-config
+            mountPath: /usr/local/openresty/nginx/conf/nginx.conf
+            subPath: nginx.conf
+      volumes:
+        - name: nginx-config
+          configMap:
+            {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+            name: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}-openresty-config
+            {{ else }}
+            name: {{ .APP_NAME }}-openresty-config
+            {{ end }}
+      
