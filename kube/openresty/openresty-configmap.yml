@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+  name: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}-openresty-config
+  {{ else }}
+  name: {{ .APP_NAME }}-openresty-config
+  {{ end }}
+  namespace: {{ .KUBE_NAMESPACE }}
+  labels:
+    {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+    name: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}-openresty
+    {{ else }}
+    name: {{ .APP_NAME }}-openresty
+    {{ end }}
+data:
+  nginx.conf: |
+{{ file .OPENRESTY_SETTINGS | indent 4 }}
