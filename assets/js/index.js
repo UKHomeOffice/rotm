@@ -33,7 +33,7 @@ function onSubmit(e) {
   });
 }
 
-// Bind onSubmit function to each input submit button
-document.querySelectorAll('input[type="submit"]').forEach(button => {
-  button.addEventListener('click', onSubmit);
+// Listen for submit on all forms
+document.querySelectorAll('form').forEach(form => {
+  form.addEventListener('submit', onSubmit);
 });
