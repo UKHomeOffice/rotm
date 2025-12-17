@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+  name: waf-admin-np-{{ .DRONE_SOURCE_BRANCH }}
+  {{ else }}
+  name: waf-admin-np
+  {{ end }}
+spec:
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+          name: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}-openresty
+          app: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}-openresty
+          {{ else }}
+          name: {{ .APP_NAME }}-openresty
+          app: {{ .APP_NAME }}-openresty
+          {{ end }}
+    ports:
+    - port: 8080
+      protocol: TCP
+  podSelector:
+    matchLabels:
+      {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+      app: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}-waf-admin-ui
+      {{ else }}
+      app: {{ .APP_NAME }}-waf-admin-ui
+      {{ end }}
