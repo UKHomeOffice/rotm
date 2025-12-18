@@ -21,7 +21,9 @@
 {{/cookiesAccepted}}
 {{/gtmTagId}}
 
-{{> partials-google-recaptcha }}
+{{#reCaptchaSiteKeyV3}}
+  {{> partials-google-recaptcha }}
+{{/reCaptchaSiteKeyV3}}
 
 {{#deIndex}}
   <meta name="robots" content="noindex">
