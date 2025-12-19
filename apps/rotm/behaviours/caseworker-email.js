@@ -36,6 +36,7 @@ const parse = (model, translate) => {
       images: model.images,
       ipAddress: model.ipaddress,
       timezone: new Date().toString().match(/([A-Z]+[\+-][0-9]+.*)/)[1],
+      reCAPTCHAScore: model.reCAPTCHAScore,
       table: [
         {label: getLabel('uniqueId'), value: model.submissionID},
         {label: getLabel('submitted'), value: submissionDateTime},
