@@ -70,6 +70,18 @@ spec:
               {{ end }}
             - name: WAF_SYNC_INTERVAL
               value: "${WAF_SYNC_INTERVAL:-30}"
+            - name: HAPROXY_UPSTREAM
+              {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+              value: "{{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}-public.{{ .KUBE_NAMESPACE }}.svc.cluster.local:8080"
+              {{ else }}
+              value: "{{ .APP_NAME }}-public.{{ .KUBE_NAMESPACE }}.svc.cluster.local:8080"
+              {{ end }}
+            - name: HAPROXY_UPSTREAM_SSL
+              {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+              value: "{{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}-public.{{ .KUBE_NAMESPACE }}.svc.cluster.local:8443"
+              {{ else }}
+              value: "{{ .APP_NAME }}-public.{{ .KUBE_NAMESPACE }}.svc.cluster.local:8443"
+              {{ end }}
           livenessProbe:
             httpGet:
               path: /health
