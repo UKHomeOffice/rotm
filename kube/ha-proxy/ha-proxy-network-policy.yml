@@ -21,6 +21,10 @@ spec:
       protocol: TCP
     - port: 10443
       protocol: TCP
+    - port: 8080
+      protocol: TCP
+    - port: 8443
+      protocol: TCP
   podSelector:
     matchLabels:
       {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}

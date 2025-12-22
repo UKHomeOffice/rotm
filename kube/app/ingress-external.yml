@@ -44,4 +44,4 @@ spec:
               {{ else }}
               serviceName: ha-{{ .APP_NAME }}
               {{ end }}
-              servicePort: 443
+              servicePort: 8443
