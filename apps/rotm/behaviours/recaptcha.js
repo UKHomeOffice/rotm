@@ -87,6 +87,7 @@ module.exports = superclass => class extends superclass {
       }
 
       const score = await createAssessment({ token }, req);
+      req.sessionModel.set('reCAPTCHAScore', score);
 
       if (score === null) {
         req.log('warn', 'reCAPTCHA score unavailable');
