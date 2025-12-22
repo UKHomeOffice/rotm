@@ -25,4 +25,3 @@ spec:
     - name: admin
       port: 8080
       targetPort: admin
-    

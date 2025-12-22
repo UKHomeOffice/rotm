@@ -64,9 +64,9 @@ spec:
               value: "6379"
             - name: REDIS_HOST
               {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-              value: redis-{{ .DRONE_SOURCE_BRANCH }}.{{ .KUBE_NAMESPACE }}.svc.cluster.local
+              value: ui-redis-{{ .DRONE_SOURCE_BRANCH }}.{{ .KUBE_NAMESPACE }}.svc.cluster.local
               {{ else }}
-              value: redis.{{ .KUBE_NAMESPACE }}.svc.cluster.local
+              value: ui-redis.{{ .KUBE_NAMESPACE }}.svc.cluster.local
               {{ end }}
             - name: WAF_SYNC_INTERVAL
               value: "${WAF_SYNC_INTERVAL:-30}"
@@ -82,6 +82,16 @@ spec:
               {{ else }}
               value: "{{ .APP_NAME }}-public.{{ .KUBE_NAMESPACE }}.svc.cluster.local:8443"
               {{ end }}
+            - name: WAF_ADMIN_SALT
+              valueFrom:
+                secretKeyRef:
+                  name: waf-admin-salt
+                  key: salt
+            - name: WAF_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: waf-admin-salt
+                  key: password
           livenessProbe:
             httpGet:
               path: /health
