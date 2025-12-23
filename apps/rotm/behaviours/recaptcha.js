@@ -3,15 +3,6 @@ const {RecaptchaEnterpriseServiceClient} = require('@google-cloud/recaptcha-ente
 const client = new RecaptchaEnterpriseServiceClient();
 
 /**
-  * Create an assessment to analyze the risk of a UI action.
-  *
-  * projectID: Your Google Cloud Project ID.
-  * recaptchaSiteKey: The reCAPTCHA key associated with the site/app
-  * token: The generated token obtained from the client.
-  * recaptchaAction: Action name corresponding to the token.
-  */
-
-/**
  * Create an assessment to analyse the risk of a UI action.
  *
  * @param {Object} options - The options for the assessment.
@@ -79,6 +70,30 @@ async function createAssessment({
 
 module.exports = superclass => class extends superclass {
   async validate(req, res, next) {
+    const validationErrorFunc = (key, type) =>
+      new this.ValidationError(key, { type: type });
+
+    const handleValidationError = reason => {
+      const errs = {};
+
+      req.log('debug', `reCAPTCHA Validation failed: ${reason}`);
+
+      if (reCaptcha.threshold === 0) {
+        req.log('debug', 'Threshold is 0. Accepting all scores, including null.');
+        return next();
+      }
+
+      // Loop through req.form.values and add the first field with a non-empty value to the error object
+      for (const [key, value] of Object.entries(req.form.values)) {
+        if (value) {
+          errs[key] = validationErrorFunc(key, 'reCaptchaFailed');
+          break;
+        }
+      }
+
+      return next(errs);
+    };
+
     try {
       const token = req.body['g-recaptcha-token'];
       if (!token) {
@@ -90,17 +105,19 @@ module.exports = superclass => class extends superclass {
       req.sessionModel.set('reCAPTCHAScore', score);
 
       if (score === null) {
-        req.log('warn', 'reCAPTCHA score unavailable');
-      } else {
-        req.log('info', `Risk Analysis -> Score: ${score}`);
+        const errorMessage = 'reCAPTCHA score unavailable';
+        throw new Error(errorMessage);
+      }
+
+      req.log('info', `reCAPTCHA Risk Analysis -> Score: ${score}`);
+
+      if ( !(score >= reCaptcha.threshold) ) {
+        const errorMessage = 'Score does not meet the threshold';
+        throw new Error(errorMessage);
       }
     } catch (error) {
-      req.log('error', `Validation failed: ${error.message}`);
+      handleValidationError(error.message);
     }
-
-    // @TODO:
-    //    Currently allowing users to continue regardless of the reCAPTCHA score.
-    //    In the future, implement a restriction to prevent users from continuing if the score exceeds the threshold.
 
     return next();
   }
