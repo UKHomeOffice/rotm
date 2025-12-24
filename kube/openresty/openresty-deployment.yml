@@ -41,7 +41,7 @@ spec:
     spec:
       containers:
         - name: openresty
-          image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/sas/hof-forms-waf:e5439bf40cd595ec3a8f9187901f31ac280ac979
+          image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/sas/hof-forms-waf:59242ea694b6642315b9b7ee3d3b423058f9d4d5
           resources:
             requests:
               memory: 100Mi
@@ -60,6 +60,10 @@ spec:
               name: https
 
           env:
+            - name: HOSTNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
             - name: REDIS_PORT
               value: "6379"
             - name: REDIS_HOST
@@ -69,7 +73,7 @@ spec:
               value: ui-redis.{{ .KUBE_NAMESPACE }}.svc.cluster.local
               {{ end }}
             - name: WAF_SYNC_INTERVAL
-              value: "${WAF_SYNC_INTERVAL:-30}"
+              value: "30"
             - name: HAPROXY_UPSTREAM
               {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
               value: "{{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}-public.{{ .KUBE_NAMESPACE }}.svc.cluster.local:8080"
@@ -92,6 +96,8 @@ spec:
                 secretKeyRef:
                   name: waf-admin-salt
                   key: password
+            - name: WAF_USE_LEADER_ELECTION
+              value: "true"
           livenessProbe:
             httpGet:
               path: /health

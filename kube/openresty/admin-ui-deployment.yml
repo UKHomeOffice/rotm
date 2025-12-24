@@ -41,7 +41,7 @@ spec:
     spec:
       containers:
         - name: admin-ui
-          image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/sas/hof-forms-waf-admin-ui:e5439bf40cd595ec3a8f9187901f31ac280ac979
+          image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/sas/hof-forms-waf-admin-ui:59242ea694b6642315b9b7ee3d3b423058f9d4d5
           resources:
             requests:
               memory: 10Mi
