@@ -2,9 +2,9 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-  name: redis-permit-access-{{ .DRONE_SOURCE_BRANCH }}
+  name: openresty-np-{{ .DRONE_SOURCE_BRANCH }}
   {{ else }}
-  name: redis-permit-access
+  name: openresty-np
   {{ end }}
 spec:
   ingress:
@@ -12,24 +12,21 @@ spec:
     - podSelector:
         matchLabels:
           {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-          name: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}
-          {{ else }}
-          name: {{ .APP_NAME }}
-          {{ end }}
-    - podSelector:
-        matchLabels:
-          {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
           name: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}-openresty
+          app: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}-openresty
           {{ else }}
           name: {{ .APP_NAME }}-openresty
+          app: {{ .APP_NAME }}-openresty
           {{ end }}
     ports:
-    - port: 6379
+    - port: 8080
+      protocol: TCP
+    - port: 8443
       protocol: TCP
   podSelector:
     matchLabels:
       {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-      name: redis-{{ .DRONE_SOURCE_BRANCH }}
+      app: ha-{{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}
       {{ else }}
-      name: redis
+      app: ha-{{ .APP_NAME }}
       {{ end }}

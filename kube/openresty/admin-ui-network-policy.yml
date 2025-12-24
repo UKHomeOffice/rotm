@@ -2,9 +2,9 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-  name: redis-permit-access-{{ .DRONE_SOURCE_BRANCH }}
+  name: waf-admin-np-{{ .DRONE_SOURCE_BRANCH }}
   {{ else }}
-  name: redis-permit-access
+  name: waf-admin-np
   {{ end }}
 spec:
   ingress:
@@ -12,24 +12,19 @@ spec:
     - podSelector:
         matchLabels:
           {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-          name: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}
-          {{ else }}
-          name: {{ .APP_NAME }}
-          {{ end }}
-    - podSelector:
-        matchLabels:
-          {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
           name: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}-openresty
+          app: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}-openresty
           {{ else }}
           name: {{ .APP_NAME }}-openresty
+          app: {{ .APP_NAME }}-openresty
           {{ end }}
     ports:
-    - port: 6379
+    - port: 8080
       protocol: TCP
   podSelector:
     matchLabels:
       {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-      name: redis-{{ .DRONE_SOURCE_BRANCH }}
+      app: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}-waf-admin-ui
       {{ else }}
-      name: redis
+      app: {{ .APP_NAME }}-waf-admin-ui
       {{ end }}
