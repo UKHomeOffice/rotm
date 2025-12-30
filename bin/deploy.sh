@@ -3,6 +3,7 @@ set -e
 
 export INGRESS_INTERNAL_ANNOTATIONS=$HOF_CONFIG/ingress-internal-annotations.yaml
 export INGRESS_EXTERNAL_ANNOTATIONS=$HOF_CONFIG/ingress-external-annotations.yaml
+export ADMIN_UI_INGRESS_INTERNAL_ANNOTATIONS=$HOF_CONFIG/admin-ui-ingress-internal-annotations.yaml
 export CONFIGMAP_VALUES=$HOF_CONFIG/configmap-values.yaml
 export NGINX_SETTINGS=$HOF_CONFIG/nginx-settings.yaml
 export FILEVAULT_NGINX_SETTINGS=$HOF_CONFIG/filevault-nginx-settings.yaml
@@ -18,7 +19,7 @@ if [[ $1 == 'tear_down' ]]; then
   export DRONE_SOURCE_BRANCH=$(cat /root/.dockersock/branch_name.txt)
 
   $kd --delete -f kube/configmaps/configmap.yml
-  $kd --delete -f kube/redis -f kube/file-vault -f kube/app
+  $kd --delete -f kube/redis -f kube/file-vault -f kube/app -f kube/ui-redis -f kube/openresty -f kube/ha-proxy
   echo "Torn Down UAT Branch - $APP_NAME-$DRONE_SOURCE_BRANCH.internal.$BRANCH_ENV.homeoffice.gov.uk"
   exit 0
 fi
@@ -39,20 +40,27 @@ elif [[ ${KUBE_NAMESPACE} == ${UAT_ENV} ]]; then
   $kd -f kube/configmaps/configmap.yml -f kube/app/service.yml
   $kd -f kube/app/ingress-internal.yml -f kube/app/ingress-external.yml -f kube/app/networkpolicy-internal.yml -f kube/app/networkpolicy-external.yml
   $kd -f kube/redis -f kube/file-vault -f kube/app/deployment.yml
+  $kd -f kube/ui-redis
+  $kd -f kube/openresty -f kube/ha-proxy
 elif [[ ${KUBE_NAMESPACE} == ${STG_ENV} ]]; then
   $kd -f kube/file-vault/file-vault-ingress.yml
   $kd -f kube/configmaps/configmap.yml  -f kube/app/service.yml
   $kd -f kube/app/ingress-internal.yml -f kube/app/ingress-external.yml -f kube/app/networkpolicy-internal.yml -f kube/app/networkpolicy-external.yml
   $kd -f kube/redis -f kube/file-vault -f kube/app/deployment.yml
+  $kd -f kube/ui-redis
+  $kd -f kube/openresty -f kube/ha-proxy
 elif [[ ${KUBE_NAMESPACE} == ${PROD_ENV} ]]; then
   $kd -f kube/file-vault/file-vault-ingress.yml
   $kd -f kube/configmaps/configmap.yml  -f kube/app/service.yml
   $kd -f kube/app/ingress-external.yml -f kube/app/networkpolicy-external.yml
   $kd -f kube/redis -f kube/file-vault -f kube/app/deployment.yml
+  $kd -f kube/ui-redis
+  $kd -f kube/openresty -f kube/ha-proxy
 fi
 
 sleep $READY_FOR_TEST_DELAY
 
 if [[ ${KUBE_NAMESPACE} == ${BRANCH_ENV} ]]; then
   echo "Branch - $APP_NAME-$DRONE_SOURCE_BRANCH.internal.$BRANCH_ENV.homeoffice.gov.uk"
+  echo "WAF Admin UI - admin-ui-$DRONE_SOURCE_BRANCH.internal.$BRANCH_ENV.homeoffice.gov.uk"
 fi
