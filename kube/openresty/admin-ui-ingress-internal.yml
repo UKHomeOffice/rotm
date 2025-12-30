@@ -1,0 +1,47 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+  name: waf-admin-ui-internal-{{ .DRONE_SOURCE_BRANCH }}
+  {{ else }}
+  name: waf-admin-ui-ingress-internal
+  {{ end }}
+{{ file .ADMIN_UI_INGRESS_INTERNAL_ANNOTATIONS | indent 2 }}
+spec:
+  tls:
+    - hosts:
+      {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+        - waf-admin-ui-{{ .DRONE_SOURCE_BRANCH }}.internal.{{ .BRANCH_ENV }}.homeoffice.gov.uk
+      {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
+        - waf-admin-ui.uat.internal.sas-notprod.homeoffice.gov.uk
+      {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
+        - waf-admin-ui-stg.internal.rotm.sas.homeoffice.gov.uk
+      {{ else if eq .KUBE_NAMESPACE .PROD_ENV }}
+        - waf-admin-ui-prod.internal.report-terrorist-material.homeoffice.gov.uk
+      {{ end }}
+      {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+      secretName: branch-tls-internal
+      {{ else }}
+      secretName: {{ .APP_NAME }}-internal
+      {{ end }}
+  rules:
+      {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+    - host: admin-ui-{{ .DRONE_SOURCE_BRANCH }}.internal.{{ .BRANCH_ENV }}.homeoffice.gov.uk
+      {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
+    - host: admin-ui.uat.internal.sas-notprod.homeoffice.gov.uk
+      {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
+    - host: admin-ui-stg.internal.rotm.sas.homeoffice.gov.uk
+      {{ else if eq .KUBE_NAMESPACE .PROD_ENV }}
+    - host: admin-ui-prod.internal.report-terrorist-material.homeoffice.gov.uk
+      {{ end }}
+      http:
+        paths:
+          - path: /
+            backend:
+              {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+              serviceName: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}-openresty
+              {{ else }}
+              serviceName: {{ .APP_NAME }}-openresty
+              {{ end }}
+              servicePort: 8082
