@@ -14,8 +14,8 @@ metadata:
   name: {{ .APP_NAME }}
   {{ end }}
 spec:
-  {{ if or (eq .KUBE_NAMESPACE .STG_ENV) (eq .KUBE_NAMESPACE .PROD_ENV) }}
-  replicas: 2
+  {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
+  replicas: 15
   {{ else }}
   replicas: 1
   {{ end }}
@@ -125,6 +125,8 @@ spec:
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
               value: https://fv-{{ .DRONE_SOURCE_BRANCH }}.{{ .BRANCH_ENV }}.homeoffice.gov.uk/file
             {{ end }}
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: /tmp/gc-key.json
           {{ if not (eq .KUBE_NAMESPACE .BRANCH_ENV) }}
           livenessProbe:
             httpGet:
@@ -149,6 +151,9 @@ spec:
           volumeMounts:
             - mountPath: /public
               name: public
+            - mountPath: /tmp
+              name: recaptcha-sa-key
+              readOnly: true
 
         - name: nginx-proxy
           # nginx-proxy-govuk:v0.0.10 updated on 8th Dec 2025
@@ -172,3 +177,9 @@ spec:
       volumes:
         - name: public
           emptyDir: {}
+        - name: recaptcha-sa-key
+          secret:
+            secretName: recaptcha-sa-key
+            items:
+              - key: gc-key.json
+                path: gc-key.json

@@ -25,7 +25,11 @@ settings = Object.assign({}, settings, {
     connectSrc: [
       'https://www.google-analytics.com',
       'https://region1.google-analytics.com',
-      'https://region1.analytics.google.com'
+      'https://region1.analytics.google.com',
+      'https://www.google.com'
+    ],
+    frameSrc: [
+      'https://www.google.com'
     ]
   },
   getCookies: false,
@@ -74,6 +78,10 @@ app.use((req, res, next) => {
     { path: '/terms-and-conditions', property: 'base.terms' },
     { path: '/accessibility', property: 'base.accessibility' }
   ];
+
+  // Pass reCAPTCHA site key to templates
+  res.locals.reCaptchaSiteKeyV3 = config.reCaptcha.siteKeyV3;
+
   next();
 });
 

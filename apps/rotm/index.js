@@ -10,6 +10,7 @@ const checkDeviceType = require('./behaviours/check-device-type');
 const caseworkerEmailer = require('./behaviours/caseworker-email')(config.email);
 const referralEmailer = require('./behaviours/caseworker-email')(config.referrals);
 const checkReport = require('./behaviours/check-report');
+const reCaptcha = require('./behaviours/recaptcha');
 
 module.exports = {
   name: 'rotm',
@@ -135,5 +136,6 @@ module.exports = {
       backLink: false
     },
     '/exit': {}
-  }
+  },
+  behaviours: [reCaptcha]
 };

@@ -5,7 +5,7 @@ apps/**/translations/*
 !apps/**/translations/src
 coverage
 package-lock.json
-.env
+*.env
 output/
 .DS_Store
 dump.rdb
