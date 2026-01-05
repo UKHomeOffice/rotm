@@ -66,4 +66,8 @@ ignore:
     - '*':
       reason: jws@3.2.2 needs updating in HOF framework to 3.2.3 or 4.0.1 or later
       expires: '2026-02-07T00:00:00.000Z'
+  SNYK-JS-QS-14724253:
+    - '*':
+      reason: transitive dependency qs 6.14.0 is introduced via hof
+      expires: '2026-03-05T00:00:00.000Z'
 patch: {}
