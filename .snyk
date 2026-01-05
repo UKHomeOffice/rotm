@@ -64,8 +64,6 @@ ignore:
       expires: '2026-02-07T00:00:00.000Z'
   SNYK-JS-JWS-14188253:
     - '*':
-      reason: HOF framework needs updating
-      expires: '2025-06-07T00:00:00.000Z'
       reason: HOF framework needs updating to use nodemailer@7.0.11
       expires: '2026-02-07T00:00:00.000Z'
   SNYK-JS-JWS-14188253:
