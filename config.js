@@ -61,6 +61,7 @@ module.exports = {
   },
   reCaptcha: {
     siteKeyV3: process.env.RECAPTCHA_SITE_KEY,
-    projectID: process.env.RECAPTCHA_PROJECT_ID
+    projectID: process.env.RECAPTCHA_PROJECT_ID,
+    threshold: parseFloat(process.env.RECAPTCHA_THRESHOLD || '0') // 0 means all scores are allowed
   }
 };
