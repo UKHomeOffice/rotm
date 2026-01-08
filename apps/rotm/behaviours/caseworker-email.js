@@ -34,6 +34,7 @@ const parse = (model, translate) => {
       title: 'You have a new report of online terrorist material',
       urls: model.urls,
       images: model.images,
+      port: model.remote_port,
       ipAddress: model.ipaddress,
       timezone: new Date().toString().match(/([A-Z]+[\+-][0-9]+.*)/)[1],
       reCAPTCHAScore: model.reCAPTCHAScore,
