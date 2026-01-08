@@ -166,3 +166,8 @@ textarea.form-control {
 .hidden {
   display: none
 }
+
+// enable multi-line error messages in Error Summary Box
+.govuk-error-summary__list a {
+  white-space: break-spaces;
+}
