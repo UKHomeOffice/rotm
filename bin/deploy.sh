@@ -40,16 +40,22 @@ elif [[ ${KUBE_NAMESPACE} == ${UAT_ENV} ]]; then
   $kd -f kube/configmaps/configmap.yml -f kube/app/service.yml
   $kd -f kube/app/ingress-internal.yml -f kube/app/ingress-external.yml -f kube/app/networkpolicy-internal.yml -f kube/app/networkpolicy-external.yml
   $kd -f kube/redis -f kube/file-vault -f kube/app/deployment.yml
+  $kd -f kube/ui-redis
+  $kd -f kube/openresty -f kube/ha-proxy
 elif [[ ${KUBE_NAMESPACE} == ${STG_ENV} ]]; then
   $kd -f kube/file-vault/file-vault-ingress.yml
   $kd -f kube/configmaps/configmap.yml  -f kube/app/service.yml
   $kd -f kube/app/ingress-internal.yml -f kube/app/ingress-external.yml -f kube/app/networkpolicy-internal.yml -f kube/app/networkpolicy-external.yml
   $kd -f kube/redis -f kube/file-vault -f kube/app/deployment.yml
+  $kd -f kube/ui-redis
+  $kd -f kube/openresty -f kube/ha-proxy
 elif [[ ${KUBE_NAMESPACE} == ${PROD_ENV} ]]; then
   $kd -f kube/file-vault/file-vault-ingress.yml
   $kd -f kube/configmaps/configmap.yml  -f kube/app/service.yml
   $kd -f kube/app/ingress-external.yml -f kube/app/networkpolicy-external.yml
   $kd -f kube/redis -f kube/file-vault -f kube/app/deployment.yml
+  $kd -f kube/ui-redis
+  $kd -f kube/openresty -f kube/ha-proxy
 fi
 
 sleep $READY_FOR_TEST_DELAY
