@@ -10,18 +10,10 @@ ignore:
     - device > useragent > tmp:
         reason: No upgrade path, useragent is deprecated
         expires: '2026-02-07T00:00:00.000Z'
-  SNYK-JS-ASYNC-7414156:
-    - '*':
-      reason: No available patch
-      expires: '2025-06-07T00:00:00.000Z'
   SNYK-JS-DICER-2311764:
     - busboy-body-parser > busboy > dicer:
       reason: No upgrade or patch available
       expires: '2025-06-07T00:00:00.000Z'
-  SNYK-JS-BODYPARSER-14105059:
-    - express@5.1.0 > body-parser@2.2.0:
-      reason: temporary ignore
-      expires: '2025-12-07T00:00:00.000Z'
   SNYK-JS-USERAGENT-174737:
     - device > useragent:
       reason: No upgrade or patch available
@@ -38,20 +30,8 @@ ignore:
     - hof > markdown-it:
       reason: Need to update markdown-it in HOF to version 13.0.2.
       expires: '2025-10-07T00:00:00.000Z'
-  SNYK-JS-PHIN-6598077:
-    - '*':
-      reason: no direct upgrade or patch available
-      expires: '2025-06-07T00:00:00.000Z'
   SNYK-JS-ELLIPTIC-8187303:
      - '*':
-       reason: No direct upgrade or patch available
-       expires: '2025-06-07T00:00:00.000Z'
-  SNYK-JS-AXIOS-9292519:
-    - '*':
-       reason: No direct upgrade or patch available
-       expires: '2025-06-07T00:00:00.000Z'
-  SNYK-JS-AXIOS-9403194:
-    - '*':
        reason: No direct upgrade or patch available
        expires: '2025-06-07T00:00:00.000Z'
   SNYK-JS-NODEMAILER-13378253:
@@ -70,4 +50,8 @@ ignore:
     - '*':
       reason: transitive dependency qs 6.14.0 is introduced via hof
       expires: '2026-03-05T00:00:00.000Z'
+  SNYK-JS-AWSSDK-14908841:
+    - '*':
+      reason: No upgrade or patch available
+      expires: '2026-04-07T00:00:00.000Z'
 patch: {}
