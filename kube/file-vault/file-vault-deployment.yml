@@ -114,15 +114,15 @@ spec:
                   name: keycloak-client
                   key: id
             - name: PROXY_REDIRECTION_URL
-            {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
+              {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
               value: https://fv.prod.{{ .APP_NAME }}.homeoffice.gov.uk
-            {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
+              {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
               value: https://fv-stg.prod.{{ .APP_NAME }}.homeoffice.gov.uk
-            {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
+              {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
               value: https://fv-uat.notprod.{{ .APP_NAME }}.homeoffice.gov.uk
-            {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+              {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
               value: https://fv-{{ .DRONE_SOURCE_BRANCH }}.{{ .BRANCH_ENV }}.homeoffice.gov.uk
-            {{ end }}
+              {{ end }}
           args:
             - --listen=:10443
             # the url which is used to retrieve the OpenID configuration
@@ -133,9 +133,9 @@ spec:
             - --resources=uri=/*
             - --tls-cert=/certs/tls.crt
             - --tls-private-key=/certs/tls.key
-            {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+              {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
             - --verbose=true
-            {{ end }}
+              {{ end }}
           ports:
             - containerPort: 10080
             - containerPort: 10443
@@ -151,8 +151,8 @@ spec:
               readOnly: true
 
         - name: nginx-proxy
-          # nginx-proxy-govuk:v4
-          image: quay.io/ukhomeofficedigital/nginx-proxy-govuk@sha256:4470064d0b1d20ae08c5fd85551576cb687f342a22d6cb456fda9b2c4ce8c8df
+          # nginx-proxy:v.4.4.7 updated on 9th Jan 2026
+          image: quay.io/ukhomeofficedigital/nginx-proxy:v.4.4.7@sha256:0c58dabb1df4b4ad4bf1c6ed4ee1e81e440384e0ea41399c568aeb79e627b8ac
           resources:
             limits:
               memory: "1024Mi"
