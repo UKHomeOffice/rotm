@@ -156,8 +156,8 @@ spec:
               readOnly: true
 
         - name: nginx-proxy
-          # nginx-proxy-govuk:v0.0.10 updated on 8th Dec 2025
-          image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/sas/hof-docker-nginx-proxy:v0.0.10
+          # nginx-proxy:v.4.4.7 updated on 9th Jan 2026
+          image: quay.io/ukhomeofficedigital/nginx-proxy:v.4.4.7@sha256:0c58dabb1df4b4ad4bf1c6ed4ee1e81e440384e0ea41399c568aeb79e627b8ac
           resources:
             requests:
               memory: 10Mi
