@@ -32,30 +32,10 @@ settings = Object.assign({}, settings, {
       'https://www.google.com'
     ]
   },
-  getCookies: false,
-  getTerms: true,
   getAccessibility: false
 });
 
 const app = hof(settings);
-
-// Terms & Cookies added to have visibility on accessibility statement
-// in the footer. Once HOF has updated with that we can remove these
-// including the getTerms: false, getCookies: false config and common directory
-app.use('/terms-and-conditions', (req, res, next) => {
-  res.locals = Object.assign({}, res.locals, req.translate('terms'));
-  next();
-});
-
-app.use('/cookies', (req, res, next) => {
-  res.locals = Object.assign({}, res.locals, req.translate('cookies'));
-  next();
-});
-
-app.use('/accessibility', (req, res, next) => {
-  res.locals = Object.assign({}, res.locals, req.translate('accessibility'));
-  next();
-});
 
 app.use('/report', (req, res) => {
   res.redirect(301, '/');
@@ -71,13 +51,6 @@ app.use((req, res, next) => {
 
   // Set feedback url, required to display phase banner
   res.locals.feedbackUrl = config.feedbackUrl;
-
-  // Below can be removed once generic accessibility footer link is added to HOF
-  res.locals.footerSupportLinks = [
-    { path: '/cookies', property: 'base.cookies' },
-    { path: '/terms-and-conditions', property: 'base.terms' },
-    { path: '/accessibility', property: 'base.accessibility' }
-  ];
 
   // Pass reCAPTCHA site key to templates
   res.locals.reCaptchaSiteKeyV3 = config.reCaptcha.siteKeyV3;

@@ -17,8 +17,7 @@ module.exports = {
   params: '/:action?',
   confirmStep: '/check-your-report',
   pages: {
-    '/accessibility': 'accessibility',
-    '/cookies': 'cookies'
+    '/accessibility': 'static/accessibility'
   },
   steps: {
     '/evidence-url': {

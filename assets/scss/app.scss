@@ -5,7 +5,7 @@
 }
 
 ul {
-  @extend .list-bullet;
+  @extend .govuk-list, .govuk-list--bullet
 }
 
 a {
