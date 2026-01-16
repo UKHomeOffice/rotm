@@ -2,18 +2,10 @@
 version: v1.22.1
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
-  SNYK-JS-MARKDOWNIT-12143043:
-    - hof > markdown-it:
-        reason: Vulnerability acknowledged, awaiting HOF update to markdown-it >=13.0.2
-        expires: '2025-10-07T00:00:00.000Z'
   SNYK-JS-TMP-11501554:
     - device > useragent > tmp:
         reason: No upgrade path, useragent is deprecated
         expires: '2026-02-07T00:00:00.000Z'
-  SNYK-JS-ASYNC-7414156:
-    - '*':
-      reason: No available patch
-      expires: '2025-06-07T00:00:00.000Z'
   SNYK-JS-DICER-2311764:
     - busboy-body-parser > busboy > dicer:
       reason: No upgrade or patch available
@@ -46,14 +38,6 @@ ignore:
      - '*':
        reason: No direct upgrade or patch available
        expires: '2025-06-07T00:00:00.000Z'
-  SNYK-JS-AXIOS-9292519:
-    - '*':
-       reason: No direct upgrade or patch available
-       expires: '2025-06-07T00:00:00.000Z'
-  SNYK-JS-AXIOS-9403194:
-    - '*':
-       reason: No direct upgrade or patch available
-       expires: '2025-06-07T00:00:00.000Z'
   SNYK-JS-NODEMAILER-13378253:
     - '*':
       reason: HOF framework needs updating to use nodemailer@7.0.7
@@ -62,12 +46,4 @@ ignore:
     - '*':
       reason: HOF framework needs updating
       expires: '2026-02-07T00:00:00.000Z'
-  SNYK-JS-JWS-14188253:
-    - '*':
-      reason: jws@3.2.2 needs updating in HOF framework to 3.2.3 or 4.0.1 or later
-      expires: '2026-02-07T00:00:00.000Z'
-  SNYK-JS-QS-14724253:
-    - '*':
-      reason: transitive dependency qs 6.14.0 is introduced via hof
-      expires: '2026-03-05T00:00:00.000Z'
 patch: {}
