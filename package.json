@@ -25,10 +25,10 @@
   },
   "author": "HomeOffice",
   "dependencies": {
+    "@google-cloud/recaptcha-enterprise": "^6.3.1",
     "busboy-body-parser": "^0.3.2",
     "device": "^0.3.12",
     "express": "^5.2.1",
-    "@google-cloud/recaptcha-enterprise": "^6.3.1",
     "hof": "^22.13.0",
     "jimp": "^1.6.0",
     "jpeg-js": "^0.4.4",
@@ -46,6 +46,9 @@
     "mocha": "^11.7.5",
     "sinon": "^21.0.1",
     "sinon-chai": "^3.7.0",
-    "snyk": "^1.1301.2"
+    "snyk": "^1.1302.0"
+  },
+  "resolutions": {
+    "nodemailer": ">=7.0.12"
   }
 }
