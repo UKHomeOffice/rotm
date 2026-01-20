@@ -134,7 +134,7 @@ spec:
             {{ end }}
           args:
             # the url which is used to retrieve the OpenID configuration
-            {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+            {{ if or (eq .KUBE_NAMESPACE .BRANCH_ENV) (eq .KUBE_NAMESPACE .UAT_ENV) }}
             - --discovery-url=https://acp-sso.notprod.acp.homeoffice.gov.uk/realms/rotm-notprod
             {{ else }}
             - --discovery-url=https://acp-sso.prod.acp.homeoffice.gov.uk/realms/rotm
