@@ -117,11 +117,11 @@ spec:
                 secretKeyRef:
                   name: keycloak-client
                   key: id
-            - name: PROXY_LISTEN
-              value: 127.0.0.1:3001
-            # the endpoint where requests are proxied to
-            - name: PROXY_UPSTREAM_URL
-              value: "http://127.0.0.1:3000"
+            # - name: PROXY_LISTEN
+            #   value: 127.0.0.1:3001
+            # # the endpoint where requests are proxied to
+            # - name: PROXY_UPSTREAM_URL
+            #   value: "http://127.0.0.1:3000"
             - name: PROXY_REDIRECTION_URL
               {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
               value: https://fv.prod.{{ .APP_NAME }}.homeoffice.gov.uk
@@ -140,6 +140,13 @@ spec:
             - --discovery-url=https://acp-sso.prod.acp.homeoffice.gov.uk/realms/rotm
              {{ end }}
             # URls that you wish to protect.
+            - --listen=:10443
+            # the endpoint where requests are proxied to
+            - --upstream-url=https://127.0.0.1:10444
+            # URls that you wish to protect.
+            - --resources=uri=/*
+            - --tls-cert=/certs/tls.crt
+            - --tls-private-key=/certs/tls.key
             - --resources=uri=/*
             - --enable-default-deny=false
             - --enable-security-filter=true
@@ -151,7 +158,8 @@ spec:
             - --verbose=true
               {{ end }}
           ports:
-            - containerPort: 3001
+            - containerPort: 10080
+            - containerPort: 10443
           securityContext:
             runAsNonRoot: true
           terminationMessagePath: /dev/termination-log
@@ -174,9 +182,6 @@ spec:
 {{ file .FILEVAULT_NGINX_SETTINGS | indent 12 }}
           securityContext:
             runAsNonRoot: true
-          ports:
-            - containerPort: 10080
-            - containerPort: 10443
           volumeMounts:
             - mountPath: /certs
               name: certs
