@@ -41,7 +41,7 @@ spec:
     spec:
       containers:
         - name: openresty
-          image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/sas/hof-forms-waf:59242ea694b6642315b9b7ee3d3b423058f9d4d5
+          image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/sas/hof-forms-waf:f574540c53a06b579df1fa84292cc8a7a6dd3373
           resources:
             requests:
               memory: 100Mi
