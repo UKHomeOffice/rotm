@@ -35,12 +35,16 @@ spec:
     spec:
       containers:
         - name: file-vault
-          image: quay.io/ukhomeofficedigital/file-vault:ad405b5738f031b7270e132745e90e16e1c23e06
+          # v3.0.1 28th August 2025
+          image: quay.io/ukhomeofficedigital/file-vault:3.0.1@sha256:44f35820701981eeb3371d332e6fd53f697e1bcd60f75731a57e8da6edb7bed5
           imagePullPolicy: Always
           resources:
             limits:
               memory: "1024Mi"
               cpu: 200m
+            requests:
+              memory: 512Mi
+              cpu: 100m
           envFrom:
             - configMapRef:
                 {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
@@ -97,7 +101,7 @@ spec:
             runAsNonRoot: true
 
         - name: keycloak-proxy
-          image: quay.io/ukhomeofficedigital/keycloak-gatekeeper:8.0.2
+          image: quay.io/ukhomeofficedigital/gogatekeeper:3.5.0
           resources:
             limits:
               memory: "1024Mi"
@@ -113,6 +117,11 @@ spec:
                 secretKeyRef:
                   name: keycloak-client
                   key: id
+            - name: PROXY_LISTEN
+              value: 127.0.0.1:3001
+            # the endpoint where requests are proxied to
+            - name: PROXY_UPSTREAM_URL
+              value: "http://127.0.0.1:3000"
             - name: PROXY_REDIRECTION_URL
             {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
               value: https://fv.prod.{{ .APP_NAME }}.homeoffice.gov.uk
@@ -124,21 +133,25 @@ spec:
               value: https://fv-{{ .DRONE_SOURCE_BRANCH }}.{{ .BRANCH_ENV }}.homeoffice.gov.uk
             {{ end }}
           args:
-            - --listen=:10443
             # the url which is used to retrieve the OpenID configuration
-            - --discovery-url=https://sso.digital.homeoffice.gov.uk/auth/realms/rotm
-            # the endpoint where requests are proxied to
-            - --upstream-url=https://127.0.0.1:10444
+            {{ if or (eq .KUBE_NAMESPACE .BRANCH_ENV) (eq .KUBE_NAMESPACE .UAT_ENV) }}
+            - --discovery-url=https://acp-sso.notprod.acp.homeoffice.gov.uk/realms/rotm-notprod
+            {{ else }}
+            - --discovery-url=https://acp-sso.prod.acp.homeoffice.gov.uk/realms/rotm
+            {{ end }}
             # URls that you wish to protect.
             - --resources=uri=/*
-            - --tls-cert=/certs/tls.crt
-            - --tls-private-key=/certs/tls.key
+            - --enable-default-deny=false
+            - --enable-security-filter=true
+            - --enable-request-id=true
+            - --enable-logging=true
+            - --enable-json-logging=true
+            - --enable-encrypted-token=false
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
             - --verbose=true
             {{ end }}
           ports:
-            - containerPort: 10080
-            - containerPort: 10443
+            - containerPort: 3001
           securityContext:
             runAsNonRoot: true
           terminationMessagePath: /dev/termination-log
@@ -151,8 +164,8 @@ spec:
               readOnly: true
 
         - name: nginx-proxy
-          # nginx-proxy-govuk:v4
-          image: quay.io/ukhomeofficedigital/nginx-proxy-govuk@sha256:4470064d0b1d20ae08c5fd85551576cb687f342a22d6cb456fda9b2c4ce8c8df
+          # nginx-proxy:v.4.4.7 updated on 9th Jan 2026
+          image: quay.io/ukhomeofficedigital/nginx-proxy:v.4.4.7@sha256:0c58dabb1df4b4ad4bf1c6ed4ee1e81e440384e0ea41399c568aeb79e627b8ac
           resources:
             limits:
               memory: "1024Mi"
@@ -161,6 +174,9 @@ spec:
 {{ file .FILEVAULT_NGINX_SETTINGS | indent 12 }}
           securityContext:
             runAsNonRoot: true
+          ports:
+            - containerPort: 10080
+            - containerPort: 10443
           volumeMounts:
             - mountPath: /certs
               name: certs

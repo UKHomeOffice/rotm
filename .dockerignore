@@ -1,6 +1,8 @@
+node_modules
+npm-debug.log
 public
 apps/**/translations/**/default.json
-LICENSE
+LICENSE.md
 README.md
 CONTRIBUTING.md
 Dockerfile
@@ -11,14 +13,14 @@ docker-compose.yml
 .drone.yml
 bin
 kube
-node_modules
-npm-debug.log
 yarn-error.log
 .DS_Store
 .git
 .gitignore
 .npmrc
 test
+jest.config.json
+jest.env.js
 coverage
 sonar-project.properties
 pull-request-template.md
