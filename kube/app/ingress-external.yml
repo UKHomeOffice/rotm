@@ -40,8 +40,8 @@ spec:
           - path: /
             backend:
               {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-              serviceName: ha-{{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}
+              serviceName: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}
               {{ else }}
-              serviceName: ha-{{ .APP_NAME }}
+              serviceName: {{ .APP_NAME }}
               {{ end }}
-              servicePort: 8443
+              servicePort: 10443
