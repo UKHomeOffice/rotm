@@ -11,9 +11,9 @@ spec:
   podSelector:
     matchLabels:
       {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-      name: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}
+      app: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}-openresty
       {{ else }}
-      name: {{ .APP_NAME }}
+      app: {{ .APP_NAME }}-openresty
       {{ end }}
   ingress:
     - from:
@@ -21,7 +21,9 @@ spec:
             matchLabels:
               name: ingress-internal
       ports:
-      - port: 10080
+      - port: 8082
         protocol: TCP
-      - port: 10443
+      - port: 8443 # client traffic
+        protocol: TCP
+      - port: 8080 # client traffic
         protocol: TCP
