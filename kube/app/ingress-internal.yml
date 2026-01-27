@@ -36,8 +36,8 @@ spec:
           - path: /
             backend:
               {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-              serviceName: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}-openresty
+              serviceName: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}
               {{ else }}
-              serviceName: {{ .APP_NAME }}-openresty
+              serviceName: {{ .APP_NAME }}
               {{ end }}
-              servicePort: 8443
+              servicePort: 10443
