@@ -123,22 +123,22 @@ spec:
             - name: PROXY_UPSTREAM_URL
               value: "http://127.0.0.1:3000"
             - name: PROXY_REDIRECTION_URL
-            {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
+              {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
               value: https://fv.prod.{{ .APP_NAME }}.homeoffice.gov.uk
-            {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
+              {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
               value: https://fv-stg.prod.{{ .APP_NAME }}.homeoffice.gov.uk
-            {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
+              {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
               value: https://fv-uat.notprod.{{ .APP_NAME }}.homeoffice.gov.uk
-            {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+              {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
               value: https://fv-{{ .DRONE_SOURCE_BRANCH }}.{{ .BRANCH_ENV }}.homeoffice.gov.uk
-            {{ end }}
+              {{ end }}
           args:
             # the url which is used to retrieve the OpenID configuration
             {{ if or (eq .KUBE_NAMESPACE .BRANCH_ENV) (eq .KUBE_NAMESPACE .UAT_ENV) }}
             - --discovery-url=https://acp-sso.notprod.acp.homeoffice.gov.uk/realms/rotm-notprod
-            {{ else }}
+             {{ else }}
             - --discovery-url=https://acp-sso.prod.acp.homeoffice.gov.uk/realms/rotm
-            {{ end }}
+             {{ end }}
             # URls that you wish to protect.
             - --resources=uri=/*
             - --enable-default-deny=false
@@ -147,9 +147,9 @@ spec:
             - --enable-logging=true
             - --enable-json-logging=true
             - --enable-encrypted-token=false
-            {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
             - --verbose=true
-            {{ end }}
+              {{ end }}
           ports:
             - containerPort: 3001
           securityContext:
