@@ -12,13 +12,13 @@ spec:
   tls:
     - hosts:
       {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-        - waf-admin-ui-{{ .DRONE_SOURCE_BRANCH }}.internal.{{ .BRANCH_ENV }}.homeoffice.gov.uk
+        - admin-ui-{{ .DRONE_SOURCE_BRANCH }}.internal.{{ .BRANCH_ENV }}.homeoffice.gov.uk
       {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
-        - waf-admin-ui.rotm.uat.internal.sas-notprod.homeoffice.gov.uk
+        - admin-ui.rotm.uat.internal.sas-notprod.homeoffice.gov.uk
       {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
-        - waf-admin-ui.stg.internal.rotm.sas.homeoffice.gov.uk
+        - admin-ui.stg.internal.rotm.sas.homeoffice.gov.uk
       {{ else if eq .KUBE_NAMESPACE .PROD_ENV }}
-        - waf-admin-ui-prod.internal.report-terrorist-material.homeoffice.gov.uk
+        - admin-ui-prod.internal.report-terrorist-material.homeoffice.gov.uk
       {{ end }}
       {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
       secretName: branch-tls-internal
@@ -27,13 +27,13 @@ spec:
       {{ end }}
   rules:
       {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-    - host: waf-admin-ui-{{ .DRONE_SOURCE_BRANCH }}.internal.{{ .BRANCH_ENV }}.homeoffice.gov.uk
+    - host: admin-ui-{{ .DRONE_SOURCE_BRANCH }}.internal.{{ .BRANCH_ENV }}.homeoffice.gov.uk
       {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
-    - host: waf-admin-ui.rotm.uat.internal.sas-notprod.homeoffice.gov.uk
+    - host: admin-ui.rotm.uat.internal.sas-notprod.homeoffice.gov.uk
       {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
-    - host: waf-admin-ui.stg.internal.rotm.sas.homeoffice.gov.uk
+    - host: admin-ui.stg.internal.rotm.sas.homeoffice.gov.uk
       {{ else if eq .KUBE_NAMESPACE .PROD_ENV }}
-    - host: waf-admin-ui-prod.internal.report-terrorist-material.homeoffice.gov.uk
+    - host: admin-ui-prod.internal.report-terrorist-material.homeoffice.gov.uk
       {{ end }}
       http:
         paths:
