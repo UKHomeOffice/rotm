@@ -51,6 +51,8 @@ spec:
               cpu: 15m
           ports:
             - containerPort: 8080
+              name: public
+            - containerPort: 8082
               name: admin
           livenessProbe:
             httpGet:
