@@ -22,6 +22,12 @@ spec:
     app: {{ .APP_NAME }}-waf-admin-ui
     {{ end }}
   ports:
-    - name: admin
+    # - name: admin
+    #   port: 8080
+    #   targetPort: admin
+    - name: public
       port: 8080
+      targetPort: public
+    - name: admin
+      port: 8082
       targetPort: admin
