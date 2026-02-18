@@ -4,6 +4,7 @@ set -e
 export INGRESS_INTERNAL_ANNOTATIONS=$HOF_CONFIG/ingress-internal-annotations.yaml
 export INGRESS_EXTERNAL_ANNOTATIONS=$HOF_CONFIG/ingress-external-annotations.yaml
 export ADMIN_UI_INGRESS_INTERNAL_ANNOTATIONS=$HOF_CONFIG/admin-ui-ingress-internal-annotations.yaml
+export ADMIN_UI_INGRESS_EXTERNAL_ANNOTATIONS=$HOF_CONFIG/admin-ui-ingress-external-annotations.yaml
 export CONFIGMAP_VALUES=$HOF_CONFIG/configmap-values.yaml
 export NGINX_SETTINGS=$HOF_CONFIG/nginx-settings.yaml
 export FILEVAULT_NGINX_SETTINGS=$HOF_CONFIG/filevault-nginx-settings.yaml
