@@ -1,0 +1,21 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: waf-admin-ui-ingress-external
+{{ file .ADMIN_UI_INGRESS_EXTERNAL_ANNOTATIONS | indent 2 }}
+spec:
+  {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
+  tls:
+    - hosts:
+        - admin-ui.prod.report-terrorist-material.homeoffice.gov.uk
+      secretName: {{ .APP_NAME }}-external
+  rules:
+    - host: admin-ui.prod.report-terrorist-material.homeoffice.gov.uk
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: {{ .APP_NAME }}-openresty
+              servicePort: 8082
+  {{ end }}
