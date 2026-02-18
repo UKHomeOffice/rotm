@@ -18,7 +18,7 @@ spec:
       {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
         - waf-admin-ui.stg.internal.rotm.sas.homeoffice.gov.uk
       {{ else if eq .KUBE_NAMESPACE .PROD_ENV }}
-        - admin-ui-prod.internal.report-terrorist-material.homeoffice.gov.uk
+        - admin-ui.internal.report-terrorist-material.homeoffice.gov.uk
       {{ end }}
       {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
       secretName: branch-tls-internal
@@ -33,7 +33,7 @@ spec:
       {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
     - host: waf-admin-ui.stg.internal.rotm.sas.homeoffice.gov.uk
       {{ else if eq .KUBE_NAMESPACE .PROD_ENV }}
-    - host: admin-ui-prod.internal.report-terrorist-material.homeoffice.gov.uk
+    - host: admin-ui.internal.report-terrorist-material.homeoffice.gov.uk
       {{ end }}
       http:
         paths:
