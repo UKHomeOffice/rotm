@@ -60,7 +60,8 @@ module.exports = {
     secret: process.env.KEYCLOAK_SECRET
   },
   reCaptcha: {
-    siteKeyV3: process.env.RECAPTCHA_SITE_KEY,
+    siteKeyScore: process.env.RECAPTCHA_SITE_KEY_SCORE,
+    siteKeyCheckbox: process.env.RECAPTCHA_SITE_KEY_CHECKBOX,
     projectID: process.env.RECAPTCHA_PROJECT_ID,
     threshold: parseFloat(process.env.RECAPTCHA_THRESHOLD || '0') // 0 means all scores are allowed
   }
