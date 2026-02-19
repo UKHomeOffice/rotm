@@ -17,9 +17,9 @@ const client = new RecaptchaEnterpriseServiceClient();
  */
 async function createAssessment({
   projectID = reCaptcha.projectID,
-  recaptchaKey = reCaptcha.siteKeyV3,
+  recaptchaKey,
   token,
-  recaptchaAction = 'submit'
+  recaptchaAction
 } = {}, req) {
   const projectPath = client.projectPath(projectID);
 
@@ -45,9 +45,9 @@ async function createAssessment({
       return null;
     }
 
-    // Check if the expected action was executed.
-    // The `action` property is set by user client in the grecaptcha.enterprise.execute() method.
-    if (response?.tokenProperties?.action !== recaptchaAction) {
+    // Check if the expected action was executed only if the `action` property
+    // is set by user client in the grecaptcha.enterprise.execute() method.
+    if (recaptchaAction && response?.tokenProperties?.action !== recaptchaAction) {
       const errorMessage = 'The action attribute in reCAPTCHA tag does not match the action you are expecting to score';
       req.log('debug', errorMessage);
       return null;
@@ -70,38 +70,49 @@ async function createAssessment({
 
 module.exports = superclass => class extends superclass {
   async validate(req, res, next) {
-    const validationErrorFunc = (key, type) =>
-      new this.ValidationError(key, { type: type });
-
     const handleValidationError = reason => {
-      const errs = {};
-
       req.log('debug', `reCAPTCHA Validation failed: ${reason}`);
 
       if (reCaptcha.threshold === 0) {
         req.log('debug', 'Threshold is 0. Accepting all scores, including null.');
+        req.sessionModel.unset('reCaptchaRenderCheckbox');
         return next();
       }
 
-      // Loop through req.form.values and add the first field with a non-empty value to the error object
-      for (const [key, value] of Object.entries(req.form.values)) {
-        if (value) {
-          errs[key] = validationErrorFunc(key, 'reCaptchaFailed');
-          break;
-        }
+      // Only perform reCAPTCHA validation if the user is on the confirm page.
+      // This ensures that reCAPTCHA checks are enforced only at the final step of the form submission process.
+      const { route: currentRoute, confirmStep } = req.form.options;
+      if (currentRoute !== confirmStep) {
+        return next();
       }
 
-      return next(errs);
+      return res.redirect(confirmStep);
     };
 
     try {
       const token = req.body['g-recaptcha-token'];
-      if (!token) {
+      const tokenCheckbox = req.body['g-recaptcha-token-checkbox'];
+      if (!token && !tokenCheckbox) {
         const errorMessage = 'Missing reCAPTCHA token in the request body';
         throw new Error(errorMessage);
       }
 
-      const score = await createAssessment({ token }, req);
+      let score;
+
+      if (tokenCheckbox) {
+        score = await createAssessment({
+          recaptchaKey: reCaptcha.siteKeyCheckbox,
+          token: tokenCheckbox,
+          recaptchaAction: 'send_report'
+        }, req);
+      } else {
+        score = await createAssessment({
+          recaptchaKey: reCaptcha.siteKeyScore,
+          token: token,
+          recaptchaAction: 'submit'
+        }, req);
+      }
+
       req.sessionModel.set('reCAPTCHAScore', score);
 
       if (score === null) {
@@ -112,6 +123,7 @@ module.exports = superclass => class extends superclass {
       req.log('info', `reCAPTCHA Risk Analysis -> Score: ${score}`);
 
       if ( !(score >= reCaptcha.threshold) ) {
+        req.sessionModel.set('reCaptchaRenderCheckbox', true);
         const errorMessage = 'Score does not meet the threshold';
         throw new Error(errorMessage);
       }
