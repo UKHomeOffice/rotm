@@ -19,7 +19,7 @@ spec:
         - stg.prod.{{ .APP_NAME }}.homeoffice.gov.uk
       {{ else if eq .KUBE_NAMESPACE .PROD_ENV }}
         - {{ .PRODUCTION_URL }}
-        - "*.prod.report-terrorist-material.homeoffice.gov.uk"
+        - "admin-ui.prod.report-terrorist-material.homeoffice.gov.uk"
       {{ end }}
       {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
       secretName: branch-tls-external
