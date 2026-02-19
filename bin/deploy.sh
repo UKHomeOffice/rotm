@@ -20,8 +20,9 @@ if [[ $1 == 'tear_down' ]]; then
   export DRONE_SOURCE_BRANCH=$(cat /root/.dockersock/branch_name.txt)
 
   $kd --delete -f kube/configmaps/configmap.yml
-  $kd --delete -f kube/redis -f kube/file-vault -f kube/app -f kube/ui-redis/ui-redis-statefulset.yml -f kube/ui-redis/ui-redis-service.yml -f kube/ui-redis/ui-redis-pvc.yml -f kube/ui-redis/ui-redis-network-policy.yml -f kube/ui-redis/ui-redis-configmap.yml -f kube/openresty -f kube/ha-proxy
-  echo "Torn Down UAT Branch - $APP_NAME-$DRONE_SOURCE_BRANCH.internal.$BRANCH_ENV.homeoffice.gov.uk"
+  $kd --delete -f kube/redis -f kube/file-vault -f kube/app -f kube/ui-redis/ui-redis-statefulset.yml -f kube/ui-redis/ui-redis-service.yml -f kube/ui-redis/ui-redis-pvc.yml -f kube/ui-redis/ui-redis-network-policy.yml -f kube/ui-redis/ui-redis-configmap.yml -f kube/openresty
+  $kd --delete -f kube/ha-proxy/ha-proxy-statefulset.yml -f kube/ha-proxy/ha-proxy-public-service.yml -f kube/ha-proxy/ha-proxy-peer-service.yml -f kube/ha-proxy/ha-proxy-network-policy.yml -f kube/ha-proxy/ha-proxy-configmap.yml
+  echo "Torn Down Branch - $APP_NAME-$DRONE_SOURCE_BRANCH.internal.$BRANCH_ENV.homeoffice.gov.uk"
   exit 0
 fi
 
@@ -35,28 +36,32 @@ if [[ ${KUBE_NAMESPACE} == ${BRANCH_ENV} ]]; then
   $kd -f kube/configmaps -f kube/certs
   $kd -f kube/redis -f kube/file-vault -f kube/app
   $kd -f kube/ui-redis
-  $kd -f kube/openresty -f kube/ha-proxy
+  $kd -f kube/openresty/admin-ui-deployment.yml -f kube/openresty/admin-ui-ingress-internal.yml -f kube/openresty/admin-ui-network-policy.yml -f kube/openresty/admin-ui-service.yml -f kube/openresty/openresty-configmap.yml -f kube/openresty/openresty-deployment.yml -f kube/openresty/openresty-network-policy.yml -f kube/openresty/openresty-service.yml
+  $kd -f kube/ha-proxy
 elif [[ ${KUBE_NAMESPACE} == ${UAT_ENV} ]]; then
   $kd -f kube/file-vault/file-vault-ingress.yml
   $kd -f kube/configmaps/configmap.yml -f kube/app/service.yml
   $kd -f kube/app/ingress-internal.yml -f kube/app/ingress-external.yml -f kube/app/networkpolicy-internal.yml -f kube/app/networkpolicy-external.yml
   $kd -f kube/redis -f kube/file-vault -f kube/app/deployment.yml
   $kd -f kube/ui-redis
-  $kd -f kube/openresty -f kube/ha-proxy
+  $kd -f kube/openresty/admin-ui-deployment.yml -f kube/openresty/admin-ui-ingress-internal.yml -f kube/openresty/admin-ui-network-policy.yml -f kube/openresty/admin-ui-service.yml -f kube/openresty/openresty-configmap.yml -f kube/openresty/openresty-deployment.yml -f kube/openresty/openresty-network-policy.yml -f kube/openresty/openresty-service.yml
+  $kd -f kube/ha-proxy
 elif [[ ${KUBE_NAMESPACE} == ${STG_ENV} ]]; then
   $kd -f kube/file-vault/file-vault-ingress.yml
   $kd -f kube/configmaps/configmap.yml  -f kube/app/service.yml
   $kd -f kube/app/ingress-internal.yml -f kube/app/ingress-external.yml -f kube/app/networkpolicy-internal.yml -f kube/app/networkpolicy-external.yml
   $kd -f kube/redis -f kube/file-vault -f kube/app/deployment.yml
   $kd -f kube/ui-redis
-  $kd -f kube/openresty -f kube/ha-proxy
+  $kd -f kube/openresty/admin-ui-deployment.yml -f kube/openresty/admin-ui-ingress-internal.yml -f kube/openresty/admin-ui-network-policy.yml -f kube/openresty/admin-ui-service.yml -f kube/openresty/openresty-configmap.yml -f kube/openresty/openresty-deployment.yml -f kube/openresty/openresty-network-policy.yml -f kube/openresty/openresty-service.yml
+  $kd -f kube/ha-proxy
 elif [[ ${KUBE_NAMESPACE} == ${PROD_ENV} ]]; then
   $kd -f kube/file-vault/file-vault-ingress.yml
   $kd -f kube/configmaps/configmap.yml  -f kube/app/service.yml
   $kd -f kube/app/ingress-external.yml -f kube/app/networkpolicy-external.yml
   $kd -f kube/redis -f kube/file-vault -f kube/app/deployment.yml
   $kd -f kube/ui-redis
-  $kd -f kube/openresty -f kube/ha-proxy
+  $kd -f kube/openresty/admin-ui-deployment.yml -f kube/openresty/admin-ui-ingress-external.yml -f kube/openresty/admin-ui-network-policy.yml -f kube/openresty/admin-ui-service.yml -f kube/openresty/openresty-configmap.yml -f kube/openresty/openresty-deployment.yml -f kube/openresty/openresty-network-policy.yml -f kube/openresty/openresty-service.yml
+  $kd -f kube/ha-proxy
 fi
 
 sleep $READY_FOR_TEST_DELAY
