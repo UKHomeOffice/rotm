@@ -127,6 +127,13 @@ spec:
             {{ end }}
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /tmp/gc-key.json
+            - name: RECAPTCHA_SITE_KEY_SCORE
+              value: "6LeUjigsAAAAAG3I6rua8pxrVDpf31XJIErnhVkm"
+            # Checkbox with fixed score 0, difficulty - easy, challenge behaviour - auto
+            - name: RECAPTCHA_SITE_KEY_CHECKBOX
+              value: "6Lesx24sAAAAAHRKXvGqJFfF1HLD2o5TPrVy0Lqk"
+            - name: RECAPTCHA_THRESHOLD
+              value: "0.6"
           {{ if not (eq .KUBE_NAMESPACE .BRANCH_ENV) }}
           livenessProbe:
             httpGet:
