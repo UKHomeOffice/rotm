@@ -129,9 +129,9 @@ spec:
               value: /tmp/gc-key.json
             - name: RECAPTCHA_SITE_KEY_SCORE
               value: "6LeUjigsAAAAAG3I6rua8pxrVDpf31XJIErnhVkm"
-            # Checkbox with fixed score 1.0, difficulty - easy, challenge behaviour - auto
+            # Checkbox with fixed score 1.0, difficulty - balanced, challenge behaviour - auto
             - name: RECAPTCHA_SITE_KEY_CHECKBOX
-              value: "6Ld8vm4sAAAAABPPBWBAeKdlPFNuJGeM2obZymgu"
+              value: "6LfyIHIsAAAAALxW0NJn8w_6XPTQNiZLCaZUUw9y"
             - name: RECAPTCHA_THRESHOLD
               value: "0.6"
           {{ if not (eq .KUBE_NAMESPACE .BRANCH_ENV) }}
