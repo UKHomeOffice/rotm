@@ -53,7 +53,8 @@ app.use((req, res, next) => {
   res.locals.feedbackUrl = config.feedbackUrl;
 
   // Pass reCAPTCHA site key to templates
-  res.locals.reCaptchaSiteKeyV3 = config.reCaptcha.siteKeyV3;
+  res.locals.reCaptchaSiteKeyScore = config.reCaptcha.siteKeyScore;
+  res.locals.reCaptchaSiteKeyCheckbox = config.reCaptcha.siteKeyCheckbox;
 
   next();
 });
