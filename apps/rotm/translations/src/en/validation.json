@@ -1,4 +1,4 @@
 {
     "reCaptchaFailed": "Your answer cannot be accepted right now.\n\nCall 999 to report an immediate threat to life or property.\n\nCall the police anti-terrorist hotline on 0800 789 321 to report a terrorist threat.",
-    "reCaptchaRequired": "Complete captcha verification to send report"
+    "reCaptchaRequired": "Verify you are not a robot"
 }
