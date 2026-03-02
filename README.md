@@ -48,7 +48,8 @@ KEYCLOAK_CLIENT_ID             | The client name used to authenticate with keycl
 KEYCLOAK_SECRET                | The secret used to authenticate with the keycloak client
 KEYCLOAK_USERNAME              | Administrator username to authenticate with the keycloak client
 KEYCLOAK_PASSWORD              | Administrator password used to authenticate with the keycloak client
-RECAPTCHA_SITE_KEY             | Recaptcha site key
+RECAPTCHA_SITE_KEY_SCORE       | Recaptcha SCORE site key
+RECAPTCHA_SITE_KEY_CHECKBOX    | Recaptcha CHECKBOX site key
 RECAPTCHA_PROJECT_ID           | Recaptcha project ID
 RECAPTCHA_THRESHOLD            | Recaptcha threshold (defaults to 0)
 
