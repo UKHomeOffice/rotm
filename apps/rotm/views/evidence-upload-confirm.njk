@@ -1,0 +1,21 @@
+{% extends "partials/page.njk" %}
+{% set encoding = "enctype=multipart/form-data" %}
+{% block pageContent %}
+  {% for field in fields %}
+    {{ renderField(field) }}
+  {% endfor %}
+  {{ inputSubmit("continue") }}
+
+   {% if not values.images %}
+    <h2 class="govuk-heading-m">No files added</h2>
+    {% elseif values.images.length %}
+    <h2 class="govuk-heading-m">Files added</h2>
+    {% endif %}
+
+    {% for img in values.images %}
+      <p>{{ img.name }} - <a href="?delete={{ img.id }}">Delete</a></p>
+      <div class="image-wrapper">
+        <img src="{{ img.thumbnail }}" width="300px" alt="">
+      </div>
+    {% endfor %}
+{% endblock %}

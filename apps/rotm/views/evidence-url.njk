@@ -1,0 +1,10 @@
+{% extends "partials/page.njk" %}
+{% block pageContent %}
+  <p>{{ t("pages.evidence-url.summary") }}</p>
+  {% include "partials/help-link.njk" %}
+
+  {% for field in fields %}
+    {{ renderField(field) }}
+  {% endfor %}
+  {{ inputSubmit("continue") }}
+{% endblock %}

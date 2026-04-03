@@ -4,36 +4,33 @@
 
 require('hof/frontend/themes/gov-uk/client-js');
 const repeater = require('./repeater');
-const govuk = require('govuk-frontend');
-const reCaptchaSiteKeyV3 = window.reCaptchaSiteKeyV3;
-
-govuk.initAll();
+// const reCaptchaSiteKeyV3 = window.reCaptchaSiteKeyV3;
 
 repeater.init();
 
-function onSubmit(e) {
-  e.preventDefault();
-  grecaptcha.enterprise.ready(async () => {
-    const token = await grecaptcha.enterprise.execute(reCaptchaSiteKeyV3, {action: 'submit'});
+// function onSubmit(e) {
+//   e.preventDefault();
+//   grecaptcha.enterprise.ready(async () => {
+//     const token = await grecaptcha.enterprise.execute(reCaptchaSiteKeyV3, {action: 'submit'});
 
-    // Populate hidden field with token
-    const form = e.target.closest('form');
-    const hiddenField = form.querySelector('input[name="g-recaptcha-token"]');
-    if (hiddenField) {
-      hiddenField.value = token;
-    } else {
-      const newHiddenField = document.createElement('input');
-      newHiddenField.type = 'hidden';
-      newHiddenField.name = 'g-recaptcha-token';
-      newHiddenField.value = token;
-      form.appendChild(newHiddenField);
-    }
+//     // Populate hidden field with token
+//     const form = e.target.closest('form');
+//     const hiddenField = form.querySelector('input[name="g-recaptcha-token"]');
+//     if (hiddenField) {
+//       hiddenField.value = token;
+//     } else {
+//       const newHiddenField = document.createElement('input');
+//       newHiddenField.type = 'hidden';
+//       newHiddenField.name = 'g-recaptcha-token';
+//       newHiddenField.value = token;
+//       form.appendChild(newHiddenField);
+//     }
 
-    form.submit();
-  });
-}
+//     form.submit();
+//   });
+// }
 
 // Listen for submit on all forms
-document.querySelectorAll('form').forEach(form => {
-  form.addEventListener('submit', onSubmit);
-});
+// document.querySelectorAll('form').forEach(form => {
+//   form.addEventListener('submit', onSubmit);
+// });

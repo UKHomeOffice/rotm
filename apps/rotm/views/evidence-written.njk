@@ -1,0 +1,21 @@
+
+{% extends "partials/page.njk" %}
+{% block pageContent %}
+  <p>Details may include:</p>
+  <ul class="gouvk-list">
+    <li>
+      who shared the material
+    </li>
+    <li>
+      when it was shared
+    </li>
+    <li>
+      a description, if you haven’t provided a link or evidence
+    </li>
+  </ul>
+  <br>
+  {% for field in fields %}
+    {{ renderField(field) }}
+  {% endfor %}
+  {{ inputSubmit("continue") }}
+{% endblock %}

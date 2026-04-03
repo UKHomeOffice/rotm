@@ -1,0 +1,7 @@
+{% extends "partials/page.njk" %}
+{% block pageContent %}
+  {% for field in fields %}
+    {{ renderField(field) }}
+  {% endfor %}
+  {{ inputSubmit("continue") }}
+{% endblock %}

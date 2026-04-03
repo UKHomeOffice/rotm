@@ -1,9 +1,5 @@
 @import "hof/frontend/themes/gov-uk/styles/govuk";
 
-.phase-banner {
-  @include phase-banner(alpha);
-}
-
 ul {
   @extend .govuk-list, .govuk-list--bullet
 }
@@ -12,23 +8,19 @@ a {
   @extend .govuk-link;
 }
 
-details {
-  margin-bottom: $gutter;
+// details {
+//   margin-bottom: $gutter;
 
-  .panel-indent {
-    margin-bottom: $gutter-half;
-  }
-}
-
-textarea.form-control {
-  @extend .form-control-3-4;
-}
+//   .panel-indent {
+//     margin-bottom: $gutter-half;
+//   }
+// }
 
 // styles for rh column borrowed from govuk prototype kit
 .govuk-related-items {
-  margin-top: $gutter;
-  border-top: 10px solid $govuk-blue;
-  padding-top: 5px;
+  // margin-top: $gutter;
+  // border-top: 10px solid $govuk-blue;
+  // padding-top: 5px;
 
   h2 {
     margin-top: 0.3em;
@@ -49,15 +41,15 @@ textarea.form-control {
   }
 }
 
-#step {
-  @include core-16;
+// #step {
+//   @include core-16;
 
-  span {
-    display: inline-block;
-    margin-top: $gutter-half;
-    color: $secondary-text-colour;
-  }
-}
+//   span {
+//     display: inline-block;
+//     // margin-top: $gutter-half;
+//     color: $secondary-text-colour;
+//   }
+// }
 
 .link-margin {
   margin-top: 2em;
@@ -70,7 +62,7 @@ textarea.form-control {
 .image-thumb {
   padding: 10px;
   background-color: #fff;
-  border: 1px solid $panel-colour;
+  // border: 1px solid $panel-colour;
   margin: 10px 0;
   overflow: hidden;
 }

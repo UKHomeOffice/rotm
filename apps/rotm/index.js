@@ -136,5 +136,5 @@ module.exports = {
     },
     '/exit': {}
   },
-  behaviours: [reCaptcha]
+  // behaviours: [reCaptcha]
 };

@@ -1,0 +1,12 @@
+{% extends "partials/page.njk" %}
+{% set encoding = "enctype=multipart/form-data" %}
+{% block pageContent %}
+  <p>This could be an image or video, for example. Evidence is helpful should the material be deleted before we can find it. </p>
+    <p>It’s safe to save evidence to your device for the purpose of reporting it to us. We recommend deleting it afterwards.</p>
+  {% include "partials/help-screenshots.html" %}
+
+  {% for field in fields %}
+    {{ renderField(field) }}
+  {% endfor %}
+  {{ inputSubmit("continue") }}
+{% endblock %}

@@ -1,0 +1,8 @@
+{% from "partials/details-summary.njk" import detailsComponent %}
+{% block contentOuter %}
+
+  {% set overrideSummary = t("Help me find the link") %}
+  {% set overrideText = "If you’re on a website, the link appears in the bar at the top of the page. An example of a link is, www.gov.uk/page/1234/content#" %}
+  {# add the img to set overrideText above when details component bug is fixed to allow html - <img class="source-help" src="{{ assetPath }}/images/source-help.png" width="100%" alt="The link appears in the bar at the top of your devices screen" /> #}
+  {{ detailsComponent(details, overrideSummary, overrideText) }}
+{% endblock %}

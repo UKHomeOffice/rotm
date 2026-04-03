@@ -36,7 +36,7 @@ module.exports = {
     validate: 'required'
   },
   'evidence-url': {
-    mixin: 'radio-group',
+    mixin: 'radioGroup',
     validate: 'required',
     legend: {
       className: 'visuallyhidden'
@@ -123,7 +123,7 @@ module.exports = {
     }]
   },
   'evidence-upload': {
-    mixin: 'radio-group',
+    mixin: 'radioGroup',
     validate: 'required',
     legend: {
       className: 'visuallyhidden'
@@ -131,14 +131,13 @@ module.exports = {
     options: [{
       value: 'yes',
       toggle: 'image',
-      child: 'input-file'
+      child: 'inputFile'
     }, {
       value: 'no'
     }]
   },
   image: {
-    mixin: 'input-file',
-    className: 'govuk-file-upload',
+    mixin: 'inputFile',
     disableRender: true,
     dependent: {
       field: 'evidence-upload',
@@ -150,7 +149,7 @@ module.exports = {
     ]
   },
   'evidence-upload-more': {
-    mixin: 'radio-group',
+    mixin: 'radioGroup',
     validate: 'required',
     legend: {
       className: 'visuallyhidden'
@@ -158,13 +157,13 @@ module.exports = {
     options: [{
       value: 'yes',
       toggle: 'another-image',
-      child: 'input-file'
+      child: 'inputFile'
     }, {
       value: 'no'
     }]
   },
   'another-image': {
-    mixin: 'input-file',
+    mixin: 'inputFile',
     disableRender: true,
     dependent: {
       field: 'evidence-upload-more',
@@ -183,7 +182,7 @@ module.exports = {
     }]
   },
   'can-we-contact': {
-    mixin: 'radio-group',
+    mixin: 'radioGroup',
     validate: 'required',
     legend: {
       className: 'visuallyhidden'
@@ -194,14 +193,14 @@ module.exports = {
     ]
   },
   'contact-details-name': {
-    mixin: 'input-text',
+    mixin: 'inputText',
     legend: {
       className: 'visuallyhidden'
     },
     validate: ['required', 'notUrl', {type: 'maxlength', arguments: [30]}]
   },
   'contact-details-method': {
-    mixin: 'checkbox-group',
+    mixin: 'checkboxGroup',
     validate: 'required',
     legend: {
       className: 'visuallyhidden'
@@ -209,11 +208,11 @@ module.exports = {
     options: [{
       value: 'email',
       toggle: 'contact-email',
-      child: 'input-text'
+      child: 'inputText'
     }, {
       value: 'phone',
       toggle: 'contact-phone',
-      child: 'input-text'
+      child: 'inputText'
     }]
   },
   'contact-email': {
