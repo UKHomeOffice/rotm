@@ -29,6 +29,9 @@ spec:
         app: redis
         {{ end }}
     spec:
+      securityContext:
+        fsGroup: 994
+        fsGroupChangePolicy: OnRootMismatch
       containers:
         - name: redis
           # redis:v5.0.6-1
@@ -57,5 +60,19 @@ spec:
               memory: "200Mi"
           {{ end }}
       volumes:
+        {{ if and (eq .REDIS_PERSISTENCE_ENABLED "true") (ne .REDIS_PERSISTENCE_EXISTING_CLAIM "") }}
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ .REDIS_PERSISTENCE_EXISTING_CLAIM }}
+        {{ else if eq .REDIS_PERSISTENCE_ENABLED "true" }}
+        - name: data
+          persistentVolumeClaim:
+            {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+            claimName: redis-pvc-{{ .DRONE_SOURCE_BRANCH }}
+            {{ else }}
+            claimName: redis-pvc
+            {{ end }}
+        {{ else }}
         - name: data
           emptyDir: {}
+        {{ end }}

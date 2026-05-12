@@ -17,6 +17,11 @@ environment:
   NON_PROD_AVAILABILITY: Mon-Fri 07:00-23:00 Europe/London
   READY_FOR_TEST_DELAY: 20s
   NOTIFY_STUB: stub
+  REDIS_PERSISTENCE_ENABLED: "false"
+  REDIS_PERSISTENCE_ACCESS_MODES: ReadWriteOnce
+  REDIS_PERSISTENCE_STORAGE_CLASS: gp2-encrypted-eu-west-2b
+  REDIS_PERSISTENCE_EXISTING_CLAIM: ""
+  REDIS_PERSISTENCE_ANNOTATIONS_FILE: ""
 
 include_default_branch: &include_default_branch
   include:
@@ -199,6 +204,8 @@ steps:
         from_secret: kube_server_dev
       KUBE_TOKEN:
         from_secret: kube_token_sas_dev
+      REDIS_PERSISTENCE_ENABLED: "true"
+      REDIS_PERSISTENCE_SIZE: "1Gi"
     commands:
       - bin/deploy.sh $${BRANCH_ENV}
     when:
@@ -278,6 +285,8 @@ steps:
         from_secret: kube_server_stg
       KUBE_TOKEN:
         from_secret: kube_token_sas_stg
+      REDIS_PERSISTENCE_ENABLED: "true"
+      REDIS_PERSISTENCE_SIZE: "1Gi"
     commands:
       - bin/deploy.sh $${STG_ENV}
     when:
@@ -325,6 +334,8 @@ steps:
         from_secret: kube_server_prod
       KUBE_TOKEN:
         from_secret: kube_token_prod
+      REDIS_PERSISTENCE_ENABLED: "true"
+      REDIS_PERSISTENCE_SIZE: "5Gi"
     commands:
       - bin/deploy.sh $${PROD_ENV}
     when:
