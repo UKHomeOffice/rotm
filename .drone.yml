@@ -206,6 +206,7 @@ steps:
         from_secret: kube_token_sas_dev
       REDIS_PERSISTENCE_ENABLED: "true"
       REDIS_PERSISTENCE_SIZE: "1Gi"
+      REDIS_PERSISTENCE_STORAGE_CLASS: ""
     commands:
       - bin/deploy.sh $${BRANCH_ENV}
     when:

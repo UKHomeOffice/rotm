@@ -9,6 +9,10 @@ metadata:
   {{ end }}
 spec:
   replicas: 1
+  {{ if eq .REDIS_PERSISTENCE_ENABLED "true" }}
+  strategy:
+    type: Recreate
+  {{ end }}
   selector:
     matchLabels:
       {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
@@ -54,7 +58,7 @@ spec:
               memory: "2000Mi"
           {{ else }}
             requests:
-              cpu: "30m"
+              cpu: "20m"
               memory: "100Mi"
             limits:
               cpu: "100m"
