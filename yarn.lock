@@ -331,10 +331,10 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.57.1.tgz#de633db3ec2ef6a3c89e2f19038063e8a122e2c2"
   integrity sha512-d9zaMRSTIKDLhctzH12MtXvJKSSUhaHcjV+2Z+GK+EEY7XKpP5yR4x+N3TAcHTcu963nIr+TMcCb4DBCYX1z6Q==
 
-"@google-cloud/recaptcha-enterprise@^6.4.0":
-  version "6.4.0"
-  resolved "https://registry.yarnpkg.com/@google-cloud/recaptcha-enterprise/-/recaptcha-enterprise-6.4.0.tgz#b3bf19736dc64a33419db5acf151840cff359db2"
-  integrity sha512-Em9ucyzFlZfLAR57lA6uZ7SqxS30tHNn11wE4FYRds+gWPcevNx8tJQtWAolycLuKgzJf3Kpi/p2kQh+vH0j3A==
+"@google-cloud/recaptcha-enterprise@^6.4.1":
+  version "6.4.1"
+  resolved "https://registry.yarnpkg.com/@google-cloud/recaptcha-enterprise/-/recaptcha-enterprise-6.4.1.tgz#2c058a312cf30e0ddc1dd5f2686b8d5d13d6d7fb"
+  integrity sha512-+SO6m/YrbMygbX9OO4+Ira9hqyVeahFxHEbVhNPs8mkarDsmaDKFJoziGkqtvMJjKTL8iRetGeKysstFOweZIA==
   dependencies:
     google-gax "^5.0.0"
 
@@ -5786,10 +5786,10 @@ uuid@8.0.0:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.0.0.tgz#bc6ccf91b5ff0ac07bbcdbf1c7c4e150db4dbb6c"
   integrity sha512-jOXGuXZAWdsTH7eZLtyXMqUb9EcWMGZNbL9YcGBJl4MH4nrxHmZJhEHvyLFrkxo+28uLb/NYRcStH48fnD0Vzw==
 
-uuid@^11.1.0:
-  version "11.1.0"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-11.1.0.tgz#9549028be1753bb934fc96e2bca09bb4105ae912"
-  integrity sha512-0/A9rDy9P7cJ+8w1c9WD9V//9Wj15Ce2MPz8Ri6032usz+NfePxx5AcN3bN+r6ZL6jEo066/yNYB3tn4pQEx+A==
+uuid@^11.1.1:
+  version "11.1.1"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-11.1.1.tgz#f6d81d2e1c65d00762e5e29b16c5d2d995e208ad"
+  integrity sha512-vIYxrBCC/N/K+Js3qSN88go7kIfNPssr/hHCesKCQNAjmgvYS2oqr69kIufEG+O4+PfezOH4EbIeHCfFov8ZgQ==
 
 uuid@^8.3.2:
   version "8.3.2"
