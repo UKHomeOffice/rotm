@@ -86,6 +86,7 @@ module.exports = {
       next: '/can-we-contact'
     },
     '/can-we-contact': {
+      behaviours: [reCaptcha],
       fields: [
         'can-we-contact'
       ],
@@ -135,6 +136,5 @@ module.exports = {
       backLink: false
     },
     '/exit': {}
-  },
-  behaviours: [reCaptcha]
+  }
 };
