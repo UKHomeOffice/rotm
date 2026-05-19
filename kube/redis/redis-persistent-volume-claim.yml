@@ -1,0 +1,23 @@
+{{ if eq .REDIS_PERSISTENCE_ENABLED "true" }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+  name: redis-pvc-{{ .DRONE_SOURCE_BRANCH }}
+  {{ else }}
+  name: redis-pvc
+  {{ end }}
+  {{ if ne .REDIS_PERSISTENCE_ANNOTATIONS_FILE "" }}
+  annotations:
+{{ file .REDIS_PERSISTENCE_ANNOTATIONS_FILE | indent 4 }}
+  {{ end }}
+spec:
+  accessModes:
+    - {{ .REDIS_PERSISTENCE_ACCESS_MODES }}
+  {{ if and (ne .REDIS_PERSISTENCE_STORAGE_CLASS "") (ne .REDIS_PERSISTENCE_STORAGE_CLASS "null") }}
+  storageClassName: {{ .REDIS_PERSISTENCE_STORAGE_CLASS }}
+  {{ end }}
+  resources:
+    requests:
+      storage: {{ .REDIS_PERSISTENCE_SIZE }}
+{{ end }}

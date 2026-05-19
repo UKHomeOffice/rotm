@@ -15,6 +15,9 @@ export OPENRESTY_SETTINGS=$HOF_CONFIG/openresty-settings.yaml
 
 kd='kd --insecure-skip-tls-verify --timeout 10m --check-interval 10s'
 
+redis_storage_files='kube/redis/redis-persistent-volume-claim.yml'
+redis_runtime_files='kube/redis/redis-service.yml -f kube/redis/redis-network-policy.yml -f kube/redis/redis-deployment.yml'
+
 if [[ $1 == 'tear_down' ]]; then
   export KUBE_NAMESPACE=$BRANCH_ENV
   export DRONE_SOURCE_BRANCH=$(cat /root/.dockersock/branch_name.txt)
@@ -28,6 +31,19 @@ fi
 
 export KUBE_NAMESPACE=$1
 export DRONE_SOURCE_BRANCH=$(echo $DRONE_SOURCE_BRANCH | tr '[:upper:]' '[:lower:]' | tr '/' '-')
+export REDIS_PERSISTENCE_ENABLED=${REDIS_PERSISTENCE_ENABLED:-true}
+export REDIS_PERSISTENCE_ACCESS_MODES=${REDIS_PERSISTENCE_ACCESS_MODES:-ReadWriteOnce}
+export REDIS_PERSISTENCE_STORAGE_CLASS=${REDIS_PERSISTENCE_STORAGE_CLASS:-gp2-encrypted-eu-west-2b}
+export REDIS_PERSISTENCE_EXISTING_CLAIM=${REDIS_PERSISTENCE_EXISTING_CLAIM:-}
+export REDIS_PERSISTENCE_ANNOTATIONS_FILE=${REDIS_PERSISTENCE_ANNOTATIONS_FILE:-}
+
+if [[ -z "${REDIS_PERSISTENCE_SIZE}" ]]; then
+  if [[ ${KUBE_NAMESPACE} == ${PROD_ENV} ]]; then
+    export REDIS_PERSISTENCE_SIZE=10Gi
+  else
+    export REDIS_PERSISTENCE_SIZE=1Gi
+  fi
+fi
 
 if [[ ${KUBE_NAMESPACE} == ${BRANCH_ENV} ]]; then
   export REAL_APP_NAME="$APP_NAME-$DRONE_SOURCE_BRANCH"
@@ -50,7 +66,8 @@ elif [[ ${KUBE_NAMESPACE} == ${STG_ENV} ]]; then
   $kd -f kube/file-vault/file-vault-ingress.yml
   $kd -f kube/configmaps/configmap.yml  -f kube/app/service.yml
   $kd -f kube/app/ingress-internal.yml -f kube/app/ingress-external.yml -f kube/app/networkpolicy-internal.yml -f kube/app/networkpolicy-external.yml
-  $kd -f kube/redis -f kube/file-vault -f kube/app/deployment.yml
+  $kd -f $redis_storage_files
+  $kd -f $redis_runtime_files -f kube/hof-rds-api -f kube/html-pdf -f kube/file-vault
   $kd -f kube/ui-redis
   $kd -f kube/openresty/admin-ui-deployment.yml -f kube/openresty/admin-ui-ingress-internal.yml -f kube/openresty/admin-ui-network-policy.yml -f kube/openresty/admin-ui-service.yml -f kube/openresty/openresty-configmap.yml -f kube/openresty/openresty-deployment.yml -f kube/openresty/openresty-network-policy.yml -f kube/openresty/openresty-service.yml
   $kd -f kube/ha-proxy
@@ -58,7 +75,8 @@ elif [[ ${KUBE_NAMESPACE} == ${PROD_ENV} ]]; then
   $kd -f kube/file-vault/file-vault-ingress.yml
   $kd -f kube/configmaps/configmap.yml  -f kube/app/service.yml
   $kd -f kube/app/ingress-external.yml -f kube/app/networkpolicy-external.yml
-  $kd -f kube/redis -f kube/file-vault -f kube/app/deployment.yml
+  $kd -f $redis_storage_files
+  $kd -f $redis_runtime_files -f kube/hof-rds-api -f kube/html-pdf -f kube/file-vault
   $kd -f kube/ui-redis
   $kd -f kube/openresty/admin-ui-deployment.yml -f kube/openresty/admin-ui-ingress-external.yml -f kube/openresty/admin-ui-network-policy.yml -f kube/openresty/admin-ui-service.yml -f kube/openresty/openresty-configmap.yml -f kube/openresty/openresty-deployment.yml -f kube/openresty/openresty-network-policy.yml -f kube/openresty/openresty-service.yml
   $kd -f kube/ha-proxy
