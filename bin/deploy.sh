@@ -102,7 +102,7 @@ elif [[ ${KUBE_NAMESPACE} == ${STG_ENV} ]]; then
   $kd -f kube/configmaps/configmap.yml  -f kube/app/service.yml
   $kd -f kube/app/ingress-internal.yml -f kube/app/ingress-external.yml -f kube/app/networkpolicy-internal.yml -f kube/app/networkpolicy-external.yml
   deploy_redis
-  $kd -f kube/hof-rds-api -f kube/html-pdf -f kube/file-vault
+  $kd -f kube/file-vault
   $kd -f kube/ui-redis
   $kd -f kube/openresty/admin-ui-deployment.yml -f kube/openresty/admin-ui-ingress-internal.yml -f kube/openresty/admin-ui-network-policy.yml -f kube/openresty/admin-ui-service.yml -f kube/openresty/openresty-configmap.yml -f kube/openresty/openresty-deployment.yml -f kube/openresty/openresty-network-policy.yml -f kube/openresty/openresty-service.yml
   $kd -f kube/ha-proxy
@@ -111,7 +111,7 @@ elif [[ ${KUBE_NAMESPACE} == ${PROD_ENV} ]]; then
   $kd -f kube/configmaps/configmap.yml  -f kube/app/service.yml
   $kd -f kube/app/ingress-external.yml -f kube/app/networkpolicy-external.yml
   deploy_redis
-  $kd -f kube/hof-rds-api -f kube/html-pdf -f kube/file-vault
+  $kd -f kube/file-vault
   $kd -f kube/ui-redis
   $kd -f kube/openresty/admin-ui-deployment.yml -f kube/openresty/admin-ui-ingress-external.yml -f kube/openresty/admin-ui-network-policy.yml -f kube/openresty/admin-ui-service.yml -f kube/openresty/openresty-configmap.yml -f kube/openresty/openresty-deployment.yml -f kube/openresty/openresty-network-policy.yml -f kube/openresty/openresty-service.yml
   $kd -f kube/ha-proxy
