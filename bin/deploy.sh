@@ -15,6 +15,27 @@ export OPENRESTY_SETTINGS=$HOF_CONFIG/openresty-settings.yaml
 
 kd='kd --insecure-skip-tls-verify --timeout 10m --check-interval 10s'
 
+sanitize_branch_name() {
+  local raw_branch="$1"
+  local sanitized_branch
+
+  sanitized_branch=$(echo "$raw_branch" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//; s/-+/-/g')
+
+  if [[ -z "$sanitized_branch" ]]; then
+    sanitized_branch='branch'
+  fi
+
+  # Keep branch slug short so generated Kubernetes resource names remain within DNS label limits.
+  sanitized_branch="${sanitized_branch:0:40}"
+  sanitized_branch=$(echo "$sanitized_branch" | sed -E 's/-+$//')
+
+  if [[ -z "$sanitized_branch" ]]; then
+    sanitized_branch='branch'
+  fi
+
+  echo "$sanitized_branch"
+}
+
 deploy_redis() {
   # Only STG/PROD create a PVC; other envs stay non-persistent.
 
@@ -39,7 +60,7 @@ delete_redis() {
 
 if [[ $1 == 'tear_down' ]]; then
   export KUBE_NAMESPACE=$BRANCH_ENV
-  export DRONE_SOURCE_BRANCH=$(cat /root/.dockersock/branch_name.txt)
+  export DRONE_SOURCE_BRANCH=$(sanitize_branch_name "$(cat /root/.dockersock/branch_name.txt)")
 
   export REDIS_PERSISTENCE_ENABLED=$(echo "${REDIS_PERSISTENCE_ENABLED:-true}" | tr '[:upper:]' '[:lower:]')
   export REDIS_PERSISTENCE_ACCESS_MODES=${REDIS_PERSISTENCE_ACCESS_MODES:-ReadWriteOnce}
@@ -60,7 +81,7 @@ if [[ $1 == 'tear_down' ]]; then
 fi
 
 export KUBE_NAMESPACE=$1
-export DRONE_SOURCE_BRANCH=$(echo $DRONE_SOURCE_BRANCH | tr '[:upper:]' '[:lower:]' | tr '/' '-')
+export DRONE_SOURCE_BRANCH=$(sanitize_branch_name "${DRONE_SOURCE_BRANCH}")
 export REDIS_PERSISTENCE_ENABLED=$(echo "${REDIS_PERSISTENCE_ENABLED:-true}" | tr '[:upper:]' '[:lower:]')
 export REDIS_PERSISTENCE_ACCESS_MODES=${REDIS_PERSISTENCE_ACCESS_MODES:-ReadWriteOnce}
 export REDIS_PERSISTENCE_STORAGE_CLASS=${REDIS_PERSISTENCE_STORAGE_CLASS:-gp2-encrypted-eu-west-2b}
