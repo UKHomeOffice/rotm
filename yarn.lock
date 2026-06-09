@@ -4339,7 +4339,7 @@ nodemailer-stub-transport@^1.1.0:
   resolved "https://registry.yarnpkg.com/nodemailer-stub-transport/-/nodemailer-stub-transport-1.1.0.tgz#11421d2d66b4ee6f405354f914c1f4641eb24b0d"
   integrity sha512-4fwl2f+647IIyuNuf6wuEMqK4oEU9FMJSYme8kPckVSr1rXIXcmI6BNcIWO+1cAK8XeexYKxYoFztam0jAwjkA==
 
-nodemailer@>=7.0.12, nodemailer@^6.10.1:
+nodemailer@>=8.0.7, nodemailer@^6.10.1:
   version "8.0.7"
   resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-8.0.7.tgz#538729a79444e538331bca8a6fc3e5c034eaebc6"
   integrity sha512-pkjE4mkBzQjdJT4/UmlKl3pX0rC9fZmjh7c6C9o7lv66Ac6w9WCnzPzhbPNxwZAzlF4mdq4CSWB5+FbK6FWCow==
@@ -5786,10 +5786,10 @@ uuid@8.0.0:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.0.0.tgz#bc6ccf91b5ff0ac07bbcdbf1c7c4e150db4dbb6c"
   integrity sha512-jOXGuXZAWdsTH7eZLtyXMqUb9EcWMGZNbL9YcGBJl4MH4nrxHmZJhEHvyLFrkxo+28uLb/NYRcStH48fnD0Vzw==
 
-uuid@^11.1.1:
-  version "11.1.1"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-11.1.1.tgz#f6d81d2e1c65d00762e5e29b16c5d2d995e208ad"
-  integrity sha512-vIYxrBCC/N/K+Js3qSN88go7kIfNPssr/hHCesKCQNAjmgvYS2oqr69kIufEG+O4+PfezOH4EbIeHCfFov8ZgQ==
+uuid@^14.0.0:
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-14.0.0.tgz#0af883220163d264ffe0c084f6b8a89b9666966d"
+  integrity sha512-Qo+uWgilfSmAhXCMav1uYFynlQO7fMFiMVZsQqZRMIXp0O7rR7qjkj+cPvBHLgBqi960QCoo/PH2/6ZtVqKvrg==
 
 uuid@^8.3.2:
   version "8.3.2"
