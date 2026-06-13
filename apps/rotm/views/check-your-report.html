@@ -43,6 +43,15 @@
 
       </tbody>
     </table>
+    {{#values.reCaptchaRenderCheckbox}}
+      <div class="govuk-form-group govuk-!-margin-bottom-6" id="hofCaptcha">
+        <p id="captcha-error-reCaptchaRequired" class="govuk-error-message govuk-!-display-none">
+          <span id="validation-error" class="govuk-visually-hidden">{{#t}}journey.error{{/t}}:</span> {{#t}}validation.reCaptchaRequired{{/t}}
+        </p>
+        <div id="recaptcha-checkbox-container" data-action="send_report"></div>
+        <input type="hidden" id="g-recaptcha-token-checkbox" name="g-recaptcha-token-checkbox">
+      </div>
+    {{/values.reCaptchaRenderCheckbox}}
     {{#input-submit}}send-report{{/input-submit}}
   {{/page-content}}
 {{/partials-page}}
