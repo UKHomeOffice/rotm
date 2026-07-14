@@ -36,6 +36,9 @@ Otherwise, see [HOF](https://github.com/UKHomeOffice/hof).
 ### Environment variables
 You'll need to set the following env vars to run the application:
 
+Variable                       | Description
+---                            | ---
+SESSION_SECRET                 | 32 bytes value for encryption compatibility
 NOTIFY_KEY                     | Your GOV.UK notify key
 NOTIFY_TEMPLATE                | GOV.UK notify template ID for user authorisation email
 CASEWORKER_EMAIL               | Caseworker email
@@ -54,6 +57,9 @@ RECAPTCHA_PROJECT_ID           | Recaptcha project ID
 RECAPTCHA_THRESHOLD            | Recaptcha threshold (defaults to 0)
 
 To set up HAProxy and Openresty, you will need to set the following environment variables in your openresty deployment kube file:
+
+Variable                       | Description
+---                            | ---
 HAPROXY_UPSTREAM               | HAProxy upstream configuration
 HAPROXY_UPSTREAM_SSL           | HAProxy upstream configuration
 WAF_ADMIN_SALT                 | 32+ character random salt for password hashing
@@ -64,6 +70,5 @@ WAF_ADMIN_PASSWORD             | WAF Admin UI password
 These are the microservices used as part of ROTM:
 
 * [File-vault](https://github.com/UKHomeOffice/file-vault) - A simple REST service that allows POSTing a file to an S3 bucket.
-* [HOF Docker HAproxy](https://github.com/UKHomeOffice/hof-docker-haproxy) - Global rate limiting with stick-table sync 
-* [HOF Forms WAF](https://github.com/UKHomeOffice/hof-forms-waf) - A comprehensive, multi-layer spam protection system for web forms using OpenResty (Lua) for intelligent form analysis. Features a modern 
-React-based Admin UI for real-time configuration management.
+* [HOF Docker HAproxy](https://github.com/UKHomeOffice/hof-docker-haproxy) - Global rate limiting with stick-table sync
+* [HOF Forms WAF](https://github.com/UKHomeOffice/hof-forms-waf) - A comprehensive, multi-layer spam protection system for web forms using OpenResty (Lua) for intelligent form analysis. Features a modern React-based Admin UI for real-time configuration management.

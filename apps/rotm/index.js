@@ -116,7 +116,8 @@ module.exports = {
         'complete',
         caseworkerEmailer,
         referralEmailer,
-        checkReport
+        checkReport,
+        reCaptcha
       ],
       nullValue: 'pages.confirm.undefined',
       sections: {

@@ -76,14 +76,14 @@ module.exports = superclass => class extends superclass {
       if (reCaptcha.threshold === 0) {
         req.log('debug', 'Threshold is 0. Accepting all scores, including null.');
         req.sessionModel.unset('reCaptchaRenderCheckbox');
-        return next();
+        return true;
       }
 
       // Only perform reCAPTCHA validation if the user is on the confirm page.
       // This ensures that reCAPTCHA checks are enforced only at the final step of the form submission process.
       const { route: currentRoute, confirmStep } = req.form.options;
       if (currentRoute !== confirmStep) {
-        return next();
+        return true;
       }
 
       return res.redirect(confirmStep);
