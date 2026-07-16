@@ -48,6 +48,7 @@
   "resolutions": {
     "nodemailer": ">=8.0.7",
     "dicer": "^0.3.1",
-    "tmp": "^0.2.7"
+    "tmp": "^0.2.7",
+    "serialize-javascript": "^7.0.5"
   }
 }
