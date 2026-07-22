@@ -1,7 +1,7 @@
 'use strict';
 
 const router = require('express').Router();
-const busboy = require('busboy-body-parser');
+const busboy = require('../utils/busboy-body-parser');
 
 router.use(busboy());
 
