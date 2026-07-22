@@ -4,7 +4,7 @@
 const hof = require('hof');
 const config = require('./config');
 const mockAPIs = require('./mock-apis');
-const bodyParser = require('busboy-body-parser');
+const bodyParser = require('./utils/busboy-body-parser');
 
 if (process.env.REDIS_URL) {
   config.redis = process.env.REDIS_URL;
