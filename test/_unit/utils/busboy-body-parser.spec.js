@@ -1,23 +1,35 @@
-var bodyparser = require('../../../utils/busboy-body-parser.js');
-var bodyparserReal = require('../../../utils/busboy-body-parser.js');
-var chai = require('chai');
-var sinon = require('sinon');
-var proxyquire = require('proxyquire');
-var Readable = require('stream').Readable;
-var EventEmitter = require('events');
+const bodyparserReal = require('../../../utils/busboy-body-parser.js');
+const chai = require('chai');
+const sinon = require('sinon');
+const proxyquire = require('proxyquire');
+const Readable = require('stream').Readable;
+const EventEmitter = require('events');
 
 chai.use(require('sinon-chai'));
 
-var Busboy = require('busboy');
+function multipartBody(boundary, content) {
+  return Buffer.from(
+    '--' + boundary + '\r\n' +
+    'Content-Disposition: form-data; name="file"; filename="testing.png"\r\n' +
+    'Content-Type: image/png\r\n\r\n' +
+    content + '\r\n' +
+    '--' + boundary + '--\r\n'
+  );
+}
 
-describe("multipart form parser ", () => {
 
-  var parser, req, res, next;
+describe('multipart form parser', () => {
+  let req;
+  let res;
+  let next;
+  let bodyparser;
+  let busboyStub;
+  let parserInstance;
 
   beforeEach(() => {
     parserInstance = {
       on: sinon.stub().returnsThis()
-    }
+    };
 
     next = sinon.stub();
 
@@ -29,7 +41,7 @@ describe("multipart form parser ", () => {
 
     req = {
       headers: {
-        'content-type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW',
+        'content-type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'
       },
       is: sinon.stub().returns(true),
       pipe: sinon.stub()
@@ -43,7 +55,7 @@ describe("multipart form parser ", () => {
   });
 
   it('should call busboy with the correct headers', () => {
-    var parser = bodyparser();
+    const parser = bodyparser();
     parser(req, res, next);
     expect(busboyStub).to.have.been.calledWith({
       headers: req.headers,
@@ -55,21 +67,21 @@ describe("multipart form parser ", () => {
 
   it('calls callback if not a multipart/form-data request', () => {
     req.is = sinon.stub().returns(false);
-    var parser = bodyparser();
+    const parser = bodyparser();
     parser(req, res, next);
     expect(next).to.have.been.called;
   });
 
   it('pipes request to busboy instance', () => {
-    var parser = bodyparser();
+    const parser = bodyparser();
     parser(req, res, next);
     req.pipe.should.have.been.calledOnce;
     expect(req.pipe).to.have.been.calledOnceWithExactly(parserInstance);
   });
 
-  it('handles a busboy error if payload invalid', (done) => {
-    var busboyErr = new Error('Invalid payload');
-    var parser = bodyparser();
+  it('handles a busboy error if payload invalid', done => {
+    const busboyErr = new Error('Invalid payload');
+    const parser = bodyparser();
     parserInstance.on.withArgs('error').yields(busboyErr);
     parser(req, res, function (err) {
       err.should.equal(busboyErr);
@@ -77,10 +89,10 @@ describe("multipart form parser ", () => {
     });
   });
 
-  it('handles busboy error if headers invalid', (done) => {
-    var parser = bodyparser();
+  it('handles busboy error if headers invalid', done => {
+    const parser = bodyparser();
     req.headers = {
-      'content-type': 'multipart/form-data',
+      'content-type': 'multipart/form-data'
     };
     busboyStub.throws(new Error('Invalid content-type header'));
     parser(req, res, function (error) {
@@ -89,8 +101,8 @@ describe("multipart form parser ", () => {
     });
   });
 
-  it('creates req.body and req.files as empty obj if not existing', (done) => {
-    var parser = bodyparser();
+  it('creates req.body and req.files as empty obj if not existing', done => {
+    const parser = bodyparser();
     parserInstance.on.withArgs('finish').yieldsAsync();
     parser(req, res, () => {
       req.body.should.eql({});
@@ -99,8 +111,8 @@ describe("multipart form parser ", () => {
     });
   });
 
-  it('sets fields on req.body', (done) => {
-    var parser = bodyparser();
+  it('sets fields on req.body', done => {
+    const parser = bodyparser();
     parserInstance.on.withArgs('field').yieldsAsync('key', 'value');
     parserInstance.on.withArgs('finish').yieldsAsync();
 
@@ -110,9 +122,9 @@ describe("multipart form parser ", () => {
     });
   });
 
-  it('sets files on req.files', (done) => {
-    var parser = bodyparser();
-    var file = {
+  it('sets files on req.files', done => {
+    const parser = bodyparser();
+    const file = {
       pipe: function (s) {
         s.end('abcdef123456');
         process.nextTick(() => {
@@ -121,12 +133,13 @@ describe("multipart form parser ", () => {
       },
       truncated: false
     };
-    parserInstance.on.withArgs('file').yieldsAsync('key', file, { filename: 'testing.png', encoding: 'binary', mimeType: 'image/png' });
+    parserInstance.on.withArgs('file').
+      yieldsAsync('key', file, { filename: 'testing.png', encoding: 'binary', mimeType: 'image/png' });
     parserInstance.on.withArgs('finish').yieldsAsync();
     parser(req, res, () => {
       req.files.should.have.property('key');
       req.files.key.should.eql({
-        data: Buffer('abcdef123456'),
+        data: Buffer.from('abcdef123456'),
         name: 'testing.png',
         encoding: 'binary',
         mimetype: 'image/png',
@@ -137,11 +150,11 @@ describe("multipart form parser ", () => {
     });
   });
 
-  it('sets truncated prop and null data if file exceeds max limit (real busboy instance)', (done) => {
-    var boundary = '----testBoundary';
-    var payload = multipartBody(boundary, 'abcdef123456'); // 12 bytes
+  it('sets truncated prop and null data if file exceeds max limit (real busboy instance)', done => {
+    const boundary = '----testBoundary';
+    const payload = multipartBody(boundary, 'abcdef123456'); // 12 bytes
 
-    var req = {
+    req = {
       headers: {
         'content-type': 'multipart/form-data; boundary=' + boundary,
         'content-length': String(payload.length)
@@ -152,36 +165,37 @@ describe("multipart form parser ", () => {
       }
     };
 
-    var res = {};
-    var parser = bodyparserReal({ limit: 4 });
+    const parser = bodyparserReal({ limit: 4 });
 
-    parser(req, res, function (err) {
+    parser(req, res, err => {
       if (err) { return done(err); }
 
       req.files.should.have.property('file');
       req.files.file.truncated.should.equal(true);
       chai.expect(req.files.file.data).to.equal(null);
       chai.expect(req.files.file.size).to.equal(null);
-      done();
+      return done();
     });
   });
 
-  it('sets files as an array to handle multi attachment', (done) => {
-    var parserInstance = new EventEmitter();
+  it('sets files as an array to handle multi attachment', done => {
+    parserInstance = new EventEmitter();
     busboyStub = sinon.stub().returns(parserInstance);
 
     bodyparser = proxyquire('../../../utils/busboy-body-parser.js', {
       busboy: busboyStub
     });
 
-    var parser = bodyparser({ multi: true });
+    const parser = bodyparser({ multi: true });
 
-    var file1 = { pipe: s => s.end('abcdef123456'), truncated: false };
-    var file2 = { pipe: s => s.end('uvwxyz789012'), truncated: false };
+    const file1 = { pipe: s => s.end('abcdef123456'), truncated: false };
+    const file2 = { pipe: s => s.end('uvwxyz789012'), truncated: false };
 
     req.pipe = sinon.stub().callsFake(() => {
-      parserInstance.emit('file', 'key', file1, { filename: 'testing1.png', encoding: 'binary', mimeType: 'image/png' });
-      parserInstance.emit('file', 'key', file2, { filename: 'testing2.png', encoding: 'binary', mimeType: 'image/png' });
+      parserInstance.emit('file', 'key', file1,
+        { filename: 'testing1.png', encoding: 'binary', mimeType: 'image/png' });
+      parserInstance.emit('file', 'key', file2,
+        { filename: 'testing2.png', encoding: 'binary', mimeType: 'image/png' });
       parserInstance.emit('finish');
     });
 
@@ -193,8 +207,8 @@ describe("multipart form parser ", () => {
     });
   });
 
-  it('can handle empty payloads', (done) => {
-    var parser = bodyparser();
+  it('can handle empty payloads', done => {
+    const parser = bodyparser();
 
     parserInstance.on.withArgs('finish').yieldsAsync();
 
@@ -204,16 +218,17 @@ describe("multipart form parser ", () => {
     });
   });
 
-  it('can handle empty files', (done) => {
-    var parser = bodyparser();
-    var file = {
+  it('can handle empty files', done => {
+    const parser = bodyparser();
+    const file = {
       pipe: function (s) {
         s.end();
-        process.nextTick(() => { parserInstance.on.withArgs('finish').should.have.been.called });
+        process.nextTick(() => { parserInstance.on.withArgs('finish').should.have.been.called; });
       },
       truncated: false
     };
-    parserInstance.on.withArgs('file').yieldsAsync('key', file, { filename: '', encoding: 'binary', mimeType: 'image/png' });
+    parserInstance.on.withArgs('file').
+      yieldsAsync('key', file, { filename: '', encoding: 'binary', mimeType: 'image/png' });
     parserInstance.on.withArgs('finish').yieldsAsync();
     parser(req, res, () => {
       req.files.should.eql({});
@@ -221,16 +236,17 @@ describe("multipart form parser ", () => {
     });
   });
 
-  it('can handle files without a filename', (done) => {
-    var parser = bodyparser();
-    var file = {
+  it('can handle files without a filename', done => {
+    const parser = bodyparser();
+    const file = {
       pipe: function (s) {
         s.end('abcdef123456');
-        process.nextTick(() => { parserInstance.on.withArgs('finish').should.have.been.called });
+        process.nextTick(() => { parserInstance.on.withArgs('finish').should.have.been.called; });
       },
       truncated: true
     };
-    parserInstance.on.withArgs('file').yieldsAsync('key', file, { filename: undefined, encoding: '7bit', mimeType: 'application/octet-stream' });
+    parserInstance.on.withArgs('file').
+      yieldsAsync('key', file, { filename: undefined, encoding: '7bit', mimeType: 'application/octet-stream' });
     parserInstance.on.withArgs('finish').yieldsAsync();
     parser(req, res, () => {
       req.files.should.have.property('key');
@@ -245,15 +261,4 @@ describe("multipart form parser ", () => {
       done();
     });
   });
-
 });
-
-function multipartBody(boundary, content) {
-  return Buffer.from(
-    '--' + boundary + '\r\n' +
-    'Content-Disposition: form-data; name="file"; filename="testing.png"\r\n' +
-    'Content-Type: image/png\r\n\r\n' +
-    content + '\r\n' +
-    '--' + boundary + '--\r\n'
-  );
-}
