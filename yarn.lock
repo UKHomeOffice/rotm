@@ -3,9 +3,9 @@
 
 
 "@aws-sdk/client-sesv2@^3.907.0":
-  version "3.1092.0"
-  resolved "https://registry.yarnpkg.com/@aws-sdk/client-sesv2/-/client-sesv2-3.1092.0.tgz#bb0b23dbe1bdd010fbe7c101527e50503eb6b360"
-  integrity sha512-V+xc9Zkvh1W6wPvfkQIU3h2LFOuIpNIUIh5sB7YbyVe7Bmn/Lr6uDTYG/TIuzUOmlhaJz1LEtoVsmrfj6PyFtg==
+  version "3.1093.0"
+  resolved "https://registry.yarnpkg.com/@aws-sdk/client-sesv2/-/client-sesv2-3.1093.0.tgz#2e69349d67436181114af095ac5c4c8ee1b863a3"
+  integrity sha512-Lv39fmVecZiZvu92AHAZOC/BmubCoLlXTr7WUDv8cn2QYerkmhf5RV4m57NUj1K3yw1xKm7fleWm5odHE8rEMA==
   dependencies:
     "@aws-sdk/core" "^3.976.0"
     "@aws-sdk/credential-provider-node" "^3.972.71"
@@ -4352,9 +4352,9 @@ math-intrinsics@^1.1.0:
   integrity sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==
 
 mdurl@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/mdurl/-/mdurl-2.0.0.tgz#80676ec0433025dd3e17ee983d0fe8de5a2237e0"
-  integrity sha512-Lf+9+2r+Tdp5wXDXC4PcIBjTDtq4UKjCPMQhKIuzpJNW0b96kVqSwW0bT7FhRSfmAiFYgP+SCRvdrDozfh0U5w==
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/mdurl/-/mdurl-2.1.0.tgz#d711d3f7bce7f22c487c91be78545f356fa96573"
+  integrity sha512-1+HBaOx0zi/dQWht8rNv9MYf9qqpqL/kxI0hXImU6Y547zM6Sni8BQibt7ifgMcYtQg41ao3Ivd6cnSM86inpg==
 
 media-typer@0.3.0:
   version "0.3.0"
@@ -5329,9 +5329,9 @@ safe-stable-stringify@^2.3.1:
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
 sass@^1.93.2:
-  version "1.101.3"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.101.3.tgz#7b01a9e53a4a2edb6ac6c1964b49e4f7b0c375ab"
-  integrity sha512-Z1lLHhtAII+dyLNIQB6JQTZMy7sDxk3f5NzbINRc9ks1P0HCGvSuKev0wUhULFpLSaHBIMZrcTs9WDQUZerrgA==
+  version "1.101.6"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.101.6.tgz#195cfd59f40125c3a479711efa5c0c2e4f8fa410"
+  integrity sha512-j8qYug9WuX19eU5sxJWQlbR8RYhKgXiOYgGjkJRkcW35c3neWtxPdcUW0saN6Od2L0aqEp0AmH9R/QeAxrffMQ==
   dependencies:
     chokidar "^5.0.0"
     immutable "^5.1.5"
