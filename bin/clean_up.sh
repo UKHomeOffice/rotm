@@ -8,8 +8,9 @@ export IGNORE_CONFIGMAP=("bundle")
 export kubectl="kubectl --insecure-skip-tls-verify --server=$KUBE_SERVER --namespace=$KUBE_NAMESPACE --token=$KUBE_TOKEN"
 
 $kubectl delete --all deploy
+$kubectl delete --all statefulset
 $kubectl delete --all svc
-$kubectl delete --all ing
+$kubectl delete --all ingress
 
 for each in $($kubectl get netpol -o jsonpath="{.items[*].metadata.name}");
 do
@@ -27,7 +28,7 @@ done
 
 for each in $($kubectl get pvc -o jsonpath="{.items[*].metadata.name}" 2>/dev/null);
 do
-  if [[ ${each} == redis-pvc* ]]; then
-    $kubectl delete pvc "$each"
+  if [[ ${each} == redis-pvc* || ${each} == ui-redis-pvc* || ${each} == *ha-proxy* || ${each} == *haproxy* ]]; then
+    $kubectl delete pvc "$each" --ignore-not-found=true
   fi
 done
