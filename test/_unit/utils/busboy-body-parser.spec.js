@@ -44,7 +44,8 @@ describe('multipart form parser', () => {
         'content-type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'
       },
       is: sinon.stub().returns(true),
-      pipe: sinon.stub()
+      pipe: sinon.stub(),
+      log: sinon.stub().returns(true)
     };
 
     res = {};
@@ -60,7 +61,7 @@ describe('multipart form parser', () => {
     expect(busboyStub).to.have.been.calledWith({
       headers: req.headers,
       limits: {
-        fileSize: 262144000
+        fileSize: 104857600
       }
     });
   });
@@ -162,7 +163,8 @@ describe('multipart form parser', () => {
       is: sinon.stub().returns(true),
       pipe: function (dest) {
         return Readable.from([payload]).pipe(dest);
-      }
+      },
+      log: sinon.stub().returns(true)
     };
 
     const parser = bodyparserReal({ limit: 4 });

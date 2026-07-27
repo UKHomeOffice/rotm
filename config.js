@@ -46,7 +46,7 @@ module.exports = {
     acceptanceTests: process.env.ACCEPTANCE_HOST_NAME || `http://localhost:${port}`
   },
   upload: {
-    maxFileSize: '100mb',
+    maxFileSizeInBytes: 250 * 1024 * 1024, // 250mib in bytes.
     // if mocks set use file service served up by app otherwise use filevault's port 3000
     hostname: !useMocks && process.env.FILE_VAULT_URL ?
       process.env.FILE_VAULT_URL :

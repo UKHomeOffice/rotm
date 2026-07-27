@@ -1,25 +1,15 @@
 const Busboy = require('busboy');
-const bytes = require('bytes');
 const bl = require('bl');
-const debug = require('debug')('busboy-body-parser');
-
-const HARDLIMIT = bytes('250mb');
 
 module.exports = inputSettings => {
   const settings = {
-    limit: HARDLIMIT,
+    limit: 100 * 1024 * 1024, // default 100mib in bytes
     multi: false,
     ...(inputSettings || {})
   };
 
-  if (typeof settings.limit === 'string') {
-    settings.limit = bytes(settings.limit);
-  }
-
-  if (settings.limit > HARDLIMIT) {
-    debug('WARNING: The busboy body parser file size limit set too high');
-    debug('This form can only handle files up to ' + HARDLIMIT + ' bytes');
-    settings.limit = HARDLIMIT;
+  if (Number.isInteger(settings.limit)) {
+    settings.limit = settings.limit;
   }
 
   return function multipartBodyParser(req, res, next) {
@@ -40,13 +30,19 @@ module.exports = inputSettings => {
       return;
     }
     busboy.on('field', function (key, value) {
-      debug('Received field %s: %s', key, value);
+      req.log('Received field %s: %s', key, value);
       req.body[key] = value;
     });
     busboy.on('file', function (key, file, info) {
       const { filename, encoding, mimeType } = info;
       file.pipe(bl(function (err, d) {
-        if (err || !(d.length || filename)) { return; }
+        if (!(d.length || filename)) { return; } // if no file passed, do nothing
+        if (err) {
+          const errorMessage = `Failed to process file during streaming operation: ${err}`;
+          req.log('error', errorMessage);
+          next(new Error(errorMessage));
+          return;
+        }
         const fileData = {
           data: file.truncated ? null : d,
           name: filename || null,
@@ -56,7 +52,7 @@ module.exports = inputSettings => {
           size: file.truncated ? null : Buffer.byteLength(d, 'binary')
         };
 
-        debug('Received file %s', file);
+        req.log('Received file %s', file);
 
         if (settings.multi) {
           req.files[key] = req.files[key] || [];
@@ -68,15 +64,15 @@ module.exports = inputSettings => {
     });
     let error;
     busboy.on('error', err => {
-      debug('Error parsing form');
-      debug(err);
+      req.log('Error parsing form');
+      req.log(err);
       error = err;
       next(err);
     });
     busboy.on('finish', () => {
       if (error) { return; }
-      debug('Finished form parsing');
-      debug(req.body);
+      req.log('Finished form parsing');
+      req.log(req.body);
       next();
     });
     req.files = req.files || {};
