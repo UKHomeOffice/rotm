@@ -2,8 +2,9 @@
 
 const router = require('express').Router();
 const busboy = require('../utils/body-parser');
+const config = require('../config');
 
-router.use(busboy());
+router.use(busboy(config.upload));
 
 router.post('/', (req, res, next) => {
   if (req.files.document) {

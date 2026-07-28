@@ -1,9 +1,7 @@
 const Busboy = require('busboy');
 const bl = require('bl');
 
-module.exports = settingsX => {
-  const settings = settingsX || {};
-
+module.exports = settings => {
   return function multipartBodyParser(req, res, next) {
     if (!Number.isInteger(settings?.maxFileSizeInBytes) || settings.maxFileSizeInBytes <= 0) {
       const errorMessage = 'Max file size limit value must be provided and be a positive integer.';
@@ -35,7 +33,7 @@ module.exports = settingsX => {
         if (!(d.length || filename)) { return; } // if no file passed, do nothing
         if (err) {
           const errorMessage = `Failed to process file during streaming operation: ${err}`;
-          req.log('debug', 'error', errorMessage);
+          req.log('error', errorMessage);
           next(new Error(errorMessage));
           return;
         }
@@ -61,14 +59,14 @@ module.exports = settingsX => {
     let error;
     busboy.on('error', err => {
       req.log('debug', 'Error parsing form');
-      req.log(err);
+      req.log('error', err);
       error = err;
       next(err);
     });
     busboy.on('finish', () => {
       if (error) { return; }
       req.log('debug', 'Finished form parsing');
-      req.log(req.body);
+      req.log('debug', req.body);
       next();
     });
     req.files = req.files || {};
