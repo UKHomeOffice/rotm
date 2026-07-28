@@ -1,9 +1,11 @@
-const bodyparserReal = require('../../../utils/busboy-body-parser.js');
+const bodyparserReal = require('../../../utils/body-parser.js');
 const chai = require('chai');
 const sinon = require('sinon');
 const proxyquire = require('proxyquire');
 const Readable = require('stream').Readable;
 const EventEmitter = require('events');
+const config = require('../../../config.js');
+const MAX_FILE_SIZE = config.upload.maxFileSizeInBytes;
 
 chai.use(require('sinon-chai'));
 
@@ -35,7 +37,7 @@ describe('multipart form parser', () => {
 
     busboyStub = sinon.stub().returns(parserInstance);
 
-    bodyparser = proxyquire('../../../utils/busboy-body-parser.js', {
+    bodyparser = proxyquire('../../../utils/body-parser.js', {
       busboy: busboyStub
     });
 
@@ -56,7 +58,7 @@ describe('multipart form parser', () => {
   });
 
   it('should call busboy with the correct headers', () => {
-    const parser = bodyparser();
+    const parser = bodyparser({maxFileSizeInBytes: MAX_FILE_SIZE});
     parser(req, res, next);
     expect(busboyStub).to.have.been.calledWith({
       headers: req.headers,
@@ -68,13 +70,13 @@ describe('multipart form parser', () => {
 
   it('calls callback if not a multipart/form-data request', () => {
     req.is = sinon.stub().returns(false);
-    const parser = bodyparser();
+    const parser = bodyparser({maxFileSizeInBytes: MAX_FILE_SIZE});
     parser(req, res, next);
     expect(next).to.have.been.called;
   });
 
   it('pipes request to busboy instance', () => {
-    const parser = bodyparser();
+    const parser = bodyparser({maxFileSizeInBytes: MAX_FILE_SIZE});
     parser(req, res, next);
     req.pipe.should.have.been.calledOnce;
     expect(req.pipe).to.have.been.calledOnceWithExactly(parserInstance);
@@ -82,7 +84,7 @@ describe('multipart form parser', () => {
 
   it('handles a busboy error if payload invalid', done => {
     const busboyErr = new Error('Invalid payload');
-    const parser = bodyparser();
+    const parser = bodyparser({maxFileSizeInBytes: MAX_FILE_SIZE});
     parserInstance.on.withArgs('error').yields(busboyErr);
     parser(req, res, function (err) {
       err.should.equal(busboyErr);
@@ -91,7 +93,7 @@ describe('multipart form parser', () => {
   });
 
   it('handles busboy error if headers invalid', done => {
-    const parser = bodyparser();
+    const parser = bodyparser({maxFileSizeInBytes: MAX_FILE_SIZE});
     req.headers = {
       'content-type': 'multipart/form-data'
     };
@@ -103,7 +105,7 @@ describe('multipart form parser', () => {
   });
 
   it('creates req.body and req.files as empty obj if not existing', done => {
-    const parser = bodyparser();
+    const parser = bodyparser({maxFileSizeInBytes: MAX_FILE_SIZE});
     parserInstance.on.withArgs('finish').yieldsAsync();
     parser(req, res, () => {
       req.body.should.eql({});
@@ -113,7 +115,7 @@ describe('multipart form parser', () => {
   });
 
   it('sets fields on req.body', done => {
-    const parser = bodyparser();
+    const parser = bodyparser({maxFileSizeInBytes: MAX_FILE_SIZE});
     parserInstance.on.withArgs('field').yieldsAsync('key', 'value');
     parserInstance.on.withArgs('finish').yieldsAsync();
 
@@ -124,7 +126,7 @@ describe('multipart form parser', () => {
   });
 
   it('sets files on req.files', done => {
-    const parser = bodyparser();
+    const parser = bodyparser({maxFileSizeInBytes: MAX_FILE_SIZE});
     const file = {
       pipe: function (s) {
         s.end('abcdef123456');
@@ -167,7 +169,7 @@ describe('multipart form parser', () => {
       log: sinon.stub().returns(true)
     };
 
-    const parser = bodyparserReal({ limit: 4 });
+    const parser = bodyparserReal({ maxFileSizeInBytes: 4 });
 
     parser(req, res, err => {
       if (err) { return done(err); }
@@ -184,11 +186,11 @@ describe('multipart form parser', () => {
     parserInstance = new EventEmitter();
     busboyStub = sinon.stub().returns(parserInstance);
 
-    bodyparser = proxyquire('../../../utils/busboy-body-parser.js', {
+    bodyparser = proxyquire('../../../utils/body-parser.js', {
       busboy: busboyStub
     });
 
-    const parser = bodyparser({ multi: true });
+    const parser = bodyparser({ multi: true, maxFileSizeInBytes: MAX_FILE_SIZE });
 
     const file1 = { pipe: s => s.end('abcdef123456'), truncated: false };
     const file2 = { pipe: s => s.end('uvwxyz789012'), truncated: false };
@@ -210,7 +212,7 @@ describe('multipart form parser', () => {
   });
 
   it('can handle empty payloads', done => {
-    const parser = bodyparser();
+    const parser = bodyparser({maxFileSizeInBytes: MAX_FILE_SIZE});
 
     parserInstance.on.withArgs('finish').yieldsAsync();
 
@@ -221,7 +223,7 @@ describe('multipart form parser', () => {
   });
 
   it('can handle empty files', done => {
-    const parser = bodyparser();
+    const parser = bodyparser({maxFileSizeInBytes: MAX_FILE_SIZE});
     const file = {
       pipe: function (s) {
         s.end();
@@ -239,7 +241,7 @@ describe('multipart form parser', () => {
   });
 
   it('can handle files without a filename', done => {
-    const parser = bodyparser();
+    const parser = bodyparser({maxFileSizeInBytes: MAX_FILE_SIZE});
     const file = {
       pipe: function (s) {
         s.end('abcdef123456');

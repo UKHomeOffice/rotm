@@ -1,18 +1,16 @@
 const Busboy = require('busboy');
 const bl = require('bl');
 
-module.exports = inputSettings => {
-  const settings = {
-    limit: 100 * 1024 * 1024, // default 100mib in bytes
-    multi: false,
-    ...(inputSettings || {})
-  };
-
-  if (Number.isInteger(settings.limit)) {
-    settings.limit = settings.limit;
-  }
+module.exports = settingsX => {
+  const settings = settingsX || {};
 
   return function multipartBodyParser(req, res, next) {
+    if (!Number.isInteger(settings?.maxFileSizeInBytes) || settings.maxFileSizeInBytes <= 0) {
+      const errorMessage = 'Max file size limit value must be provided and be a positive integer.';
+      req.log('error', errorMessage);
+      return next(new Error(errorMessage));
+    }
+
     if (!req.is('multipart/form-data')) {
       next();
       return;
@@ -22,7 +20,7 @@ module.exports = inputSettings => {
       busboy = Busboy({
         headers: req.headers,
         limits: {
-          fileSize: settings.limit
+          fileSize: settings.maxFileSizeInBytes
         }
       });
     } catch (err) {
@@ -30,7 +28,7 @@ module.exports = inputSettings => {
       return;
     }
     busboy.on('field', function (key, value) {
-      req.log('Received field %s: %s', key, value);
+      req.log('debug', 'Received field %s: %s', key, value);
       req.body[key] = value;
     });
     busboy.on('file', function (key, file, info) {
@@ -39,7 +37,7 @@ module.exports = inputSettings => {
         if (!(d.length || filename)) { return; } // if no file passed, do nothing
         if (err) {
           const errorMessage = `Failed to process file during streaming operation: ${err}`;
-          req.log('error', errorMessage);
+          req.log('debug', 'error', errorMessage);
           next(new Error(errorMessage));
           return;
         }
@@ -52,9 +50,9 @@ module.exports = inputSettings => {
           size: file.truncated ? null : Buffer.byteLength(d, 'binary')
         };
 
-        req.log('Received file %s', file);
+        req.log('debug', 'Received file %s', file);
 
-        if (settings.multi) {
+        if (settings?.multi) {
           req.files[key] = req.files[key] || [];
           req.files[key].push(fileData);
         } else {
@@ -64,14 +62,14 @@ module.exports = inputSettings => {
     });
     let error;
     busboy.on('error', err => {
-      req.log('Error parsing form');
+      req.log('debug', 'Error parsing form');
       req.log(err);
       error = err;
       next(err);
     });
     busboy.on('finish', () => {
       if (error) { return; }
-      req.log('Finished form parsing');
+      req.log('debug', 'Finished form parsing');
       req.log(req.body);
       next();
     });
