@@ -12,8 +12,7 @@ module.exports = settingsX => {
     }
 
     if (!req.is('multipart/form-data')) {
-      next();
-      return;
+      return next();
     }
     let busboy;
     try {
@@ -24,8 +23,7 @@ module.exports = settingsX => {
         }
       });
     } catch (err) {
-      next(err);
-      return;
+      return next(err);
     }
     busboy.on('field', function (key, value) {
       req.log('debug', 'Received field %s: %s', key, value);
@@ -75,6 +73,6 @@ module.exports = settingsX => {
     });
     req.files = req.files || {};
     req.body = req.body || {};
-    req.pipe(busboy);
+    return req.pipe(busboy);
   };
 };
