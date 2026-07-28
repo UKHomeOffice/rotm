@@ -10,10 +10,10 @@ const reCaptchaSiteKeyCheckbox = window.reCaptchaSiteKeyCheckbox;
  * @param {string} [errorType] - The type of error (if applicable).
  * @param {object} options - Additional options, including the captcha component.
  */
-const captchaStatusHandler = (status, errorType, options) => {
+const captchaStatusHandler = (status, errorType, options = {}) => {
   const { captchaComponent } = options;
 
-  const captchaErrorMsg = captchaComponent.querySelectorAll('.govuk-error-message');
+  const captchaErrorMsg = captchaComponent?.querySelectorAll('.govuk-error-message');
 
   switch (status) {
     case 'ready':
@@ -73,6 +73,10 @@ const renderRecaptchaV2 = (container, tokenInput) => {
       if (tokenInput) {
         tokenInput.value = token;
       }
+
+      captchaStatusHandler('ready', null, {
+        captchaComponent: document.getElementById('hofCaptcha')
+      });
     },
     'expired-callback': () => {
       if (tokenInput) {
@@ -80,15 +84,6 @@ const renderRecaptchaV2 = (container, tokenInput) => {
       }
     }
   });
-
-  const tokenInputObserver = new MutationObserver(() => {
-    captchaStatusHandler('ready', null, {
-      captchaComponent: document.getElementById('hofCaptcha')
-    });
-  });
-
-  // Observe changes to the `value` attribute of the hidden input
-  tokenInputObserver.observe(tokenInput, { attributes: true, attributeFilter: ['value'] });
 };
 
 const init = () => {
@@ -104,33 +99,33 @@ const init = () => {
     const form = document.querySelector('form');
     if (form) {
       form.addEventListener('submit', async e => {
+        const reCaptchaScoreToken = form.querySelector('input[name="g-recaptcha-token"]');
+
+        if (reCaptchaCheckboxContainer && reCaptchaCheckboxToken) {
+          if (!reCaptchaCheckboxToken.value) {
+            e.preventDefault();
+            captchaStatusHandler('error', 'reCaptchaRequired', {
+              captchaComponent: document.getElementById('hofCaptcha')
+            });
+          }
+          return;
+        }
+
+        if (!reCaptchaScoreToken) {
+          return;
+        }
+
         e.preventDefault();
 
         try {
           // Generate SCORE token
           const scoreToken = await generateCaptchaScoreToken('submit');
 
-          // Populate hidden field with token
-          const reCaptchaToken = form.querySelector('input[name="g-recaptcha-token"]');
-          if (reCaptchaToken) {
-            reCaptchaToken.value = scoreToken;
-          } else {
-            const newreCaptchaToken = document.createElement('input');
-            newreCaptchaToken.type = 'hidden';
-            newreCaptchaToken.name = 'g-recaptcha-token';
-            newreCaptchaToken.value = scoreToken;
-            form.appendChild(newreCaptchaToken);
-          }
-
-          if (reCaptchaCheckboxContainer && !reCaptchaCheckboxToken.value) {
-            captchaStatusHandler('error', 'reCaptchaRequired', {
-              captchaComponent: document.getElementById('hofCaptcha')
-            });
-            throw new Error('reCaptchaRequired');
-          }
+          // Populate hidden field with SCORE token
+          reCaptchaScoreToken.value = scoreToken;
           form.submit();
-        } catch (error) {
-          console.warn('Error handling reCAPTCHA:', error);
+        } catch {
+          // TODO: Add user-facing error messaging for reCAPTCHA failures.
         }
       });
     }

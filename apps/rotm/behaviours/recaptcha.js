@@ -70,6 +70,9 @@ async function createAssessment({
 
 module.exports = superclass => class extends superclass {
   async validate(req, res, next) {
+    const { route: currentRoute, confirmStep } = req.form.options;
+    const isConfirmStep = currentRoute === confirmStep;
+
     const handleValidationError = reason => {
       req.log('debug', `reCAPTCHA Validation failed: ${reason}`);
 
@@ -79,33 +82,41 @@ module.exports = superclass => class extends superclass {
         return true;
       }
 
-      // Only perform reCAPTCHA validation if the user is on the confirm page.
-      // This ensures that reCAPTCHA checks are enforced only at the final step of the form submission process.
-      const { route: currentRoute, confirmStep } = req.form.options;
+      // Only enforce reCAPTCHA errors on the confirm page.
       if (currentRoute !== confirmStep) {
         return true;
       }
 
-      return res.redirect(confirmStep);
+      res.redirect(confirmStep);
+      return false;
     };
 
     try {
       const token = req.body['g-recaptcha-token'];
       const tokenCheckbox = req.body['g-recaptcha-token-checkbox'];
-      if (!token && !tokenCheckbox) {
-        const errorMessage = 'Missing reCAPTCHA token in the request body';
-        throw new Error(errorMessage);
-      }
-
       let score;
 
-      if (tokenCheckbox) {
+      if (isConfirmStep) {
+        const shouldValidateCheckbox = Boolean(req.sessionModel.get('reCaptchaRenderCheckbox'));
+
+        if (!shouldValidateCheckbox) {
+          return next();
+        }
+
+        if (!tokenCheckbox) {
+          throw new Error('Missing reCAPTCHA checkbox token in the request body');
+        }
+
         score = await createAssessment({
           recaptchaKey: reCaptcha.siteKeyCheckbox,
           token: tokenCheckbox,
           recaptchaAction: 'send_report'
         }, req);
       } else {
+        if (!token) {
+          throw new Error('Missing reCAPTCHA score token in the request body');
+        }
+
         score = await createAssessment({
           recaptchaKey: reCaptcha.siteKeyScore,
           token: token,
@@ -127,8 +138,13 @@ module.exports = superclass => class extends superclass {
         const errorMessage = 'Score does not meet the threshold';
         throw new Error(errorMessage);
       }
+
+      req.sessionModel.unset('reCaptchaRenderCheckbox');
     } catch (error) {
-      handleValidationError(error.message);
+      const shouldContinue = handleValidationError(error.message);
+      if (!shouldContinue) {
+        return null;
+      }
     }
 
     return next();
