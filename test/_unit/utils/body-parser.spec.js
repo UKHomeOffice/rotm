@@ -58,7 +58,7 @@ describe('multipart form parser', () => {
   });
 
   it('should call busboy with the correct headers', () => {
-    const parser = bodyparser({maxFileSizeInBytes: MAX_FILE_SIZE});
+    const parser = bodyparser({ maxFileSizeInBytes: MAX_FILE_SIZE });
     parser(req, res, next);
     expect(busboyStub).to.have.been.calledWith({
       headers: req.headers,
@@ -70,13 +70,13 @@ describe('multipart form parser', () => {
 
   it('calls callback if not a multipart/form-data request', () => {
     req.is = sinon.stub().returns(false);
-    const parser = bodyparser({maxFileSizeInBytes: MAX_FILE_SIZE});
+    const parser = bodyparser({ maxFileSizeInBytes: MAX_FILE_SIZE });
     parser(req, res, next);
     expect(next).to.have.been.called;
   });
 
   it('pipes request to busboy instance', () => {
-    const parser = bodyparser({maxFileSizeInBytes: MAX_FILE_SIZE});
+    const parser = bodyparser({ maxFileSizeInBytes: MAX_FILE_SIZE });
     parser(req, res, next);
     req.pipe.should.have.been.calledOnce;
     expect(req.pipe).to.have.been.calledOnceWithExactly(parserInstance);
@@ -84,7 +84,7 @@ describe('multipart form parser', () => {
 
   it('handles a busboy error if payload invalid', done => {
     const busboyErr = new Error('Invalid payload');
-    const parser = bodyparser({maxFileSizeInBytes: MAX_FILE_SIZE});
+    const parser = bodyparser({ maxFileSizeInBytes: MAX_FILE_SIZE });
     parserInstance.on.withArgs('error').yields(busboyErr);
     parser(req, res, function (err) {
       err.should.equal(busboyErr);
@@ -93,7 +93,7 @@ describe('multipart form parser', () => {
   });
 
   it('handles busboy error if headers invalid', done => {
-    const parser = bodyparser({maxFileSizeInBytes: MAX_FILE_SIZE});
+    const parser = bodyparser({ maxFileSizeInBytes: MAX_FILE_SIZE });
     req.headers = {
       'content-type': 'multipart/form-data'
     };
@@ -105,7 +105,7 @@ describe('multipart form parser', () => {
   });
 
   it('creates req.body and req.files as empty obj if not existing', done => {
-    const parser = bodyparser({maxFileSizeInBytes: MAX_FILE_SIZE});
+    const parser = bodyparser({ maxFileSizeInBytes: MAX_FILE_SIZE });
     parserInstance.on.withArgs('finish').yieldsAsync();
     parser(req, res, () => {
       req.body.should.eql({});
@@ -115,7 +115,7 @@ describe('multipart form parser', () => {
   });
 
   it('sets fields on req.body', done => {
-    const parser = bodyparser({maxFileSizeInBytes: MAX_FILE_SIZE});
+    const parser = bodyparser({ maxFileSizeInBytes: MAX_FILE_SIZE });
     parserInstance.on.withArgs('field').yieldsAsync('key', 'value');
     parserInstance.on.withArgs('finish').yieldsAsync();
 
@@ -126,7 +126,7 @@ describe('multipart form parser', () => {
   });
 
   it('sets files on req.files', done => {
-    const parser = bodyparser({maxFileSizeInBytes: MAX_FILE_SIZE});
+    const parser = bodyparser({ maxFileSizeInBytes: MAX_FILE_SIZE });
     const file = {
       pipe: function (s) {
         s.end('abcdef123456');
@@ -212,7 +212,7 @@ describe('multipart form parser', () => {
   });
 
   it('can handle empty payloads', done => {
-    const parser = bodyparser({maxFileSizeInBytes: MAX_FILE_SIZE});
+    const parser = bodyparser({ maxFileSizeInBytes: MAX_FILE_SIZE });
 
     parserInstance.on.withArgs('finish').yieldsAsync();
 
@@ -223,7 +223,7 @@ describe('multipart form parser', () => {
   });
 
   it('can handle empty files', done => {
-    const parser = bodyparser({maxFileSizeInBytes: MAX_FILE_SIZE});
+    const parser = bodyparser({ maxFileSizeInBytes: MAX_FILE_SIZE });
     const file = {
       pipe: function (s) {
         s.end();
@@ -241,7 +241,7 @@ describe('multipart form parser', () => {
   });
 
   it('can handle files without a filename', done => {
-    const parser = bodyparser({maxFileSizeInBytes: MAX_FILE_SIZE});
+    const parser = bodyparser({ maxFileSizeInBytes: MAX_FILE_SIZE });
     const file = {
       pipe: function (s) {
         s.end('abcdef123456');
@@ -262,6 +262,30 @@ describe('multipart form parser', () => {
         truncated: true,
         size: null
       });
+      done();
+    });
+  });
+
+  it('passes file streaming errors to next', done => {
+    const parser = bodyparser({ maxFileSizeInBytes: MAX_FILE_SIZE });
+
+    const file = new EventEmitter();
+    file.truncated = false;
+    file.pipe = s => {
+      s.emit('pipe', file); // allow bl to attach error listener
+      process.nextTick(() => file.emit('error', new Error('interrupted stream')));
+      return s;
+    };
+
+    parserInstance.on.withArgs('file').yieldsAsync(
+      'key',
+      file,
+      { filename: 'testing.png', encoding: 'binary', mimeType: 'image/png' }
+    );
+
+    parser(req, res, err => {
+      expect(err).to.be.instanceOf(Error);
+      expect(err.message).to.contain('Failed to process file during streaming operation');
       done();
     });
   });

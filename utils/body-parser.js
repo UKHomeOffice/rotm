@@ -30,10 +30,10 @@ module.exports = settings => {
     busboy.on('file', function (key, file, info) {
       const { filename, encoding, mimeType } = info;
       file.pipe(bl(function (err, d) {
-        if (!(d.length || filename)) { return; } // if no file passed, do nothing
+        if (!(d?.length || filename)) { return; } // if no file passed, do nothing
         if (err) {
           const errorMessage = `Failed to process file during streaming operation: ${err}`;
-          req.log('error', errorMessage);
+          req.log('debug', errorMessage);
           next(new Error(errorMessage));
           return;
         }
@@ -58,7 +58,7 @@ module.exports = settings => {
     });
     let error;
     busboy.on('error', err => {
-      req.log('debug', 'Error parsing form');
+      req.log('error', 'Error parsing form');
       req.log('error', err);
       error = err;
       next(err);
