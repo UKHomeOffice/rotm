@@ -33,7 +33,7 @@ module.exports = settings => {
         if (!(d?.length || filename)) { return; } // if no file passed, do nothing
         if (err) {
           const errorMessage = `Failed to process file during streaming operation: ${err}`;
-          req.log('debug', errorMessage);
+          req.log('error', errorMessage);
           next(new Error(errorMessage));
           return;
         }
