@@ -135,7 +135,6 @@ module.exports = superclass => class extends superclass {
       req.log('info', `reCAPTCHA Risk Analysis -> Score: ${score}`);
 
       if ( !(score >= reCaptcha.threshold) ) {
-        req.sessionModel.set('reCaptchaRenderCheckbox', true);
         const errorMessage = 'Score does not meet the threshold';
         throw new Error(errorMessage);
       }
