@@ -28,10 +28,33 @@ Getting your hands dirty (You'll need [Redis](http://redis.io/) for this)
 $ yarn start:dev
 ```
 
-For anything else ROTM-related, look in [package.json](./package.json) for a full list of scripts etc, and
-[config.js](./config.js) for environment variables.
+### Google Cloud and reCAPTCHA access for local development
 
-Otherwise, see [HOF](https://github.com/UKHomeOffice/hof).
+To run this project locally, you need access to the Google Cloud reCAPTCHA project.
+If you do not already have access, contact the repository maintainers for onboarding guidance.
+
+After access is granted, install the Google Cloud CLI locally and authenticate:
+
+```bash
+$ gcloud init
+```
+
+Follow the interactive instructions, then run:
+
+```bash
+$ gcloud auth application-default login
+```
+
+This creates an application default credentials file that the Google client libraries
+use to authenticate before making API requests.
+
+On Linux/macOS, the file is typically created at:
+
+```text
+~/.config/gcloud/application_default_credentials.json
+```
+
+If your local setup differs, use your Google Cloud CLI config path equivalent.
 
 ### Environment variables
 You'll need to set the following env vars to run the application:
@@ -64,6 +87,13 @@ HAPROXY_UPSTREAM               | HAProxy upstream configuration
 HAPROXY_UPSTREAM_SSL           | HAProxy upstream configuration
 WAF_ADMIN_SALT                 | 32+ character random salt for password hashing
 WAF_ADMIN_PASSWORD             | WAF Admin UI password
+
+### Additional information
+
+For anything else ROTM-related, look in [package.json](./package.json) for a full list of scripts etc, and
+[config.js](./config.js) for environment variables.
+
+Otherwise, see [HOF](https://github.com/UKHomeOffice/hof).
 
 ### Microservices / Repos <a name="microservices-repos"></a>
 
