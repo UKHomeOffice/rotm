@@ -4,7 +4,7 @@
 const hof = require('hof');
 const config = require('./config');
 const mockAPIs = require('./mock-apis');
-const bodyParser = require('busboy-body-parser');
+const bodyParser = require('./utils/body-parser');
 
 if (process.env.REDIS_URL) {
   config.redis = process.env.REDIS_URL;
@@ -59,6 +59,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(bodyParser({limit: config.upload.maxFileSize}));
+app.use(bodyParser(config.upload));
 
 module.exports = app;
