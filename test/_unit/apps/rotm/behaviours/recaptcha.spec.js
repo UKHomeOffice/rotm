@@ -107,6 +107,39 @@ describe("apps/rotm 'recaptcha' behaviour should", () => {
     expect(next).to.have.been.calledOnce;
   });
 
+  it('sets checkbox render flag on non-confirm step when SCORE token is missing', async () => {
+    const Behaviour = buildBehaviour();
+    setupRequest('/can-we-contact');
+
+    const instance = new (Behaviour(Base))();
+    await instance.validate(req, res, next);
+
+    expect(createAssessmentStub).to.not.have.been.called;
+    expect(req.sessionModel.set).to.have.been.calledWith('reCaptchaRenderCheckbox', true);
+    expect(res.redirect).to.not.have.been.called;
+    expect(next).to.have.been.calledOnce;
+  });
+
+  it('sets checkbox render flag on non-confirm step when assessment returns null score', async () => {
+    const Behaviour = buildBehaviour();
+    setupRequest('/can-we-contact');
+
+    req.body['g-recaptcha-token'] = 'score-token';
+    createAssessmentStub.resolves([{
+      tokenProperties: {
+        valid: false,
+        invalidReason: 'MALFORMED'
+      }
+    }]);
+
+    const instance = new (Behaviour(Base))();
+    await instance.validate(req, res, next);
+
+    expect(req.sessionModel.set).to.have.been.calledWith('reCaptchaRenderCheckbox', true);
+    expect(res.redirect).to.not.have.been.called;
+    expect(next).to.have.been.calledOnce;
+  });
+
   it('skips checkbox assessment on confirm step when checkbox is not required', async () => {
     const Behaviour = buildBehaviour();
     setupRequest(confirmStep);
