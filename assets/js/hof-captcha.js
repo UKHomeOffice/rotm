@@ -124,8 +124,9 @@ const init = () => {
           // Populate hidden field with SCORE token
           reCaptchaScoreToken.value = scoreToken;
           form.submit();
-        } catch {
+        } catch(error) {
           // TODO: Add user-facing error messaging for reCAPTCHA failures.
+          console.debug('Error handling reCAPTCHA:', error);
         }
       });
     }
