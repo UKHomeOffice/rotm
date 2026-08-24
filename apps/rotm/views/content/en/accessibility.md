@@ -38,8 +38,8 @@ This service is fully compliant with the [Web Content Accessibility Guidelines (
 
 ## Preparation of this accessibility statement
 
-This statement was prepared on 28 September 2020. It was last reviewed on 05 March 2025.
+This statement was prepared on 28 September 2020. It was last reviewed on 19 August 2026.
 
-This website was last tested on 24 March 2024. The test was carried out internally by the Home Office.
+This website was last tested on 19 August 2026. The test was carried out internally by the Home Office.
 
 We tested the service based on a user's ability to complete key journeys. All parts of the chosen journeys were tested, including documents. Journeys were chosen on a number of factors including usage statistics, risk assessments and subject matter.
