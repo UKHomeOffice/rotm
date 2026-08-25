@@ -1,0 +1,86 @@
+{{<layout}}
+
+  {{$propositionHeader}}{{/propositionHeader}}
+
+  {{$validationSummary}}
+    {{#hasGoogleAnalytics}}
+      {{> partials-cookie-notification}}
+    {{/hasGoogleAnalytics}}
+  {{/validationSummary}}
+
+  {{$header}}
+    {{header}}
+  {{/header}}
+
+  {{$content}}
+    <p>{{intro}}</p>
+    {{^hasGoogleAnalytics}}
+      {{#intro-list}}
+        {{> partials-bullet-list}}
+      {{/intro-list}}
+      {{#indent-intro}}
+        {{> partials-panel-indent}}
+      {{/indent-intro}}
+      <h2>{{intro-cookie}}</h2>
+      <p>{{intro-cookie-message}}</p>
+      {{#intro-cookie-table}}
+        {{> partials-table}}
+      {{/intro-cookie-table}}
+      <h2>{{session-cookies}}</h2>
+      <p>{{session-cookies-content}}</p>
+      {{#session-cookies-table}}
+        {{> partials-session-cookies-table}}
+      {{/session-cookies-table}}
+      {{#markdown}}cookies-recaptcha{{/markdown}}
+    {{/hasGoogleAnalytics}}
+
+    {{#hasGoogleAnalytics}}
+      <div id="cookie-settings">
+        {{#intro-list-ga-tag}}
+          {{> partials-bullet-list}}
+        {{/intro-list-ga-tag}}
+        {{#indent-intro}}
+          {{> partials-panel-indent}}
+        {{/indent-intro}}
+        <h2>{{intro-cookie}}</h2>
+        <p>{{intro-cookie-message}}</p>
+        {{#intro-cookie-table}}
+          {{> partials-table}}
+        {{/intro-cookie-table}}
+          <h2>{{session-cookies}}</h2>
+          <p>{{session-cookies-content}}</p>
+          {{#session-cookies-table}}
+            {{> partials-session-cookies-table}}
+          {{/session-cookies-table}}
+          {{#markdown}}cookies-recaptcha{{/markdown}}
+        <div class="js-enabled">
+          <form>
+            <div class="govuk-form-group">
+              <fieldset>
+                <legend>
+                  <h2>{{measuring-use}}</h2>
+                </legend>
+                {{#google-analytics}}
+                  <p>{{.}}</p>
+                {{/google-analytics}}
+                {{#google-analytics-list}}
+                  {{> partials-bullet-list}}
+                {{/google-analytics-list}}
+                <p>{{no-identify}}</p>
+                {{#analytics-table}}
+                  {{> partials-analytics-table}}
+                {{/analytics-table}}
+                {{#indent-ga}}
+                  {{> partials-panel-indent}}
+                {{/indent-ga}}
+                {{> partials-cookie-settings-radio}}
+              </fieldset>
+            </div>
+            {{> partials-cookie-settings-button}}
+          </form>
+        </div>
+      </div>
+    {{/hasGoogleAnalytics}}
+
+  {{/content}}
+{{/layout}}

@@ -6,6 +6,7 @@
     "hof/components/session-timeout-warning"
   ],
   "translations": "./apps/rotm/translations",
+  "views": "./apps/rotm/views",
   "routes": [
     "./apps/rotm"
   ],
