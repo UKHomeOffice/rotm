@@ -17,9 +17,9 @@ const client = new RecaptchaEnterpriseServiceClient();
  */
 async function createAssessment({
   projectID = reCaptcha.projectID,
-  recaptchaKey = reCaptcha.siteKeyV3,
+  recaptchaKey,
   token,
-  recaptchaAction = 'submit'
+  recaptchaAction
 } = {}, req) {
   const projectPath = client.projectPath(projectID);
 
@@ -45,9 +45,9 @@ async function createAssessment({
       return null;
     }
 
-    // Check if the expected action was executed.
-    // The `action` property is set by user client in the grecaptcha.enterprise.execute() method.
-    if (response?.tokenProperties?.action !== recaptchaAction) {
+    // Check if the expected action was executed only if the `action` property
+    // is set by user client in the grecaptcha.enterprise.execute() method.
+    if (recaptchaAction && response?.tokenProperties?.action !== recaptchaAction) {
       const errorMessage = 'The action attribute in reCAPTCHA tag does not match the action you are expecting to score';
       req.log('debug', errorMessage);
       return null;
@@ -70,38 +70,61 @@ async function createAssessment({
 
 module.exports = superclass => class extends superclass {
   async validate(req, res, next) {
-    const validationErrorFunc = (key, type) =>
-      new this.ValidationError(key, { type: type });
+    const { route: currentRoute, confirmStep } = req.form.options;
+    const isConfirmStep = currentRoute === confirmStep;
 
     const handleValidationError = reason => {
-      const errs = {};
-
       req.log('debug', `reCAPTCHA Validation failed: ${reason}`);
 
       if (reCaptcha.threshold === 0) {
         req.log('debug', 'Threshold is 0. Accepting all scores, including null.');
-        return next();
+        req.sessionModel.unset('reCaptchaRenderCheckbox');
+        return true;
       }
 
-      // Loop through req.form.values and add the first field with a non-empty value to the error object
-      for (const [key, value] of Object.entries(req.form.values)) {
-        if (value) {
-          errs[key] = validationErrorFunc(key, 'reCaptchaFailed');
-          break;
-        }
+      // Only enforce reCAPTCHA errors on the confirm page.
+      if (!isConfirmStep) {
+        req.sessionModel.set('reCaptchaRenderCheckbox', true);
+        return true;
       }
 
-      return next(errs);
+      res.redirect(confirmStep);
+      return false;
     };
 
     try {
       const token = req.body['g-recaptcha-token'];
-      if (!token) {
-        const errorMessage = 'Missing reCAPTCHA token in the request body';
-        throw new Error(errorMessage);
+      const tokenCheckbox = req.body['g-recaptcha-token-checkbox'];
+      let score;
+
+      if (isConfirmStep) {
+        const shouldValidateCheckbox = Boolean(req.sessionModel.get('reCaptchaRenderCheckbox'));
+
+        if (!shouldValidateCheckbox) {
+          return next();
+        }
+
+        if (!tokenCheckbox) {
+          throw new Error('Missing reCAPTCHA checkbox token in the request body');
+        }
+
+        score = await createAssessment({
+          recaptchaKey: reCaptcha.siteKeyCheckbox,
+          token: tokenCheckbox,
+          recaptchaAction: 'send_report'
+        }, req);
+      } else {
+        if (!token) {
+          throw new Error('Missing reCAPTCHA score token in the request body');
+        }
+
+        score = await createAssessment({
+          recaptchaKey: reCaptcha.siteKeyScore,
+          token: token,
+          recaptchaAction: 'submit'
+        }, req);
       }
 
-      const score = await createAssessment({ token }, req);
       req.sessionModel.set('reCAPTCHAScore', score);
 
       if (score === null) {
@@ -115,8 +138,13 @@ module.exports = superclass => class extends superclass {
         const errorMessage = 'Score does not meet the threshold';
         throw new Error(errorMessage);
       }
+
+      req.sessionModel.unset('reCaptchaRenderCheckbox');
     } catch (error) {
-      handleValidationError(error.message);
+      const shouldContinue = handleValidationError(error.message);
+      if (!shouldContinue) {
+        return null;
+      }
     }
 
     return next();

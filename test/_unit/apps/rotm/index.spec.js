@@ -9,10 +9,10 @@ describe('apps/rotm config', () => {
   });
 
   it('should apply reCaptcha only to the intended steps', () => {
-    const intendedSteps = ['/can-we-contact'];
+    const intendedSteps = ['/can-we-contact', '/check-your-report'];
 
     intendedSteps.forEach(step => {
-      expect(app.steps[step].behaviours).to.deep.equal([reCaptcha]);
+      expect(app.steps[step].behaviours).to.include(reCaptcha);
     });
 
     const otherSteps = Object.keys(app.steps).filter(
