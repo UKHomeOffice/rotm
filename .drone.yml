@@ -96,7 +96,6 @@ steps:
       event: [push, pull_request]
     depends_on:
       - setup
-      - clone_repos
 
   - name: unit_tests
     <<: *unit_tests
@@ -129,7 +128,7 @@ steps:
       event: [push, pull_request]
     depends_on:
       - linting
-    #  - unit_tests
+      - unit_tests
 
   # Trivy Security Scannner for scanning OS related vulnerabilities in Base image of Dockerfile
   - name: scan_base_image_os
@@ -152,7 +151,7 @@ steps:
     when:
       event: [push, pull_request]
     depends_on:
-      - clone_repos  
+      - clone_repos
 
   - name: image_to_quay
     pull: if-not-exists
