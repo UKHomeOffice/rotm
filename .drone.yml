@@ -100,12 +100,12 @@ steps:
 
   - name: unit_tests
     <<: *unit_tests
-   when:
-     branch:
-       <<: *include_default_and_feature_branches
-     event: [push, pull_request]
-   depends_on:
-     - setup
+    when:
+      branch:
+        <<: *include_default_and_feature_branches
+      event: [push, pull_request]
+    depends_on:
+      - setup
 
   - name: sonar_scanner
     <<: *sonar_scanner
