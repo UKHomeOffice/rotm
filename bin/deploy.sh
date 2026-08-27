@@ -126,6 +126,17 @@ delete_redis() {
     -f kube/redis/redis-deployment.yml
 }
 
+deploy_ui_redis() {
+  if [[ ${KUBE_NAMESPACE} != ${BRANCH_ENV} ]]; then
+    $kd -f kube/ui-redis/ui-redis-pvc.yml
+  fi
+
+  $kd -f kube/ui-redis/ui-redis-configmap.yml \
+    -f kube/ui-redis/ui-redis-service.yml \
+    -f kube/ui-redis/ui-redis-network-policy.yml \
+    -f kube/ui-redis/ui-redis-statefulset.yml
+}
+
 if [[ $1 == 'tear_down' ]]; then
   export KUBE_NAMESPACE=$BRANCH_ENV
   export BRANCH_SLUG_MAX_LENGTH=$(compute_branch_slug_max_length)
@@ -176,7 +187,7 @@ if [[ ${KUBE_NAMESPACE} == ${BRANCH_ENV} ]]; then
   $kd -f kube/configmaps -f kube/certs
   deploy_redis
   $kd -f kube/file-vault -f kube/app
-  $kd -f kube/ui-redis
+  deploy_ui_redis
   $kd -f kube/openresty/admin-ui-deployment.yml -f kube/openresty/admin-ui-ingress-internal.yml -f kube/openresty/admin-ui-network-policy.yml -f kube/openresty/admin-ui-service.yml -f kube/openresty/openresty-configmap.yml -f kube/openresty/openresty-deployment.yml -f kube/openresty/openresty-network-policy.yml -f kube/openresty/openresty-service.yml
   $kd -f kube/ha-proxy
 elif [[ ${KUBE_NAMESPACE} == ${UAT_ENV} ]]; then
@@ -185,7 +196,7 @@ elif [[ ${KUBE_NAMESPACE} == ${UAT_ENV} ]]; then
   $kd -f kube/app/ingress-internal.yml -f kube/app/ingress-external.yml -f kube/app/networkpolicy-internal.yml -f kube/app/networkpolicy-external.yml
   deploy_redis
   $kd -f kube/file-vault -f kube/app/deployment.yml
-  $kd -f kube/ui-redis
+  deploy_ui_redis
   $kd -f kube/openresty/admin-ui-deployment.yml -f kube/openresty/admin-ui-ingress-internal.yml -f kube/openresty/admin-ui-network-policy.yml -f kube/openresty/admin-ui-service.yml -f kube/openresty/openresty-configmap.yml -f kube/openresty/openresty-deployment.yml -f kube/openresty/openresty-network-policy.yml -f kube/openresty/openresty-service.yml
   $kd -f kube/ha-proxy
 elif [[ ${KUBE_NAMESPACE} == ${STG_ENV} ]]; then
@@ -194,7 +205,7 @@ elif [[ ${KUBE_NAMESPACE} == ${STG_ENV} ]]; then
   $kd -f kube/app/ingress-internal.yml -f kube/app/ingress-external.yml -f kube/app/networkpolicy-internal.yml -f kube/app/networkpolicy-external.yml
   deploy_redis
   $kd -f kube/file-vault
-  $kd -f kube/ui-redis
+  deploy_ui_redis
   $kd -f kube/openresty/admin-ui-deployment.yml -f kube/openresty/admin-ui-ingress-internal.yml -f kube/openresty/admin-ui-network-policy.yml -f kube/openresty/admin-ui-service.yml -f kube/openresty/openresty-configmap.yml -f kube/openresty/openresty-deployment.yml -f kube/openresty/openresty-network-policy.yml -f kube/openresty/openresty-service.yml
   $kd -f kube/ha-proxy
 elif [[ ${KUBE_NAMESPACE} == ${PROD_ENV} ]]; then
@@ -203,7 +214,7 @@ elif [[ ${KUBE_NAMESPACE} == ${PROD_ENV} ]]; then
   $kd -f kube/app/ingress-external.yml -f kube/app/networkpolicy-external.yml
   deploy_redis
   $kd -f kube/file-vault
-  $kd -f kube/ui-redis
+  deploy_ui_redis
   $kd -f kube/openresty/admin-ui-deployment.yml -f kube/openresty/admin-ui-ingress-external.yml -f kube/openresty/admin-ui-network-policy.yml -f kube/openresty/admin-ui-service.yml -f kube/openresty/openresty-configmap.yml -f kube/openresty/openresty-deployment.yml -f kube/openresty/openresty-network-policy.yml -f kube/openresty/openresty-service.yml
   $kd -f kube/ha-proxy
 fi

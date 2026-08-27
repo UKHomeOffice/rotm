@@ -1,4 +1,3 @@
-{{ if ne .KUBE_NAMESPACE .BRANCH_ENV }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -10,4 +9,3 @@ spec:
     requests:
       storage: 5Gi
   storageClassName: gp2
-{{ end }}
