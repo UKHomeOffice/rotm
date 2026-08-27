@@ -26,10 +26,10 @@ settings = Object.assign({}, settings, {
       'https://www.google-analytics.com',
       'https://region1.google-analytics.com',
       'https://region1.analytics.google.com',
-      'https://www.google.com'
+      'https://www.recaptcha.net'
     ],
     frameSrc: [
-      'https://www.google.com'
+      'https://www.recaptcha.net'
     ]
   },
   getAccessibility: false
