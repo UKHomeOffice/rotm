@@ -1,11 +1,8 @@
+{{ if ne .KUBE_NAMESPACE .BRANCH_ENV }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-  name: ui-redis-pvc-{{ .DRONE_SOURCE_BRANCH }}
-  {{ else }}
   name: ui-redis-pvc
-  {{ end }}
 spec:
   accessModes:
     - ReadWriteOnce
@@ -13,3 +10,4 @@ spec:
     requests:
       storage: 5Gi
   storageClassName: gp2
+{{ end }}

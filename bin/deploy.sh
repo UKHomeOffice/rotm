@@ -143,7 +143,7 @@ if [[ $1 == 'tear_down' ]]; then
 
   $kd --delete -f kube/configmaps/configmap.yml
   delete_redis
-  $kd --delete -f kube/file-vault -f kube/app -f kube/ui-redis/ui-redis-statefulset.yml -f kube/ui-redis/ui-redis-service.yml -f kube/ui-redis/ui-redis-pvc.yml -f kube/ui-redis/ui-redis-network-policy.yml -f kube/ui-redis/ui-redis-configmap.yml -f kube/openresty
+  $kd --delete -f kube/file-vault -f kube/app -f kube/ui-redis/ui-redis-statefulset.yml -f kube/ui-redis/ui-redis-service.yml -f kube/ui-redis/ui-redis-network-policy.yml -f kube/ui-redis/ui-redis-configmap.yml -f kube/openresty
   $kd --delete -f kube/ha-proxy/ha-proxy-statefulset.yml -f kube/ha-proxy/ha-proxy-public-service.yml -f kube/ha-proxy/ha-proxy-peer-service.yml -f kube/ha-proxy/ha-proxy-network-policy.yml -f kube/ha-proxy/ha-proxy-configmap.yml
   echo "Torn Down Branch - $APP_NAME-$DRONE_SOURCE_BRANCH.internal.$BRANCH_ENV.homeoffice.gov.uk"
   exit 0
