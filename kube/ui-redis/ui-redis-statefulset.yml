@@ -67,12 +67,12 @@ spec:
               subPath: redis.conf
       volumes:
         - name: redis-data
+          {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+          emptyDir: {}
+          {{ else }}
           persistentVolumeClaim:
-            {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-            claimName: ui-redis-pvc-{{ .DRONE_SOURCE_BRANCH }}
-            {{ else }}
             claimName: ui-redis-pvc
-            {{ end }}
+          {{ end }}
         - name: redis-config
           configMap:
             name: redis-config
