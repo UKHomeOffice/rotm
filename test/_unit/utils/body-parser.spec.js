@@ -1,13 +1,14 @@
 const bodyparserReal = require('../../../utils/body-parser.js');
 const chai = require('chai');
 const sinon = require('sinon');
+const sinonChai = require('sinon-chai');
 const proxyquire = require('proxyquire');
 const Readable = require('stream').Readable;
 const EventEmitter = require('events');
 const config = require('../../../config.js');
 const MAX_FILE_SIZE = config.upload.maxFileSizeInBytes;
 
-chai.use(require('sinon-chai'));
+chai.use(sinonChai.default || sinonChai);
 
 function multipartBody(boundary, content) {
   return Buffer.from(
