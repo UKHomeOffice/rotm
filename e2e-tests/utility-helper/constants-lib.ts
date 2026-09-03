@@ -1,0 +1,18 @@
+export const ConstantsLib = {
+  FULL_NAME: 'HOF TEST',
+  SAS_HOF_EMAIL: 'sas-hof-test@digital.homeoffice.gov.uk',
+  TELEPHONE: '01616699548',
+  TENANTS_EMAIL: 'Email',
+  TELEPHONE_LABEL: 'Telephone',
+  BOTH_CONTACTS: 'Both',
+  RESPONSE_YES: 'Yes',
+  RESPONSE_NO: 'No',
+  HAVE_LINK: 'Yes, I have a link to the material',
+  DO_NOT_HAVE_LINK: 'No, I don’t have a link',
+  LINK_TO_MATERIAL: 'www.gov.uk/page/1234/content',
+  HAVE_EVIDENCE: 'Yes, I have evidence',
+  NO_EVIDENCE: 'No, I don’t have anything',
+  GIVE_CONTACT: 'Yes, I’ll give my contact details',
+  DO_NOT_GIVE_CONTACT: 'No, I don’t want to be contacted',
+  ADDITIONAL_DETAILS: 'Anything else you want to tell us',
+} as const;
