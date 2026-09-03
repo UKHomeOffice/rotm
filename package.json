@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "@cucumber/cucumber": "^13.2.0",
-    "@playwright/test": "^1.61.1",
+    "@playwright/test": "1.61.1",
     "@types/node": "^26.1.1",
     "chai": "^6.2.2",
     "chai-as-promised": "^8.0.2",
