@@ -1,12 +1,21 @@
 import { expect } from '@playwright/test';
 import { createBdd } from 'playwright-bdd';
 import { test, Pages } from '../fixture/fixtures';
-import { ConstantsLib as c } from '../utility-helper/constants-lib';
-import { getRotmApplicantForScenario, RotmApplicant } from '../test-data/rotm-applicant';
+import { ConstantsLib as c, getRotmApplicantForScenario, RotmApplicant } from '../utility-helper/constants-lib';
+// import { getRotmApplicantForScenario, RotmApplicant } from '../test-data/rotm-applicant';
 
 export const { Given, When, Then } = createBdd(test);
 
 let selectedApplicant: RotmApplicant;
+
+function getSasHofEmail(): string {
+    const sasHofEmail = process.env.SAS_HOF_EMAIL;
+
+    if (!sasHofEmail) {
+        throw new Error("SAS_HOF_EMAIL is not configured");
+    }
+    return sasHofEmail;
+}
 
 export class BficStepLib {
   constructor(private readonly pages: Pages) {}
@@ -116,7 +125,7 @@ export class BficStepLib {
 
     switch (applicant.whatAreYourContactDetails.toLowerCase()) {
       case c.TENANTS_EMAIL.toLowerCase():
-        await this.pages.rotmWhatAreYourContactDetailsPage.answerSelectContact(c.TENANTS_EMAIL, c.SAS_HOF_EMAIL);
+        await this.pages.rotmWhatAreYourContactDetailsPage.answerSelectContact(c.TENANTS_EMAIL, getSasHofEmail());
         break;
 
       case c.TELEPHONE_LABEL.toLowerCase():
@@ -124,7 +133,7 @@ export class BficStepLib {
         break;
 
       case c.BOTH_CONTACTS.toLowerCase():
-        await this.pages.rotmWhatAreYourContactDetailsPage.answerSelectContact(c.TENANTS_EMAIL, c.SAS_HOF_EMAIL);
+        await this.pages.rotmWhatAreYourContactDetailsPage.answerSelectContact(c.TENANTS_EMAIL, getSasHofEmail());
         await this.pages.rotmWhatAreYourContactDetailsPage.answerSelectContact(c.TELEPHONE_LABEL, c.TELEPHONE);
         break;
 

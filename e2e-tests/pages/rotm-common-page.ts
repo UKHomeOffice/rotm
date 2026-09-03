@@ -12,6 +12,6 @@ export class rotmCommonPage extends basePage {
 
   async uploadEvidence(label: string) {
     await this.selectRadioOrCheckboxOption(label);
-    await this.chooseFile.first().setInputFiles(path.resolve('assets/images/source-help.png'));
+    await this.chooseFile.first().setInputFiles(path.resolve('e2e-tests/utility-helper/no-preview.png'));
   }
 }
