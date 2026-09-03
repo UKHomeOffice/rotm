@@ -100,7 +100,7 @@ clone_repos_step: &clone_repos_step
       path: /root/.dockersock
   commands:
     - test -s "$CLONE_TOKEN_FILE" || (echo "$CLONE_TOKEN_MISSING_MESSAGE" && exit 1)
-    - export GITHUB_TOKEN="$(cat \"$CLONE_TOKEN_FILE\")"
+    - export GITHUB_TOKEN="$(cat "$CLONE_TOKEN_FILE")"
     - git clone https://x-access-token:$${GITHUB_TOKEN}@github.com/UKHomeOfficeForms/hof-services-config.git
     - if [ "${CLONE_REPOS_PRUNE:-false}" = "true" ]; then find hof-services-config/* | grep -v $HOF_CONFIG | grep -v 'infrastructure' | xargs rm -rf; fi
     - rm -f "$CLONE_TOKEN_FILE"
