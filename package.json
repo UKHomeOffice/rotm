@@ -23,7 +23,7 @@
   },
   "author": "HomeOffice",
   "dependencies": {
-    "@google-cloud/recaptcha-enterprise": "^6.4.1",
+    "@google-cloud/recaptcha-enterprise": "^7.1.0",
     "busboy": "^1.6.0",
     "bl": "6.1.6",
     "device": "^0.3.12",
