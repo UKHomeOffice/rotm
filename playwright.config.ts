@@ -8,7 +8,6 @@ dotenv.config({ quiet: true });
 const port = Number(process.env.PLAYWRIGHT_PORT || 8080);
 const baseURL = process.env.PLAYWRIGHT_BASE_URL || `http://localhost:${port}`;
 
-
 const testDir = defineBddConfig({
   features: 'e2e-tests/features/**/*.feature',
   steps: [
