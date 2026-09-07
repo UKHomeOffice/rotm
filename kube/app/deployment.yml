@@ -80,16 +80,6 @@ spec:
                   key: pass
             - name: USE_MOCKS
               value: "false"
-            - name: AWS_USER
-              valueFrom:
-                secretKeyRef:
-                  name: ses
-                  key: smtp_username
-            - name: AWS_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: ses
-                  key: smtp_password
             - name: KEYCLOAK_SECRET
               valueFrom:
                 secretKeyRef:
