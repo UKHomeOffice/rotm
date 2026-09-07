@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 
 dotenv.config({ quiet: true });
 
-//Note: The baseURL is set to the value of PLAYWRIGHT_BASE_URL from the .env file if it exists, otherwise it defaults to http://localhost:${port}.
+//Note: The baseURL is set to the value of PLAYWRIGHT_BASE_URL from the .env file if it exists, otherwise it defaults to http://localhost:${port}
 const port = Number(process.env.PLAYWRIGHT_PORT || 8080);
 const baseURL = process.env.PLAYWRIGHT_BASE_URL || `http://localhost:${port}`;
 
