@@ -34,7 +34,7 @@ export default defineConfig({
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
     trace: 'on-first-retry',
-    headless: !!process.env.CI,
+    headless: false,
   },
 
     webServer: process.env.PLAYWRIGHT_BASE_URL
