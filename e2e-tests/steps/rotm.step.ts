@@ -17,16 +17,8 @@ function getSasHofEmail(): string {
     return sasHofEmail;
 }
 
-export class BficStepLib {
+export class RotmStepLib {
   constructor(private readonly pages: Pages) {}
-
-  async openRotmHomePage() {
-    await this.pages.rotmHomePgHaveLinkToMaterialPage.openRotmHomePage();
-  }
-
-  async getRotmHeaderLinkServiceName(): Promise<string> {
-    return (await this.pages.rotmHomePgHaveLinkToMaterialPage.getRotmHeaderLink()).trim();
-  }
 
   async ansDoYouHaveLinkToTheMaterial(applicant: RotmApplicant) {
     await this.pages.rotmHomePgHaveLinkToMaterialPage.assertPageTitle(this.pages.rotmHomePgHaveLinkToMaterialPage.page, await this.pages.rotmHomePgHaveLinkToMaterialPage.expectedPageTitle());
@@ -210,15 +202,15 @@ Given('I selected the data for scenario {string} - {string}', async ({}, scenari
 });
 
 When('I visit the Rotm page', async ({ pages }) => {
-  await new BficStepLib(pages).openRotmHomePage();
+  await pages.rotmHomePgHaveLinkToMaterialPage.openRotmHomePage();
 });
 
 Then('I see the Rotm header link service name {string}', async ({ pages }, rotmHeaderLinkName: string) => {
-  await expect(await new BficStepLib(pages).getRotmHeaderLinkServiceName()).toEqual(rotmHeaderLinkName);
+  await expect((await pages.rotmHomePgHaveLinkToMaterialPage.getRotmHeaderLink()).trim()).toEqual(rotmHeaderLinkName);
 });
 
 When('I fill out my answers for the Rotm questionnaire', async ({ pages }) => {
-  const stepLib = new BficStepLib(pages);
+  const stepLib = new RotmStepLib(pages);
   await stepLib.ansDoYouHaveLinkToTheMaterial(selectedApplicant);
   await stepLib.ansDoYouHaveEvidence(selectedApplicant);
   await stepLib.ansAnythingElseYouCanTellUs();
@@ -226,23 +218,23 @@ When('I fill out my answers for the Rotm questionnaire', async ({ pages }) => {
 });
 
 Then('I check my report for Rotm', async ({ pages }) => {
-  await new BficStepLib(pages).ansCheckYourReport();
+  await new RotmStepLib(pages).ansCheckYourReport();
 });
 
 Then('I am able to submit the Rotm questionnaire', async ({ pages }) => {
-  await expect(await new BficStepLib(pages).getReportSubmissionMessage()).toEqual('Report sent');
+  await expect(await new RotmStepLib(pages).getReportSubmissionMessage()).toEqual('Report sent');
 });
 
 Then('I am able to navigate back to ROTM home page', async ({ pages }) => {
-  await new BficStepLib(pages).navigateBackToHomePage();
+  await new RotmStepLib(pages).navigateBackToHomePage();
 });
 
 When('I add {int} additional links to my report and continue', async ({ pages }, addLinks: number) => {
-  await new BficStepLib(pages).addAdditionalLinks(addLinks);
+  await new RotmStepLib(pages).addAdditionalLinks(addLinks);
 });
 
 Then('I check the change is updated to {int} links on the \'Check your report\' page and continue', async ({ pages }, links: number) => {
-  await expect(await new BficStepLib(pages).verifyAdditionalLinksAreAdded()).toEqual(links);
+  await expect(await new RotmStepLib(pages).verifyAdditionalLinksAreAdded()).toEqual(links);
 });
 
 When('I select continue', async ({ pages }) => {
@@ -250,37 +242,37 @@ When('I select continue', async ({ pages }) => {
 });
 
 Then('I see {string} error message displayed for ROTM', async ({ pages }, expectedErrorMessage: string) => {
-  await expect(await new BficStepLib(pages).getErrorMessageDetailText()).toEqual(expectedErrorMessage);
+  await expect(await new RotmStepLib(pages).getErrorMessageDetailText()).toEqual(expectedErrorMessage);
 });
 
 Then('I see error message displayed for ROTM', async ({ pages }, expectedErrorMessage: string) => {
-  await expect(await new BficStepLib(pages).getErrorMessageDetailText()).toEqual(expectedErrorMessage.trim());
+  await expect(await new RotmStepLib(pages).getErrorMessageDetailText()).toEqual(expectedErrorMessage.trim());
 });
 
 Then('I see {string} error header message displayed for ROTM', async ({ pages }, expectedErrorMessage: string) => {
-  await expect(await new BficStepLib(pages).getErrorSummaryHeaderText()).toEqual(expectedErrorMessage);
+  await expect(await new RotmStepLib(pages).getErrorSummaryHeaderText()).toEqual(expectedErrorMessage);
 });
 
 When('I select {string} link to material and click continue', async ({ pages }, option: string) => {
-  await new BficStepLib(pages).selectLinkToMaterial(option);
+  await new RotmStepLib(pages).selectLinkToMaterial(option);
 });
 
 When('I select {string} for evidence and click continue', async ({ pages }, evidence: string) => {
-  await new BficStepLib(pages).selectEvidence(evidence);
+  await new RotmStepLib(pages).selectEvidence(evidence);
 });
 
 When('I select {string} for more evidence and click continue', async ({ pages }, additionalEvidence: string) => {
-  await new BficStepLib(pages).selectMoreEvidence(additionalEvidence);
+  await new RotmStepLib(pages).selectMoreEvidence(additionalEvidence);
 });
 
 When('I select {string} to give contact details and click continue', async ({ pages }, giveContact: string) => {
-  await new BficStepLib(pages).selectContactDetails(giveContact);
+  await new RotmStepLib(pages).selectContactDetails(giveContact);
 });
 
 When('I enter my contact details for ROTM and click continue', async ({ pages }) => {
-  await new BficStepLib(pages).enterYourContactDetails();
+  await new RotmStepLib(pages).enterYourContactDetails();
 });
 
 When('I am on the \'Check your report\' page', async ({ pages }) => {
-  await new BficStepLib(pages).ansCheckYourReport();
+  await new RotmStepLib(pages).ansCheckYourReport();
 });
