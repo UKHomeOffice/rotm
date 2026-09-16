@@ -2,7 +2,6 @@ import { expect } from '@playwright/test';
 import { createBdd } from 'playwright-bdd';
 import { test, Pages } from '../fixture/fixtures';
 import { ConstantsLib as c, getRotmApplicantForScenario, RotmApplicant } from '../utility-helper/constants-lib';
-// import { getRotmApplicantForScenario, RotmApplicant } from '../test-data/rotm-applicant';
 
 export const { Given, When, Then } = createBdd(test);
 
