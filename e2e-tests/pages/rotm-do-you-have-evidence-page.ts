@@ -44,12 +44,8 @@ export class rotmDoYouHaveEvidencePage extends rotmCommonPage {
 
       if (tabName.toLowerCase() === 'mac' || tabName.toLowerCase() === 'chromebook') {
         const link = this.page.getByRole('tabpanel', { name: tabName, exact: true }).getByRole('link').first();
-
-        if (await link.isVisible()) {
-          await link.click();
-          await this.page.goBack();
-          await this.helpMeTakeScreenshotLink.click();
-        }
+        await expect(link).toBeVisible();
+        await expect(link).toHaveAttribute('href', /^https:\/\//);
       }
 
       if (tabName.toLowerCase() === 'all other computers') {
