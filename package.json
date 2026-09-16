@@ -29,9 +29,9 @@
   "author": "HomeOffice",
   "dependencies": {
     "@google-cloud/recaptcha-enterprise": "^6.4.1",
-    "busboy": "^1.6.0",
     "bl": "6.1.6",
-    "device": "^0.3.12",
+    "bowser": "^2.14.1",
+    "busboy": "^1.6.0",
     "express": "^5.2.1",
     "hof": "~24.5.0",
     "jimp": "^1.6.1",
@@ -60,6 +60,7 @@
     "tmp": "^0.2.7",
     "serialize-javascript": "^7.0.7",
     "brace-expansion": "^5.0.8",
-    "diff": "^8.0.3"
+    "diff": "^8.0.3",
+    "qs": "^6.16.0"
   }
 }

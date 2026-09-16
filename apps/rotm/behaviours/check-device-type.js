@@ -1,16 +1,27 @@
 'use strict';
-const device = require('device');
+
+const Bowser = require('bowser');
+
 
 module.exports = superclass => class extends superclass {
   locals(req, res, callback) {
-    const client = device(req.get('user-agent'), {
-      emptyUserAgentDeviceType: 'unknown',
-      unknownUserAgentDeviceType: 'unknown'
-    });
+    const userAgent = req.get('user-agent') || '';
+    let platformType = 'unknown';
 
-    res.locals['device-desktop'] = client.type === 'desktop';
-    res.locals['device-phone'] = client.type === 'phone';
-    res.locals['device-unknown'] = client.type !== 'desktop' && client.type !== 'phone';
+    if (userAgent) {
+      try {
+        platformType = Bowser.getParser(userAgent).getPlatformType(true);
+      } catch (error) {
+        platformType = 'unknown';
+      }
+    }
+
+    const isDesktop = platformType === 'desktop';
+    const isPhone = platformType === 'mobile' || platformType === 'tablet';
+
+    res.locals['device-desktop'] = isDesktop;
+    res.locals['device-phone'] = isPhone;
+    res.locals['device-unknown'] = !isDesktop && !isPhone;
     req.log('info', `Submission ID: ${req.sessionModel.get('submissionID')}, 
                      Device Desktop: ${res.locals['device-desktop']}, 
                      Device Phone: ${res.locals['device-phone']},
