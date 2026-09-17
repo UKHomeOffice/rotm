@@ -22,7 +22,6 @@ environment:
   REDIS_PERSISTENCE_STORAGE_CLASS: gp2-encrypted-eu-west-2b
   REDIS_PERSISTENCE_EXISTING_CLAIM: ""
   REDIS_PERSISTENCE_ANNOTATIONS_FILE: ""
-  NIGHTLY_E2E_BASE_URL: rotm.uat.internal.sas-notprod.homeoffice.gov.uk
 
 include_default_branch: &include_default_branch
   include:
@@ -600,6 +599,9 @@ steps:
   - name: cron_nightly_e2e_tests
     pull: if-not-exists
     image: mcr.microsoft.com/playwright:v1.61.1-noble
+    environment:
+      NIGHTLY_E2E_BASE_URL:
+        from_secret: NIGHTLY_E2E_BASE_URL    
     volumes:
       - name: dockersock
         path: /root/.dockersock
