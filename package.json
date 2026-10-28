@@ -24,7 +24,7 @@
   "author": "HomeOffice",
   "dependencies": {
     "@google-cloud/recaptcha-enterprise": "^6.4.2",
-    "bl": "6.1.6",
+    "bl": "7.0.13",
     "bowser": "^2.14.1",
     "busboy": "^1.6.0",
     "express": "^5.2.1",
