@@ -6,14 +6,6 @@ export const { Given, When, Then } = createBdd(test);
 
 let selectedApplicant: RotmApplicant;
 
-function getSasHofEmail(): string {
-    const sasHofEmail = process.env.SAS_HOF_EMAIL;
-
-    if (!sasHofEmail) {
-        throw new Error("SAS_HOF_EMAIL is not configured");
-    }
-    return sasHofEmail;
-}
 
 export class RotmStepLib {
   constructor(private readonly pages: Pages) {}
@@ -115,7 +107,7 @@ export class RotmStepLib {
 
     switch (applicant.whatAreYourContactDetails.toLowerCase()) {
       case c.TENANTS_EMAIL.toLowerCase():
-        await this.pages.rotmWhatAreYourContactDetailsPage.answerSelectContact(c.TENANTS_EMAIL, getSasHofEmail());
+        await this.pages.rotmWhatAreYourContactDetailsPage.answerSelectContact(c.TENANTS_EMAIL, c.SAS_HOF_EMAIL);
         break;
 
       case c.TELEPHONE_LABEL.toLowerCase():
@@ -123,7 +115,7 @@ export class RotmStepLib {
         break;
 
       case c.BOTH_CONTACTS.toLowerCase():
-        await this.pages.rotmWhatAreYourContactDetailsPage.answerSelectContact(c.TENANTS_EMAIL, getSasHofEmail());
+        await this.pages.rotmWhatAreYourContactDetailsPage.answerSelectContact(c.TENANTS_EMAIL, c.SAS_HOF_EMAIL);
         await this.pages.rotmWhatAreYourContactDetailsPage.answerSelectContact(c.TELEPHONE_LABEL, c.TELEPHONE);
         break;
 
@@ -191,6 +183,10 @@ export class RotmStepLib {
   }
 }
 
+
+// ************************************************************************************************************************************ */
+//                                                              ROTM Step Definitions
+// ************************************************************************************************************************************ */
 Given('Test data has been created for {string} scenarios', async ({}, service: string) => {
   expect(service).toBe('ROTM');
 });
@@ -203,10 +199,6 @@ When('I visit the Rotm page', async ({ pages }) => {
   await pages.rotmHomePgHaveLinkToMaterialPage.openRotmHomePage();
 });
 
-Then('I see the Rotm header link service name {string}', async ({ pages }, rotmHeaderLinkName: string) => {
-  await expect((await pages.rotmHomePgHaveLinkToMaterialPage.getRotmHeaderLink()).trim()).toEqual(rotmHeaderLinkName);
-});
-
 When('I fill out my answers for the Rotm questionnaire', async ({ pages }) => {
   const stepLib = new RotmStepLib(pages);
   await stepLib.ansDoYouHaveLinkToTheMaterial(selectedApplicant);
@@ -215,40 +207,12 @@ When('I fill out my answers for the Rotm questionnaire', async ({ pages }) => {
   await stepLib.ansWillingToBeContacted(selectedApplicant);
 });
 
-Then('I check my report for Rotm', async ({ pages }) => {
-  await new RotmStepLib(pages).ansCheckYourReport();
-});
-
-Then('I am able to submit the Rotm questionnaire', async ({ pages }) => {
-  await expect(await new RotmStepLib(pages).getReportSubmissionMessage()).toEqual('Report sent');
-});
-
-Then('I am able to navigate back to ROTM home page', async ({ pages }) => {
-  await new RotmStepLib(pages).navigateBackToHomePage();
-});
-
 When('I add {int} additional links to my report and continue', async ({ pages }, addLinks: number) => {
   await new RotmStepLib(pages).addAdditionalLinks(addLinks);
 });
 
-Then('I check the change is updated to {int} links on the \'Check your report\' page and continue', async ({ pages }, links: number) => {
-  await expect(await new RotmStepLib(pages).verifyAdditionalLinksAreAdded()).toEqual(links);
-});
-
 When('I select continue', async ({ pages }) => {
   await pages.basePage.clickContinueButton();
-});
-
-Then('I see {string} error message displayed for ROTM', async ({ pages }, expectedErrorMessage: string) => {
-  await expect(await new RotmStepLib(pages).getErrorMessageDetailText()).toEqual(expectedErrorMessage);
-});
-
-Then('I see error message displayed for ROTM', async ({ pages }, expectedErrorMessage: string) => {
-  await expect(await new RotmStepLib(pages).getErrorMessageDetailText()).toEqual(expectedErrorMessage.trim());
-});
-
-Then('I see {string} error header message displayed for ROTM', async ({ pages }, expectedErrorMessage: string) => {
-  await expect(await new RotmStepLib(pages).getErrorSummaryHeaderText()).toEqual(expectedErrorMessage);
 });
 
 When('I select {string} link to material and click continue', async ({ pages }, option: string) => {
@@ -273,4 +237,39 @@ When('I enter my contact details for ROTM and click continue', async ({ pages })
 
 When('I am on the \'Check your report\' page', async ({ pages }) => {
   await new RotmStepLib(pages).ansCheckYourReport();
+});
+
+
+
+
+Then('I check my report for Rotm', async ({ pages }) => {
+  await new RotmStepLib(pages).ansCheckYourReport();
+});
+
+Then('I am able to submit the Rotm questionnaire', async ({ pages }) => {
+  await expect(await new RotmStepLib(pages).getReportSubmissionMessage()).toEqual('Report sent');
+});
+
+Then('I am able to navigate back to ROTM home page', async ({ pages }) => {
+  await new RotmStepLib(pages).navigateBackToHomePage();
+});
+
+Then('I see {string} error message displayed for ROTM', async ({ pages }, expectedErrorMessage: string) => {
+  await expect(await new RotmStepLib(pages).getErrorMessageDetailText()).toEqual(expectedErrorMessage);
+});
+
+Then('I see error message displayed for ROTM', async ({ pages }, expectedErrorMessage: string) => {
+  await expect(await new RotmStepLib(pages).getErrorMessageDetailText()).toEqual(expectedErrorMessage.trim());
+});
+
+Then('I see {string} error header message displayed for ROTM', async ({ pages }, expectedErrorMessage: string) => {
+  await expect(await new RotmStepLib(pages).getErrorSummaryHeaderText()).toEqual(expectedErrorMessage);
+});
+
+Then('I check the change is updated to {int} links on the \'Check your report\' page and continue', async ({ pages }, links: number) => {
+  await expect(await new RotmStepLib(pages).verifyAdditionalLinksAreAdded()).toEqual(links);
+});
+
+Then('I see the Rotm header link service name {string}', async ({ pages }, rotmHeaderLinkName: string) => {
+  await expect((await pages.rotmHomePgHaveLinkToMaterialPage.getRotmHeaderLink()).trim()).toEqual(rotmHeaderLinkName);
 });

@@ -14,9 +14,17 @@ export const ConstantsLib = {
   GIVE_CONTACT: 'Yes, I’ll give my contact details',
   DO_NOT_GIVE_CONTACT: 'No, I don’t want to be contacted',
   ADDITIONAL_DETAILS: 'Anything else you want to tell us',
+  SAS_HOF_EMAIL: requiredEnv('SAS_HOF_EMAIL')
 } as const;
 
 
+function requiredEnv(name: string): string {
+  const value = process.env[name];
+  if (!value) {
+    throw new Error(`${name} is not configured`);
+  }
+  return value;
+}
 
 export type RotmApplicant = {
   scenarioId: string;
