@@ -1,0 +1,49 @@
+'use strict';
+
+const fs = require('node:fs');
+
+function parseCount(text, label) {
+  const match = text.match(new RegExp(String.raw`(\d+)\s+${label}`, 'i'));
+  return match ? Number(match[1]) : 0;
+}
+
+function buildSummary(outputText) {
+  if (!/^\s*\d+\s+(passed|failed|flaky|skipped)\b/im.test(outputText)) {
+    throw new Error('No Playwright result counts found in run output');
+  }
+  const passed = parseCount(outputText, 'passed');
+  const failed = parseCount(outputText, 'failed');
+  const flaky = parseCount(outputText, 'flaky');
+  const skipped = parseCount(outputText, 'skipped');
+  const total = passed + failed + flaky + skipped;
+  const duration = outputText.match(/\(([^)]+)\)\s*$/m)?.[1] || 'unknown';
+
+  return [
+    'Playwright Nightly Summary',
+    `Total: ${total}`,
+    `Passed: ${passed}`,
+    `Failed: ${failed}`,
+    `Flaky: ${flaky}`,
+    `Skipped: ${skipped}`,
+    `Duration: ${duration}`
+  ].join('\n');
+}
+
+const [inputPath, outputPath] = process.argv.slice(2);
+if (!inputPath || !outputPath) {
+  process.stderr.write(
+    'Usage: node bin/summarise_playwright_report.js <input-text> <output-txt>\n'
+  );
+  process.exit(1);
+}
+
+let summary;
+try {
+  summary = buildSummary(fs.readFileSync(inputPath, 'utf8'));
+} catch (error) {
+  summary = `Playwright Nightly Summary\nUnable to parse run output: ${error.message || error}`;
+  process.exitCode = 1;
+}
+
+fs.writeFileSync(outputPath, `${summary}\n`, 'utf8');
+process.stdout.write(`${summary}\n`);
