@@ -1,5 +1,6 @@
 #!/bin/bash
 set -euo pipefail
+umask 077
 : "${GITHUB_APP_ID:?Missing GITHUB_APP_ID}"
 : "${GITHUB_APP_PRIVATE_KEY:?Missing GITHUB_APP_PRIVATE_KEY}"
 : "${GITHUB_APP_INSTALLATION_ID:?Missing GITHUB_APP_INSTALLATION_ID}"

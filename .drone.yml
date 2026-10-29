@@ -38,7 +38,7 @@ trigger:
   branch:
     <<: *include_default_and_feature_branches
 
-node_image_name: &node_image_name quay.io/ukhomeofficedigital/hof-nodejs:24.22.1-alpine3.24@sha256:cd92fd7b873764c2a09b1580f721a164c0aca853d18ed0b78f2af461595d534d
+node_image_name: &node_image_name quay.io/ukhomeofficedigital/hof-nodejs:24.22.1_1-alpine@sha256:033927ee2316f3b3c7d22f3560c2e4201c4c751b7cb4664d0d9b9c28783d9473
 
 node_image: &node_image
   pull: if-not-exists
@@ -100,11 +100,13 @@ clone_repos_step: &clone_repos_step
     - name: dockersock
       path: /root/.dockersock
   commands:
+    - trap 'rm -f "$CLONE_TOKEN_FILE"' EXIT
     - test -s "$CLONE_TOKEN_FILE" || (echo "$CLONE_TOKEN_MISSING_MESSAGE" && exit 1)
+    - set +x
     - export GITHUB_TOKEN="$(cat "$CLONE_TOKEN_FILE")"
     - git clone https://x-access-token:$${GITHUB_TOKEN}@github.com/UKHomeOfficeForms/hof-services-config.git
-    - if [ "${CLONE_REPOS_PRUNE:-false}" = "true" ]; then find hof-services-config/* | grep -v $HOF_CONFIG | grep -v 'infrastructure' | xargs rm -rf; fi
-    - rm -f "$CLONE_TOKEN_FILE"
+    - git -C hof-services-config remote set-url origin https://github.com/UKHomeOfficeForms/hof-services-config.git
+    - if [ "$${CLONE_REPOS_PRUNE:-false}" = "true" ]; then find hof-services-config/* | grep -v $HOF_CONFIG | grep -v 'infrastructure' | xargs rm -rf; fi
 
 steps:
   - name: generate_github_app_token_for_clone
@@ -233,7 +235,7 @@ steps:
         cpu: 1000
         memory: 1024Mi
     environment:
-      IMAGE_NAME: rotm:${DRONE_COMMIT_SHA}
+      IMAGE_NAME: "rotm:${DRONE_COMMIT_SHA}"
       SEVERITY: MEDIUM,HIGH,CRITICAL  --dependency-tree --format table
       FAIL_ON_DETECTION: true
       IGNORE_UNFIXED: false
@@ -305,6 +307,7 @@ steps:
       branch:
         <<: *include_default_and_feature_branches
       event: pull_request
+      status: [success, failure]
     depends_on:
       - e2e_tests
 
@@ -315,18 +318,21 @@ steps:
       - name: dockersock
         path: /root/.dockersock
     commands:
+      - trap 'rm -f /root/.dockersock/github_app_token_for_report.txt' EXIT
       - apk add --no-cache bash curl jq zip
       - test -n "$DRONE_PULL_REQUEST" || (echo "Missing DRONE_PULL_REQUEST. This step only supports pull_request builds." && exit 1)
       - export DRONE_REPO="$${DRONE_REPO:-$GIT_REPO}"
       - test -n "$DRONE_REPO" || (echo "Missing repository slug (DRONE_REPO/GIT_REPO)." && exit 1)
       - test -s /root/.dockersock/github_app_token_for_report.txt || (echo "Missing GitHub App token file for report publication." && exit 1)
-      - export GITHUB_APP_TOKEN="$(cat /root/.dockersock/github_app_token_for_report.txt)"
-      - bash bin/publish_e2e_test_report.sh
-      - rm -f /root/.dockersock/github_app_token_for_report.txt
+      - set +x
+      - |
+        export GITHUB_APP_TOKEN="$(cat /root/.dockersock/github_app_token_for_report.txt)"
+        bash bin/publish_e2e_test_report.sh
     when:
       branch:
         <<: *include_default_and_feature_branches
       event: pull_request
+      status: [success, failure]
     depends_on:
       - generate_github_app_token_for_report
 
@@ -533,7 +539,7 @@ steps:
     image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/trivy/client:latest
     pull: always
     environment:
-      IMAGE_NAME: paf:${DRONE_COMMIT_SHA}
+      IMAGE_NAME: "paf:${DRONE_COMMIT_SHA}"
       SEVERITY: UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL --dependency-tree
       FAIL_ON_DETECTION: true
       IGNORE_UNFIXED: false
@@ -642,6 +648,8 @@ steps:
     environment:
       SLACK_WEBHOOK:
         from_secret: slack_sas_hof_e2e_tests_webhook
+      NIGHTLY_E2E_BASE_URL:
+        from_secret: NIGHTLY_E2E_BASE_URL
     volumes:
       - name: dockersock
         path: /root/.dockersock

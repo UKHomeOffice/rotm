@@ -19,6 +19,21 @@ Before choosing an installation option, make sure you have access to the Google 
 - [Gov.uk Notify](https://www.notifications.service.gov.uk) to send notification emails
 - [Google reCAPTCHA Enterprise](https://docs.cloud.google.com/recaptcha/docs/overview) to protect this service from spam, abuse and automated submissions
 
+## Playwright CI
+
+For pull requests on the existing Drone branch policy, the pipeline deploys a
+branch environment, runs Playwright against its internal host, and publishes the
+HTML report as a GitHub release asset with a link in the PR. The GitHub Apps
+configured by the `hof_ukho_gh_app_*` and `HOF_GH_APP_*` Drone secrets need
+access to this repository (including releases and PR comments) and the
+configuration repository respectively. Drone must expose these secrets to the
+applicable PR builds.
+
+The `nightly_e2e_playwright` Drone cron runs against the
+`NIGHTLY_E2E_BASE_URL` secret and sends its summary using the
+`slack_sas_hof_e2e_tests_webhook` secret. Configure that cron and both secrets
+in Drone before enabling the nightly run.
+
 ## Install & Run the Application locally
 
 ### Prerequisites
