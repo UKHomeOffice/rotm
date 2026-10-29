@@ -3,7 +3,6 @@ import { basePage } from '../pages/base-page';
 import { rotmAnythingElseYouCanTellUsPage } from '../pages/rotm-anything-else-you-can-tell-us-page';
 import { rotmAreYouWillingToBeContactedPage } from '../pages/rotm-are-you-willing-to-be-contacted-page';
 import { rotmCheckYourReportPage } from '../pages/rotm-check-your-report-page';
-import { rotmCommonPage } from '../pages/rotm-common-page';
 import { rotmDoYouHaveEvidencePage } from '../pages/rotm-do-you-have-evidence-page';
 import { rotmHomePgHaveLinkToMaterialPage } from '../pages/rotm-home-pg-have-link-to-material-page';
 import { rotmUploadAnotherFilePage } from '../pages/rotm-upload-another-file-page';
@@ -11,7 +10,6 @@ import { rotmWhatAreYourContactDetailsPage } from '../pages/rotm-what-are-your-c
 
 export type Pages = {
   basePage: basePage;
-  rotmCommonPage: rotmCommonPage;
   rotmHomePgHaveLinkToMaterialPage: rotmHomePgHaveLinkToMaterialPage;
   rotmDoYouHaveEvidencePage: rotmDoYouHaveEvidencePage;
   rotmUploadAnotherFilePage: rotmUploadAnotherFilePage;
@@ -21,11 +19,13 @@ export type Pages = {
   rotmCheckYourReportPage: rotmCheckYourReportPage;
 };
 
-export const test = base.extend<{ pages: Pages }>({
+export const test = base.extend<{ pages: Pages; scenario: { description?: string } }>({
+  scenario: async ({}, use) => {
+    await use({});
+  },
   pages: async ({ page }, use) => {
     await use({
       basePage: new basePage(page),
-      rotmCommonPage: new rotmCommonPage(page),
       rotmHomePgHaveLinkToMaterialPage: new rotmHomePgHaveLinkToMaterialPage(page),
       rotmDoYouHaveEvidencePage: new rotmDoYouHaveEvidencePage(page),
       rotmUploadAnotherFilePage: new rotmUploadAnotherFilePage(page),

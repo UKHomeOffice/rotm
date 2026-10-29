@@ -1,5 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { basePage } from './base-page';
+import { ConstantsLib as c } from '../utility-helper/constants-lib';
 
 export class rotmHomePgHaveLinkToMaterialPage extends basePage {
   readonly rotmLink: Locator;
@@ -49,6 +50,10 @@ export class rotmHomePgHaveLinkToMaterialPage extends basePage {
     return (await this.rotmLink.textContent()) || '';
   }
 
+  async assertHomePage() {
+    await this.assertPageTitle(this.page, await this.expectedPageTitle());
+  }
+
   async answerYesHaveLinkToMaterial(label: string, link: string) {
     await this.selectRadioOrCheckboxOption(label);
     await this.type(this.urlTextbox, link);
@@ -56,6 +61,26 @@ export class rotmHomePgHaveLinkToMaterialPage extends basePage {
 
   async answerNoDontHaveLink(label: string) {
     await this.selectRadioOrCheckboxOption(label);
+  }
+
+  async completeLinkPage(option: string, additionalLinks: number) {
+    await this.assertHomePage();
+    await this.refreshPage();
+    expect(await this.isHelpMeFindLinkSummaryTextDisplayed()).toBe(true);
+
+    if (option === c.HAVE_LINK) {
+      await this.answerYesHaveLinkToMaterial(option, c.LINK_TO_MATERIAL);
+      await this.addAnotherLink(additionalLinks, c.LINK_TO_MATERIAL);
+      if (additionalLinks === 4) {
+        await this.removeLink(additionalLinks);
+        await this.addAnotherLink(additionalLinks, c.LINK_TO_MATERIAL);
+      }
+    } else if (option === c.DO_NOT_HAVE_LINK) {
+      await this.answerNoDontHaveLink(option);
+    } else {
+      throw new Error(`Invalid link-to-material option: ${option}`);
+    }
+    await this.clickContinueButton();
   }
 
   async isHelpMeFindLinkSummaryTextDisplayed(): Promise<boolean> {

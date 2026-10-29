@@ -17,6 +17,10 @@ export class rotmCheckYourReportPage extends basePage {
     return 'Check your report – Report online material promoting terrorism or extremism';
   }
 
+  async assertReportPage() {
+    await this.assertPageTitle(this.page, await this.expectedPageTitle());
+  }
+
   async getAdditionalLinks(): Promise<number> {
     return this.linkText.count();
   }

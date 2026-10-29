@@ -1,5 +1,6 @@
 import { Page } from '@playwright/test';
 import { basePage } from './base-page';
+import { ConstantsLib as c } from '../utility-helper/constants-lib';
 
 export class rotmAreYouWillingToBeContactedPage extends basePage {
   constructor(page: Page) {
@@ -21,5 +22,13 @@ export class rotmAreYouWillingToBeContactedPage extends basePage {
       .getByRole('heading', { name: 'What are your contact details?' })
       .or(this.page.getByRole('heading', { name: 'Check your report' }))
       .waitFor();
+  }
+
+  async completeContactConsentPage(option: string) {
+    await this.assertPageTitle(this.page, await this.expectedPageTitle());
+    if (option !== c.GIVE_CONTACT && option !== c.DO_NOT_GIVE_CONTACT) {
+      throw new Error(`Invalid contact-consent option: ${option}`);
+    }
+    await this.answerAreYouWillingToBeContacted(option);
   }
 }

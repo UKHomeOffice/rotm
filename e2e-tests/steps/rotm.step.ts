@@ -1,214 +1,165 @@
 import { expect } from '@playwright/test';
 import { createBdd } from 'playwright-bdd';
-import { test, Pages } from '../fixture/fixtures';
-import { ConstantsLib as c, getRotmApplicantForScenario, RotmApplicant } from '../utility-helper/constants-lib';
+import { test } from '../fixture/fixtures';
+import { ConstantsLib as c } from '../utility-helper/constants-lib';
 export const { Given, When, Then } = createBdd(test);
-
-let selectedApplicant: RotmApplicant;
-
-
-export class RotmStepLib {
-  constructor(private readonly pages: Pages) {}
-
-  async ansDoYouHaveLinkToTheMaterial(applicant: RotmApplicant) {
-    await this.pages.rotmHomePgHaveLinkToMaterialPage.assertPageTitle(this.pages.rotmHomePgHaveLinkToMaterialPage.page, await this.pages.rotmHomePgHaveLinkToMaterialPage.expectedPageTitle());
-    await this.pages.basePage.refreshPage();
-    expect(await this.pages.rotmHomePgHaveLinkToMaterialPage.isHelpMeFindLinkSummaryTextDisplayed()).toBe(true);
-
-    switch (applicant.doYouHaveLinkToTheMaterial.toLowerCase()) {
-      case c.HAVE_LINK.toLowerCase():
-        await this.pages.rotmHomePgHaveLinkToMaterialPage.answerYesHaveLinkToMaterial(c.HAVE_LINK, c.LINK_TO_MATERIAL);
-
-        if (applicant.additionalLinksToTheMaterial === 4) {
-          await this.pages.rotmHomePgHaveLinkToMaterialPage.addAnotherLink(applicant.additionalLinksToTheMaterial, c.LINK_TO_MATERIAL);
-          await this.pages.rotmHomePgHaveLinkToMaterialPage.removeLink(applicant.additionalLinksToTheMaterial);
-          await this.pages.rotmHomePgHaveLinkToMaterialPage.addAnotherLink(applicant.additionalLinksToTheMaterial, c.LINK_TO_MATERIAL);
-        } else {
-          await this.pages.rotmHomePgHaveLinkToMaterialPage.addAnotherLink(applicant.additionalLinksToTheMaterial, c.LINK_TO_MATERIAL);
-        }
-        break;
-
-      case c.DO_NOT_HAVE_LINK.toLowerCase():
-        await this.pages.rotmHomePgHaveLinkToMaterialPage.answerNoDontHaveLink(c.DO_NOT_HAVE_LINK);
-        break;
-
-      default:
-        throw new Error(`Invalid link-to-material option: ${applicant.doYouHaveLinkToTheMaterial}`);
-    }
-
-    await this.pages.basePage.clickContinueButton();
-  }
-
-  async ansDoYouHaveEvidence(applicant: RotmApplicant) {
-    await this.pages.rotmDoYouHaveEvidencePage.assertPageTitle(this.pages.rotmDoYouHaveEvidencePage.page, await this.pages.rotmDoYouHaveEvidencePage.expectedPageTitle());
-    expect(await this.pages.rotmDoYouHaveEvidencePage.checkHelpMeTakeScreenshotLinkIsWorking()).toBe(true);
-
-    switch (applicant.doYouHaveAnyEvidence.toLowerCase()) {
-      case c.HAVE_EVIDENCE.toLowerCase():
-        await this.pages.rotmDoYouHaveEvidencePage.answerYesHaveEvidence(c.HAVE_EVIDENCE);
-        await this.ansDoYouWantToUploadAnotherFile(applicant);
-        break;
-
-      case c.NO_EVIDENCE.toLowerCase():
-        await this.pages.rotmDoYouHaveEvidencePage.answerNoDontHaveLink(c.NO_EVIDENCE);
-        break;
-
-      default:
-        throw new Error(`Invalid evidence option: ${applicant.doYouHaveAnyEvidence}`);
-    }
-  }
-
-  async ansDoYouWantToUploadAnotherFile(applicant: RotmApplicant) {
-    await this.pages.rotmUploadAnotherFilePage.assertPageTitle(this.pages.rotmUploadAnotherFilePage.page, await this.pages.rotmUploadAnotherFilePage.expectedPageTitle());
-    expect(await this.pages.rotmUploadAnotherFilePage.isPreviousDocAdded()).toBe(true);
-
-    switch (applicant.doYouWantToUploadAnotherFile.toLowerCase()) {
-      case 'yes':
-        await this.pages.rotmUploadAnotherFilePage.answerUploadAnotherFileYes(c.RESPONSE_YES);
-        await this.pages.rotmUploadAnotherFilePage.answerUploadAnotherFileNo(c.RESPONSE_NO);
-        break;
-
-      case 'no':
-        await this.pages.rotmUploadAnotherFilePage.answerUploadAnotherFileNo(c.RESPONSE_NO);
-        break;
-
-      default:
-        throw new Error(`Invalid upload-another-file option: ${applicant.doYouWantToUploadAnotherFile}`);
-    }
-  }
-
-  async ansAnythingElseYouCanTellUs() {
-    await this.pages.rotmAnythingElseYouCanTellUsPage.assertPageTitle(this.pages.rotmAnythingElseYouCanTellUsPage.page, await this.pages.rotmAnythingElseYouCanTellUsPage.expectedPageTitle());
-    await this.pages.rotmAnythingElseYouCanTellUsPage.answerEnterAdditionalDetails(c.ADDITIONAL_DETAILS);
-  }
-
-  async ansWillingToBeContacted(applicant: RotmApplicant) {
-    await this.pages.rotmAreYouWillingToBeContactedPage.assertPageTitle(this.pages.rotmAreYouWillingToBeContactedPage.page, await this.pages.rotmAreYouWillingToBeContactedPage.expectedPageTitle());
-
-    switch (applicant.areYouWillingToBeContacted.toLowerCase()) {
-      case c.GIVE_CONTACT.toLowerCase():
-        await this.pages.rotmAreYouWillingToBeContactedPage.answerAreYouWillingToBeContacted(c.GIVE_CONTACT);
-        await this.ansYourContactDetails(applicant);
-        await this.pages.basePage.clickContinueButton();
-        break;
-
-      case c.DO_NOT_GIVE_CONTACT.toLowerCase():
-        await this.pages.rotmAreYouWillingToBeContactedPage.answerAreYouWillingToBeContacted(c.DO_NOT_GIVE_CONTACT);
-        break;
-
-      default:
-        throw new Error(`Invalid contact-consent option: ${applicant.areYouWillingToBeContacted}`);
-    }
-  }
-
-  async ansYourContactDetails(applicant: RotmApplicant) {
-    await this.pages.rotmWhatAreYourContactDetailsPage.assertPageTitle(this.pages.rotmWhatAreYourContactDetailsPage.page, await this.pages.rotmWhatAreYourContactDetailsPage.expectedPageTitle());
-    await this.pages.rotmWhatAreYourContactDetailsPage.answerYourFullName(c.FULL_NAME);
-
-    switch (applicant.whatAreYourContactDetails.toLowerCase()) {
-      case c.TENANTS_EMAIL.toLowerCase():
-        await this.pages.rotmWhatAreYourContactDetailsPage.answerSelectContact(c.TENANTS_EMAIL, c.SAS_HOF_EMAIL);
-        break;
-
-      case c.TELEPHONE_LABEL.toLowerCase():
-        await this.pages.rotmWhatAreYourContactDetailsPage.answerSelectContact(c.TELEPHONE_LABEL, c.TELEPHONE);
-        break;
-
-      case c.BOTH_CONTACTS.toLowerCase():
-        await this.pages.rotmWhatAreYourContactDetailsPage.answerSelectContact(c.TENANTS_EMAIL, c.SAS_HOF_EMAIL);
-        await this.pages.rotmWhatAreYourContactDetailsPage.answerSelectContact(c.TELEPHONE_LABEL, c.TELEPHONE);
-        break;
-
-      default:
-        throw new Error(`Invalid contact-details option: ${applicant.whatAreYourContactDetails}`);
-    }
-  }
-
-  async ansCheckYourReport() {
-    await this.pages.rotmCheckYourReportPage.assertPageTitle(this.pages.rotmCheckYourReportPage.page, await this.pages.rotmCheckYourReportPage.expectedPageTitle());
-  }
-
-  async getReportSubmissionMessage(): Promise<string> {
-    await this.pages.rotmCheckYourReportPage.ansSendReport();
-    return this.pages.rotmCheckYourReportPage.getReportSentText();
-  }
-
-  async addAdditionalLinks(addLinks: number) {
-    await this.pages.rotmCheckYourReportPage.navigateBackToHomePage();
-    await this.pages.rotmHomePgHaveLinkToMaterialPage.addAnotherLink(addLinks, c.LINK_TO_MATERIAL);
-    await this.pages.basePage.clickContinueButton();
-    await this.pages.rotmDoYouHaveEvidencePage.answerNoDontHaveLink(c.NO_EVIDENCE);
-    await this.pages.rotmAnythingElseYouCanTellUsPage.answerEnterAdditionalDetails(`Added ${addLinks} additional links to material`);
-    await this.pages.rotmAreYouWillingToBeContactedPage.answerAreYouWillingToBeContacted(c.DO_NOT_GIVE_CONTACT);
-  }
-
-  async navigateBackToHomePage() {
-    await this.pages.rotmCheckYourReportPage.navigateBackToHomePage();
-    await this.pages.rotmHomePgHaveLinkToMaterialPage.assertPageTitle(this.pages.rotmHomePgHaveLinkToMaterialPage.page, await this.pages.rotmHomePgHaveLinkToMaterialPage.expectedPageTitle());
-  }
-
-  async verifyAdditionalLinksAreAdded(): Promise<number> {
-    return this.pages.rotmCheckYourReportPage.getAdditionalLinks();
-  }
-
-  async getErrorSummaryHeaderText(): Promise<string | null> {
-    return this.pages.basePage.getThereIsAProblemTextErrorText();
-  }
-
-  async getErrorMessageDetailText(): Promise<string> {
-    return this.pages.basePage.getErrorMessageDetailText();
-  }
-
-  async selectLinkToMaterial(option: string) {
-    await this.pages.rotmHomePgHaveLinkToMaterialPage.answerYesHaveLinkToMaterial(option, c.LINK_TO_MATERIAL);
-    await this.pages.basePage.clickContinueButton();
-  }
-
-  async selectEvidence(option: string) {
-    await this.pages.rotmDoYouHaveEvidencePage.answerYesHaveEvidence(option);
-  }
-
-  async selectMoreEvidence(response: string) {
-    await this.pages.rotmUploadAnotherFilePage.answerUploadAnotherFileNo(response);
-  }
-
-  async selectContactDetails(option: string) {
-    await this.pages.rotmAreYouWillingToBeContactedPage.answerAreYouWillingToBeContacted(option);
-  }
-
-  async enterYourContactDetails() {
-    await this.pages.rotmWhatAreYourContactDetailsPage.answerYourFullName(c.FULL_NAME);
-    await this.pages.rotmWhatAreYourContactDetailsPage.answerSelectContact(c.TELEPHONE_LABEL, c.TELEPHONE);
-    await this.pages.basePage.clickContinueButton();
-  }
-}
 
 
 // ************************************************************************************************************************************ */
 //                                                              ROTM Step Definitions
 // ************************************************************************************************************************************ */
-Given('Test data has been created for {string} scenarios', async ({}, service: string) => {
-  expect(service).toBe('ROTM');
+
+Given('I selected the data for scenario {string}', async ({ scenario }, description: string) => {
+  scenario.description = description;
 });
 
-Given('I selected the data for scenario {string} - {string}', async ({}, scenarioId: string, description: string) => {
-  selectedApplicant = getRotmApplicantForScenario(scenarioId, description);
+When('I fill out my answers for the Rotm questionnaire', async ({ pages, scenario }) => {
+  const description = scenario.description;
+  if (!description) {
+    throw new Error('No ROTM scenario description selected');
+  }
+
+  switch (description.toLowerCase()) {
+    case 's1 - have (0 additional) link to the material - have evidence - another file-yes - email contact':
+      await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.HAVE_LINK, 0);
+      await pages.rotmDoYouHaveEvidencePage.completeEvidencePage(c.HAVE_EVIDENCE);
+      await pages.rotmUploadAnotherFilePage.completeUploadPage(c.RESPONSE_YES);
+      await pages.rotmAnythingElseYouCanTellUsPage.completeAdditionalDetailsPage(c.ADDITIONAL_DETAILS);
+      await pages.rotmAreYouWillingToBeContactedPage.completeContactConsentPage(c.GIVE_CONTACT);
+      await pages.rotmWhatAreYourContactDetailsPage.completeContactDetailsPage(c.TENANTS_EMAIL);
+      break;
+    case 's3 - have (4 additional) links to the material-remove links and add again - have evidence - another file-yes- email & telephone contacts':
+      await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.HAVE_LINK, 4);
+      await pages.rotmDoYouHaveEvidencePage.completeEvidencePage(c.HAVE_EVIDENCE);
+      await pages.rotmUploadAnotherFilePage.completeUploadPage(c.RESPONSE_YES);
+      await pages.rotmAnythingElseYouCanTellUsPage.completeAdditionalDetailsPage(c.ADDITIONAL_DETAILS);
+      await pages.rotmAreYouWillingToBeContactedPage.completeContactConsentPage(c.GIVE_CONTACT);
+      await pages.rotmWhatAreYourContactDetailsPage.completeContactDetailsPage(c.BOTH_CONTACTS);
+      break;
+    case 's4 - have (3 additional) links to the material - have evidence - another file-yes - no contact':
+      await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.HAVE_LINK, 3);
+      await pages.rotmDoYouHaveEvidencePage.completeEvidencePage(c.HAVE_EVIDENCE);
+      await pages.rotmUploadAnotherFilePage.completeUploadPage(c.RESPONSE_YES);
+      await pages.rotmAnythingElseYouCanTellUsPage.completeAdditionalDetailsPage(c.ADDITIONAL_DETAILS);
+      await pages.rotmAreYouWillingToBeContactedPage.completeContactConsentPage(c.DO_NOT_GIVE_CONTACT);
+      break;
+    case 's8 - have (1 additional) link to the material - no evidence - another file-yes - email & telephone contacts':
+      await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.HAVE_LINK, 1);
+      await pages.rotmDoYouHaveEvidencePage.completeEvidencePage(c.NO_EVIDENCE);
+      await pages.rotmAnythingElseYouCanTellUsPage.completeAdditionalDetailsPage(c.ADDITIONAL_DETAILS);
+      await pages.rotmAreYouWillingToBeContactedPage.completeContactConsentPage(c.GIVE_CONTACT);
+      await pages.rotmWhatAreYourContactDetailsPage.completeContactDetailsPage(c.BOTH_CONTACTS);
+      break;
+    case "s9 - don't have link - have evidence - another file-yes - email contact":
+      await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.DO_NOT_HAVE_LINK, 0);
+      await pages.rotmDoYouHaveEvidencePage.completeEvidencePage(c.HAVE_EVIDENCE);
+      await pages.rotmUploadAnotherFilePage.completeUploadPage(c.RESPONSE_YES);
+      await pages.rotmAnythingElseYouCanTellUsPage.completeAdditionalDetailsPage(c.ADDITIONAL_DETAILS);
+      await pages.rotmAreYouWillingToBeContactedPage.completeContactConsentPage(c.GIVE_CONTACT);
+      await pages.rotmWhatAreYourContactDetailsPage.completeContactDetailsPage(c.TENANTS_EMAIL);
+      break;
+    case "s16 - don't have link - no evidence - yes contact - email & telephone contacts":
+      await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.DO_NOT_HAVE_LINK, 0);
+      await pages.rotmDoYouHaveEvidencePage.completeEvidencePage(c.NO_EVIDENCE);
+      await pages.rotmAnythingElseYouCanTellUsPage.completeAdditionalDetailsPage(c.ADDITIONAL_DETAILS);
+      await pages.rotmAreYouWillingToBeContactedPage.completeContactConsentPage(c.GIVE_CONTACT);
+      await pages.rotmWhatAreYourContactDetailsPage.completeContactDetailsPage(c.BOTH_CONTACTS);
+      break;
+    case 's2 - have (0 additional) link to the material - have evidence - another file-yes- telephone contact':
+      await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.HAVE_LINK, 0);
+      await pages.rotmDoYouHaveEvidencePage.completeEvidencePage(c.HAVE_EVIDENCE);
+      await pages.rotmUploadAnotherFilePage.completeUploadPage(c.RESPONSE_YES);
+      await pages.rotmAnythingElseYouCanTellUsPage.completeAdditionalDetailsPage(c.ADDITIONAL_DETAILS);
+      await pages.rotmAreYouWillingToBeContactedPage.completeContactConsentPage(c.GIVE_CONTACT);
+      await pages.rotmWhatAreYourContactDetailsPage.completeContactDetailsPage(c.TELEPHONE_LABEL);
+      break;
+    case 's5 - have (2 additional) links to the material - have evidence - another file-no - no contact':
+      await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.HAVE_LINK, 2);
+      await pages.rotmDoYouHaveEvidencePage.completeEvidencePage(c.HAVE_EVIDENCE);
+      await pages.rotmUploadAnotherFilePage.completeUploadPage(c.RESPONSE_NO);
+      await pages.rotmAnythingElseYouCanTellUsPage.completeAdditionalDetailsPage(c.ADDITIONAL_DETAILS);
+      await pages.rotmAreYouWillingToBeContactedPage.completeContactConsentPage(c.DO_NOT_GIVE_CONTACT);
+      break;
+    case 's6 - have (1 additional) link to the material - no evidence - another file-yes - email contact':
+      await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.HAVE_LINK, 1);
+      await pages.rotmDoYouHaveEvidencePage.completeEvidencePage(c.NO_EVIDENCE);
+      await pages.rotmAnythingElseYouCanTellUsPage.completeAdditionalDetailsPage(c.ADDITIONAL_DETAILS);
+      await pages.rotmAreYouWillingToBeContactedPage.completeContactConsentPage(c.GIVE_CONTACT);
+      await pages.rotmWhatAreYourContactDetailsPage.completeContactDetailsPage(c.TENANTS_EMAIL);
+      break;
+    case 's7 - have (1 additional) link to the material - no evidence - another file-yes - telephone contact':
+      await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.HAVE_LINK, 1);
+      await pages.rotmDoYouHaveEvidencePage.completeEvidencePage(c.NO_EVIDENCE);
+      await pages.rotmAnythingElseYouCanTellUsPage.completeAdditionalDetailsPage(c.ADDITIONAL_DETAILS);
+      await pages.rotmAreYouWillingToBeContactedPage.completeContactConsentPage(c.GIVE_CONTACT);
+      await pages.rotmWhatAreYourContactDetailsPage.completeContactDetailsPage(c.TELEPHONE_LABEL);
+      break;
+    case "s10 - don't have link - have evidence - another file-yes - telephone contact":
+      await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.DO_NOT_HAVE_LINK, 0);
+      await pages.rotmDoYouHaveEvidencePage.completeEvidencePage(c.HAVE_EVIDENCE);
+      await pages.rotmUploadAnotherFilePage.completeUploadPage(c.RESPONSE_YES);
+      await pages.rotmAnythingElseYouCanTellUsPage.completeAdditionalDetailsPage(c.ADDITIONAL_DETAILS);
+      await pages.rotmAreYouWillingToBeContactedPage.completeContactConsentPage(c.GIVE_CONTACT);
+      await pages.rotmWhatAreYourContactDetailsPage.completeContactDetailsPage(c.TELEPHONE_LABEL);
+      break;
+    case "s11 - don't have link - have evidence - another file-yes - email & telephone contacts":
+      await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.DO_NOT_HAVE_LINK, 0);
+      await pages.rotmDoYouHaveEvidencePage.completeEvidencePage(c.HAVE_EVIDENCE);
+      await pages.rotmUploadAnotherFilePage.completeUploadPage(c.RESPONSE_YES);
+      await pages.rotmAnythingElseYouCanTellUsPage.completeAdditionalDetailsPage(c.ADDITIONAL_DETAILS);
+      await pages.rotmAreYouWillingToBeContactedPage.completeContactConsentPage(c.GIVE_CONTACT);
+      await pages.rotmWhatAreYourContactDetailsPage.completeContactDetailsPage(c.BOTH_CONTACTS);
+      break;
+    case "s12 - don't have link - have evidence - another file-yes - no contact":
+      await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.DO_NOT_HAVE_LINK, 0);
+      await pages.rotmDoYouHaveEvidencePage.completeEvidencePage(c.HAVE_EVIDENCE);
+      await pages.rotmUploadAnotherFilePage.completeUploadPage(c.RESPONSE_YES);
+      await pages.rotmAnythingElseYouCanTellUsPage.completeAdditionalDetailsPage(c.ADDITIONAL_DETAILS);
+      await pages.rotmAreYouWillingToBeContactedPage.completeContactConsentPage(c.DO_NOT_GIVE_CONTACT);
+      break;
+    case "s13 - don't have link - have evidence - another file-no - no contact":
+      await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.DO_NOT_HAVE_LINK, 0);
+      await pages.rotmDoYouHaveEvidencePage.completeEvidencePage(c.HAVE_EVIDENCE);
+      await pages.rotmUploadAnotherFilePage.completeUploadPage(c.RESPONSE_NO);
+      await pages.rotmAnythingElseYouCanTellUsPage.completeAdditionalDetailsPage(c.ADDITIONAL_DETAILS);
+      await pages.rotmAreYouWillingToBeContactedPage.completeContactConsentPage(c.DO_NOT_GIVE_CONTACT);
+      break;
+    case "s14 - don't have link - no evidence - yes contact - email contact":
+      await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.DO_NOT_HAVE_LINK, 0);
+      await pages.rotmDoYouHaveEvidencePage.completeEvidencePage(c.NO_EVIDENCE);
+      await pages.rotmAnythingElseYouCanTellUsPage.completeAdditionalDetailsPage(c.ADDITIONAL_DETAILS);
+      await pages.rotmAreYouWillingToBeContactedPage.completeContactConsentPage(c.GIVE_CONTACT);
+      await pages.rotmWhatAreYourContactDetailsPage.completeContactDetailsPage(c.TENANTS_EMAIL);
+      break;
+    case "s15 - don't have link - no evidence - yes contact - telephone contact":
+      await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.DO_NOT_HAVE_LINK, 0);
+      await pages.rotmDoYouHaveEvidencePage.completeEvidencePage(c.NO_EVIDENCE);
+      await pages.rotmAnythingElseYouCanTellUsPage.completeAdditionalDetailsPage(c.ADDITIONAL_DETAILS);
+      await pages.rotmAreYouWillingToBeContactedPage.completeContactConsentPage(c.GIVE_CONTACT);
+      await pages.rotmWhatAreYourContactDetailsPage.completeContactDetailsPage(c.TELEPHONE_LABEL);
+      break;
+    case "s17 - don't have link - no evidence - no contact":
+      await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.DO_NOT_HAVE_LINK, 0);
+      await pages.rotmDoYouHaveEvidencePage.completeEvidencePage(c.NO_EVIDENCE);
+      await pages.rotmAnythingElseYouCanTellUsPage.completeAdditionalDetailsPage(c.ADDITIONAL_DETAILS);
+      await pages.rotmAreYouWillingToBeContactedPage.completeContactConsentPage(c.DO_NOT_GIVE_CONTACT);
+      break;
+    default:
+      throw new Error(`Invalid scenario: ${description}`);
+  }
 });
 
 When('I visit the Rotm page', async ({ pages }) => {
   await pages.rotmHomePgHaveLinkToMaterialPage.openRotmHomePage();
 });
 
-When('I fill out my answers for the Rotm questionnaire', async ({ pages }) => {
-  const stepLib = new RotmStepLib(pages);
-  await stepLib.ansDoYouHaveLinkToTheMaterial(selectedApplicant);
-  await stepLib.ansDoYouHaveEvidence(selectedApplicant);
-  await stepLib.ansAnythingElseYouCanTellUs();
-  await stepLib.ansWillingToBeContacted(selectedApplicant);
-});
-
 When('I add {int} additional links to my report and continue', async ({ pages }, addLinks: number) => {
-  await new RotmStepLib(pages).addAdditionalLinks(addLinks);
+  await pages.rotmCheckYourReportPage.navigateBackToHomePage();
+  await pages.rotmHomePgHaveLinkToMaterialPage.addAnotherLink(addLinks, c.LINK_TO_MATERIAL);
+  await pages.basePage.clickContinueButton();
+  await pages.rotmDoYouHaveEvidencePage.answerNoDontHaveLink(c.NO_EVIDENCE);
+  await pages.rotmAnythingElseYouCanTellUsPage.answerEnterAdditionalDetails(`Added ${addLinks} additional links to material`);
+  await pages.rotmAreYouWillingToBeContactedPage.answerAreYouWillingToBeContacted(c.DO_NOT_GIVE_CONTACT);
 });
 
 When('I select continue', async ({ pages }) => {
@@ -216,58 +167,63 @@ When('I select continue', async ({ pages }) => {
 });
 
 When('I select {string} link to material and click continue', async ({ pages }, option: string) => {
-  await new RotmStepLib(pages).selectLinkToMaterial(option);
+  await pages.rotmHomePgHaveLinkToMaterialPage.answerYesHaveLinkToMaterial(option, c.LINK_TO_MATERIAL);
+  await pages.basePage.clickContinueButton();
 });
 
 When('I select {string} for evidence and click continue', async ({ pages }, evidence: string) => {
-  await new RotmStepLib(pages).selectEvidence(evidence);
+  await pages.rotmDoYouHaveEvidencePage.answerYesHaveEvidence(evidence);
 });
 
 When('I select {string} for more evidence and click continue', async ({ pages }, additionalEvidence: string) => {
-  await new RotmStepLib(pages).selectMoreEvidence(additionalEvidence);
+  await pages.rotmUploadAnotherFilePage.answerUploadAnotherFileNo(additionalEvidence);
 });
 
 When('I select {string} to give contact details and click continue', async ({ pages }, giveContact: string) => {
-  await new RotmStepLib(pages).selectContactDetails(giveContact);
+  await pages.rotmAreYouWillingToBeContactedPage.answerAreYouWillingToBeContacted(giveContact);
 });
 
 When('I enter my contact details for ROTM and click continue', async ({ pages }) => {
-  await new RotmStepLib(pages).enterYourContactDetails();
+  await pages.rotmWhatAreYourContactDetailsPage.answerYourFullName(c.FULL_NAME);
+  await pages.rotmWhatAreYourContactDetailsPage.answerSelectContact(c.TELEPHONE_LABEL, c.TELEPHONE);
+  await pages.basePage.clickContinueButton();
 });
 
 When('I am on the \'Check your report\' page', async ({ pages }) => {
-  await new RotmStepLib(pages).ansCheckYourReport();
+  await pages.rotmCheckYourReportPage.assertReportPage();
 });
 
 
 
 
 Then('I check my report for Rotm', async ({ pages }) => {
-  await new RotmStepLib(pages).ansCheckYourReport();
+  await pages.rotmCheckYourReportPage.assertReportPage();
 });
 
 Then('I am able to submit the Rotm questionnaire', async ({ pages }) => {
-  await expect(await new RotmStepLib(pages).getReportSubmissionMessage()).toEqual('Report sent');
+  await pages.rotmCheckYourReportPage.ansSendReport();
+  await expect(await pages.rotmCheckYourReportPage.getReportSentText()).toEqual('Report sent');
 });
 
 Then('I am able to navigate back to ROTM home page', async ({ pages }) => {
-  await new RotmStepLib(pages).navigateBackToHomePage();
+  await pages.rotmCheckYourReportPage.navigateBackToHomePage();
+  await pages.rotmHomePgHaveLinkToMaterialPage.assertHomePage();
 });
 
 Then('I see {string} error message displayed for ROTM', async ({ pages }, expectedErrorMessage: string) => {
-  await expect(await new RotmStepLib(pages).getErrorMessageDetailText()).toEqual(expectedErrorMessage);
+  await expect(await pages.basePage.getErrorMessageDetailText()).toEqual(expectedErrorMessage);
 });
 
 Then('I see error message displayed for ROTM', async ({ pages }, expectedErrorMessage: string) => {
-  await expect(await new RotmStepLib(pages).getErrorMessageDetailText()).toEqual(expectedErrorMessage.trim());
+  await expect(await pages.basePage.getErrorMessageDetailText()).toEqual(expectedErrorMessage.trim());
 });
 
 Then('I see {string} error header message displayed for ROTM', async ({ pages }, expectedErrorMessage: string) => {
-  await expect(await new RotmStepLib(pages).getErrorSummaryHeaderText()).toEqual(expectedErrorMessage);
+  await expect(await pages.basePage.getThereIsAProblemTextErrorText()).toEqual(expectedErrorMessage);
 });
 
 Then('I check the change is updated to {int} links on the \'Check your report\' page and continue', async ({ pages }, links: number) => {
-  await expect(await new RotmStepLib(pages).verifyAdditionalLinksAreAdded()).toEqual(links);
+  await expect(await pages.rotmCheckYourReportPage.getAdditionalLinks()).toEqual(links);
 });
 
 Then('I see the Rotm header link service name {string}', async ({ pages }, rotmHeaderLinkName: string) => {

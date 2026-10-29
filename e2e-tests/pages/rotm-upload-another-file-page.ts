@@ -1,7 +1,8 @@
 import { expect, Locator, Page } from '@playwright/test';
-import { rotmCommonPage } from './rotm-common-page';
+import { ConstantsLib as c } from '../utility-helper/constants-lib';
+import { basePage } from './base-page';
 
-export class rotmUploadAnotherFilePage extends rotmCommonPage {
+export class rotmUploadAnotherFilePage extends basePage {
   readonly filesAddedMessage: Locator;
   readonly deleteButton: Locator;
 
@@ -34,5 +35,16 @@ export class rotmUploadAnotherFilePage extends rotmCommonPage {
     await this.refreshPage();
     await this.selectRadioOrCheckboxOption(response);
     await this.clickContinueButton();
+  }
+
+  async completeUploadPage(anotherFile: string) {
+    await this.assertPageTitle(this.page, await this.expectedPageTitle());
+    expect(await this.isPreviousDocAdded()).toBe(true);
+    if (anotherFile === c.RESPONSE_YES) {
+      await this.answerUploadAnotherFileYes(c.RESPONSE_YES);
+    } else if (anotherFile !== c.RESPONSE_NO) {
+      throw new Error(`Invalid upload-another-file option: ${anotherFile}`);
+    }
+    await this.answerUploadAnotherFileNo(c.RESPONSE_NO);
   }
 }

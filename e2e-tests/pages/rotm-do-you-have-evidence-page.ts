@@ -1,7 +1,8 @@
 import { expect, Locator, Page } from '@playwright/test';
-import { rotmCommonPage } from './rotm-common-page';
+import { ConstantsLib as c } from '../utility-helper/constants-lib';
+import { basePage } from './base-page';
 
-export class rotmDoYouHaveEvidencePage extends rotmCommonPage {
+export class rotmDoYouHaveEvidencePage extends basePage {
   readonly helpMeTakeScreenshotLink: Locator;
   readonly tabsList: Locator;
   readonly sectionLinks: Locator;
@@ -32,6 +33,18 @@ export class rotmDoYouHaveEvidencePage extends rotmCommonPage {
   async answerNoDontHaveLink(label: string) {
     await this.selectRadioOrCheckboxOption(label);
     await this.clickContinueButton();
+  }
+
+  async completeEvidencePage(option: string) {
+    await this.assertPageTitle(this.page, await this.expectedPageTitle());
+    expect(await this.checkHelpMeTakeScreenshotLinkIsWorking()).toBe(true);
+    if (option === c.NO_EVIDENCE) {
+      await this.answerNoDontHaveLink(option);
+    } else if (option === c.HAVE_EVIDENCE) {
+      await this.answerYesHaveEvidence(option);
+    } else {
+      throw new Error(`Invalid evidence option: ${option}`);
+    }
   }
 
   async checkHelpMeTakeScreenshotLinkIsWorking(): Promise<boolean> {

@@ -14,4 +14,9 @@ export class rotmAnythingElseYouCanTellUsPage extends basePage {
     await this.type(this.page.getByLabel('Additional details'), additionalDetails);
     await this.clickContinueButton();
   }
+
+  async completeAdditionalDetailsPage(additionalDetails: string) {
+    await this.assertPageTitle(this.page, await this.expectedPageTitle());
+    await this.answerEnterAdditionalDetails(additionalDetails);
+  }
 }

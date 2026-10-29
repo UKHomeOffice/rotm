@@ -2,12 +2,8 @@
 
 Feature: ROTM - Report Online Material Promoting Terrorism or Extremism
 
-  Background:
-    Given Test data has been created for "ROTM" scenarios
-
-
   Scenario: ROTM - Field page validation error message
-    Given I selected the data for scenario "1" - "S1 - Have (0 additional) link to the material - Have evidence - Another file-Yes - Email contact"
+    Given I selected the data for scenario "S1 - Have (0 additional) link to the material - Have evidence - Another file-Yes - Email contact"
     And I visit the Rotm page
     When I select continue
     Then I see "There is a problem" error header message displayed for ROTM
