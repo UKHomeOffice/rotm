@@ -3,8 +3,7 @@
 Feature: ROTM - Report Online Material Promoting Terrorism or Extremism
 
   Scenario: ROTM - Field page validation error message
-    Given I selected the data for scenario "S1 - Have (0 additional) link to the material - Have evidence - Another file-Yes - Email contact"
-    And I visit the Rotm page
+    Given I visit the Rotm page
     When I select continue
     Then I see "There is a problem" error header message displayed for ROTM
     And I see "Select whether you have a link to the material or not" error message displayed for ROTM
@@ -30,4 +29,4 @@ Feature: ROTM - Report Online Material Promoting Terrorism or Extremism
           Select how you would like to be contacted
           """
     When I enter my contact details for ROTM and click continue
-    Then I am on the 'Check your report' page
+    Then I am navigated to "Check your report" page

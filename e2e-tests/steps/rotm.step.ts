@@ -9,16 +9,13 @@ export const { Given, When, Then } = createBdd(test);
 //                                                              ROTM Step Definitions
 // ************************************************************************************************************************************ */
 
-Given('I selected the data for scenario {string}', async ({ scenario }, description: string) => {
-  scenario.description = description;
+
+Given('I visit the Rotm page', async ({ pages }) => {
+  await pages.rotmHomePgHaveLinkToMaterialPage.openRotmHomePage();
 });
 
-When('I fill out my answers for the Rotm questionnaire', async ({ pages, scenario }) => {
-  const description = scenario.description;
-  if (!description) {
-    throw new Error('No ROTM scenario description selected');
-  }
 
+When('I fill out the answers to Rotm form pertaining to {string}', async ({pages}, description: string) => {
   switch (description.toLowerCase()) {
     case 's1 - have (0 additional) link to the material - have evidence - another file-yes - email contact':
       await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.HAVE_LINK, 0);
@@ -149,10 +146,6 @@ When('I fill out my answers for the Rotm questionnaire', async ({ pages, scenari
   }
 });
 
-When('I visit the Rotm page', async ({ pages }) => {
-  await pages.rotmHomePgHaveLinkToMaterialPage.openRotmHomePage();
-});
-
 When('I add {int} additional links to my report and continue', async ({ pages }, addLinks: number) => {
   await pages.rotmCheckYourReportPage.navigateBackToHomePage();
   await pages.rotmHomePgHaveLinkToMaterialPage.addAnotherLink(addLinks, c.LINK_TO_MATERIAL);
@@ -189,43 +182,32 @@ When('I enter my contact details for ROTM and click continue', async ({ pages })
   await pages.basePage.clickContinueButton();
 });
 
-When('I am on the \'Check your report\' page', async ({ pages }) => {
-  await pages.rotmCheckYourReportPage.assertReportPage();
+When('I choose to submit the Rotm questionnaire', async ({ pages }) => {
+  await pages.rotmCheckYourReportPage.completeSendYourReport();
 });
 
 
-
-
-Then('I check my report for Rotm', async ({ pages }) => {
-  await pages.rotmCheckYourReportPage.assertReportPage();
-});
-
-Then('I am able to submit the Rotm questionnaire', async ({ pages }) => {
-  await pages.rotmCheckYourReportPage.ansSendReport();
-  await expect(await pages.rotmCheckYourReportPage.getReportSentText()).toEqual('Report sent');
-});
-
-Then('I am able to navigate back to ROTM home page', async ({ pages }) => {
-  await pages.rotmCheckYourReportPage.navigateBackToHomePage();
-  await pages.rotmHomePgHaveLinkToMaterialPage.assertHomePage();
+Then('I am navigated to {string} page', async ({ pages }, expectedPageHeaderText: string) => {
+  const actualPageHeaderTextLocator = pages.rotmCheckYourReportPage.headerText;
+  await expect(actualPageHeaderTextLocator).toHaveText(expectedPageHeaderText);
 });
 
 Then('I see {string} error message displayed for ROTM', async ({ pages }, expectedErrorMessage: string) => {
-  await expect(await pages.basePage.getErrorMessageDetailText()).toEqual(expectedErrorMessage);
+  expect(await pages.basePage.getErrorMessageDetailText()).toEqual(expectedErrorMessage);
 });
 
 Then('I see error message displayed for ROTM', async ({ pages }, expectedErrorMessage: string) => {
-  await expect(await pages.basePage.getErrorMessageDetailText()).toEqual(expectedErrorMessage.trim());
+  expect(await pages.basePage.getErrorMessageDetailText()).toEqual(expectedErrorMessage.trim());
 });
 
 Then('I see {string} error header message displayed for ROTM', async ({ pages }, expectedErrorMessage: string) => {
-  await expect(await pages.basePage.getThereIsAProblemTextErrorText()).toEqual(expectedErrorMessage);
+  expect(await pages.basePage.getThereIsAProblemTextErrorText()).toEqual(expectedErrorMessage);
 });
 
 Then('I check the change is updated to {int} links on the \'Check your report\' page and continue', async ({ pages }, links: number) => {
-  await expect(await pages.rotmCheckYourReportPage.getAdditionalLinks()).toEqual(links);
+  expect(await pages.rotmCheckYourReportPage.getAdditionalLinks()).toEqual(links);
 });
 
 Then('I see the Rotm header link service name {string}', async ({ pages }, rotmHeaderLinkName: string) => {
-  await expect((await pages.rotmHomePgHaveLinkToMaterialPage.getRotmHeaderLink()).trim()).toEqual(rotmHeaderLinkName);
+  expect((await pages.rotmHomePgHaveLinkToMaterialPage.getRotmHeaderLink()).trim()).toEqual(rotmHeaderLinkName);
 });

@@ -17,20 +17,13 @@ export class rotmCheckYourReportPage extends basePage {
     return 'Check your report – Report online material promoting terrorism or extremism';
   }
 
-  async assertReportPage() {
-    await this.assertPageTitle(this.page, await this.expectedPageTitle());
-  }
-
   async getAdditionalLinks(): Promise<number> {
     return this.linkText.count();
   }
 
-  async ansSendReport() {
+  async completeSendYourReport() {
+    await this.assertPageTitle(this.page, await this.expectedPageTitle());
     await this.sendReportBtn.first().click();
-  }
-
-  async getReportSentText(): Promise<string> {
-    return ((await this.reportSentText.textContent()) || '').trim();
   }
 
   async navigateBackToHomePage() {
