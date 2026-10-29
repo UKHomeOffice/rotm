@@ -24,13 +24,12 @@ export class rotmDoYouHaveEvidencePage extends basePage {
       : 'Do you have any evidence? – Report online material promoting terrorism or extremism';
   }
 
-  async answerYesHaveEvidence(label: string) {
-    await this.refreshPage();
-    await this.uploadEvidence(label);
+  async uploadFileAndContinue(label: string) {
+    await this.uploadFile(label, 'no-preview.png');
     await this.clickContinueButton();
   }
 
-  async answerNoDontHaveLink(label: string) {
+  async iSelectOptionAndSelectContinue(label: string) {
     await this.selectRadioOrCheckboxOption(label);
     await this.clickContinueButton();
   }
@@ -39,9 +38,9 @@ export class rotmDoYouHaveEvidencePage extends basePage {
     await this.assertPageTitle(this.page, await this.expectedPageTitle());
     expect(await this.checkHelpMeTakeScreenshotLinkIsWorking()).toBe(true);
     if (option === c.NO_EVIDENCE) {
-      await this.answerNoDontHaveLink(option);
+      await this.iSelectOptionAndSelectContinue(option);
     } else if (option === c.HAVE_EVIDENCE) {
-      await this.answerYesHaveEvidence(option);
+      await this.uploadFileAndContinue(option);
     } else {
       throw new Error(`Invalid evidence option: ${option}`);
     }

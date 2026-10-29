@@ -15,7 +15,7 @@ export class rotmAreYouWillingToBeContactedPage extends basePage {
       : 'Are you willing to be contacted, if necessary? – Report online material promoting terrorism or extremism';
   }
 
-  async answerAreYouWillingToBeContacted(response: string) {
+  async areYouWillingToBeContacted(response: string) {
     await this.selectRadioOrCheckboxOption(response);
     await this.clickContinueButton();
     await this.page
@@ -29,6 +29,6 @@ export class rotmAreYouWillingToBeContactedPage extends basePage {
     if (option !== c.GIVE_CONTACT && option !== c.DO_NOT_GIVE_CONTACT) {
       throw new Error(`Invalid contact-consent option: ${option}`);
     }
-    await this.answerAreYouWillingToBeContacted(option);
+    await this.areYouWillingToBeContacted(option);
   }
 }

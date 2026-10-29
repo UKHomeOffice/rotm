@@ -10,13 +10,13 @@ export class rotmAnythingElseYouCanTellUsPage extends basePage {
     return 'Is there anything else you can tell us? – Report online material promoting terrorism or extremism';
   }
 
-  async answerEnterAdditionalDetails(additionalDetails: string) {
+  async enterAdditionalDetails(additionalDetails: string) {
     await this.type(this.page.getByLabel('Additional details'), additionalDetails);
     await this.clickContinueButton();
   }
 
   async completeAdditionalDetailsPage(additionalDetails: string) {
     await this.assertPageTitle(this.page, await this.expectedPageTitle());
-    await this.answerEnterAdditionalDetails(additionalDetails);
+    await this.enterAdditionalDetails(additionalDetails);
   }
 }

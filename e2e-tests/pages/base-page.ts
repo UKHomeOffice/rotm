@@ -41,26 +41,17 @@ export class basePage {
     await this.page.getByLabel(label, { exact: true }).check();
   }
 
-
-  async uploadEvidence(label: string) {
+  async uploadFile(label: string, fileName: string) {
     await this.selectRadioOrCheckboxOption(label);
-    await this.chooseFile.first().setInputFiles(path.resolve('e2e-tests/utility-helper/no-preview.png'));
+    await this.chooseFile.first().setInputFiles(path.resolve(`e2e-tests/test-data/${fileName}`));
   }
 
   async getThereIsAProblemTextErrorText(): Promise<string | null> {
     return this.thereIsAProblemText.textContent();
   }
 
-  async getErrorSummaryListText(): Promise<string | null> {
-    return this.errorSummaryList.textContent();
-  }
-
   async getErrorMessageDetailText(): Promise<string> {
     const text = await this.errorSummaryList.textContent();
     return (text || '').replaceAll('\t', '').trim();
-  }
-
-  async refreshPage() {
-    await this.page.reload();
   }
 }

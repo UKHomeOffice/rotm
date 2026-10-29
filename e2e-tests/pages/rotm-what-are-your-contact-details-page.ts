@@ -18,25 +18,25 @@ export class rotmWhatAreYourContactDetailsPage extends basePage {
       : 'What are your contact details? – Report online material promoting terrorism or extremism';
   }
 
-  async answerYourFullName(fullName: string) {
+  async enterYourFullName(fullName: string) {
     await this.type(this.fullNameTextField, fullName);
   }
 
-  async answerSelectContact(label: string, contact: string) {
+  async selectContact(label: string, contact: string) {
     await this.selectRadioOrCheckboxOption(label);
     await this.type(this.inputForSelectedContact(label), contact);
   }
 
   async completeContactDetailsPage(contact: string) {
     await this.assertPageTitle(this.page, await this.expectedPageTitle());
-    await this.answerYourFullName(c.FULL_NAME);
-    if (contact === c.TENANTS_EMAIL || contact === c.BOTH_CONTACTS) {
-      await this.answerSelectContact(c.TENANTS_EMAIL, c.SAS_HOF_EMAIL);
+    await this.enterYourFullName(c.FULL_NAME);
+    if (contact === c.EMAIL_LABEL || contact === c.BOTH_CONTACTS) {
+      await this.selectContact(c.EMAIL_LABEL, c.SAS_HOF_EMAIL);
     }
     if (contact === c.TELEPHONE_LABEL || contact === c.BOTH_CONTACTS) {
-      await this.answerSelectContact(c.TELEPHONE_LABEL, c.TELEPHONE);
+      await this.selectContact(c.TELEPHONE_LABEL, c.TELEPHONE);
     }
-    if (contact !== c.TENANTS_EMAIL && contact !== c.TELEPHONE_LABEL && contact !== c.BOTH_CONTACTS) {
+    if (contact !== c.EMAIL_LABEL && contact !== c.TELEPHONE_LABEL && contact !== c.BOTH_CONTACTS) {
       throw new Error(`Invalid contact-details option: ${contact}`);
     }
     await this.clickContinueButton();

@@ -26,25 +26,24 @@ export class rotmUploadAnotherFilePage extends basePage {
     return true;
   }
 
-  async answerUploadAnotherFileYes(response: string) {
-    await this.uploadEvidence(response);
+  async uploadFileAndContinue(response: string, fileName: string) {
+    await this.uploadFile(response, fileName);
     await this.clickContinueButton();
   }
 
-  async answerUploadAnotherFileNo(response: string) {
-    await this.refreshPage();
+  async iSelectOptionAndSelectContinue(response: string) {
     await this.selectRadioOrCheckboxOption(response);
     await this.clickContinueButton();
   }
 
-  async completeUploadPage(anotherFile: string) {
+  async completeUploadPage(anotherFile: string, fileName: string) {
     await this.assertPageTitle(this.page, await this.expectedPageTitle());
     expect(await this.isPreviousDocAdded()).toBe(true);
     if (anotherFile === c.RESPONSE_YES) {
-      await this.answerUploadAnotherFileYes(c.RESPONSE_YES);
+      await this.uploadFileAndContinue(c.RESPONSE_YES, fileName);
     } else if (anotherFile !== c.RESPONSE_NO) {
       throw new Error(`Invalid upload-another-file option: ${anotherFile}`);
     }
-    await this.answerUploadAnotherFileNo(c.RESPONSE_NO);
+    await this.iSelectOptionAndSelectContinue(c.RESPONSE_NO);
   }
 }

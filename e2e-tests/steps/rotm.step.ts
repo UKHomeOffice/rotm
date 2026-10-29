@@ -20,15 +20,15 @@ When('I fill out the answers to Rotm form pertaining to {string}', async ({pages
     case 's1 - have (0 additional) link to the material - have evidence - another file-yes - email contact':
       await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.HAVE_LINK, 0);
       await pages.rotmDoYouHaveEvidencePage.completeEvidencePage(c.HAVE_EVIDENCE);
-      await pages.rotmUploadAnotherFilePage.completeUploadPage(c.RESPONSE_YES);
+      await pages.rotmUploadAnotherFilePage.completeUploadPage(c.RESPONSE_YES, 'no-preview.png');
       await pages.rotmAnythingElseYouCanTellUsPage.completeAdditionalDetailsPage(c.ADDITIONAL_DETAILS);
       await pages.rotmAreYouWillingToBeContactedPage.completeContactConsentPage(c.GIVE_CONTACT);
-      await pages.rotmWhatAreYourContactDetailsPage.completeContactDetailsPage(c.TENANTS_EMAIL);
+      await pages.rotmWhatAreYourContactDetailsPage.completeContactDetailsPage(c.EMAIL_LABEL);
       break;
     case 's3 - have (4 additional) links to the material-remove links and add again - have evidence - another file-yes- email & telephone contacts':
       await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.HAVE_LINK, 4);
       await pages.rotmDoYouHaveEvidencePage.completeEvidencePage(c.HAVE_EVIDENCE);
-      await pages.rotmUploadAnotherFilePage.completeUploadPage(c.RESPONSE_YES);
+      await pages.rotmUploadAnotherFilePage.completeUploadPage(c.RESPONSE_YES, 'no-preview.png');
       await pages.rotmAnythingElseYouCanTellUsPage.completeAdditionalDetailsPage(c.ADDITIONAL_DETAILS);
       await pages.rotmAreYouWillingToBeContactedPage.completeContactConsentPage(c.GIVE_CONTACT);
       await pages.rotmWhatAreYourContactDetailsPage.completeContactDetailsPage(c.BOTH_CONTACTS);
@@ -36,7 +36,7 @@ When('I fill out the answers to Rotm form pertaining to {string}', async ({pages
     case 's4 - have (3 additional) links to the material - have evidence - another file-yes - no contact':
       await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.HAVE_LINK, 3);
       await pages.rotmDoYouHaveEvidencePage.completeEvidencePage(c.HAVE_EVIDENCE);
-      await pages.rotmUploadAnotherFilePage.completeUploadPage(c.RESPONSE_YES);
+      await pages.rotmUploadAnotherFilePage.completeUploadPage(c.RESPONSE_YES, 'no-preview.png');
       await pages.rotmAnythingElseYouCanTellUsPage.completeAdditionalDetailsPage(c.ADDITIONAL_DETAILS);
       await pages.rotmAreYouWillingToBeContactedPage.completeContactConsentPage(c.DO_NOT_GIVE_CONTACT);
       break;
@@ -50,10 +50,10 @@ When('I fill out the answers to Rotm form pertaining to {string}', async ({pages
     case "s9 - don't have link - have evidence - another file-yes - email contact":
       await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.DO_NOT_HAVE_LINK, 0);
       await pages.rotmDoYouHaveEvidencePage.completeEvidencePage(c.HAVE_EVIDENCE);
-      await pages.rotmUploadAnotherFilePage.completeUploadPage(c.RESPONSE_YES);
+      await pages.rotmUploadAnotherFilePage.completeUploadPage(c.RESPONSE_YES, 'no-preview.png');
       await pages.rotmAnythingElseYouCanTellUsPage.completeAdditionalDetailsPage(c.ADDITIONAL_DETAILS);
       await pages.rotmAreYouWillingToBeContactedPage.completeContactConsentPage(c.GIVE_CONTACT);
-      await pages.rotmWhatAreYourContactDetailsPage.completeContactDetailsPage(c.TENANTS_EMAIL);
+      await pages.rotmWhatAreYourContactDetailsPage.completeContactDetailsPage(c.EMAIL_LABEL);
       break;
     case "s16 - don't have link - no evidence - yes contact - email & telephone contacts":
       await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.DO_NOT_HAVE_LINK, 0);
@@ -65,7 +65,7 @@ When('I fill out the answers to Rotm form pertaining to {string}', async ({pages
     case 's2 - have (0 additional) link to the material - have evidence - another file-yes- telephone contact':
       await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.HAVE_LINK, 0);
       await pages.rotmDoYouHaveEvidencePage.completeEvidencePage(c.HAVE_EVIDENCE);
-      await pages.rotmUploadAnotherFilePage.completeUploadPage(c.RESPONSE_YES);
+      await pages.rotmUploadAnotherFilePage.completeUploadPage(c.RESPONSE_YES, 'no-preview.png');
       await pages.rotmAnythingElseYouCanTellUsPage.completeAdditionalDetailsPage(c.ADDITIONAL_DETAILS);
       await pages.rotmAreYouWillingToBeContactedPage.completeContactConsentPage(c.GIVE_CONTACT);
       await pages.rotmWhatAreYourContactDetailsPage.completeContactDetailsPage(c.TELEPHONE_LABEL);
@@ -73,7 +73,7 @@ When('I fill out the answers to Rotm form pertaining to {string}', async ({pages
     case 's5 - have (2 additional) links to the material - have evidence - another file-no - no contact':
       await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.HAVE_LINK, 2);
       await pages.rotmDoYouHaveEvidencePage.completeEvidencePage(c.HAVE_EVIDENCE);
-      await pages.rotmUploadAnotherFilePage.completeUploadPage(c.RESPONSE_NO);
+      await pages.rotmUploadAnotherFilePage.completeUploadPage(c.RESPONSE_NO, 'no-preview.png');
       await pages.rotmAnythingElseYouCanTellUsPage.completeAdditionalDetailsPage(c.ADDITIONAL_DETAILS);
       await pages.rotmAreYouWillingToBeContactedPage.completeContactConsentPage(c.DO_NOT_GIVE_CONTACT);
       break;
@@ -82,7 +82,7 @@ When('I fill out the answers to Rotm form pertaining to {string}', async ({pages
       await pages.rotmDoYouHaveEvidencePage.completeEvidencePage(c.NO_EVIDENCE);
       await pages.rotmAnythingElseYouCanTellUsPage.completeAdditionalDetailsPage(c.ADDITIONAL_DETAILS);
       await pages.rotmAreYouWillingToBeContactedPage.completeContactConsentPage(c.GIVE_CONTACT);
-      await pages.rotmWhatAreYourContactDetailsPage.completeContactDetailsPage(c.TENANTS_EMAIL);
+      await pages.rotmWhatAreYourContactDetailsPage.completeContactDetailsPage(c.EMAIL_LABEL);
       break;
     case 's7 - have (1 additional) link to the material - no evidence - another file-yes - telephone contact':
       await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.HAVE_LINK, 1);
@@ -94,7 +94,7 @@ When('I fill out the answers to Rotm form pertaining to {string}', async ({pages
     case "s10 - don't have link - have evidence - another file-yes - telephone contact":
       await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.DO_NOT_HAVE_LINK, 0);
       await pages.rotmDoYouHaveEvidencePage.completeEvidencePage(c.HAVE_EVIDENCE);
-      await pages.rotmUploadAnotherFilePage.completeUploadPage(c.RESPONSE_YES);
+      await pages.rotmUploadAnotherFilePage.completeUploadPage(c.RESPONSE_YES, 'no-preview.png');
       await pages.rotmAnythingElseYouCanTellUsPage.completeAdditionalDetailsPage(c.ADDITIONAL_DETAILS);
       await pages.rotmAreYouWillingToBeContactedPage.completeContactConsentPage(c.GIVE_CONTACT);
       await pages.rotmWhatAreYourContactDetailsPage.completeContactDetailsPage(c.TELEPHONE_LABEL);
@@ -102,7 +102,7 @@ When('I fill out the answers to Rotm form pertaining to {string}', async ({pages
     case "s11 - don't have link - have evidence - another file-yes - email & telephone contacts":
       await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.DO_NOT_HAVE_LINK, 0);
       await pages.rotmDoYouHaveEvidencePage.completeEvidencePage(c.HAVE_EVIDENCE);
-      await pages.rotmUploadAnotherFilePage.completeUploadPage(c.RESPONSE_YES);
+      await pages.rotmUploadAnotherFilePage.completeUploadPage(c.RESPONSE_YES, 'no-preview.png');
       await pages.rotmAnythingElseYouCanTellUsPage.completeAdditionalDetailsPage(c.ADDITIONAL_DETAILS);
       await pages.rotmAreYouWillingToBeContactedPage.completeContactConsentPage(c.GIVE_CONTACT);
       await pages.rotmWhatAreYourContactDetailsPage.completeContactDetailsPage(c.BOTH_CONTACTS);
@@ -110,14 +110,14 @@ When('I fill out the answers to Rotm form pertaining to {string}', async ({pages
     case "s12 - don't have link - have evidence - another file-yes - no contact":
       await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.DO_NOT_HAVE_LINK, 0);
       await pages.rotmDoYouHaveEvidencePage.completeEvidencePage(c.HAVE_EVIDENCE);
-      await pages.rotmUploadAnotherFilePage.completeUploadPage(c.RESPONSE_YES);
+      await pages.rotmUploadAnotherFilePage.completeUploadPage(c.RESPONSE_YES, 'no-preview.png');
       await pages.rotmAnythingElseYouCanTellUsPage.completeAdditionalDetailsPage(c.ADDITIONAL_DETAILS);
       await pages.rotmAreYouWillingToBeContactedPage.completeContactConsentPage(c.DO_NOT_GIVE_CONTACT);
       break;
     case "s13 - don't have link - have evidence - another file-no - no contact":
       await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.DO_NOT_HAVE_LINK, 0);
       await pages.rotmDoYouHaveEvidencePage.completeEvidencePage(c.HAVE_EVIDENCE);
-      await pages.rotmUploadAnotherFilePage.completeUploadPage(c.RESPONSE_NO);
+      await pages.rotmUploadAnotherFilePage.completeUploadPage(c.RESPONSE_NO, 'no-preview.png');
       await pages.rotmAnythingElseYouCanTellUsPage.completeAdditionalDetailsPage(c.ADDITIONAL_DETAILS);
       await pages.rotmAreYouWillingToBeContactedPage.completeContactConsentPage(c.DO_NOT_GIVE_CONTACT);
       break;
@@ -126,7 +126,7 @@ When('I fill out the answers to Rotm form pertaining to {string}', async ({pages
       await pages.rotmDoYouHaveEvidencePage.completeEvidencePage(c.NO_EVIDENCE);
       await pages.rotmAnythingElseYouCanTellUsPage.completeAdditionalDetailsPage(c.ADDITIONAL_DETAILS);
       await pages.rotmAreYouWillingToBeContactedPage.completeContactConsentPage(c.GIVE_CONTACT);
-      await pages.rotmWhatAreYourContactDetailsPage.completeContactDetailsPage(c.TENANTS_EMAIL);
+      await pages.rotmWhatAreYourContactDetailsPage.completeContactDetailsPage(c.EMAIL_LABEL);
       break;
     case "s15 - don't have link - no evidence - yes contact - telephone contact":
       await pages.rotmHomePgHaveLinkToMaterialPage.completeLinkPage(c.DO_NOT_HAVE_LINK, 0);
@@ -150,9 +150,9 @@ When('I add {int} additional links to my report and continue', async ({ pages },
   await pages.rotmCheckYourReportPage.navigateBackToHomePage();
   await pages.rotmHomePgHaveLinkToMaterialPage.addAnotherLink(addLinks, c.LINK_TO_MATERIAL);
   await pages.basePage.clickContinueButton();
-  await pages.rotmDoYouHaveEvidencePage.answerNoDontHaveLink(c.NO_EVIDENCE);
-  await pages.rotmAnythingElseYouCanTellUsPage.answerEnterAdditionalDetails(`Added ${addLinks} additional links to material`);
-  await pages.rotmAreYouWillingToBeContactedPage.answerAreYouWillingToBeContacted(c.DO_NOT_GIVE_CONTACT);
+  await pages.rotmDoYouHaveEvidencePage.iSelectOptionAndSelectContinue(c.NO_EVIDENCE);
+  await pages.rotmAnythingElseYouCanTellUsPage.enterAdditionalDetails(`Added ${addLinks} additional links to material`);
+  await pages.rotmAreYouWillingToBeContactedPage.areYouWillingToBeContacted(c.DO_NOT_GIVE_CONTACT);
 });
 
 When('I select continue', async ({ pages }) => {
@@ -160,25 +160,25 @@ When('I select continue', async ({ pages }) => {
 });
 
 When('I select {string} link to material and click continue', async ({ pages }, option: string) => {
-  await pages.rotmHomePgHaveLinkToMaterialPage.answerYesHaveLinkToMaterial(option, c.LINK_TO_MATERIAL);
+  await pages.rotmHomePgHaveLinkToMaterialPage.yesHaveLinkToMaterial(option, c.LINK_TO_MATERIAL);
   await pages.basePage.clickContinueButton();
 });
 
 When('I select {string} for evidence and click continue', async ({ pages }, evidence: string) => {
-  await pages.rotmDoYouHaveEvidencePage.answerYesHaveEvidence(evidence);
+  await pages.rotmDoYouHaveEvidencePage.uploadFileAndContinue(evidence);
 });
 
 When('I select {string} for more evidence and click continue', async ({ pages }, additionalEvidence: string) => {
-  await pages.rotmUploadAnotherFilePage.answerUploadAnotherFileNo(additionalEvidence);
+  await pages.rotmUploadAnotherFilePage.iSelectOptionAndSelectContinue(additionalEvidence);
 });
 
 When('I select {string} to give contact details and click continue', async ({ pages }, giveContact: string) => {
-  await pages.rotmAreYouWillingToBeContactedPage.answerAreYouWillingToBeContacted(giveContact);
+  await pages.rotmAreYouWillingToBeContactedPage.areYouWillingToBeContacted(giveContact);
 });
 
 When('I enter my contact details for ROTM and click continue', async ({ pages }) => {
-  await pages.rotmWhatAreYourContactDetailsPage.answerYourFullName(c.FULL_NAME);
-  await pages.rotmWhatAreYourContactDetailsPage.answerSelectContact(c.TELEPHONE_LABEL, c.TELEPHONE);
+  await pages.rotmWhatAreYourContactDetailsPage.enterYourFullName(c.FULL_NAME);
+  await pages.rotmWhatAreYourContactDetailsPage.selectContact(c.TELEPHONE_LABEL, c.TELEPHONE);
   await pages.basePage.clickContinueButton();
 });
 

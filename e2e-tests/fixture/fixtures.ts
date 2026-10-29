@@ -4,13 +4,13 @@ import { rotmAnythingElseYouCanTellUsPage } from '../pages/rotm-anything-else-yo
 import { rotmAreYouWillingToBeContactedPage } from '../pages/rotm-are-you-willing-to-be-contacted-page';
 import { rotmCheckYourReportPage } from '../pages/rotm-check-your-report-page';
 import { rotmDoYouHaveEvidencePage } from '../pages/rotm-do-you-have-evidence-page';
-import { rotmHomePgHaveLinkToMaterialPage } from '../pages/rotm-home-pg-have-link-to-material-page';
+import { rotmDoYouHaveALinkToMaterialPage } from '../pages/rotm-do-you-a-have-link-to-material-page';
 import { rotmUploadAnotherFilePage } from '../pages/rotm-upload-another-file-page';
 import { rotmWhatAreYourContactDetailsPage } from '../pages/rotm-what-are-your-contact-details-page';
 
 export type Pages = {
   basePage: basePage;
-  rotmHomePgHaveLinkToMaterialPage: rotmHomePgHaveLinkToMaterialPage;
+  rotmHomePgHaveLinkToMaterialPage: rotmDoYouHaveALinkToMaterialPage;
   rotmDoYouHaveEvidencePage: rotmDoYouHaveEvidencePage;
   rotmUploadAnotherFilePage: rotmUploadAnotherFilePage;
   rotmAnythingElseYouCanTellUsPage: rotmAnythingElseYouCanTellUsPage;
@@ -26,7 +26,7 @@ export const test = base.extend<{ pages: Pages; scenario: { description?: string
   pages: async ({ page }, use) => {
     await use({
       basePage: new basePage(page),
-      rotmHomePgHaveLinkToMaterialPage: new rotmHomePgHaveLinkToMaterialPage(page),
+      rotmHomePgHaveLinkToMaterialPage: new rotmDoYouHaveALinkToMaterialPage(page),
       rotmDoYouHaveEvidencePage: new rotmDoYouHaveEvidencePage(page),
       rotmUploadAnotherFilePage: new rotmUploadAnotherFilePage(page),
       rotmAnythingElseYouCanTellUsPage: new rotmAnythingElseYouCanTellUsPage(page),
