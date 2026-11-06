@@ -5,7 +5,7 @@
   "description": "A Home Office application for reporting online terrorist material.",
   "license": "GPL-2.0",
   "engines": {
-    "node": ">=24.22.1 <25.0.0"
+    "node": ">=24.22.2 <25.0.0"
   },
   "repository": {
     "type": "git",
@@ -45,22 +45,5 @@
     "mocha": "^11.8.0",
     "sinon": "^22.1.0",
     "sinon-chai": "^4.0.1"
-  },
-  "resolutions": {
-    "tmp": "^0.2.7",
-    "serialize-javascript": "^7.0.7",
-    "brace-expansion": "^5.0.12",
-    "diff": "^8.0.3",
-    "qs": "^6.16.0",
-    "source-map-js": "^1.2.2",
-    "morgan": "^1.12.1",
-    "proxy-addr": "^2.0.8",
-    "@grpc/grpc-js": "^1.14.5",
-    "moment": "^2.31.0",
-    "braces": "^3.0.3",
-    "body-parser": "^2.4.0",
-    "follow-redirects": "^1.16.1",
-    "markdown-it": "^15.0.3",
-    "zod": "^4.6.6"
   }
 }
