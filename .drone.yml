@@ -38,7 +38,7 @@ trigger:
   branch:
     <<: *include_default_and_feature_branches
 
-node_image_name: &node_image_name quay.io/ukhomeofficedigital/hof-nodejs:24.22.1-alpine3.24@sha256:cd92fd7b873764c2a09b1580f721a164c0aca853d18ed0b78f2af461595d534d
+node_image_name: &node_image_name quay.io/ukhomeofficedigital/hof-nodejs:24.22.2_2-alpine@sha256:9279cf6e97dd0c1e0ea106153c2847a23a99bac3a588f7eb564d1f54eb3c92af
 
 node_image: &node_image
   pull: if-not-exists
