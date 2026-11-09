@@ -1,0 +1,14 @@
+name: Dependabot auto-merge
+
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize]
+
+permissions: {}
+
+jobs:
+  auto-merge:
+    uses: UKHomeOffice/hof-github-actions/.github/workflows/dependabot-auto-merge.yml@main
+    secrets:
+      DEPENDABOT_APPROVER_APP_ID: ${{ secrets.DEPENDABOT_APPROVER_APP_ID }}
+      DEPENDABOT_APPROVER_PRIVATE_KEY: ${{ secrets.DEPENDABOT_APPROVER_PRIVATE_KEY }}
