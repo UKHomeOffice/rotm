@@ -5,6 +5,7 @@ metadata:
   name: waf-admin-ui-ingress-external
 {{ file .ADMIN_UI_INGRESS_EXTERNAL_ANNOTATIONS | indent 2 }}
 spec:
+  ingressClassName: nginx-external
   tls:
     - hosts:
         - admin-ui.prod.report-terrorist-material.homeoffice.gov.uk

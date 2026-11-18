@@ -1,0 +1,23 @@
+name: Sync hof-nodejs image in .drone.yml
+
+# pull_request_target is needed for access to Actions secrets on Dependabot PRs; PR code is only read, never executed.
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize]
+    paths:
+      - Dockerfile
+
+permissions: {}
+
+concurrency:
+  group: sync-drone-node-image-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    permissions:
+      contents: read
+    uses: UKHomeOffice/hof-github-actions/.github/workflows/sync-drone-node-image.yml@main
+    secrets:
+      app-id: ${{ secrets.DEPENDABOT_APPROVER_APP_ID }}
+      private-key: ${{ secrets.DEPENDABOT_APPROVER_PRIVATE_KEY }}

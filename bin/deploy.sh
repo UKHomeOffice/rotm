@@ -20,6 +20,7 @@ compute_branch_slug_max_length() {
   local app_name_length=${#APP_NAME}
   local max_for_app_name
   local max_for_configmap_name
+  local max_for_waf_admin_ui
   local max_branch_length
 
   # ${APP_NAME}-${DRONE_SOURCE_BRANCH}
@@ -27,10 +28,14 @@ compute_branch_slug_max_length() {
 
   # ${APP_NAME}-configmap-${DRONE_SOURCE_BRANCH}
   max_for_configmap_name=$((dns_label_limit - app_name_length - 11))
+  max_for_waf_admin_ui=$((dns_label_limit - app_name_length - 14))
 
   max_branch_length=$max_for_app_name
   if (( max_for_configmap_name < max_branch_length )); then
     max_branch_length=$max_for_configmap_name
+  fi
+  if (( max_for_waf_admin_ui < max_branch_length )); then
+    max_branch_length=$max_for_waf_admin_ui
   fi
 
   # Keep a small but usable floor even for long APP_NAME values.
