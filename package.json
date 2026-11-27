@@ -25,7 +25,7 @@
   "dependencies": {
     "@google-cloud/recaptcha-enterprise": "^7.3.0",
     "bl": "6.1.6",
-    "bowser": "^2.14.1",
+    "bowser": "^2.15.1",
     "busboy": "^1.6.0",
     "express": "^5.2.1",
     "hof": "~24.5.0",
